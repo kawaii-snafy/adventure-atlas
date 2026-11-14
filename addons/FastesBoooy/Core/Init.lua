@@ -38,7 +38,7 @@ local public = { API_VERSION = 1, API_MINOR = 2 }
 ns.public = public
 FastesBoooy = public
 
-local DEFAULT_VERSION = "0.4.0"
+local DEFAULT_VERSION = "0.4.1"
 
 local function readVersion()
     if C_AddOns and C_AddOns.GetAddOnMetadata then
