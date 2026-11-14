@@ -88,6 +88,12 @@ V.DEFAULTS = {
     -- the core's auto-accept window (settings.lookahead, Core/Init.lua): quests of the steps
     -- [cursor, cursor + lookahead] are accepted at the NPC (lookahead-skip check)
     lookahead = 6,
+    -- back-and-forth trips (Run:checkTravel), yards between step positions:
+    travelTalkYards = 35,   -- "at the quest giver / ender": a step this close to one of its spawns
+    travelHubYards = 100,   -- one visit: consecutive steps this close to the visit's first position
+    travelAreaYards = 90,   -- "at the objective area": a step this close to the `at` of the complete step
+    travelLeaveYards = 200, -- "left the place": a later step this far away (or on another map)
+    unknownMapYards = 1400, -- assumed width of a map without a known world size (the at-far tolerance ratio)
 }
 
 V.SEVERITIES = { "ERROR", "WARN", "INFO" }
@@ -1815,6 +1821,229 @@ function Run:checkSkipAhead()
     end
 end
 
+---------------------------------------------------------------------------
+-- travel: back-and-forth trips (WARN travel-trip / travel-revisit)
+---------------------------------------------------------------------------
+
+--- Yards between two `at` points of one uiMap (math.huge across maps or without a point). A map
+-- without a known world size counts as V.DEFAULTS.unknownMapYards wide.
+function Run:yards(a, b)
+    if not a or not b or a.map ~= b.map then return math.huge end
+    local d, isYards = self:mapDistance(a.map, a.x, a.y, b.x, b.y)
+    if isYards then return d end
+    return d * (self.opts.unknownMapYards or V.DEFAULTS.unknownMapYards) / 100
+end
+
+-- The NPCs / objects of a quest's start or finish record: spawn points ({ map, x, y }) and id sets.
+-- nil when the record names neither (a quest started by an item, no ender data).
+local function questParty(db, rec)
+    if not rec or (#(rec.npcs or {}) == 0 and #(rec.objects or {}) == 0) then return nil end
+    local party = { points = {}, npcs = {}, objects = {} }
+    for _, kind in ipairs({ "npcs", "objects" }) do
+        for _, id in ipairs(rec[kind] or {}) do
+            party[kind][id] = true
+            local e = db[kind][id]
+            for map, list in pairs(e and e.spawns or {}) do
+                for _, p in ipairs(list) do party.points[#party.points + 1] = { map = map, x = p[1], y = p[2] } end
+            end
+        end
+    end
+    return party
+end
+
+local function listHas(v, set)
+    if type(v) == "number" then return set[v] or false end
+    for _, x in ipairs(type(v) == "table" and v or {}) do
+        if set[x] then return true end
+    end
+    return false
+end
+
+--- WARN travel-trip / travel-revisit: the route makes the player come back to a place where the
+-- work of a later step could have been done already. Positions: a step's `at`, else the last one (bg
+-- goals move nobody). A visit is a run of consecutive steps within travelHubYards of its first
+-- positioned step. "Leaves" a place: a later step is more than travelLeaveYards away or on another map.
+-- Only within one segment.
+--   * travel-trip: a visit whose every action could have been done at an earlier step j the player
+--     then leaves: accepts of quests whose giver j is at (j names it as `npc` / `object` or stands within
+--     travelTalkYards of a spawn) and which are available there (simulated level >= required level,
+--     prerequisite quests turned in by j), turn-ins of quests complete by j that is at their ender,
+--     `go` / `fly` / `hearth` / `abandon`; optional steps do not count. The whole trip can be dropped.
+--     Reported at the visit's first quest step.
+--   * travel-revisit: a step completes a quest at `at`, and an earlier step j is within
+--     travelAreaYards of that point while the quest is in the log (or could have been: accepted at an
+--     earlier step at its giver, as above) and its objectives of the later step are not done yet, then
+--     the player leaves and comes back.
+-- An `ok` goes on the reported step.
+function Run:checkTravel()
+    local steps, db, o = self.walked, self.db, self.opts
+    local talk = o.travelTalkYards or V.DEFAULTS.travelTalkYards
+    local hub = o.travelHubYards or V.DEFAULTS.travelHubYards
+    local area = o.travelAreaYards or V.DEFAULTS.travelAreaYards
+    local leave = o.travelLeaveYards or V.DEFAULTS.travelLeaveYards
+    local pos, last = {}, nil
+    local acceptAt, turninAt = {}, {}
+    local state = o.startState
+    for _, q in ipairs(state and state.done or {}) do turninAt[q] = 0 end
+    for _, q in ipairs(state and state.log or {}) do acceptAt[q] = 0 end
+    for i, s in ipairs(steps) do
+        if s.at and not s.bg then last = s.at end
+        pos[i] = last
+        for _, a in ipairs(s.actions) do
+            if a.type == "accept" and not acceptAt[a.quest] then acceptAt[a.quest] = i end
+            if a.type == "turnin" and not turninAt[a.quest] then turninAt[a.quest] = i end
+        end
+    end
+    -- the player leaves P after step j and before step k
+    local function leaves(j, k, P)
+        for i = j + 1, k - 1 do
+            if not steps[i].bg and self:yards(pos[i], P) > leave then return true end
+        end
+        return false
+    end
+    local function atParty(j, party)
+        local s = steps[j]
+        if s.bg then return false end
+        if listHas(s.npc, party.npcs) or listHas(s.object, party.objects) then return true end
+        if not s.at then return false end
+        for _, p in ipairs(party.points) do
+            if self:yards(p, s.at) <= talk then return true end
+        end
+        return false
+    end
+    local function available(rec, j)
+        if floor(self.levelBefore[steps[j]] or 0) < (rec.reqLevel or 0) then return false end
+        for _, p in ipairs(rec.preGroup or {}) do
+            if not turninAt[p] or turninAt[p] > j then return false end
+        end
+        if rec.preSingle and #rec.preSingle > 0 then
+            for _, p in ipairs(rec.preSingle) do
+                if turninAt[p] and turninAt[p] <= j then return true end
+            end
+            return false
+        end
+        return true
+    end
+    -- complete steps of every quest, in order (readiness for a turn-in)
+    local completes = {}
+    for i, s in ipairs(steps) do
+        for _, a in ipairs(s.bg and {} or s.actions) do
+            if a.type == "complete" then
+                completes[a.quest] = completes[a.quest] or {}
+                table.insert(completes[a.quest], i)
+            end
+        end
+    end
+    -- index of the last complete step of q before step k (nil: none)
+    local function lastCompleteBefore(q, k)
+        local best
+        for _, i in ipairs(completes[q] or {}) do
+            if i < k then best = i end
+        end
+        return best
+    end
+    -- earliest step j in [1, to] of segment seg where the accept / turn-in could be done instead; with
+    -- `before` and P: one the player leaves (place P) before step `before`
+    local function earlier(a, rec, to, seg, before, P)
+        if a.type == "accept" then
+            local party = questParty(db, rec.start)
+            -- a quest accepted again (after an abandon) is not the first accept
+            if not party or (before and acceptAt[a.quest] and acceptAt[a.quest] < before) then return nil end
+            for j = 1, to do
+                if steps[j].segment == seg and atParty(j, party) and available(rec, j)
+                    and (not P or leaves(j, before, P)) then
+                    return j
+                end
+            end
+        elseif a.type == "turnin" then
+            local party = questParty(db, rec.finish)
+            local lc = lastCompleteBefore(a.quest, before)
+            local from = lc or ((acceptAt[a.quest] or to) + 1) -- a complete step may stand at the ender itself
+            for j = from, party and to or 0 do
+                if steps[j].segment == seg and atParty(j, party) and leaves(j, before, P) then return j end
+            end
+        end
+        return nil
+    end
+    local function report(code, k, q, text, ...)
+        local prev = self.curQuest
+        self.curQuest = q
+        local m = self:addx("WARN", code, steps[k], q and { quest = q } or nil, text, ...)
+        self.curQuest = prev
+        if m then self.msgOrd[m] = self.walkedOrd[k] end
+    end
+    local MOVABLE = { go = true, fly = true, hearth = true, abandon = true }
+    -- travel-trip: visits
+    local a = 1
+    while a <= #steps do
+        local center = steps[a].at and not steps[a].bg and steps[a].at or pos[a]
+        local b = a
+        while b < #steps and steps[b + 1].segment == steps[a].segment
+            and (steps[b + 1].bg or self:yards(pos[b + 1], center) <= hub) do
+            b = b + 1
+        end
+        local seg = steps[a].segment
+        local redundant, quests, first = center ~= nil, {}, nil
+        for i = a, b do
+            local s = steps[i]
+            if not s.bg and not s.optional then
+                for _, act in ipairs(s.actions) do
+                    local t = act.type
+                    if t == "accept" or t == "turnin" then
+                        local rec = DB.Quest(db, act.quest, self.profile.class)
+                        local j = rec and earlier(act, rec, a - 1, seg, a, center)
+                        if not j then redundant = false break end
+                        quests[#quests + 1] = format("%s %s (at step %s)", t, self:qn(act.quest), tostring(steps[j].id))
+                        first = first or i
+                    elseif not MOVABLE[t] then
+                        redundant = false
+                        break
+                    end
+                end
+            end
+            if not redundant then break end
+        end
+        if redundant and first then
+            report("travel-trip", first, nil, "the visit at steps %s..%s only does what could be done earlier, where the "
+                .. "player was already and then left: %s; do it there and drop this trip", tostring(steps[a].id),
+                tostring(steps[b].id), table.concat(quests, "; "))
+        end
+        a = b + 1
+    end
+    -- travel-revisit
+    for k, s in ipairs(steps) do
+        if not s.bg and s.at then
+            local seg = s.segment
+            for _, act in ipairs(s.actions) do
+                local q = act.quest
+                local rec = act.type == "complete" and DB.Quest(db, q, self.profile.class)
+                local acc = acceptAt[q]
+                local lc = rec and lastCompleteBefore(q, k)
+                for j = 1, rec and k - 1 or 0 do
+                    local sj = steps[j]
+                    if sj.segment == seg and not sj.bg and not (lc and lc >= j)
+                        and self:yards(pos[j], s.at) <= area and leaves(j, k, s.at) then
+                        if acc and acc <= j then
+                            report("travel-revisit", k, q, "complete %s: the quest is in the log when the player "
+                                .. "passes its objective area at step %s, leaves and comes back: do it there",
+                                self:qn(q), tostring(sj.id))
+                            break
+                        end
+                        local i = earlier({ type = "accept", quest = q }, rec, j, seg)
+                        if i then
+                            report("travel-revisit", k, q, "complete %s: the player passes its objective area at "
+                                .. "step %s, leaves and comes back; the quest can be accepted before that, at step %s "
+                                .. "(its giver; level and prerequisites met): accept it there and do it at step %s",
+                                self:qn(q), tostring(sj.id), tostring(steps[i].id), tostring(sj.id))
+                            break
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
 --- WARN lookahead-skip. Talking to an NPC opens its gossip first: the core's automation accepts the
 -- route quests of the steps [cursor, cursor + lookahead] the NPC offers and turns in the route quests
 -- it takes (Core/Automation.lua). When the current step is a trainer / merchant / taxi / innkeeper
@@ -1904,6 +2133,7 @@ function Run:execute()
         local before = #self.messages
         self:checkSkipAhead()
         self:checkLookaheadSkip()
+        self:checkTravel()
         if #self.messages > before then self:sortMessages() end
     end
     for _, id in ipairs(sortedKeys(self.active)) do
