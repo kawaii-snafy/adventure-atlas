@@ -315,7 +315,7 @@ describe("the build (Makefile, CI workflows)", function()
             assert.equal(0, code, out)
             assert.matches("luacheck ", out)
             assert.matches("\nlua5%.1 tools/validate_routes%.lua %-%-strict %-%-end%-level\n", out)
-            assert.matches("FastesBoooy_TestGuides", out)
+            assert.matches("AdventureAtlas_TestGuides", out)
             assert.matches("%-%-harness ", out)
             assert.matches("\nlua5%.1 tools/simulate_routes%.lua %-%-route 'some%-route'\n", out)
             assert.is_nil(out:find("busted", 1, true))
@@ -414,7 +414,7 @@ exit 0
 #!/bin/sh
 exec lua5.1 -e 'package.preload["lib.report"] = function()
     return { Markdown = function() error("report generator: boom") end }
-end' "$@" --no-overrides tests/fixtures/validator/FastesBoooy_FxClean
+end' "$@" --no-overrides tests/fixtures/validator/AdventureAtlas_FxClean
 ]])
             os.execute(("chmod +x '%s/lua.sh'"):format(dir))
             writeFile(dir .. "/VALIDATION.md", "the committed report\n")
@@ -426,7 +426,7 @@ end' "$@" --no-overrides tests/fixtures/validator/FastesBoooy_FxClean
             assert.equal("the committed report\n", readFile(dir .. "/VALIDATION.md"))
             -- the same wrapper without the broken module writes a report
             writeFile(dir .. "/lua.sh", "#!/bin/sh\nexec lua5.1 \"$@\" --no-overrides "
-                .. "tests/fixtures/validator/FastesBoooy_FxClean\n")
+                .. "tests/fixtures/validator/AdventureAtlas_FxClean\n")
             code, out = run(("%s --no-print-directory report LUA='%s/lua.sh' REPORT='%s/VALIDATION.md'")
                 :format(MAKE, dir, dir))
             assert.equal(0, code, out)
@@ -516,6 +516,7 @@ end' "$@" --no-overrides tests/fixtures/validator/FastesBoooy_FxClean
             assert.is_true(count >= 8)
             -- generated files are checked for freshness, the addons are packaged
             assert.is_true(ran["routedata-check"])
+            assert.is_true(ran["knowledge-check"])
             assert.is_true(ran["package"])
             -- `make report` fails when the validator wrote no report (the cases above), so the step
             -- must not hide its exit status; then the committed file is compared
