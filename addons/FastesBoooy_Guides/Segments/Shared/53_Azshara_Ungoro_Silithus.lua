@@ -70,9 +70,10 @@
 --     55 + 97% to 55.
 --   * Explicit steps (r4): no background ("along the way") steps any more - every goal is a step where it is done, in
 --     the order of play, and the notes say what to kill / pick up on the way before it. Un'Goro regrouped so that
---     each area is done in one visit: the gorilla caves once in loop 1 (pelts + A-Me 01; Torwa -> carcass -> straight
---     to Marshal's Refuge), the bloodpetals where they grow (Flayers by the tar pits, Lashers / Threshers east,
---     Trappers north of the springs), the power crystals finished around the lake (the densest field), the
+--     each area is done in one visit: the gorilla caves for the pelts + A-Me 01 in loop 1 (Torwa -> carcass ->
+--     straight to Marshal's Refuge; U'cha 4301, given by Torwa after that visit, takes them once more in loop 3),
+--     the bloodpetals where they grow (Flayers by the tar pits, Lashers / Threshers east, Trappers north of the
+--     springs), the power crystals finished around the lake (the densest field), the
 --     Pterrordax by the hive; 974 is done at the ridge with Ringo and turned in at Krakle on the Western Pylon trip
 --     (no Krakle - ridge - Krakle zigzag). Silithus: the Pincer stingers (8278) next to the crushers.
 -- Carried out: 980 + 3908 (Donova, Winterspring), 4300 (Jes'rimon, Orgrimmar), 3542 + 3568 + the book item for 81952

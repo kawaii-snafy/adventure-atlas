@@ -10,7 +10,7 @@
 
 Перегенерировать: `make report` (или `lua5.1 tools/validate_routes.lua --markdown docs/VALIDATION.md`).
 
-**Итого: 0 ERROR, 0 WARN, 12571 INFO; принято предупреждений (`ok`): 488.**
+**Итого: 0 ERROR, 0 WARN, 12859 INFO; принято предупреждений (`ok`): 653.**
 
 Прогонов (маршрут × профиль): 28. ERROR и WARN без повторов: 0 из 0 (сообщений о шагах общих сегментов: 0, строк в разделе «Общие шаги»: 0).
 
@@ -18,7 +18,7 @@
 
 ### Общая часть модуля FastesBoooy_Guides
 
-Проверки шаблонов (shared: 26 segment(s), 364 insert(s), 2747 step(s)): общие сегменты и общие вставки (`AddLibraryInsert`) проверяются один раз для всех маршрутов. Результат: **0 ERROR, 0 WARN, 0 INFO**.
+Проверки шаблонов (shared: 26 segment(s), 370 insert(s), 2673 step(s)): общие сегменты и общие вставки (`AddLibraryInsert`) проверяются один раз для всех маршрутов. Результат: **0 ERROR, 0 WARN, 0 INFO**.
 
 Ошибок и предупреждений нет.
 
@@ -28,34 +28,34 @@
 
 | маршрут | профиль | ERROR | WARN | принято | конец | худший конец | гринд | худший гринд | гринд +15 % | худший +15 % | оценён опыт | журнал | шагов | необязательных |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| `orc-hunter` | Orc HUNTER Horde | 0 | 0 | 16 | 60.00 | 60.00 | 4944 | 6207 | 3943 | 5288 | 63 (4.5 %) | 23 | 1710 | 168 |
-| `orc-mage` | Orc MAGE Horde | 0 | 0 | 17 | 60.00 | 60.00 | 4978 | 6225 | 3973 | 5301 | 65 (4.6 %) | 23 | 1699 | 163 |
-| `orc-rogue` | Orc ROGUE Horde | 0 | 0 | 18 | 60.00 | 60.00 | 4954 | 6187 | 3947 | 5259 | 63 (4.5 %) | 23 | 1712 | 168 |
-| `orc-shaman` | Orc SHAMAN Horde | 0 | 0 | 17 | 60.00 | 60.00 | 4937 | 6183 | 3946 | 5269 | 63 (4.5 %) | 23 | 1724 | 171 |
-| `orc-warlock` | Orc WARLOCK Horde | 0 | 0 | 17 | 60.00 | 60.00 | 4897 | 6199 | 3892 | 5276 | 66 (4.6 %) | 23 | 1728 | 177 |
-| `orc-warrior` | Orc WARRIOR Horde | 0 | 0 | 16 | 60.00 | 60.00 | 4914 | 6155 | 3913 | 5227 | 64 (4.5 %) | 23 | 1720 | 162 |
-| `troll-hunter` | Troll HUNTER Horde | 0 | 0 | 16 | 60.00 | 60.00 | 4944 | 6207 | 3943 | 5288 | 63 (4.5 %) | 23 | 1712 | 170 |
-| `troll-mage` | Troll MAGE Horde | 0 | 0 | 17 | 60.00 | 60.00 | 4978 | 6225 | 3973 | 5301 | 64 (4.6 %) | 23 | 1701 | 165 |
-| `troll-priest` | Troll PRIEST Horde | 0 | 0 | 17 | 60.00 | 60.00 | 4950 | 6219 | 3944 | 5296 | 63 (4.5 %) | 23 | 1708 | 169 |
-| `troll-rogue` | Troll ROGUE Horde | 0 | 0 | 18 | 60.00 | 60.00 | 4954 | 6187 | 3947 | 5259 | 63 (4.5 %) | 23 | 1714 | 170 |
-| `troll-shaman` | Troll SHAMAN Horde | 0 | 0 | 17 | 60.00 | 60.00 | 4937 | 6183 | 3946 | 5269 | 63 (4.5 %) | 23 | 1726 | 173 |
-| `troll-warlock` | Troll WARLOCK Horde | 0 | 0 | 19 | 60.00 | 60.00 | 4897 | 6199 | 3892 | 5276 | 67 (4.7 %) | 23 | 1728 | 177 |
-| `troll-warrior` | Troll WARRIOR Horde | 0 | 0 | 16 | 60.00 | 60.00 | 4914 | 6155 | 3913 | 5227 | 64 (4.5 %) | 23 | 1722 | 164 |
-| `tauren-druid` | Tauren DRUID Horde | 0 | 0 | 18 | 60.00 | 60.00 | 4890 | 6118 | 3899 | 5197 | 67 (4.7 %) | 23 | 1736 | 156 |
-| `tauren-hunter` | Tauren HUNTER Horde | 0 | 0 | 18 | 60.00 | 60.00 | 4933 | 6180 | 3937 | 5265 | 62 (4.5 %) | 23 | 1713 | 165 |
-| `tauren-shaman` | Tauren SHAMAN Horde | 0 | 0 | 19 | 60.00 | 60.00 | 4930 | 6167 | 3940 | 5250 | 62 (4.5 %) | 23 | 1728 | 168 |
-| `tauren-warrior` | Tauren WARRIOR Horde | 0 | 0 | 18 | 60.00 | 60.00 | 4905 | 6128 | 3909 | 5206 | 63 (4.5 %) | 23 | 1725 | 159 |
-| `undead-mage` | Scourge MAGE Horde | 0 | 0 | 16 | 60.00 | 60.00 | 4973 | 6208 | 3971 | 5288 | 64 (4.5 %) | 23 | 1725 | 162 |
-| `undead-paladin` | Scourge PALADIN Horde | 0 | 0 | 17 | 60.00 | 60.00 | 4902 | 6173 | 3914 | 5260 | 82 (5.2 %) | 23 | 1754 | 173 |
-| `undead-priest` | Scourge PRIEST Horde | 0 | 0 | 16 | 60.00 | 60.00 | 4951 | 6209 | 3944 | 5286 | 64 (4.5 %) | 23 | 1727 | 166 |
-| `undead-rogue` | Scourge ROGUE Horde | 0 | 0 | 17 | 60.00 | 60.00 | 4948 | 6165 | 3938 | 5237 | 63 (4.5 %) | 23 | 1740 | 168 |
-| `undead-warlock` | Scourge WARLOCK Horde | 0 | 0 | 17 | 60.00 | 60.00 | 4898 | 6187 | 3890 | 5265 | 66 (4.6 %) | 23 | 1749 | 174 |
-| `undead-warrior` | Scourge WARRIOR Horde | 0 | 0 | 16 | 60.00 | 60.00 | 4904 | 6144 | 3907 | 5216 | 63 (4.5 %) | 23 | 1748 | 166 |
-| `skyborne-druid` | Skyborne DRUID Horde | 0 | 0 | 19 | 60.00 | 60.00 | 4852 | 6052 | 3865 | 5139 | 125 (6.3 %) | 23 | 1784 | 168 |
-| `skyborne-hunter` | Skyborne HUNTER Horde | 0 | 0 | 19 | 60.00 | 60.00 | 4888 | 6121 | 3903 | 5209 | 120 (6.1 %) | 23 | 1757 | 172 |
-| `skyborne-rogue` | Skyborne ROGUE Horde | 0 | 0 | 19 | 60.00 | 60.00 | 4889 | 6090 | 3909 | 5177 | 116 (6.0 %) | 23 | 1758 | 172 |
-| `skyborne-shaman` | Skyborne SHAMAN Horde | 0 | 0 | 20 | 60.00 | 60.00 | 4896 | 6118 | 3916 | 5203 | 123 (6.2 %) | 23 | 1770 | 175 |
-| `skyborne-warrior` | Skyborne WARRIOR Horde | 0 | 0 | 18 | 60.00 | 60.00 | 4862 | 6070 | 3879 | 5151 | 117 (6.0 %) | 23 | 1763 | 166 |
+| `orc-hunter` | Orc HUNTER Horde | 0 | 0 | 21 | 60.00 | 60.00 | 4944 | 6207 | 3941 | 5288 | 63 (4.5 %) | 23 | 1663 | 174 |
+| `orc-mage` | Orc MAGE Horde | 0 | 0 | 22 | 60.00 | 60.00 | 4977 | 6225 | 3968 | 5302 | 65 (4.6 %) | 23 | 1652 | 169 |
+| `orc-rogue` | Orc ROGUE Horde | 0 | 0 | 22 | 60.00 | 60.00 | 4952 | 6188 | 3943 | 5262 | 63 (4.5 %) | 23 | 1665 | 174 |
+| `orc-shaman` | Orc SHAMAN Horde | 0 | 0 | 22 | 60.00 | 60.00 | 4936 | 6185 | 3944 | 5268 | 63 (4.5 %) | 23 | 1677 | 177 |
+| `orc-warlock` | Orc WARLOCK Horde | 0 | 0 | 24 | 60.00 | 60.00 | 4900 | 6201 | 3888 | 5278 | 66 (4.6 %) | 23 | 1681 | 183 |
+| `orc-warrior` | Orc WARRIOR Horde | 0 | 0 | 22 | 60.00 | 60.00 | 4917 | 6156 | 3912 | 5229 | 64 (4.5 %) | 23 | 1673 | 168 |
+| `troll-hunter` | Troll HUNTER Horde | 0 | 0 | 21 | 60.00 | 60.00 | 4944 | 6207 | 3941 | 5288 | 63 (4.5 %) | 23 | 1665 | 176 |
+| `troll-mage` | Troll MAGE Horde | 0 | 0 | 22 | 60.00 | 60.00 | 4977 | 6225 | 3968 | 5302 | 64 (4.6 %) | 23 | 1654 | 171 |
+| `troll-priest` | Troll PRIEST Horde | 0 | 0 | 22 | 60.00 | 60.00 | 4949 | 6219 | 3939 | 5297 | 63 (4.5 %) | 23 | 1661 | 175 |
+| `troll-rogue` | Troll ROGUE Horde | 0 | 0 | 22 | 60.00 | 60.00 | 4952 | 6188 | 3943 | 5262 | 63 (4.5 %) | 23 | 1667 | 176 |
+| `troll-shaman` | Troll SHAMAN Horde | 0 | 0 | 22 | 60.00 | 60.00 | 4936 | 6185 | 3944 | 5268 | 63 (4.5 %) | 23 | 1679 | 179 |
+| `troll-warlock` | Troll WARLOCK Horde | 0 | 0 | 26 | 60.00 | 60.00 | 4900 | 6201 | 3888 | 5278 | 67 (4.6 %) | 23 | 1681 | 183 |
+| `troll-warrior` | Troll WARRIOR Horde | 0 | 0 | 22 | 60.00 | 60.00 | 4917 | 6156 | 3912 | 5229 | 64 (4.5 %) | 23 | 1675 | 170 |
+| `tauren-druid` | Tauren DRUID Horde | 0 | 0 | 24 | 60.00 | 60.00 | 4888 | 6121 | 3899 | 5198 | 67 (4.7 %) | 23 | 1688 | 162 |
+| `tauren-hunter` | Tauren HUNTER Horde | 0 | 0 | 24 | 60.00 | 60.00 | 4932 | 6180 | 3937 | 5265 | 62 (4.5 %) | 23 | 1665 | 171 |
+| `tauren-shaman` | Tauren SHAMAN Horde | 0 | 0 | 25 | 60.00 | 60.00 | 4931 | 6169 | 3940 | 5255 | 62 (4.5 %) | 23 | 1680 | 174 |
+| `tauren-warrior` | Tauren WARRIOR Horde | 0 | 0 | 24 | 60.00 | 60.00 | 4903 | 6129 | 3908 | 5206 | 63 (4.5 %) | 23 | 1677 | 165 |
+| `undead-mage` | Scourge MAGE Horde | 0 | 0 | 23 | 60.00 | 60.00 | 4974 | 6210 | 3967 | 5292 | 64 (4.5 %) | 23 | 1674 | 168 |
+| `undead-paladin` | Scourge PALADIN Horde | 0 | 0 | 24 | 60.00 | 60.00 | 4900 | 6174 | 3915 | 5262 | 82 (5.2 %) | 23 | 1702 | 179 |
+| `undead-priest` | Scourge PRIEST Horde | 0 | 0 | 23 | 60.00 | 60.00 | 4952 | 6211 | 3939 | 5291 | 64 (4.5 %) | 23 | 1676 | 172 |
+| `undead-rogue` | Scourge ROGUE Horde | 0 | 0 | 24 | 60.00 | 60.00 | 4945 | 6165 | 3940 | 5243 | 63 (4.5 %) | 23 | 1689 | 174 |
+| `undead-warlock` | Scourge WARLOCK Horde | 0 | 0 | 25 | 60.00 | 60.00 | 4900 | 6189 | 3888 | 5269 | 66 (4.6 %) | 23 | 1698 | 180 |
+| `undead-warrior` | Scourge WARRIOR Horde | 0 | 0 | 23 | 60.00 | 60.00 | 4904 | 6146 | 3907 | 5220 | 63 (4.5 %) | 23 | 1697 | 172 |
+| `skyborne-druid` | Skyborne DRUID Horde | 0 | 0 | 25 | 60.00 | 60.00 | 4849 | 6057 | 3865 | 5146 | 125 (6.3 %) | 23 | 1731 | 174 |
+| `skyborne-hunter` | Skyborne HUNTER Horde | 0 | 0 | 24 | 60.00 | 60.00 | 4888 | 6126 | 3902 | 5218 | 120 (6.1 %) | 23 | 1704 | 178 |
+| `skyborne-rogue` | Skyborne ROGUE Horde | 0 | 0 | 25 | 60.00 | 60.00 | 4888 | 6096 | 3908 | 5186 | 116 (6.0 %) | 23 | 1705 | 178 |
+| `skyborne-shaman` | Skyborne SHAMAN Horde | 0 | 0 | 26 | 60.00 | 60.00 | 4896 | 6119 | 3917 | 5214 | 123 (6.2 %) | 23 | 1717 | 181 |
+| `skyborne-warrior` | Skyborne WARRIOR Horde | 0 | 0 | 24 | 60.00 | 60.00 | 4860 | 6075 | 3878 | 5158 | 117 (6.0 %) | 23 | 1710 | 172 |
 
 ## Сравнение путей
 
@@ -63,10 +63,10 @@
 
 | стартовый участок | маршруты | уровень в точке слияния | гринд до неё | худший случай |
 |---|---|---:|---:|---:|
-| `dur-01-valley-of-trials`, `dur-02-durotar`, `h-12-orgrimmar-tirisfal` | все 6 `orc-*`, все 7 `troll-*` | 12.39–12.67 | 0–9 | 0–9 |
-| `mul-01-camp-narache`, `mul-02-mulgore`, `mul-03-barrens-crossing`, `h-12-orgrimmar-tirisfal` | все 4 `tauren-*` | 13.01–13.43 | 0–1 | 0–1 |
-| `ud-01-deathknell`, `ud-02-tirisfal` | все 6 `undead-*` | 12.12–12.79 | 0–3 | 2–9 |
-| `sd-01-zephras`, `sd-02-zephras`, `sd-03-thunder-bluff`, `h-12-orgrimmar-tirisfal` | все 5 `skyborne-*` | 14.09–14.27 | 0 | 0 |
+| `dur-01-valley-of-trials`, `dur-02-durotar`, `h-12-orgrimmar-tirisfal` | все 6 `orc-*`, все 7 `troll-*` | 12.40–12.67 | 0–9 | 0–9 |
+| `mul-01-camp-narache`, `mul-02-mulgore`, `mul-03-barrens-crossing`, `h-12-orgrimmar-tirisfal` | все 4 `tauren-*` | 13.01–13.42 | 1 | 1 |
+| `ud-01-deathknell`, `ud-02-tirisfal` | все 6 `undead-*` | 12.11–12.76 | 1–4 | 2–10 |
+| `sd-01-zephras`, `sd-02-zephras`, `sd-03-thunder-bluff`, `h-12-orgrimmar-tirisfal` | все 5 `skyborne-*` | 14.07–14.26 | 0 | 0 |
 
 Сегменты: уровень на входе и в конце и гринд (убийств) — мин–макс по маршрутам, которые проходят сегмент.
 
@@ -74,30 +74,30 @@
 |---|---|---|---:|---:|---:|---:|
 | `dur-01-valley-of-trials` 1-5 Valley of Trials | 1–5 | все 6 `orc-*`, все 7 `troll-*` | 1.00 | 5.30–5.78 | 0 | 0 |
 | `dur-02-durotar` 5-11 Durotar | 5–11 | все 6 `orc-*`, все 7 `troll-*` | 5.30–5.78 | 11.09–11.36 | 0–9 | 0–9 |
-| `h-12-orgrimmar-tirisfal` 12-13 Orgrimmar, Tirisfal Glades | 12–13 | `orc-hunter`, `orc-mage`, `orc-rogue` и ещё 19 | 11.09–13.48 | 12.39–14.27 | 0 | 0 |
-| `mul-01-camp-narache` 1-6 Camp Narache, Red Cloud Mesa | 1–6 | все 4 `tauren-*` | 1.00 | 6.03–6.31 | 0–1 | 0–1 |
-| `mul-02-mulgore` 6-12 Mulgore: Bloodhoof Village and Thunder Bluff | 6–12 | все 4 `tauren-*` | 6.03–6.31 | 11.46–11.72 | 0 | 0 |
-| `mul-03-barrens-crossing` 12 Through the Barrens to Orgrimmar | 12–12 | все 4 `tauren-*` | 11.46–11.72 | 12.06–12.57 | 0 | 0 |
+| `h-12-orgrimmar-tirisfal` 12-13 Orgrimmar, Tirisfal Glades | 12–13 | `orc-hunter`, `orc-mage`, `orc-rogue` и ещё 19 | 11.09–13.46 | 12.40–14.26 | 0 | 0 |
+| `mul-01-camp-narache` 1-6 Camp Narache, Red Cloud Mesa | 1–6 | все 4 `tauren-*` | 1.00 | 6.03–6.32 | 1 | 1 |
+| `mul-02-mulgore` 6-12 Mulgore: Bloodhoof Village and Thunder Bluff | 6–12 | все 4 `tauren-*` | 6.03–6.32 | 11.46–11.72 | 0 | 0 |
+| `mul-03-barrens-crossing` 12 Through the Barrens to Orgrimmar | 12–12 | все 4 `tauren-*` | 11.46–11.72 | 12.06–12.56 | 0 | 0 |
 | `ud-01-deathknell` 1-6 Deathknell | 1–6 | все 6 `undead-*` | 1.00 | 5.75–5.91 | 0–2 | 0–2 |
-| `ud-02-tirisfal` 6-13 Tirisfal Glades | 6–13 | все 6 `undead-*` | 5.75–5.91 | 12.12–12.79 | 0–1 | 0–7 |
-| `sd-01-zephras` 1-9 Zephras Isle: Thendal Grove and Shen'dar | 1–9 | все 5 `skyborne-*` | 1.00 | 9.95–10.08 | 0 | 0 |
-| `sd-02-zephras` 9-13 Zephras Isle: Valanaar, the Windfield orchard, Shadowwind Forest | 9–13 | все 5 `skyborne-*` | 9.95–10.08 | 13.25–13.48 | 0 | 0 |
-| `sd-03-thunder-bluff` 13 Thunder Bluff, the flight to Orgrimmar | 13–13 | все 5 `skyborne-*` | 13.25–13.48 | 13.25–13.48 | 0 | 0 |
-| `h-13-silverpine` 13-15 Silverpine Forest | 13–15 | все 28 | 12.12–14.27 | 14.13–15.60 | 0–18 | 0–18 |
-| `h-15-barrens` 15-18 The Barrens | 15–18 | все 28 | 14.13–15.60 | 18.03–18.78 | 0 | 0 |
-| `h-18-stonetalon-ashenvale` 18-22 Barrens, Stonetalon, Ashenvale | 18–22 | все 28 | 18.03–18.78 | 22.04–22.44 | 0–36 | 24–145 |
-| `h-22-hillsbrad` 22-24 Hillsbrad Foothills (Tarren Mill) | 22–24 | все 28 | 22.04–22.44 | 24.82–25.16 | 0 | 13–52 |
-| `h-24-barrens-stonetalon` 24-27 Ratchet, Southern Barrens, Stonetalon | 24–27 | все 28 | 24.82–25.16 | 27.30–27.55 | 0 | 201–221 |
-| `h-27-ashenvale-needles` 27-31 Ashenvale, Skywatcher Plateau, Thousand Needles | 27–31 | все 28 | 27.30–27.55 | 31.01 | 76–122 | 313–314 |
-| `h-31-hillsbrad-arathi` 31-34 Hillsbrad, Alterac Mountains, Arathi Highlands | 31–34 | все 28 | 31.01 | 34.05–34.06 | 258–274 | 311–327 |
-| `h-34-stranglethorn` 34-37 Stranglethorn Vale | 34–37 | все 28 | 34.05–34.06 | 36.06 | 151–152 | 151–152 |
+| `ud-02-tirisfal` 6-13 Tirisfal Glades | 6–13 | все 6 `undead-*` | 5.75–5.91 | 12.11–12.76 | 0–2 | 0–8 |
+| `sd-01-zephras` 1-9 Zephras Isle: Thendal Grove and Shen'dar | 1–9 | все 5 `skyborne-*` | 1.00 | 9.91–10.06 | 0 | 0 |
+| `sd-02-zephras` 9-13 Zephras Isle: Valanaar, the Windfield orchard, Shadowwind Forest | 9–13 | все 5 `skyborne-*` | 9.91–10.06 | 13.22–13.46 | 0 | 0 |
+| `sd-03-thunder-bluff` 13 Thunder Bluff, the flight to Orgrimmar | 13–13 | все 5 `skyborne-*` | 13.22–13.46 | 13.22–13.46 | 0 | 0 |
+| `h-13-silverpine` 13-15 Silverpine Forest | 13–15 | все 28 | 12.11–14.26 | 14.11–15.58 | 0–18 | 0–18 |
+| `h-15-barrens` 15-18 The Barrens | 15–18 | все 28 | 14.11–15.58 | 18.06–18.76 | 0 | 0 |
+| `h-18-stonetalon-ashenvale` 18-22 Barrens, Stonetalon, Ashenvale | 18–22 | все 28 | 18.06–18.76 | 22.04–22.39 | 0–40 | 31–146 |
+| `h-22-hillsbrad` 22-24 Hillsbrad Foothills (Tarren Mill) | 22–24 | все 28 | 22.04–22.39 | 24.81–25.13 | 0 | 12–50 |
+| `h-24-barrens-stonetalon` 24-27 Ratchet, Southern Barrens, Stonetalon | 24–27 | все 28 | 24.81–25.13 | 27.29–27.52 | 0 | 189–208 |
+| `h-27-ashenvale-needles` 27-31 Ashenvale, Skywatcher Plateau, Thousand Needles | 27–31 | все 28 | 27.29–27.52 | 31.01 | 81–124 | 325–326 |
+| `h-31-hillsbrad-arathi` 31-34 Hillsbrad, Alterac Mountains, Arathi Highlands | 31–34 | все 28 | 31.01 | 34.05–34.06 | 255–271 | 308–324 |
+| `h-34-stranglethorn` 34-37 Stranglethorn Vale | 34–37 | все 28 | 34.05–34.06 | 36.06 | 154–155 | 154–155 |
 | `h-37-desolace-dustwallow` 37-41 Desolace and Dustwallow Marsh | 37–41 | все 28 | 36.06 | 41.01–41.13 | 998–1009 | 1028–1029 |
-| `h-41-arathi-badlands` 41-44 Arathi Highlands and Badlands | 41–44 | все 28 | 41.01–41.13 | 44.02 | 720–765 | 907–919 |
-| `h-44-swamp-stranglethorn` 44-46 Swamp of Sorrows and Stranglethorn Vale | 44–46 | все 28 | 44.02 | 46.01 | 177–178 | 184–185 |
-| `h-46-tanaris-feralas` 46-50 Tanaris and Feralas | 46–50 | все 28 | 46.01 | 49.40 | 601–618 | 714–715 |
-| `h-50-hinterlands-searing-steppes` 50-53 Hinterlands, Searing Gorge, Burning Steppes, Blasted Lands | 50–53 | все 28 | 49.40 | 52.57–52.60 | 148–154 | 300–308 |
-| `h-53-azshara-ungoro-silithus` 53-56 Azshara, Tanaris, Un'Goro Crater, Silithus | 53–56 | все 28 | 52.57–52.60 | 55.04–55.05 | 319–362 | 349–392 |
-| `h-56-felwood-winterspring-plaguelands` 56-60 Felwood, Winterspring, the Plaguelands | 56–60 | все 28 | 55.04–55.05 | 60.00 | 1304 | 1460–1461 |
+| `h-41-arathi-badlands` 41-44 Arathi Highlands and Badlands | 41–44 | все 28 | 41.01–41.13 | 44.00 | 708–751 | 908–919 |
+| `h-44-swamp-stranglethorn` 44-46 Swamp of Sorrows and Stranglethorn Vale | 44–46 | все 28 | 44.00 | 46.01 | 185–186 | 185–186 |
+| `h-46-tanaris-feralas` 46-50 Tanaris and Feralas | 46–50 | все 28 | 46.01 | 49.40 | 602–618 | 714–715 |
+| `h-50-hinterlands-searing-steppes` 50-53 Hinterlands, Searing Gorge, Burning Steppes, Blasted Lands | 50–53 | все 28 | 49.40 | 52.57–52.60 | 148–155 | 300–308 |
+| `h-53-azshara-ungoro-silithus` 53-56 Azshara, Tanaris, Un'Goro Crater, Silithus | 53–56 | все 28 | 52.57–52.60 | 55.04–55.05 | 318–362 | 349–392 |
+| `h-56-felwood-winterspring-plaguelands` 56-60 Felwood, Winterspring, the Plaguelands | 56–60 | все 28 | 55.04–55.05 | 60.00 | 1304–1305 | 1460–1461 |
 
 ## Общие шаги
 
@@ -105,33 +105,42 @@ ERROR и WARN на шагах общих сегментов — по одной 
 
 Ошибок и предупреждений на общих шагах нет.
 
-<details><summary>Принятые предупреждения на общих шагах, `ok` (23)</summary>
+<details><summary>Принятые предупреждения на общих шагах, `ok` (32)</summary>
 
 | где | код | маршруты | сообщение |
 |---|---|---|---|
+| h-13-silverpine#21 id=h13-wild-eyes (Segments/Shared/13_Silverpine.lua) | `travel-revisit` | все 28 | complete 91920 "Wild Eyes": the player passes its objective area at step h13-murloc-eyes, leaves and comes back; the quest can be accepted before that, at step h13-escort (its giver; level and prerequisites met): accept it there and do it at step h13-murloc-eyes |
+| h-15-barrens#62 id=h15-walton-scene (Segments/Shared/15_Barrens.lua) | `travel-revisit` | все 28 | complete 95508 "Unwelcome Guests": the player passes its objective area at step h15-walton, leaves and comes back; the quest can be accepted before that, at step h15-walton (its giver; level and prerequisites met): accept it there and do it at step h15-walton |
 | h-22-hillsbrad#19 id=h22-sfk-vincent (Segments/Shared/22_Hillsbrad.lua) | `at-far-from-giver` | все 28 | turnin 1098 "Deathstalkers in Shadowfang": no quest ender spawns on uiMap 1421 |
-| h-24-barrens-stonetalon#84 (Segments/Shared/24_Barrens_Stonetalon.lua) | `at-far-from-giver` | все 28 | accept 6561 "Blackfathom Villainy": no quest giver spawns on uiMap 1440 |
-| h-27-ashenvale-needles#55 (Segments/Shared/27_Ashenvale_Needles.lua) | `at-far-from-giver` | все 28 | accept 1144 "Willix the Importer": no quest giver spawns on uiMap 1413 |
-| h-27-ashenvale-needles#57 (Segments/Shared/27_Ashenvale_Needles.lua) | `at-far-from-giver` | все 28 | turnin 1144 "Willix the Importer": no quest ender spawns on uiMap 1413 |
-| h-27-ashenvale-needles#120 id=h-27-ashenvale-needles-level-gate (Segments/Shared/27_Ashenvale_Needles.lua) | `level-grind` | все 28 | level 30 +67%: simulated level 30.17–30.36 is short by 14820–23790 XP; ~76–122 same-level kills needed (estimate) |
-| h-31-hillsbrad-arathi#56 id=h-31-hillsbrad-arathi-level-gate (Segments/Shared/31_Hillsbrad_Arathi.lua) | `level-grind` | все 28 | level 33 +43%: simulated level 32.42–32.48 is short by 53490–56770 XP; ~258–274 same-level kills needed (estimate) |
-| h-34-stranglethorn#50 id=h-34-stranglethorn-level-gate (Segments/Shared/34_Stranglethorn.lua) | `level-grind` | все 28 | level 35 +75%: simulated level 35.25–35.26 is short by 33220–33440 XP; ~151–152 same-level kills needed (estimate) |
+| h-24-barrens-stonetalon#86 (Segments/Shared/24_Barrens_Stonetalon.lua) | `at-far-from-giver` | все 28 | accept 6561 "Blackfathom Villainy": no quest giver spawns on uiMap 1440 |
+| h-27-ashenvale-needles#54 (Segments/Shared/27_Ashenvale_Needles.lua) | `at-far-from-giver` | все 28 | accept 1144 "Willix the Importer": no quest giver spawns on uiMap 1413 |
+| h-27-ashenvale-needles#56 (Segments/Shared/27_Ashenvale_Needles.lua) | `at-far-from-giver` | все 28 | turnin 1144 "Willix the Importer": no quest ender spawns on uiMap 1413 |
+| h-27-ashenvale-needles#114 id=h-27-ashenvale-needles-level-gate (Segments/Shared/27_Ashenvale_Needles.lua) | `level-grind` | все 28 | level 30 +53%: simulated level 30.02–30.20 is short by 15795–24180 XP; ~81–124 same-level kills needed (estimate) |
+| h-31-hillsbrad-arathi#57 id=h-31-hillsbrad-arathi-level-gate (Segments/Shared/31_Hillsbrad_Arathi.lua) | `level-grind` | все 28 | level 33 +43%: simulated level 32.43–32.49 is short by 52875–56155 XP; ~255–271 same-level kills needed (estimate) |
+| h-34-stranglethorn#49 id=h-34-stranglethorn-level-gate (Segments/Shared/34_Stranglethorn.lua) | `level-grind` | все 28 | level 35 +75%: simulated level 35.24–35.25 is short by 33880–34100 XP; ~154–155 same-level kills needed (estimate) |
 | h-37-desolace-dustwallow#36 id=h38-level-maraudine (Segments/Shared/37_Desolace_Dustwallow.lua) | `level-grind` | все 28 | level 37 +50%: simulated level 36.50–36.52 is short by 72600–74180 XP; ~319–326 same-level kills needed (estimate) |
+| h-37-desolace-dustwallow#61 (Segments/Shared/37_Desolace_Dustwallow.lua) | `skip-ahead` | все 28 | optional step [complete 5943] can be fast-forwarded: the later step h-37-desolace-dustwallow#62 id=h39-mannoroc-portals [complete 5581] is done as soon as its objectives are killed / looted on the way: the walk to step h-37-desolace-dustwallow#61 [complete 5943] passes them with 5581 "Portals of the Legion" in the log, becomes the forward anchor, and the guide then counts the travel / transient / optional / collect steps before it as done (move this step before that point or after the later step, merge it into the later step, or drop the overlap) _(текст различается по маршрутам: вариантов 2, показан первый)_ |
 | h-37-desolace-dustwallow#63 id=h39-level-mannoroc (Segments/Shared/37_Desolace_Dustwallow.lua) | `level-grind` | все 28 | level 39 +78%: simulated level 37.82–37.83 is short by 160670–161830 XP; ~679–684 same-level kills needed (estimate) |
-| h-41-arathi-badlands#70 id=h-41-arathi-badlands-level-gate (Segments/Shared/41_Arathi_Badlands.lua) | `level-grind` | все 28 | level 43 +80%: simulated level 41.89–42.01 is short by 185235–196510 XP; ~720–765 same-level kills needed (estimate) |
-| h-44-swamp-stranglethorn#89 id=h-44-swamp-stranglethorn-level-gate (Segments/Shared/44_Swamp_Stranglethorn.lua) | `level-grind` | все 28 | level 45 +90%: simulated level 45.49 is short by 47790–48060 XP; ~177–178 same-level kills needed (estimate) |
-| h-46-tanaris-feralas#108 id=h-46-tanaris-feralas-level-gate (Segments/Shared/46_Tanaris_Feralas.lua) | `level-grind` | все 28 | level 49 +30%: simulated level 48.07 is short by 168595 XP; ~589 same-level kills needed (estimate) |
-| h-50-hinterlands-searing-steppes#139 id=h-50-hinterlands-searing-steppes-level-gate (Segments/Shared/50_Hinterlands_Searing_Steppes.lua) | `level-grind` | все 28 | level 52 +30%: simulated level 52.01–52.02 is short by 45140–46970 XP; ~148–154 same-level kills needed (estimate) |
-| h-53-azshara-ungoro-silithus#114 id=h55-silithus-field-grind (Segments/Shared/53_Azshara_Ungoro_Silithus.lua) | `level-grind` | все 28 | level 54 +74%: simulated level 54.08–54.16 is short by 100485–114030 XP; ~319–362 same-level kills needed (estimate) |
-| h-56-felwood-winterspring-plaguelands#72 id=h57-winterspring-grind (Segments/Shared/56_Felwood_Winterspring_Plaguelands.lua) | `level-grind` | все 28 | level 57: simulated level 55.99 is short by 189770–189775 XP; ~584 same-level kills needed (estimate) |
-| h-56-felwood-winterspring-plaguelands#206 id=h-56-felwood-winterspring-plaguelands-level-gate (Segments/Shared/56_Felwood_Winterspring_Plaguelands.lua) | `level-grind` | все 28 | level 59 +98%: simulated level 58.81 is short by 244220–244225 XP; ~720 same-level kills needed (estimate) |
-| h-18-stonetalon-ashenvale#92 id=h18-lvl-22 (Segments/Shared/18_Stonetalon_Ashenvale.lua) | `level-grind` | `orc-mage`, `orc-rogue`, `troll-mage` и ещё 2 | level 21 +85%: simulated level 21.64–21.65 is short by 5250–5400 XP; ~35–36 same-level kills needed (estimate) |
-| h-22-hillsbrad (Segments/Shared/22_Hillsbrad.lua) | `segment-level` | `orc-rogue`, `troll-rogue`, `undead-paladin` и ещё 5 | segment h-22-hillsbrad ends at simulated level 25.00–25.16; planned end level 24 |
+| h-41-arathi-badlands#70 id=h-41-arathi-badlands-level-gate (Segments/Shared/41_Arathi_Badlands.lua) | `level-grind` | все 28 | level 43 +80%: simulated level 41.93–42.04 is short by 182175–193010 XP; ~708–751 same-level kills needed (estimate) |
+| h-44-swamp-stranglethorn#55 (Segments/Shared/44_Swamp_Stranglethorn.lua) | `travel-revisit` | все 28 | complete 348 "Stranglethorn Fever": the quest is in the log when the player passes its objective area at step h45-mistvale, leaves and comes back: do it there |
+| h-44-swamp-stranglethorn#86 id=h-44-swamp-stranglethorn-level-gate (Segments/Shared/44_Swamp_Stranglethorn.lua) | `level-grind` | все 28 | level 45 +90%: simulated level 45.47–45.48 is short by 49950–50220 XP; ~185–186 same-level kills needed (estimate) |
+| h-46-tanaris-feralas#106 id=h-46-tanaris-feralas-level-gate (Segments/Shared/46_Tanaris_Feralas.lua) | `level-grind` | все 28 | level 49 +30%: simulated level 48.07 is short by 168595–168600 XP; ~589 same-level kills needed (estimate) |
+| h-50-hinterlands-searing-steppes#130 id=h-50-hinterlands-searing-steppes-level-gate (Segments/Shared/50_Hinterlands_Searing_Steppes.lua) | `level-grind` | все 28 | level 52 +30%: simulated level 52.01–52.02 is short by 45140–47275 XP; ~148–155 same-level kills needed (estimate) |
+| h-53-azshara-ungoro-silithus#108 id=h55-silithus-field-grind (Segments/Shared/53_Azshara_Ungoro_Silithus.lua) | `level-grind` | все 28 | level 54 +74%: simulated level 54.08–54.16 is short by 100170–114030 XP; ~318–362 same-level kills needed (estimate) |
+| h-56-felwood-winterspring-plaguelands#23 (Segments/Shared/56_Felwood_Winterspring_Plaguelands.lua) | `travel-revisit` | все 28 | complete 4506 "Corrupted Sabers": the quest is in the log when the player passes its objective area at step h-56-felwood-winterspring-plaguelands:21, leaves and comes back: do it there |
+| h-56-felwood-winterspring-plaguelands#69 id=h57-winterspring-grind (Segments/Shared/56_Felwood_Winterspring_Plaguelands.lua) | `level-grind` | все 28 | level 57: simulated level 55.99 is short by 189450–189775 XP; ~583–584 same-level kills needed (estimate) |
+| h-56-felwood-winterspring-plaguelands#196 id=h-56-felwood-winterspring-plaguelands-level-gate (Segments/Shared/56_Felwood_Winterspring_Plaguelands.lua) | `level-grind` | все 28 | level 59 +98%: simulated level 58.81 is short by 244220–244560 XP; ~720–721 same-level kills needed (estimate) |
+| h-18-stonetalon-ashenvale#92 id=h18-lvl-22 (Segments/Shared/18_Stonetalon_Ashenvale.lua) | `level-grind` | `orc-mage`, `orc-rogue`, `orc-warlock` и ещё 6 | level 21 +85%: simulated level 21.61–21.67 is short by 4650–6000 XP; ~31–40 same-level kills needed (estimate) |
+| mul-02-mulgore#22 id=mul02-kyle (Segments/Mulgore/02_Mulgore.lua) | `travel-revisit` | все 4 `tauren-*` | complete 99411 "Kyle's Gone Missing!": the quest is in the log when the player passes its objective area at step mul02-maur, leaves and comes back: do it there |
 | h-15-barrens#7 id=h15-xr-arrive (Segments/Shared/15_Barrens.lua) | `db-override-unverified` | все 4 `tauren-*` | accept 844 "Plainstrider Menace" (exclusive with 854 "Journey to the Crossroads" in the snapshot): the exclusivity check passes only because of the unverified DB override in tools/overrides/shared.lua (source: Classic: Journey to the Crossroads (Thunder Bluff) is a breadcrumb, 844 stays available): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment) |
 | h-15-barrens#7 id=h15-xr-arrive (Segments/Shared/15_Barrens.lua) | `db-override-unverified` | все 4 `tauren-*` | accept 844 "Plainstrider Menace" (exclusive with 861 "The Hunter's Way" in the snapshot): the exclusivity check passes only because of the unverified DB override in tools/overrides/shared.lua (source: the DB chain 861 -> 860 (breadcrumbFor 844) -> 844; Classic quest chain The Hunter's Way): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment) |
+| ud-01-deathknell#20 id=ud01-marla-grave (Segments/Tirisfal/01_Deathknell.lua) | `travel-revisit` | все 6 `undead-*` | complete 6395 "Marla's Last Wish": the quest is in the log when the player passes its objective area at step ud01-church-4, leaves and comes back: do it there |
+| ud-02-tirisfal#17 id=ud02-putrid-claws (Segments/Tirisfal/02_Tirisfal.lua) | `travel-revisit` | все 6 `undead-*` | complete 404 "A Putrid Task": the player passes its objective area at step ud02-lvl-6, leaves and comes back; the quest can be accepted before that, at step ud02-brill-gate (its giver; level and prerequisites met): accept it there and do it at step ud02-lvl-6 |
+| h-22-hillsbrad (Segments/Shared/22_Hillsbrad.lua) | `segment-level` | `undead-paladin`, `undead-rogue`, `skyborne-druid` и ещё 2 | segment h-22-hillsbrad ends at simulated level 25.00–25.13; planned end level 24 |
+| sd-02-zephras#50 id=sd02-speech (Segments/Zephras/02_Zephras_9_13.lua) | `travel-revisit` | все 5 `skyborne-*` | complete 92708 "A Grand Adventure": the player passes its objective area at step sd02-ayessa, leaves and comes back; the quest can be accepted before that, at step sd02-ayessa (its giver; level and prerequisites met): accept it there and do it at step sd02-ayessa |
 | sd-03-thunder-bluff#4 id=sd03-fly-org (Segments/Zephras/03_ThunderBluff.lua) | `fly-unknown-fp` | все 5 `skyborne-*` | fly Orgrimmar: flight point Orgrimmar was not learned before (no earlier fp step): a flight there is not offered |
-| h-12-orgrimmar-tirisfal (Segments/Shared/12_Orgrimmar_Tirisfal.lua) | `segment-level` | все 5 `skyborne-*` | segment h-12-orgrimmar-tirisfal ends at simulated level 14.09–14.27; planned end level 13 |
-| sd-01-zephras (Segments/Zephras/01_Zephras_1_9.lua) | `segment-level` | `skyborne-shaman` | segment sd-01-zephras ends at simulated level 10.08; planned end level 9 |
+| h-12-orgrimmar-tirisfal (Segments/Shared/12_Orgrimmar_Tirisfal.lua) | `segment-level` | все 5 `skyborne-*` | segment h-12-orgrimmar-tirisfal ends at simulated level 14.07–14.26; planned end level 13 |
+| sd-01-zephras (Segments/Zephras/01_Zephras_1_9.lua) | `segment-level` | `skyborne-shaman` | segment sd-01-zephras ends at simulated level 10.06; planned end level 9 |
 
 </details>
 
@@ -144,49 +153,48 @@ ERROR и WARN на шагах общих сегментов — по одной 
 | 2 | dur-01-valley-of-trials#3 id=dur01-boars | все 6 `orc-*`, все 7 `troll-*` | 0 | 0 | 0 | — |
 | 2 | ud-01-deathknell#3 id=ud01-zombies | все 6 `undead-*` | 0 | 0 | 0 | — |
 | 2 | sd-01-zephras#5 id=sd01-level-2 | все 5 `skyborne-*` | 0 | 0 | 0 | — |
-| 3 | sd-01-zephras#18 id=sd01-level-3 | все 5 `skyborne-*` | 0 | 0 | 0 | — |
+| 3 | sd-01-zephras#17 id=sd01-level-3 | все 5 `skyborne-*` | 0 | 0 | 0 | — |
 | 3 | sd-01-zephras#10 id=sha-zep-level-3 | `skyborne-shaman` | 0 | 0 | 0 | — |
-| 3 +70% | ud-01-deathknell#8 id=ud01-xp-4 | все 6 `undead-*` | 0 | 2 | 2 | — |
-| 4 | dur-01-valley-of-trials#24 id=sha-dur-level-4 | `orc-shaman`, `troll-shaman` | 0 | 0 | 0 | — |
-| 4 | mul-01-camp-narache#11 id=mul01-lvl-4 | все 4 `tauren-*` | 0 | 1 | 1 | — |
-| 4 | sd-01-zephras#24 id=sd01-level-4 | все 5 `skyborne-*` | 0 | 0 | 0 | — |
-| 5 | dur-01-valley-of-trials#30 id=dur01-lvl-5 | все 6 `orc-*`, все 7 `troll-*` | 0 | 0 | 0 | — |
+| 3 +70% | ud-01-deathknell#7 id=ud01-xp-4 | все 6 `undead-*` | 0 | 2 | 2 | — |
+| 4 | dur-01-valley-of-trials#22 id=sha-dur-level-4 | `orc-shaman`, `troll-shaman` | 0 | 0 | 0 | — |
+| 4 | mul-01-camp-narache#10 id=mul01-lvl-4 | все 4 `tauren-*` | 1 | 1 | 1 | — |
+| 4 | sd-01-zephras#23 id=sd01-level-4 | все 5 `skyborne-*` | 0 | 0 | 0 | — |
+| 5 | dur-01-valley-of-trials#28 id=dur01-lvl-5 | все 6 `orc-*`, все 7 `troll-*` | 0 | 0 | 0 | — |
 | 6 | dur-02-durotar#10 id=dur02-lvl-6 | все 6 `orc-*`, все 7 `troll-*` | 0 | 0 | 0 | — |
 | 6 | mul-02-mulgore#4 id=mul02-lvl-6 | все 4 `tauren-*` | 0 | 0 | 0 | — |
 | 6 | ud-02-tirisfal#9 id=ud02-lvl-6 | все 6 `undead-*` | 0 | 0 | 0 | — |
-| 9 | dur-02-durotar#47 id=dur02-lvl-9 | все 6 `orc-*`, все 7 `troll-*` | 0 | 0 | 0 | — |
-| 10 | dur-02-durotar#54 id=dur02-lvl-10 | все 6 `orc-*`, все 7 `troll-*` | 0 | 9 | 9 | — |
-| 10 | mul-02-mulgore#51 id=mul02-lvl-10 | все 4 `tauren-*` | 0 | 0 | 0 | — |
-| 10 | ud-02-tirisfal#64 id=ud02-level-10 | все 6 `undead-*` | 0 | 0 | 0 | — |
-| 10 | sd-02-zephras#23 id=sd02-level-10 | все 5 `skyborne-*` | 0 | 0 | 0 | — |
-| 10 | sd-02-zephras#13 id=hun-zep-level-10 | `skyborne-hunter` | 0 | 0 | 0 | — |
-| 10 | sd-02-zephras#12 id=sha-zep-level-10 | `skyborne-shaman` | 0 | 0 | 0 | — |
+| 9 | dur-02-durotar#44 id=dur02-lvl-9 | все 6 `orc-*`, все 7 `troll-*` | 0 | 0 | 0 | — |
+| 10 | dur-02-durotar#51 id=dur02-lvl-10 | все 6 `orc-*`, все 7 `troll-*` | 0 | 9 | 9 | — |
+| 10 | mul-02-mulgore#48 id=mul02-lvl-10 | все 4 `tauren-*` | 0 | 0 | 0 | — |
+| 10 | ud-02-tirisfal#58 id=ud02-level-10 | все 6 `undead-*` | 0 | 0 | 0 | — |
+| 10 | sd-02-zephras#20 id=sd02-level-10 | все 5 `skyborne-*` | 0 | 0 | 0 | — |
+| 10 | sd-02-zephras#12 id=hun-zep-level-10 | `skyborne-hunter` | 0 | 0 | 0 | — |
+| 10 | sd-02-zephras#11 id=sha-zep-level-10 | `skyborne-shaman` | 0 | 0 | 0 | — |
 | 12 | h-13-silverpine#6 id=h13-lvl-12 | все 28 | 0 | 0 | 0 | — |
-| 12 | ud-02-tirisfal#96 id=ud02-lvl-12 | все 6 `undead-*` | 0 | 1 | 7 | — |
-| 13 +92% | h-13-silverpine#40 id=h13-lvl-14 | все 28 | 0 | 18 | 18 | — |
-| 18 | h-18-stonetalon-ashenvale#3 id=h18-lvl-18 | все 28 | 0 | 0 | 45 | — |
+| 12 | ud-02-tirisfal#88 id=ud02-lvl-12 | все 6 `undead-*` | 0 | 2 | 8 | — |
+| 13 +92% | h-13-silverpine#39 id=h13-lvl-14 | все 28 | 0 | 18 | 18 | — |
+| 18 | h-18-stonetalon-ashenvale#3 id=h18-lvl-18 | все 28 | 0 | 0 | 39 | — |
 | 19 +88% | h-18-stonetalon-ashenvale#46 id=h18-lvl-20 | все 28 | 0 | 0 | 0 | — |
 | 21 | h-18-stonetalon-ashenvale#86 id=h18-lvl-21 | все 28 | 0 | 0 | 0 | — |
-| 21 +85% | h-18-stonetalon-ashenvale#92 id=h18-lvl-22 | все 28 | 0 | 36 | 100 | 40 |
-| 23 +85% | h-22-hillsbrad#54 id=h-22-hillsbrad-level-gate | все 28 | 0 | 0 | 52 | — |
-| 26 +84% | h-24-barrens-stonetalon#90 id=h-24-barrens-stonetalon-level-gate | все 28 | 0 | 0 | 221 | — |
-| 29 | h-27-ashenvale-needles#117 | все 28 | 0 | 0 | 0 | — |
-| 30 +67% | h-27-ashenvale-needles#120 id=h-27-ashenvale-needles-level-gate | все 28 | 76 | 122 | 314 | 130 |
-| 33 +43% | h-31-hillsbrad-arathi#56 id=h-31-hillsbrad-arathi-level-gate | все 28 | 258 | 274 | 327 | 280 |
-| 35 +75% | h-34-stranglethorn#50 id=h-34-stranglethorn-level-gate | все 28 | 151 | 152 | 152 | 160 |
+| 21 +85% | h-18-stonetalon-ashenvale#92 id=h18-lvl-22 | все 28 | 0 | 40 | 107 | 40 |
+| 23 +93% | h-22-hillsbrad#56 id=h-22-hillsbrad-level-gate | все 28 | 0 | 0 | 50 | — |
+| 26 +89% | h-24-barrens-stonetalon#92 id=h-24-barrens-stonetalon-level-gate | все 28 | 0 | 0 | 208 | — |
+| 30 +53% | h-27-ashenvale-needles#114 id=h-27-ashenvale-needles-level-gate | все 28 | 81 | 124 | 326 | 130 |
+| 33 +43% | h-31-hillsbrad-arathi#57 id=h-31-hillsbrad-arathi-level-gate | все 28 | 255 | 271 | 324 | 280 |
+| 35 +75% | h-34-stranglethorn#49 id=h-34-stranglethorn-level-gate | все 28 | 154 | 155 | 155 | 160 |
 | 37 +50% | h-37-desolace-dustwallow#36 id=h38-level-maraudine | все 28 | 319 | 326 | 346 | 330 |
 | 39 +78% | h-37-desolace-dustwallow#63 id=h39-level-mannoroc | все 28 | 679 | 684 | 684 | 690 |
 | 40 +25% | h-37-desolace-dustwallow#117 id=h-37-desolace-dustwallow-level-gate | все 28 | 0 | 0 | 0 | — |
-| 43 +80% | h-41-arathi-badlands#70 id=h-41-arathi-badlands-level-gate | все 28 | 720 | 765 | 919 | 770 |
-| 45 +90% | h-44-swamp-stranglethorn#89 id=h-44-swamp-stranglethorn-level-gate | все 28 | 177 | 178 | 185 | 180 |
-| 47 (необязательный) | h-46-tanaris-feralas#54 id=h48-tanaris-level-gate | все 28 | 12 | 29 | — | — |
-| 49 +30% | h-46-tanaris-feralas#108 id=h-46-tanaris-feralas-level-gate | все 28 | 589 | 589 | 715 | 590 |
-| 52 +30% | h-50-hinterlands-searing-steppes#139 id=h-50-hinterlands-searing-steppes-level-gate | все 28 | 148 | 154 | 308 | 160 |
-| 54 | h-53-azshara-ungoro-silithus#108 id=h55-silithus-grind | все 28 | 0 | 0 | 24 | — |
-| 54 +74% | h-53-azshara-ungoro-silithus#114 id=h55-silithus-field-grind | все 28 | 319 | 362 | 369 | 370 |
-| 55 | h-53-azshara-ungoro-silithus#127 id=h-53-azshara-ungoro-silithus-level-gate | все 28 | 0 | 0 | 0 | — |
-| 57 | h-56-felwood-winterspring-plaguelands#72 id=h57-winterspring-grind | все 28 | 584 | 584 | 605 | 590 |
-| 59 +98% | h-56-felwood-winterspring-plaguelands#206 id=h-56-felwood-winterspring-plaguelands-level-gate | все 28 | 720 | 720 | 857 | 720 |
+| 43 +80% | h-41-arathi-badlands#70 id=h-41-arathi-badlands-level-gate | все 28 | 708 | 751 | 919 | 770 |
+| 45 +90% | h-44-swamp-stranglethorn#86 id=h-44-swamp-stranglethorn-level-gate | все 28 | 185 | 186 | 186 | 190 |
+| 47 (необязательный) | h-46-tanaris-feralas#52 id=h48-tanaris-level-gate | все 28 | 13 | 29 | — | — |
+| 49 +30% | h-46-tanaris-feralas#106 id=h-46-tanaris-feralas-level-gate | все 28 | 589 | 589 | 715 | 590 |
+| 52 +30% | h-50-hinterlands-searing-steppes#130 id=h-50-hinterlands-searing-steppes-level-gate | все 28 | 148 | 155 | 308 | 160 |
+| 54 | h-53-azshara-ungoro-silithus#102 id=h55-silithus-grind | все 28 | 0 | 0 | 24 | — |
+| 54 +74% | h-53-azshara-ungoro-silithus#108 id=h55-silithus-field-grind | все 28 | 318 | 362 | 369 | 370 |
+| 55 | h-53-azshara-ungoro-silithus#121 id=h-53-azshara-ungoro-silithus-level-gate | все 28 | 0 | 0 | 0 | — |
+| 57 | h-56-felwood-winterspring-plaguelands#69 id=h57-winterspring-grind | все 28 | 583 | 584 | 605 | 590 |
+| 59 +98% | h-56-felwood-winterspring-plaguelands#196 id=h-56-felwood-winterspring-plaguelands-level-gate | все 28 | 720 | 721 | 857 | 725 |
 
 ## Маршруты
 
@@ -194,968 +202,971 @@ ERROR и WARN на шагах общих сегментов — по одной 
 
 ### orc-hunter — Orc Hunter 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Orc HUNTER Horde. Результат: **0 ERROR, 0 WARN, 433 INFO**; принято предупреждений (`ok`): 16; из них на общих шагах: 0 ERROR, 0 WARN, принято 16.
+Модуль `FastesBoooy_Guides`, профиль: Orc HUNTER Horde. Результат: **0 ERROR, 0 WARN, 443 INFO**; принято предупреждений (`ok`): 21; из них на общих шагах: 0 ERROR, 0 WARN, принято 21.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1907650 (из них оценено 86545; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 814496, гринд 1362620 (~4944 убийств); максимум квестов в журнале 23 из 40; принято 703, сдано 703, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1909320 (из них оценено 86545; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 813281, гринд 1362395 (~4944 убийств); максимум квестов в журнале 23 из 40; принято 704, сдано 704, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4944 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 168 — и их квесты): ~6207. С попутными убийствами в пути на 15 % опыта квестов: ~3943 (худший случай ~5288).
+Гринд до порогов уровня (шаги `level`): ~4944 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 174 — и их квесты): ~6207. С попутными убийствами в пути на 15 % опыта квестов: ~3941 (худший случай ~5288).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
 | `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.37 | 3635 | 2213 | 0 (0) | 2 |
-| `dur-02-durotar` | 5–11 | 5.37 → 11.36 | 20885 | 11005 | 7 (7) | 7 |
+| `dur-02-durotar` | 5–11 | 5.37 → 11.36 | 20885 | 11026 | 7 (7) | 7 |
 | `h-12-orgrimmar-tirisfal` | 12–13 | 11.36 → 12.67 | 9425 | 2992 | 0 (0) | 4 |
-| `h-13-silverpine` | 13–15 | 12.67 → 14.33 | 14155 | 4771 | 0 (0) | 4 |
-| `h-15-barrens` | 15–18 | 14.33 → 18.15 | 45520 | 14083 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.15 → 22.04 | 51790 | 32243 | 23 (130) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 24.82 | 61855 | 19595 | 0 (51) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.30 | 66380 | 21632 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.30 → 31.01 | 102715 | 34021 | 122 (313) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (327) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (151) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (919) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (184) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153307 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 241170 | 69149 | 341 (392) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+| `h-13-silverpine` | 13–15 | 12.67 → 14.33 | 14155 | 4753 | 0 (0) | 4 |
+| `h-15-barrens` | 15–18 | 14.33 → 18.18 | 46770 | 13538 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.18 → 22.04 | 50540 | 32198 | 27 (132) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 24.81 | 61855 | 19315 | 0 (49) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.81 → 27.29 | 66380 | 21402 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.29 → 31.01 | 102715 | 34155 | 124 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 67170 | 43819 | 270 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (186) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (714) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153273 | 155 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.05 | 241170 | 69149 | 341 (392) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (433): `complete-kill-xp` 343, `complete-no-kill` 19, `complete-no-objectives` 2, `level-grind` 3, `quest-profession` 1, `train-service` 2, `xp-unknown` 63.
+INFO (443): `complete-kill-xp` 353, `complete-no-kill` 19, `complete-no-objectives` 2, `level-grind` 3, `quest-profession` 1, `train-service` 2, `xp-unknown` 63.
 
 ### orc-mage — Orc Mage 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Orc MAGE Horde. Результат: **0 ERROR, 0 WARN, 429 INFO**; принято предупреждений (`ok`): 17; из них на общих шагах: 0 ERROR, 0 WARN, принято 17.
+Модуль `FastesBoooy_Guides`, профиль: Orc MAGE Horde. Результат: **0 ERROR, 0 WARN, 439 INFO**; принято предупреждений (`ok`): 22; из них на общих шагах: 0 ERROR, 0 WARN, принято 22.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1899180 (из них оценено 86665; квестов с оценённым опытом: 65, 4.6 % опыта квестов), за убийства по целям 814532, гринд 1371190 (~4978 убийств); максимум квестов в журнале 23 из 40; принято 698, сдано 698, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1900850 (из них оценено 86665; квестов с оценённым опытом: 65, 4.6 % опыта квестов), за убийства по целям 813317, гринд 1370640 (~4977 убийств); максимум квестов в журнале 23 из 40; принято 699, сдано 699, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4978 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 163 — и их квесты): ~6225. С попутными убийствами в пути на 15 % опыта квестов: ~3973 (худший случай ~5301).
+Гринд до порогов уровня (шаги `level`): ~4977 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 169 — и их квесты): ~6225. С попутными убийствами в пути на 15 % опыта квестов: ~3968 (худший случай ~5302).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
 | `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.37 | 3635 | 2213 | 0 (0) | 2 |
-| `dur-02-durotar` | 5–11 | 5.37 → 11.09 | 18365 | 11133 | 7 (7) | 6 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 11.09 → 12.39 | 9005 | 2992 | 0 (0) | 4 |
-| `h-13-silverpine` | 13–15 | 12.39 → 14.13 | 14155 | 4987 | 0 (3) | 4 |
-| `h-15-barrens` | 15–18 | 14.13 → 18.03 | 45520 | 14376 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.03 → 22.04 | 51790 | 32585 | 36 (145) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 24.82 | 61855 | 19595 | 0 (51) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.30 | 66380 | 21632 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.30 → 31.01 | 102715 | 34015 | 122 (314) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (326) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (918) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277790 | 153285 | 154 (307) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.05 | 235560 | 68234 | 362 (392) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+| `dur-02-durotar` | 5–11 | 5.37 → 11.09 | 18365 | 11154 | 7 (7) | 6 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 11.09 → 12.40 | 9005 | 2992 | 0 (0) | 4 |
+| `h-13-silverpine` | 13–15 | 12.40 → 14.11 | 14155 | 4818 | 0 (4) | 4 |
+| `h-15-barrens` | 15–18 | 14.11 → 18.06 | 46770 | 13922 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.06 → 22.04 | 50540 | 32557 | 40 (146) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 24.81 | 61855 | 19315 | 0 (49) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.81 → 27.29 | 66380 | 21417 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.29 → 31.01 | 102715 | 34155 | 124 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 67170 | 43819 | 270 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (186) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (714) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277790 | 153273 | 154 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 362 (392) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (429): `complete-kill-xp` 342, `complete-no-kill` 16, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 1, `xp-unknown` 65.
+INFO (439): `complete-kill-xp` 352, `complete-no-kill` 16, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 1, `xp-unknown` 65.
 
 ### orc-rogue — Orc Rogue 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Orc ROGUE Horde. Результат: **0 ERROR, 0 WARN, 430 INFO**; принято предупреждений (`ok`): 18; из них на общих шагах: 0 ERROR, 0 WARN, принято 18.
+Модуль `FastesBoooy_Guides`, профиль: Orc ROGUE Horde. Результат: **0 ERROR, 0 WARN, 440 INFO**; принято предупреждений (`ok`): 22; из них на общих шагах: 0 ERROR, 0 WARN, принято 22.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1903560 (из них оценено 86545; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 814779, гринд 1366510 (~4954 убийств); максимум квестов в журнале 23 из 40; принято 702, сдано 702, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1905230 (из них оценено 86545; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 813869, гринд 1365840 (~4952 убийств); максимум квестов в журнале 23 из 40; принято 703, сдано 703, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4954 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 168 — и их квесты): ~6187. С попутными убийствами в пути на 15 % опыта квестов: ~3947 (худший случай ~5259).
+Гринд до порогов уровня (шаги `level`): ~4952 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 174 — и их квесты): ~6188. С попутными убийствами в пути на 15 % опыта квестов: ~3943 (худший случай ~5262).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
 | `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.37 | 3635 | 2213 | 0 (0) | 2 |
-| `dur-02-durotar` | 5–11 | 5.37 → 11.09 | 18365 | 11133 | 7 (7) | 6 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 11.09 → 12.39 | 9005 | 2992 | 0 (0) | 4 |
-| `h-13-silverpine` | 13–15 | 12.39 → 14.13 | 14155 | 4987 | 0 (3) | 4 |
-| `h-15-barrens` | 15–18 | 14.13 → 18.03 | 45520 | 14376 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.03 → 22.04 | 51790 | 32585 | 36 (145) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 25.00 | 66315 | 20921 | 0 (13) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 25.00 → 27.44 | 66380 | 20996 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.44 → 31.01 | 102715 | 33550 | 98 (313) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (327) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1028) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (919) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (714) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153307 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 362 (392) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+| `dur-02-durotar` | 5–11 | 5.37 → 11.09 | 18365 | 11154 | 7 (7) | 6 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 11.09 → 12.40 | 9005 | 2992 | 0 (0) | 4 |
+| `h-13-silverpine` | 13–15 | 12.40 → 14.11 | 14155 | 4818 | 0 (4) | 4 |
+| `h-15-barrens` | 15–18 | 14.11 → 18.06 | 46770 | 13922 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.06 → 22.04 | 50540 | 32557 | 40 (146) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 25.00 | 66315 | 20915 | 0 (12) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 25.00 → 27.44 | 66380 | 20996 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.44 → 31.01 | 102715 | 33550 | 98 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 67170 | 43819 | 270 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.00 | 71030 | 38121 | 750 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 618 (715) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153251 | 154 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.05 | 235560 | 68234 | 362 (392) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (430): `complete-kill-xp` 343, `complete-no-kill` 17, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 2, `xp-unknown` 63.
+INFO (440): `complete-kill-xp` 353, `complete-no-kill` 17, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 2, `xp-unknown` 63.
 
 ### orc-shaman — Orc Shaman 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Orc SHAMAN Horde. Результат: **0 ERROR, 0 WARN, 432 INFO**; принято предупреждений (`ok`): 17; из них на общих шагах: 0 ERROR, 0 WARN, принято 16.
+Модуль `FastesBoooy_Guides`, профиль: Orc SHAMAN Horde. Результат: **0 ERROR, 0 WARN, 442 INFO**; принято предупреждений (`ok`): 22; из них на общих шагах: 0 ERROR, 0 WARN, принято 21.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1906710 (из них оценено 86545; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 812989, гринд 1365110 (~4937 убийств); максимум квестов в журнале 23 из 40; принято 709, сдано 709, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1908380 (из них оценено 86545; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 811818, гринд 1364550 (~4936 убийств); максимум квестов в журнале 23 из 40; принято 710, сдано 710, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4937 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 171 — и их квесты): ~6183. С попутными убийствами в пути на 15 % опыта квестов: ~3946 (худший случай ~5269).
+Гринд до порогов уровня (шаги `level`): ~4936 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 177 — и их квесты): ~6185. С попутными убийствами в пути на 15 % опыта квестов: ~3944 (худший случай ~5268).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
 | `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.78 | 4620 | 2362 | 0 (0) | 2 |
 | `dur-02-durotar` | 5–11 | 5.78 → 11.10 | 18365 | 10766 | 0 (0) | 7 |
 | `h-12-orgrimmar-tirisfal` | 12–13 | 11.10 → 12.41 | 9005 | 2992 | 0 (0) | 5 |
-| `h-13-silverpine` | 13–15 | 12.41 → 14.14 | 14155 | 4987 | 0 (2) | 5 |
-| `h-15-barrens` | 15–18 | 14.14 → 18.23 | 49810 | 13868 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.23 → 22.04 | 52570 | 32060 | 8 (111) | 1 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 24.82 | 61855 | 19595 | 0 (52) | 5 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.33 | 67685 | 21447 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.33 → 31.01 | 102715 | 33862 | 117 (313) | 7 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (326) | 5 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 2 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 2 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (918) | 5 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 5 |
+| `h-13-silverpine` | 13–15 | 12.41 → 14.12 | 14155 | 4805 | 0 (3) | 5 |
+| `h-15-barrens` | 15–18 | 14.12 → 18.27 | 51060 | 13606 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.27 → 22.05 | 51320 | 31998 | 12 (114) | 1 |
+| `h-22-hillsbrad` | 22–24 | 22.05 → 24.81 | 61855 | 19315 | 0 (50) | 5 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.81 → 27.32 | 67685 | 21262 | 0 (207) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.32 → 31.01 | 102715 | 33938 | 119 (325) | 7 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 67170 | 43819 | 270 (324) | 5 |
+| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 50789 | 155 (154) | 2 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 2 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (919) | 5 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 5 |
 | `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170955 | 95081 | 616 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153331 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 362 (391) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153273 | 155 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 361 (392) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1460) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
 <details><summary>Принятые предупреждения, `ok` (1)</summary>
 
-- [library FastesBoooy_Guides] dur-01-valley-of-trials#24 id=sha-dur-1516 (Classes/Shaman.lua) `db-override-unverified` accept 1516 "Call of Earth": the prerequisite check passes only because of the unverified DB override in tools/overrides/shaman.lua (source: https://www.wowhead.com/classic/quest=1516): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
+- [library FastesBoooy_Guides] dur-01-valley-of-trials#22 id=sha-dur-1516 (Classes/Shaman.lua) `db-override-unverified` accept 1516 "Call of Earth": the prerequisite check passes only because of the unverified DB override in tools/overrides/shaman.lua (source: https://www.wowhead.com/classic/quest=1516): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
 
 </details>
 
-INFO (432): `complete-kill-xp` 346, `complete-no-kill` 16, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 2, `xp-unknown` 63.
+INFO (442): `complete-kill-xp` 356, `complete-no-kill` 16, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 2, `xp-unknown` 63.
 
 ### orc-warlock — Orc Warlock 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Orc WARLOCK Horde. Результат: **0 ERROR, 0 WARN, 439 INFO**; принято предупреждений (`ok`): 17; из них на общих шагах: 0 ERROR, 0 WARN, принято 16.
+Модуль `FastesBoooy_Guides`, профиль: Orc WARLOCK Horde. Результат: **0 ERROR, 0 WARN, 448 INFO**; принято предупреждений (`ok`): 24; из них на общих шагах: 0 ERROR, 0 WARN, принято 22.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1917320 (из них оценено 89055; квестов с оценённым опытом: 66, 4.6 % опыта квестов), за убийства по целям 815897, гринд 1351590 (~4897 убийств); максимум квестов в журнале 23 из 40; принято 712, сдано 712, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1918990 (из них оценено 89055; квестов с оценённым опытом: 66, 4.6 % опыта квестов), за убийства по целям 814084, гринд 1351805 (~4900 убийств); максимум квестов в журнале 23 из 40; принято 713, сдано 713, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4897 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 177 — и их квесты): ~6199. С попутными убийствами в пути на 15 % опыта квестов: ~3892 (худший случай ~5276).
+Гринд до порогов уровня (шаги `level`): ~4900 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 183 — и их квесты): ~6201. С попутными убийствами в пути на 15 % опыта квестов: ~3888 (худший случай ~5278).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
 | `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.30 | 3575 | 2066 | 0 (0) | 2 |
-| `dur-02-durotar` | 5–11 | 5.30 → 11.09 | 18365 | 11213 | 9 (9) | 7 |
+| `dur-02-durotar` | 5–11 | 5.30 → 11.09 | 18365 | 11194 | 9 (9) | 7 |
 | `h-12-orgrimmar-tirisfal` | 12–13 | 11.09 → 12.57 | 10755 | 2992 | 0 (0) | 4 |
-| `h-13-silverpine` | 13–15 | 12.57 → 14.26 | 14155 | 4901 | 0 (0) | 4 |
-| `h-15-barrens` | 15–18 | 14.26 → 18.11 | 45520 | 14376 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.11 → 22.04 | 51790 | 32320 | 26 (136) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 24.83 | 62010 | 19841 | 0 (48) | 5 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.83 → 27.32 | 66380 | 21800 | 0 (219) | 10 |
-| `h-27-ashenvale-needles` | 27–31 | 27.32 → 31.01 | 102715 | 33930 | 120 (313) | 7 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 67060 | 43399 | 273 (326) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.13 | 122745 | 56757 | 999 (1029) | 2 |
-| `h-41-arathi-badlands` | 41–44 | 41.13 → 44.02 | 69630 | 38097 | 720 (907) | 5 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 5 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 175055 | 95081 | 601 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153331 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 362 (391) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
-
-Собственных ошибок и предупреждений нет.
-
-<details><summary>Принятые предупреждения, `ok` (1)</summary>
-
-- [library FastesBoooy_Guides] h-46-tanaris-feralas#1 id=wlk-46-menara (Classes/Warlock.lua) `db-override-unverified` accept 4975 "The Completed Orb of Noh'Orahil" (exclusive with 4962 "Shard of a Felhound" in the snapshot): the exclusivity check passes only because of the unverified DB override in tools/overrides/warlock.lua (source: original game (classes.md 5.5): Shard of a Felhound -> Orb of Noh'Orahil): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
-
-</details>
-
-INFO (439): `complete-kill-xp` 348, `complete-no-kill` 18, `complete-no-objectives` 2, `level-grind` 3, `quest-profession` 1, `train-service` 1, `xp-unknown` 66.
-
-### orc-warrior — Orc Warrior 1-60
-
-Модуль `FastesBoooy_Guides`, профиль: Orc WARRIOR Horde. Результат: **0 ERROR, 0 WARN, 433 INFO**; принято предупреждений (`ok`): 16; из них на общих шагах: 0 ERROR, 0 WARN, принято 16.
-
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1911300 (из них оценено 86965; квестов с оценённым опытом: 64, 4.5 % опыта квестов), за убийства по целям 817019, гринд 1356395 (~4914 убийств); максимум квестов в журнале 23 из 40; принято 707, сдано 707, не сдано к концу 0.
-
-Гринд до порогов уровня (шаги `level`): ~4914 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 162 — и их квесты): ~6155. С попутными убийствами в пути на 15 % опыта квестов: ~3913 (худший случай ~5227).
-
-| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
-|---|---|---|---:|---:|---:|---:|
-| `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.37 | 3635 | 2213 | 0 (0) | 2 |
-| `dur-02-durotar` | 5–11 | 5.37 → 11.17 | 18450 | 11757 | 7 (7) | 7 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 11.17 → 12.46 | 9005 | 2992 | 0 (0) | 5 |
-| `h-13-silverpine` | 13–15 | 12.46 → 14.18 | 14155 | 4987 | 0 (0) | 5 |
-| `h-15-barrens` | 15–18 | 14.18 → 18.13 | 46990 | 14263 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.13 → 22.04 | 51790 | 32273 | 24 (133) | 1 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 24.82 | 61855 | 19595 | 0 (51) | 5 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.38 | 68865 | 22226 | 0 (202) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.38 → 31.01 | 102715 | 33746 | 108 (313) | 7 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 69960 | 43399 | 259 (311) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (918) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.60 | 282810 | 155248 | 148 (300) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.60 → 55.04 | 235560 | 68234 | 345 (378) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
-
-Собственных ошибок и предупреждений нет.
-
-INFO (433): `complete-kill-xp` 345, `complete-no-kill` 17, `complete-no-objectives` 2, `level-grind` 3, `quest-profession` 1, `train-service` 1, `xp-unknown` 64.
-
-### troll-hunter — Troll Hunter 1-60
-
-Модуль `FastesBoooy_Guides`, профиль: Troll HUNTER Horde. Результат: **0 ERROR, 0 WARN, 433 INFO**; принято предупреждений (`ok`): 16; из них на общих шагах: 0 ERROR, 0 WARN, принято 16.
-
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1907650 (из них оценено 86545; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 814496, гринд 1362620 (~4944 убийств); максимум квестов в журнале 23 из 40; принято 703, сдано 703, не сдано к концу 0.
-
-Гринд до порогов уровня (шаги `level`): ~4944 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 170 — и их квесты): ~6207. С попутными убийствами в пути на 15 % опыта квестов: ~3943 (худший случай ~5288).
-
-| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
-|---|---|---|---:|---:|---:|---:|
-| `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.37 | 3635 | 2213 | 0 (0) | 2 |
-| `dur-02-durotar` | 5–11 | 5.37 → 11.36 | 20885 | 11005 | 7 (7) | 7 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 11.36 → 12.67 | 9425 | 2992 | 0 (0) | 4 |
-| `h-13-silverpine` | 13–15 | 12.67 → 14.33 | 14155 | 4771 | 0 (0) | 4 |
-| `h-15-barrens` | 15–18 | 14.33 → 18.15 | 45520 | 14083 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.15 → 22.04 | 51790 | 32243 | 23 (130) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 24.82 | 61855 | 19595 | 0 (51) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.30 | 66380 | 21632 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.30 → 31.01 | 102715 | 34021 | 122 (313) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (327) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (151) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (919) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (184) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153307 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 241170 | 69149 | 341 (392) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
-
-Собственных ошибок и предупреждений нет.
-
-INFO (433): `complete-kill-xp` 343, `complete-no-kill` 19, `complete-no-objectives` 2, `level-grind` 3, `quest-profession` 1, `train-service` 2, `xp-unknown` 63.
-
-### troll-mage — Troll Mage 1-60
-
-Модуль `FastesBoooy_Guides`, профиль: Troll MAGE Horde. Результат: **0 ERROR, 0 WARN, 428 INFO**; принято предупреждений (`ok`): 17; из них на общих шагах: 0 ERROR, 0 WARN, принято 17.
-
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1899180 (из них оценено 86625; квестов с оценённым опытом: 64, 4.6 % опыта квестов), за убийства по целям 814532, гринд 1371190 (~4978 убийств); максимум квестов в журнале 23 из 40; принято 698, сдано 698, не сдано к концу 0.
-
-Гринд до порогов уровня (шаги `level`): ~4978 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 165 — и их квесты): ~6225. С попутными убийствами в пути на 15 % опыта квестов: ~3973 (худший случай ~5301).
-
-| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
-|---|---|---|---:|---:|---:|---:|
-| `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.37 | 3635 | 2213 | 0 (0) | 2 |
-| `dur-02-durotar` | 5–11 | 5.37 → 11.09 | 18365 | 11133 | 7 (7) | 6 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 11.09 → 12.39 | 9005 | 2992 | 0 (0) | 4 |
-| `h-13-silverpine` | 13–15 | 12.39 → 14.13 | 14155 | 4987 | 0 (3) | 4 |
-| `h-15-barrens` | 15–18 | 14.13 → 18.03 | 45520 | 14376 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.03 → 22.04 | 51790 | 32585 | 36 (145) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 24.82 | 61855 | 19595 | 0 (51) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.30 | 66380 | 21632 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.30 → 31.01 | 102715 | 34015 | 122 (314) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (326) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (918) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277790 | 153285 | 154 (307) | 9 |
+| `h-13-silverpine` | 13–15 | 12.57 → 14.25 | 14155 | 4753 | 0 (0) | 4 |
+| `h-15-barrens` | 15–18 | 14.25 → 18.13 | 46770 | 13596 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.13 → 22.04 | 50540 | 32367 | 32 (139) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 24.82 | 62010 | 19548 | 0 (47) | 5 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.30 | 66380 | 21573 | 0 (206) | 10 |
+| `h-27-ashenvale-needles` | 27–31 | 27.30 → 31.01 | 102715 | 34079 | 122 (325) | 7 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 67330 | 43819 | 269 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (154) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.13 | 122745 | 56757 | 998 (1029) | 2 |
+| `h-41-arathi-badlands` | 41–44 | 41.13 → 44.00 | 71030 | 37853 | 708 (908) | 5 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 5 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 175055 | 95081 | 602 (715) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153251 | 154 (308) | 9 |
 | `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.05 | 235560 | 68234 | 362 (392) | 6 |
 | `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (428): `complete-kill-xp` 342, `complete-no-kill` 16, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 1, `xp-unknown` 64.
+<details><summary>Принятые предупреждения, `ok` (2)</summary>
 
-### troll-priest — Troll Priest 1-60
+- [library FastesBoooy_Guides] h-37-desolace-dustwallow#62 id=wlk-38-spirit (Classes/Warlock.lua) `skip-ahead` optional step [complete 4962] can be fast-forwarded: the later step h-37-desolace-dustwallow#62 id=h39-mannoroc-portals [complete 5581] is done as soon as its objectives are killed / looted on the way: the walk to step h-37-desolace-dustwallow#61 [complete 5943] passes them with 5581 "Portals of the Legion" in the log, becomes the forward anchor, and the guide then counts the travel / transient / optional / collect steps before it as done (move this step before that point or after the later step, merge it into the later step, or drop the overlap)
+- [library FastesBoooy_Guides] h-46-tanaris-feralas#1 id=wlk-46-menara (Classes/Warlock.lua) `db-override-unverified` accept 4975 "The Completed Orb of Noh'Orahil" (exclusive with 4962 "Shard of a Felhound" in the snapshot): the exclusivity check passes only because of the unverified DB override in tools/overrides/warlock.lua (source: original game (classes.md 5.5): Shard of a Felhound -> Orb of Noh'Orahil): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
 
-Модуль `FastesBoooy_Guides`, профиль: Troll PRIEST Horde. Результат: **0 ERROR, 0 WARN, 429 INFO**; принято предупреждений (`ok`): 17; из них на общих шагах: 0 ERROR, 0 WARN, принято 17.
+</details>
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1905580 (из них оценено 86545; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 816121, гринд 1363140 (~4950 убийств); максимум квестов в журнале 23 из 40; принято 702, сдано 702, не сдано к концу 0.
+INFO (448): `complete-kill-xp` 358, `complete-no-kill` 18, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 1, `xp-unknown` 66.
 
-Гринд до порогов уровня (шаги `level`): ~4950 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 169 — и их квесты): ~6219. С попутными убийствами в пути на 15 % опыта квестов: ~3944 (худший случай ~5296).
+### orc-warrior — Orc Warrior 1-60
+
+Модуль `FastesBoooy_Guides`, профиль: Orc WARRIOR Horde. Результат: **0 ERROR, 0 WARN, 442 INFO**; принято предупреждений (`ok`): 22; из них на общих шагах: 0 ERROR, 0 WARN, принято 22.
+
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1912970 (из них оценено 86965; квестов с оценённым опытом: 64, 4.5 % опыта квестов), за убийства по целям 815385, гринд 1356625 (~4917 убийств); максимум квестов в журнале 23 из 40; принято 708, сдано 708, не сдано к концу 0.
+
+Гринд до порогов уровня (шаги `level`): ~4917 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 168 — и их квесты): ~6156. С попутными убийствами в пути на 15 % опыта квестов: ~3912 (худший случай ~5229).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
 | `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.37 | 3635 | 2213 | 0 (0) | 2 |
-| `dur-02-durotar` | 5–11 | 5.37 → 11.09 | 18635 | 11096 | 5 (5) | 7 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 11.09 → 12.40 | 9005 | 2992 | 0 (0) | 5 |
-| `h-13-silverpine` | 13–15 | 12.40 → 14.13 | 14155 | 4987 | 0 (3) | 5 |
-| `h-15-barrens` | 15–18 | 14.13 → 18.04 | 45730 | 14376 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.04 → 22.05 | 51790 | 32553 | 35 (143) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.05 → 24.83 | 62245 | 19547 | 0 (49) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.83 → 27.31 | 66380 | 21568 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.31 → 31.01 | 102715 | 33962 | 121 (313) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 66900 | 43399 | 273 (327) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 51482 | 152 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1028) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.02 | 69630 | 38121 | 765 (919) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59796 | 177 (184) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 618 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153285 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 241170 | 70064 | 338 (392) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+| `dur-02-durotar` | 5–11 | 5.37 → 11.17 | 18450 | 11778 | 7 (7) | 7 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 11.17 → 12.47 | 9005 | 2992 | 0 (0) | 5 |
+| `h-13-silverpine` | 13–15 | 12.47 → 14.16 | 14155 | 4753 | 0 (0) | 5 |
+| `h-15-barrens` | 15–18 | 14.16 → 18.15 | 48240 | 13540 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.15 → 22.05 | 50540 | 32295 | 31 (135) | 1 |
+| `h-22-hillsbrad` | 22–24 | 22.05 → 24.81 | 61855 | 19300 | 0 (50) | 5 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.81 → 27.37 | 68865 | 21982 | 0 (189) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.37 → 31.01 | 102715 | 33805 | 110 (325) | 7 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 70230 | 43831 | 255 (308) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.60 | 282810 | 155214 | 148 (301) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.60 → 55.05 | 235560 | 68234 | 346 (378) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (429): `complete-kill-xp` 343, `complete-no-kill` 17, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 1, `xp-unknown` 63.
+INFO (442): `complete-kill-xp` 355, `complete-no-kill` 17, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 1, `xp-unknown` 64.
 
-### troll-rogue — Troll Rogue 1-60
+### troll-hunter — Troll Hunter 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Troll ROGUE Horde. Результат: **0 ERROR, 0 WARN, 430 INFO**; принято предупреждений (`ok`): 18; из них на общих шагах: 0 ERROR, 0 WARN, принято 18.
+Модуль `FastesBoooy_Guides`, профиль: Troll HUNTER Horde. Результат: **0 ERROR, 0 WARN, 443 INFO**; принято предупреждений (`ok`): 21; из них на общих шагах: 0 ERROR, 0 WARN, принято 21.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1903560 (из них оценено 86545; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 814779, гринд 1366510 (~4954 убийств); максимум квестов в журнале 23 из 40; принято 702, сдано 702, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1909320 (из них оценено 86545; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 813281, гринд 1362395 (~4944 убийств); максимум квестов в журнале 23 из 40; принято 704, сдано 704, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4954 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 170 — и их квесты): ~6187. С попутными убийствами в пути на 15 % опыта квестов: ~3947 (худший случай ~5259).
+Гринд до порогов уровня (шаги `level`): ~4944 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 176 — и их квесты): ~6207. С попутными убийствами в пути на 15 % опыта квестов: ~3941 (худший случай ~5288).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
 | `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.37 | 3635 | 2213 | 0 (0) | 2 |
-| `dur-02-durotar` | 5–11 | 5.37 → 11.09 | 18365 | 11133 | 7 (7) | 6 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 11.09 → 12.39 | 9005 | 2992 | 0 (0) | 4 |
-| `h-13-silverpine` | 13–15 | 12.39 → 14.13 | 14155 | 4987 | 0 (3) | 4 |
-| `h-15-barrens` | 15–18 | 14.13 → 18.03 | 45520 | 14376 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.03 → 22.04 | 51790 | 32585 | 36 (145) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 25.00 | 66315 | 20921 | 0 (13) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 25.00 → 27.44 | 66380 | 20996 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.44 → 31.01 | 102715 | 33550 | 98 (313) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (327) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1028) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (919) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 4 |
+| `dur-02-durotar` | 5–11 | 5.37 → 11.36 | 20885 | 11026 | 7 (7) | 7 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 11.36 → 12.67 | 9425 | 2992 | 0 (0) | 4 |
+| `h-13-silverpine` | 13–15 | 12.67 → 14.33 | 14155 | 4753 | 0 (0) | 4 |
+| `h-15-barrens` | 15–18 | 14.33 → 18.18 | 46770 | 13538 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.18 → 22.04 | 50540 | 32198 | 27 (132) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 24.81 | 61855 | 19315 | 0 (49) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.81 → 27.29 | 66380 | 21402 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.29 → 31.01 | 102715 | 34155 | 124 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 67170 | 43819 | 270 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (186) | 4 |
 | `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (714) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153307 | 154 (308) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153273 | 155 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.05 | 241170 | 69149 | 341 (392) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+
+Собственных ошибок и предупреждений нет.
+
+INFO (443): `complete-kill-xp` 353, `complete-no-kill` 19, `complete-no-objectives` 2, `level-grind` 3, `quest-profession` 1, `train-service` 2, `xp-unknown` 63.
+
+### troll-mage — Troll Mage 1-60
+
+Модуль `FastesBoooy_Guides`, профиль: Troll MAGE Horde. Результат: **0 ERROR, 0 WARN, 438 INFO**; принято предупреждений (`ok`): 22; из них на общих шагах: 0 ERROR, 0 WARN, принято 22.
+
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1900850 (из них оценено 86625; квестов с оценённым опытом: 64, 4.6 % опыта квестов), за убийства по целям 813317, гринд 1370640 (~4977 убийств); максимум квестов в журнале 23 из 40; принято 699, сдано 699, не сдано к концу 0.
+
+Гринд до порогов уровня (шаги `level`): ~4977 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 171 — и их квесты): ~6225. С попутными убийствами в пути на 15 % опыта квестов: ~3968 (худший случай ~5302).
+
+| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
+|---|---|---|---:|---:|---:|---:|
+| `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.37 | 3635 | 2213 | 0 (0) | 2 |
+| `dur-02-durotar` | 5–11 | 5.37 → 11.09 | 18365 | 11154 | 7 (7) | 6 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 11.09 → 12.40 | 9005 | 2992 | 0 (0) | 4 |
+| `h-13-silverpine` | 13–15 | 12.40 → 14.11 | 14155 | 4818 | 0 (4) | 4 |
+| `h-15-barrens` | 15–18 | 14.11 → 18.06 | 46770 | 13922 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.06 → 22.04 | 50540 | 32557 | 40 (146) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 24.81 | 61855 | 19315 | 0 (49) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.81 → 27.29 | 66380 | 21417 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.29 → 31.01 | 102715 | 34155 | 124 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 67170 | 43819 | 270 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (186) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (714) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277790 | 153273 | 154 (308) | 9 |
 | `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 362 (392) | 6 |
 | `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (430): `complete-kill-xp` 343, `complete-no-kill` 17, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 2, `xp-unknown` 63.
+INFO (438): `complete-kill-xp` 352, `complete-no-kill` 16, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 1, `xp-unknown` 64.
+
+### troll-priest — Troll Priest 1-60
+
+Модуль `FastesBoooy_Guides`, профиль: Troll PRIEST Horde. Результат: **0 ERROR, 0 WARN, 439 INFO**; принято предупреждений (`ok`): 22; из них на общих шагах: 0 ERROR, 0 WARN, принято 22.
+
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1907250 (из них оценено 86545; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 814905, гринд 1362585 (~4949 убийств); максимум квестов в журнале 23 из 40; принято 703, сдано 703, не сдано к концу 0.
+
+Гринд до порогов уровня (шаги `level`): ~4949 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 175 — и их квесты): ~6219. С попутными убийствами в пути на 15 % опыта квестов: ~3939 (худший случай ~5297).
+
+| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
+|---|---|---|---:|---:|---:|---:|
+| `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.37 | 3635 | 2213 | 0 (0) | 2 |
+| `dur-02-durotar` | 5–11 | 5.37 → 11.10 | 18635 | 11117 | 5 (5) | 7 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 11.10 → 12.40 | 9005 | 2992 | 0 (0) | 5 |
+| `h-13-silverpine` | 13–15 | 12.40 → 14.12 | 14155 | 4818 | 0 (3) | 5 |
+| `h-15-barrens` | 15–18 | 14.12 → 18.07 | 46980 | 13922 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.07 → 22.04 | 50540 | 32512 | 39 (145) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 24.82 | 62245 | 19270 | 0 (47) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.30 | 66380 | 21357 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.30 → 31.01 | 102715 | 34100 | 122 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 67170 | 43819 | 271 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153273 | 154 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 241170 | 70064 | 338 (392) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+
+Собственных ошибок и предупреждений нет.
+
+INFO (439): `complete-kill-xp` 353, `complete-no-kill` 17, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 1, `xp-unknown` 63.
+
+### troll-rogue — Troll Rogue 1-60
+
+Модуль `FastesBoooy_Guides`, профиль: Troll ROGUE Horde. Результат: **0 ERROR, 0 WARN, 440 INFO**; принято предупреждений (`ok`): 22; из них на общих шагах: 0 ERROR, 0 WARN, принято 22.
+
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1905230 (из них оценено 86545; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 813869, гринд 1365840 (~4952 убийств); максимум квестов в журнале 23 из 40; принято 703, сдано 703, не сдано к концу 0.
+
+Гринд до порогов уровня (шаги `level`): ~4952 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 176 — и их квесты): ~6188. С попутными убийствами в пути на 15 % опыта квестов: ~3943 (худший случай ~5262).
+
+| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
+|---|---|---|---:|---:|---:|---:|
+| `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.37 | 3635 | 2213 | 0 (0) | 2 |
+| `dur-02-durotar` | 5–11 | 5.37 → 11.09 | 18365 | 11154 | 7 (7) | 6 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 11.09 → 12.40 | 9005 | 2992 | 0 (0) | 4 |
+| `h-13-silverpine` | 13–15 | 12.40 → 14.11 | 14155 | 4818 | 0 (4) | 4 |
+| `h-15-barrens` | 15–18 | 14.11 → 18.06 | 46770 | 13922 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.06 → 22.04 | 50540 | 32557 | 40 (146) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 25.00 | 66315 | 20915 | 0 (12) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 25.00 → 27.44 | 66380 | 20996 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.44 → 31.01 | 102715 | 33550 | 98 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 67170 | 43819 | 270 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.00 | 71030 | 38121 | 750 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 618 (715) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153251 | 154 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.05 | 235560 | 68234 | 362 (392) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+
+Собственных ошибок и предупреждений нет.
+
+INFO (440): `complete-kill-xp` 353, `complete-no-kill` 17, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 2, `xp-unknown` 63.
 
 ### troll-shaman — Troll Shaman 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Troll SHAMAN Horde. Результат: **0 ERROR, 0 WARN, 432 INFO**; принято предупреждений (`ok`): 17; из них на общих шагах: 0 ERROR, 0 WARN, принято 16.
+Модуль `FastesBoooy_Guides`, профиль: Troll SHAMAN Horde. Результат: **0 ERROR, 0 WARN, 442 INFO**; принято предупреждений (`ok`): 22; из них на общих шагах: 0 ERROR, 0 WARN, принято 21.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1906710 (из них оценено 86545; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 812989, гринд 1365110 (~4937 убийств); максимум квестов в журнале 23 из 40; принято 709, сдано 709, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1908380 (из них оценено 86545; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 811818, гринд 1364550 (~4936 убийств); максимум квестов в журнале 23 из 40; принято 710, сдано 710, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4937 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 173 — и их квесты): ~6183. С попутными убийствами в пути на 15 % опыта квестов: ~3946 (худший случай ~5269).
+Гринд до порогов уровня (шаги `level`): ~4936 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 179 — и их квесты): ~6185. С попутными убийствами в пути на 15 % опыта квестов: ~3944 (худший случай ~5268).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
 | `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.78 | 4620 | 2362 | 0 (0) | 2 |
 | `dur-02-durotar` | 5–11 | 5.78 → 11.10 | 18365 | 10766 | 0 (0) | 7 |
 | `h-12-orgrimmar-tirisfal` | 12–13 | 11.10 → 12.41 | 9005 | 2992 | 0 (0) | 5 |
-| `h-13-silverpine` | 13–15 | 12.41 → 14.14 | 14155 | 4987 | 0 (2) | 5 |
-| `h-15-barrens` | 15–18 | 14.14 → 18.23 | 49810 | 13868 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.23 → 22.04 | 52570 | 32060 | 8 (111) | 1 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 24.82 | 61855 | 19595 | 0 (52) | 5 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.33 | 67685 | 21447 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.33 → 31.01 | 102715 | 33862 | 117 (313) | 7 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (326) | 5 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 2 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 2 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (918) | 5 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 5 |
+| `h-13-silverpine` | 13–15 | 12.41 → 14.12 | 14155 | 4805 | 0 (3) | 5 |
+| `h-15-barrens` | 15–18 | 14.12 → 18.27 | 51060 | 13606 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.27 → 22.05 | 51320 | 31998 | 12 (114) | 1 |
+| `h-22-hillsbrad` | 22–24 | 22.05 → 24.81 | 61855 | 19315 | 0 (50) | 5 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.81 → 27.32 | 67685 | 21262 | 0 (207) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.32 → 31.01 | 102715 | 33938 | 119 (325) | 7 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 67170 | 43819 | 270 (324) | 5 |
+| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 50789 | 155 (154) | 2 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 2 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (919) | 5 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 5 |
 | `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170955 | 95081 | 616 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153331 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 362 (391) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153273 | 155 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 361 (392) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1460) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
 <details><summary>Принятые предупреждения, `ok` (1)</summary>
 
-- [library FastesBoooy_Guides] dur-01-valley-of-trials#24 id=sha-dur-1516 (Classes/Shaman.lua) `db-override-unverified` accept 1516 "Call of Earth": the prerequisite check passes only because of the unverified DB override in tools/overrides/shaman.lua (source: https://www.wowhead.com/classic/quest=1516): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
+- [library FastesBoooy_Guides] dur-01-valley-of-trials#22 id=sha-dur-1516 (Classes/Shaman.lua) `db-override-unverified` accept 1516 "Call of Earth": the prerequisite check passes only because of the unverified DB override in tools/overrides/shaman.lua (source: https://www.wowhead.com/classic/quest=1516): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
 
 </details>
 
-INFO (432): `complete-kill-xp` 346, `complete-no-kill` 16, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 2, `xp-unknown` 63.
+INFO (442): `complete-kill-xp` 356, `complete-no-kill` 16, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 2, `xp-unknown` 63.
 
 ### troll-warlock — Troll Warlock 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Troll WARLOCK Horde. Результат: **0 ERROR, 0 WARN, 440 INFO**; принято предупреждений (`ok`): 19; из них на общих шагах: 0 ERROR, 0 WARN, принято 16.
+Модуль `FastesBoooy_Guides`, профиль: Troll WARLOCK Horde. Результат: **0 ERROR, 0 WARN, 449 INFO**; принято предупреждений (`ok`): 26; из них на общих шагах: 0 ERROR, 0 WARN, принято 22.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1917320 (из них оценено 89095; квестов с оценённым опытом: 67, 4.7 % опыта квестов), за убийства по целям 815897, гринд 1351590 (~4897 убийств); максимум квестов в журнале 23 из 40; принято 712, сдано 712, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1918990 (из них оценено 89095; квестов с оценённым опытом: 67, 4.6 % опыта квестов), за убийства по целям 814084, гринд 1351805 (~4900 убийств); максимум квестов в журнале 23 из 40; принято 713, сдано 713, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4897 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 177 — и их квесты): ~6199. С попутными убийствами в пути на 15 % опыта квестов: ~3892 (худший случай ~5276).
+Гринд до порогов уровня (шаги `level`): ~4900 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 183 — и их квесты): ~6201. С попутными убийствами в пути на 15 % опыта квестов: ~3888 (худший случай ~5278).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
 | `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.30 | 3575 | 2066 | 0 (0) | 2 |
-| `dur-02-durotar` | 5–11 | 5.30 → 11.09 | 18365 | 11213 | 9 (9) | 7 |
+| `dur-02-durotar` | 5–11 | 5.30 → 11.09 | 18365 | 11194 | 9 (9) | 7 |
 | `h-12-orgrimmar-tirisfal` | 12–13 | 11.09 → 12.57 | 10755 | 2992 | 0 (0) | 4 |
-| `h-13-silverpine` | 13–15 | 12.57 → 14.26 | 14155 | 4901 | 0 (0) | 4 |
-| `h-15-barrens` | 15–18 | 14.26 → 18.11 | 45520 | 14376 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.11 → 22.04 | 51790 | 32320 | 26 (136) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 24.83 | 62010 | 19841 | 0 (48) | 5 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.83 → 27.32 | 66380 | 21800 | 0 (219) | 10 |
-| `h-27-ashenvale-needles` | 27–31 | 27.32 → 31.01 | 102715 | 33930 | 120 (313) | 7 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 67060 | 43399 | 273 (326) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.13 | 122745 | 56757 | 999 (1029) | 2 |
-| `h-41-arathi-badlands` | 41–44 | 41.13 → 44.02 | 69630 | 38097 | 720 (907) | 5 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 5 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 175055 | 95081 | 601 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153331 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 362 (391) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
-
-Собственных ошибок и предупреждений нет.
-
-<details><summary>Принятые предупреждения, `ok` (3)</summary>
-
-- [library FastesBoooy_Guides] h-12-orgrimmar-tirisfal#4 id=wlk-ganrul (Classes/Warlock.lua) `db-override-unverified` accept 1501 "Creature of the Void": the race check passes only because of the unverified DB override in tools/overrides/warlock.lua (source: https://www.warcrafttavern.com/forever/guides/warlock-leveling/): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
-- [library FastesBoooy_Guides] h-12-orgrimmar-tirisfal#15 id=wlk-ganrul-2 (Classes/Warlock.lua) `db-override-unverified` accept 1504 "The Binding": the race check passes only because of the unverified DB override in tools/overrides/warlock.lua (source: https://www.warcrafttavern.com/forever/guides/warlock-leveling/): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
-- [library FastesBoooy_Guides] h-46-tanaris-feralas#1 id=wlk-46-menara (Classes/Warlock.lua) `db-override-unverified` accept 4975 "The Completed Orb of Noh'Orahil" (exclusive with 4962 "Shard of a Felhound" in the snapshot): the exclusivity check passes only because of the unverified DB override in tools/overrides/warlock.lua (source: original game (classes.md 5.5): Shard of a Felhound -> Orb of Noh'Orahil): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
-
-</details>
-
-INFO (440): `complete-kill-xp` 348, `complete-no-kill` 18, `complete-no-objectives` 2, `level-grind` 3, `quest-profession` 1, `train-service` 1, `xp-unknown` 67.
-
-### troll-warrior — Troll Warrior 1-60
-
-Модуль `FastesBoooy_Guides`, профиль: Troll WARRIOR Horde. Результат: **0 ERROR, 0 WARN, 433 INFO**; принято предупреждений (`ok`): 16; из них на общих шагах: 0 ERROR, 0 WARN, принято 16.
-
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1911300 (из них оценено 86965; квестов с оценённым опытом: 64, 4.5 % опыта квестов), за убийства по целям 817019, гринд 1356395 (~4914 убийств); максимум квестов в журнале 23 из 40; принято 707, сдано 707, не сдано к концу 0.
-
-Гринд до порогов уровня (шаги `level`): ~4914 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 164 — и их квесты): ~6155. С попутными убийствами в пути на 15 % опыта квестов: ~3913 (худший случай ~5227).
-
-| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
-|---|---|---|---:|---:|---:|---:|
-| `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.37 | 3635 | 2213 | 0 (0) | 2 |
-| `dur-02-durotar` | 5–11 | 5.37 → 11.17 | 18450 | 11757 | 7 (7) | 7 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 11.17 → 12.46 | 9005 | 2992 | 0 (0) | 5 |
-| `h-13-silverpine` | 13–15 | 12.46 → 14.18 | 14155 | 4987 | 0 (0) | 5 |
-| `h-15-barrens` | 15–18 | 14.18 → 18.13 | 46990 | 14263 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.13 → 22.04 | 51790 | 32273 | 24 (133) | 1 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 24.82 | 61855 | 19595 | 0 (51) | 5 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.38 | 68865 | 22226 | 0 (202) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.38 → 31.01 | 102715 | 33746 | 108 (313) | 7 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 69960 | 43399 | 259 (311) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (918) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.60 | 282810 | 155248 | 148 (300) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.60 → 55.04 | 235560 | 68234 | 345 (378) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
-
-Собственных ошибок и предупреждений нет.
-
-INFO (433): `complete-kill-xp` 345, `complete-no-kill` 17, `complete-no-objectives` 2, `level-grind` 3, `quest-profession` 1, `train-service` 1, `xp-unknown` 64.
-
-### tauren-druid — Tauren Druid 1-60
-
-Модуль `FastesBoooy_Guides`, профиль: Tauren DRUID Horde. Результат: **0 ERROR, 0 WARN, 435 INFO**; принято предупреждений (`ok`): 18; из них на общих шагах: 0 ERROR, 0 WARN, принято 18.
-
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1916620 (из них оценено 89285; квестов с оценённым опытом: 67, 4.7 % опыта квестов), за убийства по целям 817081, гринд 1351210 (~4890 убийств); максимум квестов в журнале 23 из 40; принято 716, сдано 716, не сдано к концу 0.
-
-Гринд до порогов уровня (шаги `level`): ~4890 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 156 — и их квесты): ~6118. С попутными убийствами в пути на 15 % опыта квестов: ~3899 (худший случай ~5197).
-
-| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
-|---|---|---|---:|---:|---:|---:|
-| `mul-01-camp-narache` | 1–6 | 1.00 → 6.03 | 3355 | 4338 | 0 (0) | 3 |
-| `mul-02-mulgore` | 6–12 | 6.03 → 11.55 | 22355 | 9975 | 0 (0) | 4 |
-| `mul-03-barrens-crossing` | 12–12 | 11.55 → 12.17 | 5660 | 0 | 0 (0) | 0 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 12.17 → 13.10 | 6630 | 2953 | 0 (0) | 1 |
-| `h-13-silverpine` | 13–15 | 13.10 → 14.65 | 14155 | 4457 | 0 (0) | 1 |
-| `h-15-barrens` | 15–18 | 14.65 → 18.15 | 41445 | 14038 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.15 → 22.06 | 55690 | 32243 | 0 (90) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.06 → 24.83 | 61855 | 19547 | 0 (52) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.83 → 27.31 | 66380 | 21568 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.31 → 31.01 | 102715 | 33962 | 120 (313) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (326) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 152 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1008 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 765 (918) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59789 | 177 (185) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153331 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.05 | 246260 | 71198 | 319 (349) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
-
-Собственных ошибок и предупреждений нет.
-
-INFO (435): `complete-kill-xp` 343, `complete-no-kill` 20, `complete-no-objectives` 2, `level-grind` 1, `quest-profession` 1, `train-service` 1, `xp-unknown` 67.
-
-### tauren-hunter — Tauren Hunter 1-60
-
-Модуль `FastesBoooy_Guides`, профиль: Tauren HUNTER Horde. Результат: **0 ERROR, 0 WARN, 432 INFO**; принято предупреждений (`ok`): 18; из них на общих шагах: 0 ERROR, 0 WARN, принято 18.
-
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1908920 (из них оценено 85385; квестов с оценённым опытом: 62, 4.5 % опыта квестов), за убийства по целям 814406, гринд 1361390 (~4933 убийств); максимум квестов в журнале 23 из 40; принято 709, сдано 709, не сдано к концу 0.
-
-Гринд до порогов уровня (шаги `level`): ~4933 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 165 — и их квесты): ~6180. С попутными убийствами в пути на 15 % опыта квестов: ~3937 (худший случай ~5265).
-
-| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
-|---|---|---|---:|---:|---:|---:|
-| `mul-01-camp-narache` | 1–6 | 1.00 → 6.03 | 3355 | 4338 | 0 (0) | 3 |
-| `mul-02-mulgore` | 6–12 | 6.03 → 11.72 | 24075 | 9780 | 0 (0) | 4 |
-| `mul-03-barrens-crossing` | 12–12 | 11.72 → 12.28 | 5230 | 0 | 0 (0) | 0 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 12.28 → 13.18 | 6630 | 2797 | 0 (0) | 1 |
-| `h-13-silverpine` | 13–15 | 13.18 → 14.72 | 14155 | 4444 | 0 (0) | 1 |
-| `h-15-barrens` | 15–18 | 14.72 → 18.18 | 41445 | 13690 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.18 → 22.04 | 51790 | 32174 | 19 (110) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 24.82 | 61855 | 19595 | 0 (51) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.30 | 66380 | 21632 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.30 → 31.01 | 102715 | 34015 | 122 (313) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (327) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (151) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (919) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (184) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153307 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 241170 | 69149 | 341 (392) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
-
-Собственных ошибок и предупреждений нет.
-
-INFO (432): `complete-kill-xp` 343, `complete-no-kill` 20, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 2, `xp-unknown` 62.
-
-### tauren-shaman — Tauren Shaman 1-60
-
-Модуль `FastesBoooy_Guides`, профиль: Tauren SHAMAN Horde. Результат: **0 ERROR, 0 WARN, 432 INFO**; принято предупреждений (`ok`): 19; из них на общих шагах: 0 ERROR, 0 WARN, принято 18.
-
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1907890 (из них оценено 85385; квестов с оценённым опытом: 62, 4.5 % опыта квестов), за убийства по целям 812898, гринд 1364060 (~4930 убийств); максимум квестов в журнале 23 из 40; принято 715, сдано 715, не сдано к концу 0.
-
-Гринд до порогов уровня (шаги `level`): ~4930 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 168 — и их квесты): ~6167. С попутными убийствами в пути на 15 % опыта квестов: ~3940 (худший случай ~5250).
-
-| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
-|---|---|---|---:|---:|---:|---:|
-| `mul-01-camp-narache` | 1–6 | 1.00 → 6.31 | 4250 | 4452 | 0 (0) | 3 |
-| `mul-02-mulgore` | 6–12 | 6.31 → 11.55 | 21555 | 9802 | 0 (0) | 4 |
-| `mul-03-barrens-crossing` | 12–12 | 11.55 → 12.57 | 9100 | 640 | 0 (0) | 0 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 12.57 → 13.43 | 6630 | 2550 | 0 (0) | 1 |
-| `h-13-silverpine` | 13–15 | 13.43 → 14.93 | 14155 | 4379 | 0 (0) | 1 |
-| `h-15-barrens` | 15–18 | 14.93 → 18.30 | 41445 | 13305 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.30 → 22.05 | 52570 | 31865 | 1 (97) | 1 |
-| `h-22-hillsbrad` | 22–24 | 22.05 → 24.82 | 61855 | 19595 | 0 (51) | 5 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.33 | 67685 | 21432 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.33 → 31.01 | 102715 | 33852 | 117 (313) | 7 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (327) | 5 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 2 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 2 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (918) | 5 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 5 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170955 | 95081 | 616 (714) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153307 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 362 (392) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
-
-Собственных ошибок и предупреждений нет.
-
-<details><summary>Принятые предупреждения, `ok` (1)</summary>
-
-- [library FastesBoooy_Guides] mul-01-camp-narache#12 id=sha-mul-1519 (Classes/Shaman.lua) `db-override-unverified` accept 1519 "Call of Earth": the prerequisite check passes only because of the unverified DB override in tools/overrides/shaman.lua (source: https://www.wowhead.com/classic/quest=1519): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
-
-</details>
-
-INFO (432): `complete-kill-xp` 346, `complete-no-kill` 17, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 2, `xp-unknown` 62.
-
-### tauren-warrior — Tauren Warrior 1-60
-
-Модуль `FastesBoooy_Guides`, профиль: Tauren WARRIOR Horde. Результат: **0 ERROR, 0 WARN, 433 INFO**; принято предупреждений (`ok`): 18; из них на общих шагах: 0 ERROR, 0 WARN, принято 18.
-
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1912550 (из них оценено 85805; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 816835, гринд 1355415 (~4905 убийств); максимум квестов в журнале 23 из 40; принято 713, сдано 713, не сдано к концу 0.
-
-Гринд до порогов уровня (шаги `level`): ~4905 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 159 — и их квесты): ~6128. С попутными убийствами в пути на 15 % опыта квестов: ~3909 (худший случай ~5206).
-
-| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
-|---|---|---|---:|---:|---:|---:|
-| `mul-01-camp-narache` | 1–6 | 1.00 → 6.04 | 3335 | 4338 | 1 (1) | 3 |
-| `mul-02-mulgore` | 6–12 | 6.04 → 11.46 | 21555 | 9975 | 0 (0) | 4 |
-| `mul-03-barrens-crossing` | 12–12 | 11.46 → 12.06 | 4895 | 456 | 0 (0) | 1 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 12.06 → 13.01 | 6630 | 2992 | 0 (0) | 2 |
-| `h-13-silverpine` | 13–15 | 13.01 → 14.58 | 14155 | 4603 | 0 (0) | 2 |
-| `h-15-barrens` | 15–18 | 14.58 → 18.17 | 42915 | 13800 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.17 → 22.05 | 51790 | 32198 | 21 (112) | 1 |
-| `h-22-hillsbrad` | 22–24 | 22.05 → 24.82 | 61855 | 19595 | 0 (51) | 5 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.38 | 68865 | 22211 | 0 (201) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.38 → 31.01 | 102715 | 33729 | 108 (314) | 7 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 69960 | 43399 | 258 (311) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 51482 | 152 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.02 | 69630 | 38121 | 765 (918) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59796 | 177 (185) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 618 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.60 | 282810 | 155226 | 148 (300) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.60 → 55.04 | 235560 | 68234 | 345 (378) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
-
-Собственных ошибок и предупреждений нет.
-
-INFO (433): `complete-kill-xp` 345, `complete-no-kill` 18, `complete-no-objectives` 2, `level-grind` 3, `quest-profession` 1, `train-service` 1, `xp-unknown` 63.
-
-### undead-mage — Undead Mage 1-60
-
-Модуль `FastesBoooy_Guides`, профиль: Scourge MAGE Horde. Результат: **0 ERROR, 0 WARN, 438 INFO**; принято предупреждений (`ok`): 16; из них на общих шагах: 0 ERROR, 0 WARN, принято 16.
-
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1898895 (из них оценено 85160; квестов с оценённым опытом: 64, 4.5 % опыта квестов), за убийства по целям 815827, гринд 1370200 (~4973 убийств); максимум квестов в журнале 23 из 40; принято 706, сдано 706, не сдано к концу 0.
-
-Гринд до порогов уровня (шаги `level`): ~4973 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 162 — и их квесты): ~6208. С попутными убийствами в пути на 15 % опыта квестов: ~3971 (худший случай ~5288).
-
-| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
-|---|---|---|---:|---:|---:|---:|
-| `ud-01-deathknell` | 1–6 | 1.00 → 5.75 | 3190 | 3579 | 2 (2) | 3 |
-| `ud-02-tirisfal` | 6–13 | 5.75 → 12.17 | 24365 | 14512 | 0 (6) | 1 |
-| `h-13-silverpine` | 13–15 | 12.17 → 14.22 | 16145 | 5052 | 12 (12) | 1 |
-| `h-15-barrens` | 15–18 | 14.22 → 18.14 | 46695 | 14192 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.14 → 22.05 | 51790 | 32273 | 24 (118) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.05 → 24.82 | 61855 | 19595 | 0 (51) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.31 | 66380 | 21616 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.31 → 31.01 | 102715 | 34004 | 122 (314) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (326) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (918) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277790 | 153285 | 154 (307) | 9 |
+| `h-13-silverpine` | 13–15 | 12.57 → 14.25 | 14155 | 4753 | 0 (0) | 4 |
+| `h-15-barrens` | 15–18 | 14.25 → 18.13 | 46770 | 13596 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.13 → 22.04 | 50540 | 32367 | 32 (139) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 24.82 | 62010 | 19548 | 0 (47) | 5 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.30 | 66380 | 21573 | 0 (206) | 10 |
+| `h-27-ashenvale-needles` | 27–31 | 27.30 → 31.01 | 102715 | 34079 | 122 (325) | 7 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 67330 | 43819 | 269 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (154) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.13 | 122745 | 56757 | 998 (1029) | 2 |
+| `h-41-arathi-badlands` | 41–44 | 41.13 → 44.00 | 71030 | 37853 | 708 (908) | 5 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 5 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 175055 | 95081 | 602 (715) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153251 | 154 (308) | 9 |
 | `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.05 | 235560 | 68234 | 362 (392) | 6 |
 | `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (438): `complete-kill-xp` 348, `complete-no-kill` 17, `complete-no-objectives` 3, `level-grind` 4, `quest-profession` 1, `train-service` 1, `xp-unknown` 64.
+<details><summary>Принятые предупреждения, `ok` (4)</summary>
+
+- [library FastesBoooy_Guides] h-12-orgrimmar-tirisfal#4 id=wlk-ganrul (Classes/Warlock.lua) `db-override-unverified` accept 1501 "Creature of the Void": the race check passes only because of the unverified DB override in tools/overrides/warlock.lua (source: https://www.warcrafttavern.com/forever/guides/warlock-leveling/): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
+- [library FastesBoooy_Guides] h-12-orgrimmar-tirisfal#15 id=wlk-ganrul-2 (Classes/Warlock.lua) `db-override-unverified` accept 1504 "The Binding": the race check passes only because of the unverified DB override in tools/overrides/warlock.lua (source: https://www.warcrafttavern.com/forever/guides/warlock-leveling/): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
+- [library FastesBoooy_Guides] h-37-desolace-dustwallow#62 id=wlk-38-spirit (Classes/Warlock.lua) `skip-ahead` optional step [complete 4962] can be fast-forwarded: the later step h-37-desolace-dustwallow#62 id=h39-mannoroc-portals [complete 5581] is done as soon as its objectives are killed / looted on the way: the walk to step h-37-desolace-dustwallow#61 [complete 5943] passes them with 5581 "Portals of the Legion" in the log, becomes the forward anchor, and the guide then counts the travel / transient / optional / collect steps before it as done (move this step before that point or after the later step, merge it into the later step, or drop the overlap)
+- [library FastesBoooy_Guides] h-46-tanaris-feralas#1 id=wlk-46-menara (Classes/Warlock.lua) `db-override-unverified` accept 4975 "The Completed Orb of Noh'Orahil" (exclusive with 4962 "Shard of a Felhound" in the snapshot): the exclusivity check passes only because of the unverified DB override in tools/overrides/warlock.lua (source: original game (classes.md 5.5): Shard of a Felhound -> Orb of Noh'Orahil): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
+
+</details>
+
+INFO (449): `complete-kill-xp` 358, `complete-no-kill` 18, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 1, `xp-unknown` 67.
+
+### troll-warrior — Troll Warrior 1-60
+
+Модуль `FastesBoooy_Guides`, профиль: Troll WARRIOR Horde. Результат: **0 ERROR, 0 WARN, 442 INFO**; принято предупреждений (`ok`): 22; из них на общих шагах: 0 ERROR, 0 WARN, принято 22.
+
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1912970 (из них оценено 86965; квестов с оценённым опытом: 64, 4.5 % опыта квестов), за убийства по целям 815385, гринд 1356625 (~4917 убийств); максимум квестов в журнале 23 из 40; принято 708, сдано 708, не сдано к концу 0.
+
+Гринд до порогов уровня (шаги `level`): ~4917 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 170 — и их квесты): ~6156. С попутными убийствами в пути на 15 % опыта квестов: ~3912 (худший случай ~5229).
+
+| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
+|---|---|---|---:|---:|---:|---:|
+| `dur-01-valley-of-trials` | 1–5 | 1.00 → 5.37 | 3635 | 2213 | 0 (0) | 2 |
+| `dur-02-durotar` | 5–11 | 5.37 → 11.17 | 18450 | 11778 | 7 (7) | 7 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 11.17 → 12.47 | 9005 | 2992 | 0 (0) | 5 |
+| `h-13-silverpine` | 13–15 | 12.47 → 14.16 | 14155 | 4753 | 0 (0) | 5 |
+| `h-15-barrens` | 15–18 | 14.16 → 18.15 | 48240 | 13540 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.15 → 22.05 | 50540 | 32295 | 31 (135) | 1 |
+| `h-22-hillsbrad` | 22–24 | 22.05 → 24.81 | 61855 | 19300 | 0 (50) | 5 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.81 → 27.37 | 68865 | 21982 | 0 (189) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.37 → 31.01 | 102715 | 33805 | 110 (325) | 7 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 70230 | 43831 | 255 (308) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.60 | 282810 | 155214 | 148 (301) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.60 → 55.05 | 235560 | 68234 | 346 (378) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+
+Собственных ошибок и предупреждений нет.
+
+INFO (442): `complete-kill-xp` 355, `complete-no-kill` 17, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 1, `xp-unknown` 64.
+
+### tauren-druid — Tauren Druid 1-60
+
+Модуль `FastesBoooy_Guides`, профиль: Tauren DRUID Horde. Результат: **0 ERROR, 0 WARN, 446 INFO**; принято предупреждений (`ok`): 24; из них на общих шагах: 0 ERROR, 0 WARN, принято 24.
+
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1918290 (из них оценено 89285; квестов с оценённым опытом: 67, 4.7 % опыта квестов), за убийства по целям 815982, гринд 1350485 (~4888 убийств); максимум квестов в журнале 23 из 40; принято 717, сдано 717, не сдано к концу 0.
+
+Гринд до порогов уровня (шаги `level`): ~4888 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 162 — и их квесты): ~6121. С попутными убийствами в пути на 15 % опыта квестов: ~3899 (худший случай ~5198).
+
+| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
+|---|---|---|---:|---:|---:|---:|
+| `mul-01-camp-narache` | 1–6 | 1.00 → 6.04 | 3355 | 4314 | 1 (1) | 3 |
+| `mul-02-mulgore` | 6–12 | 6.04 → 11.55 | 22355 | 9960 | 0 (0) | 4 |
+| `mul-03-barrens-crossing` | 12–12 | 11.55 → 12.17 | 5660 | 0 | 0 (0) | 0 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 12.17 → 13.10 | 6630 | 2953 | 0 (0) | 1 |
+| `h-13-silverpine` | 13–15 | 13.10 → 14.65 | 14155 | 4457 | 0 (0) | 1 |
+| `h-15-barrens` | 15–18 | 14.65 → 18.19 | 42695 | 13538 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.19 → 22.04 | 54440 | 32181 | 0 (94) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 24.81 | 61855 | 19315 | 0 (50) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.81 → 27.29 | 66380 | 21417 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.29 → 31.01 | 102715 | 34155 | 124 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 67170 | 43819 | 270 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 618 (715) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153227 | 154 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 246260 | 71198 | 318 (350) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1460) | 0 |
+
+Собственных ошибок и предупреждений нет.
+
+INFO (446): `complete-kill-xp` 353, `complete-no-kill` 20, `complete-no-objectives` 2, `level-grind` 2, `quest-profession` 1, `train-service` 1, `xp-unknown` 67.
+
+### tauren-hunter — Tauren Hunter 1-60
+
+Модуль `FastesBoooy_Guides`, профиль: Tauren HUNTER Horde. Результат: **0 ERROR, 0 WARN, 443 INFO**; принято предупреждений (`ok`): 24; из них на общих шагах: 0 ERROR, 0 WARN, принято 24.
+
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1910590 (из них оценено 85385; квестов с оценённым опытом: 62, 4.5 % опыта квестов), за убийства по целям 813374, гринд 1360760 (~4932 убийств); максимум квестов в журнале 23 из 40; принято 710, сдано 710, не сдано к концу 0.
+
+Гринд до порогов уровня (шаги `level`): ~4932 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 171 — и их квесты): ~6180. С попутными убийствами в пути на 15 % опыта квестов: ~3937 (худший случай ~5265).
+
+| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
+|---|---|---|---:|---:|---:|---:|
+| `mul-01-camp-narache` | 1–6 | 1.00 → 6.04 | 3355 | 4314 | 1 (1) | 3 |
+| `mul-02-mulgore` | 6–12 | 6.04 → 11.72 | 24075 | 9752 | 0 (0) | 4 |
+| `mul-03-barrens-crossing` | 12–12 | 11.72 → 12.28 | 5230 | 0 | 0 (0) | 0 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 12.28 → 13.19 | 6630 | 2797 | 0 (0) | 1 |
+| `h-13-silverpine` | 13–15 | 13.19 → 14.72 | 14155 | 4444 | 0 (0) | 1 |
+| `h-15-barrens` | 15–18 | 14.72 → 18.23 | 42695 | 13447 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.23 → 22.05 | 50540 | 32076 | 22 (111) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.05 → 24.81 | 61855 | 19315 | 0 (49) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.81 → 27.29 | 66380 | 21402 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.29 → 31.01 | 102715 | 34138 | 124 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 67170 | 43819 | 270 (324) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 50789 | 155 (154) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (919) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153273 | 154 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 241170 | 69149 | 341 (391) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+
+Собственных ошибок и предупреждений нет.
+
+INFO (443): `complete-kill-xp` 353, `complete-no-kill` 20, `complete-no-objectives` 2, `level-grind` 3, `quest-profession` 1, `train-service` 2, `xp-unknown` 62.
+
+### tauren-shaman — Tauren Shaman 1-60
+
+Модуль `FastesBoooy_Guides`, профиль: Tauren SHAMAN Horde. Результат: **0 ERROR, 0 WARN, 443 INFO**; принято предупреждений (`ok`): 25; из них на общих шагах: 0 ERROR, 0 WARN, принято 24.
+
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1909560 (из них оценено 85385; квестов с оценённым опытом: 62, 4.5 % опыта квестов), за убийства по целям 811543, гринд 1363855 (~4931 убийств); максимум квестов в журнале 23 из 40; принято 716, сдано 716, не сдано к концу 0.
+
+Гринд до порогов уровня (шаги `level`): ~4931 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 174 — и их квесты): ~6169. С попутными убийствами в пути на 15 % опыта квестов: ~3940 (худший случай ~5255).
+
+| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
+|---|---|---|---:|---:|---:|---:|
+| `mul-01-camp-narache` | 1–6 | 1.00 → 6.32 | 4250 | 4437 | 1 (1) | 3 |
+| `mul-02-mulgore` | 6–12 | 6.32 → 11.54 | 21555 | 9633 | 0 (0) | 4 |
+| `mul-03-barrens-crossing` | 12–12 | 11.54 → 12.56 | 9100 | 640 | 0 (0) | 0 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 12.56 → 13.42 | 6630 | 2550 | 0 (0) | 1 |
+| `h-13-silverpine` | 13–15 | 13.42 → 14.92 | 14155 | 4297 | 0 (0) | 1 |
+| `h-15-barrens` | 15–18 | 14.92 → 18.33 | 42695 | 12909 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.33 → 22.04 | 51320 | 31818 | 5 (100) | 1 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 24.81 | 61855 | 19315 | 0 (49) | 5 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.81 → 27.32 | 67685 | 21262 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.32 → 31.01 | 102715 | 33954 | 119 (325) | 7 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 67170 | 43819 | 270 (323) | 5 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (155) | 2 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 2 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 5 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (186) | 5 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170955 | 95081 | 617 (714) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153227 | 154 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.05 | 235560 | 68234 | 362 (392) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+
+Собственных ошибок и предупреждений нет.
+
+<details><summary>Принятые предупреждения, `ok` (1)</summary>
+
+- [library FastesBoooy_Guides] mul-01-camp-narache#11 id=sha-mul-1519 (Classes/Shaman.lua) `db-override-unverified` accept 1519 "Call of Earth": the prerequisite check passes only because of the unverified DB override in tools/overrides/shaman.lua (source: https://www.wowhead.com/classic/quest=1519): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
+
+</details>
+
+INFO (443): `complete-kill-xp` 356, `complete-no-kill` 17, `complete-no-objectives` 2, `level-grind` 3, `quest-profession` 1, `train-service` 2, `xp-unknown` 62.
+
+### tauren-warrior — Tauren Warrior 1-60
+
+Модуль `FastesBoooy_Guides`, профиль: Tauren WARRIOR Horde. Результат: **0 ERROR, 0 WARN, 443 INFO**; принято предупреждений (`ok`): 24; из них на общих шагах: 0 ERROR, 0 WARN, принято 24.
+
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1914220 (из них оценено 85805; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 815858, гринд 1354845 (~4903 убийств); максимум квестов в журнале 23 из 40; принято 714, сдано 714, не сдано к концу 0.
+
+Гринд до порогов уровня (шаги `level`): ~4903 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 165 — и их квесты): ~6129. С попутными убийствами в пути на 15 % опыта квестов: ~3908 (худший случай ~5206).
+
+| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
+|---|---|---|---:|---:|---:|---:|
+| `mul-01-camp-narache` | 1–6 | 1.00 → 6.03 | 3335 | 4326 | 1 (1) | 3 |
+| `mul-02-mulgore` | 6–12 | 6.03 → 11.46 | 21555 | 9960 | 0 (0) | 4 |
+| `mul-03-barrens-crossing` | 12–12 | 11.46 → 12.06 | 4895 | 456 | 0 (0) | 1 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 12.06 → 13.01 | 6630 | 2992 | 0 (0) | 2 |
+| `h-13-silverpine` | 13–15 | 13.01 → 14.58 | 14155 | 4603 | 0 (0) | 2 |
+| `h-15-barrens` | 15–18 | 14.58 → 18.21 | 44165 | 13525 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.21 → 22.04 | 50540 | 32106 | 23 (115) | 1 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 24.81 | 61855 | 19315 | 0 (49) | 5 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.81 → 27.37 | 68865 | 21998 | 0 (189) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.37 → 31.01 | 102715 | 33826 | 110 (325) | 7 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 70230 | 43831 | 255 (309) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.60 | 282810 | 155238 | 148 (301) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.60 → 55.05 | 235560 | 68234 | 346 (378) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1460) | 0 |
+
+Собственных ошибок и предупреждений нет.
+
+INFO (443): `complete-kill-xp` 355, `complete-no-kill` 18, `complete-no-objectives` 2, `level-grind` 3, `quest-profession` 1, `train-service` 1, `xp-unknown` 63.
+
+### undead-mage — Undead Mage 1-60
+
+Модуль `FastesBoooy_Guides`, профиль: Scourge MAGE Horde. Результат: **0 ERROR, 0 WARN, 450 INFO**; принято предупреждений (`ok`): 23; из них на общих шагах: 0 ERROR, 0 WARN, принято 23.
+
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1900565 (из них оценено 85160; квестов с оценённым опытом: 64, 4.5 % опыта квестов), за убийства по целям 814414, гринд 1369860 (~4974 убийств); максимум квестов в журнале 23 из 40; принято 707, сдано 707, не сдано к концу 0.
+
+Гринд до порогов уровня (шаги `level`): ~4974 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 168 — и их квесты): ~6210. С попутными убийствами в пути на 15 % опыта квестов: ~3967 (худший случай ~5292).
+
+| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
+|---|---|---|---:|---:|---:|---:|
+| `ud-01-deathknell` | 1–6 | 1.00 → 5.75 | 3190 | 3586 | 2 (2) | 3 |
+| `ud-02-tirisfal` | 6–13 | 5.75 → 12.17 | 24365 | 14360 | 1 (7) | 1 |
+| `h-13-silverpine` | 13–15 | 12.17 → 14.22 | 16145 | 5052 | 13 (12) | 1 |
+| `h-15-barrens` | 15–18 | 14.22 → 18.17 | 47945 | 13538 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.17 → 22.04 | 50540 | 32232 | 28 (121) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 24.81 | 61855 | 19315 | 0 (50) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.81 → 27.29 | 66380 | 21402 | 0 (207) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.29 → 31.01 | 102715 | 34155 | 124 (326) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 67170 | 43819 | 270 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277790 | 153273 | 154 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 362 (392) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1460) | 0 |
+
+Собственных ошибок и предупреждений нет.
+
+INFO (450): `complete-kill-xp` 359, `complete-no-kill` 17, `complete-no-objectives` 3, `level-grind` 5, `quest-profession` 1, `train-service` 1, `xp-unknown` 64.
 
 ### undead-paladin — Undead Paladin 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Scourge PALADIN Horde. Результат: **0 ERROR, 0 WARN, 465 INFO**; принято предупреждений (`ok`): 17; из них на общих шагах: 0 ERROR, 0 WARN, принято 17.
+Модуль `FastesBoooy_Guides`, профиль: Scourge PALADIN Horde. Результат: **0 ERROR, 0 WARN, 476 INFO**; принято предупреждений (`ok`): 24; из них на общих шагах: 0 ERROR, 0 WARN, принято 24.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1912445 (из них оценено 100075; квестов с оценённым опытом: 82, 5.2 % опыта квестов), за убийства по целям 814089, гринд 1358320 (~4902 убийств); максимум квестов в журнале 23 из 40; принято 721, сдано 721, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1914115 (из них оценено 100075; квестов с оценённым опытом: 82, 5.2 % опыта квестов), за убийства по целям 813144, гринд 1357530 (~4900 убийств); максимум квестов в журнале 23 из 40; принято 722, сдано 722, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4902 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 173 — и их квесты): ~6173. С попутными убийствами в пути на 15 % опыта квестов: ~3914 (худший случай ~5260).
+Гринд до порогов уровня (шаги `level`): ~4900 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 179 — и их квесты): ~6174. С попутными убийствами в пути на 15 % опыта квестов: ~3915 (худший случай ~5262).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
-| `ud-01-deathknell` | 1–6 | 1.00 → 5.91 | 3715 | 3502 | 2 (2) | 4 |
-| `ud-02-tirisfal` | 6–13 | 5.91 → 12.79 | 28275 | 16340 | 0 (0) | 1 |
-| `h-13-silverpine` | 13–15 | 12.79 → 14.56 | 16145 | 4691 | 0 (0) | 1 |
-| `h-15-barrens` | 15–18 | 14.56 → 18.32 | 46695 | 13304 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.32 → 22.04 | 51790 | 31790 | 3 (101) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 25.10 | 71605 | 18962 | 0 (51) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 25.10 → 27.51 | 65825 | 20996 | 0 (221) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.51 → 31.01 | 102715 | 33478 | 84 (313) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (326) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (918) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153307 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 362 (391) | 6 |
+| `ud-01-deathknell` | 1–6 | 1.00 → 5.91 | 3715 | 3520 | 2 (2) | 4 |
+| `ud-02-tirisfal` | 6–13 | 5.91 → 12.76 | 28275 | 16052 | 0 (0) | 1 |
+| `h-13-silverpine` | 13–15 | 12.76 → 14.54 | 16145 | 4693 | 0 (0) | 1 |
+| `h-15-barrens` | 15–18 | 14.54 → 18.35 | 47945 | 12885 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.35 → 22.05 | 50540 | 31758 | 8 (104) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.05 → 25.10 | 71605 | 18988 | 0 (49) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 25.10 → 27.51 | 65825 | 20996 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.51 → 31.01 | 102715 | 33478 | 84 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 67170 | 43819 | 270 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (186) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (714) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153273 | 154 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 362 (392) | 6 |
 | `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (465): `complete-kill-xp` 351, `complete-no-kill` 24, `complete-no-objectives` 4, `level-grind` 3, `quest-profession` 1, `xp-unknown` 82.
+INFO (476): `complete-kill-xp` 362, `complete-no-kill` 24, `complete-no-objectives` 4, `level-grind` 3, `quest-profession` 1, `xp-unknown` 82.
 
 ### undead-priest — Undead Priest 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Scourge PRIEST Horde. Результат: **0 ERROR, 0 WARN, 440 INFO**; принято предупреждений (`ok`): 16; из них на общих шагах: 0 ERROR, 0 WARN, принято 16.
+Модуль `FastesBoooy_Guides`, профиль: Scourge PRIEST Horde. Результат: **0 ERROR, 0 WARN, 451 INFO**; принято предупреждений (`ok`): 23; из них на общих шагах: 0 ERROR, 0 WARN, принято 23.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1904530 (из них оценено 85500; квестов с оценённым опытом: 64, 4.5 % опыта квестов), за убийства по целям 817474, гринд 1362800 (~4951 убийств); максимум квестов в журнале 23 из 40; принято 708, сдано 708, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1906200 (из них оценено 85500; квестов с оценённым опытом: 64, 4.5 % опыта квестов), за убийства по целям 816118, гринд 1362650 (~4952 убийств); максимум квестов в журнале 23 из 40; принято 709, сдано 709, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4951 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 166 — и их квесты): ~6209. С попутными убийствами в пути на 15 % опыта квестов: ~3944 (худший случай ~5286).
+Гринд до порогов уровня (шаги `level`): ~4952 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 172 — и их квесты): ~6211. С попутными убийствами в пути на 15 % опыта квестов: ~3939 (худший случай ~5291).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
-| `ud-01-deathknell` | 1–6 | 1.00 → 5.75 | 3190 | 3579 | 2 (2) | 3 |
-| `ud-02-tirisfal` | 6–13 | 5.75 → 12.14 | 24080 | 14486 | 0 (5) | 1 |
-| `h-13-silverpine` | 13–15 | 12.14 → 14.22 | 16145 | 5052 | 15 (16) | 1 |
-| `h-15-barrens` | 15–18 | 14.22 → 18.14 | 46695 | 14180 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.14 → 22.05 | 51790 | 32273 | 24 (118) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.05 → 24.83 | 62245 | 19547 | 0 (49) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.83 → 27.31 | 66380 | 21568 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.31 → 31.01 | 102715 | 33962 | 121 (313) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 66900 | 43399 | 273 (327) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 51482 | 152 (151) | 1 |
+| `ud-01-deathknell` | 1–6 | 1.00 → 5.75 | 3190 | 3586 | 2 (2) | 3 |
+| `ud-02-tirisfal` | 6–13 | 5.75 → 12.13 | 24080 | 14347 | 0 (6) | 1 |
+| `h-13-silverpine` | 13–15 | 12.13 → 14.22 | 16145 | 5052 | 16 (16) | 1 |
+| `h-15-barrens` | 15–18 | 14.22 → 18.17 | 47945 | 13538 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.17 → 22.04 | 50540 | 32232 | 28 (121) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 24.82 | 62245 | 19270 | 0 (47) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.30 | 66380 | 21372 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.30 → 31.01 | 102715 | 34117 | 123 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 67170 | 43819 | 270 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
 | `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.02 | 69630 | 38121 | 765 (919) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59796 | 178 (184) | 4 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
 | `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153285 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 241170 | 70064 | 338 (392) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153273 | 155 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.05 | 241170 | 70064 | 338 (392) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (440): `complete-kill-xp` 349, `complete-no-kill` 18, `complete-no-objectives` 3, `level-grind` 4, `quest-profession` 1, `train-service` 1, `xp-unknown` 64.
+INFO (451): `complete-kill-xp` 360, `complete-no-kill` 18, `complete-no-objectives` 3, `level-grind` 4, `quest-profession` 1, `train-service` 1, `xp-unknown` 64.
 
 ### undead-rogue — Undead Rogue 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Scourge ROGUE Horde. Результат: **0 ERROR, 0 WARN, 441 INFO**; принято предупреждений (`ok`): 17; из них на общих шагах: 0 ERROR, 0 WARN, принято 17.
+Модуль `FastesBoooy_Guides`, профиль: Scourge ROGUE Horde. Результат: **0 ERROR, 0 WARN, 452 INFO**; принято предупреждений (`ok`): 24; из них на общих шагах: 0 ERROR, 0 WARN, принято 24.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1904610 (из них оценено 85080; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 815217, гринд 1365120 (~4948 убийств); максимум квестов в журнале 23 из 40; принято 713, сдано 713, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1906280 (из них оценено 85080; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 814449, гринд 1364220 (~4945 убийств); максимум квестов в журнале 23 из 40; принято 714, сдано 714, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4948 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 168 — и их квесты): ~6165. С попутными убийствами в пути на 15 % опыта квестов: ~3938 (худший случай ~5237).
+Гринд до порогов уровня (шаги `level`): ~4945 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 174 — и их квесты): ~6165. С попутными убийствами в пути на 15 % опыта квестов: ~3940 (худший случай ~5243).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
-| `ud-01-deathknell` | 1–6 | 1.00 → 5.75 | 3190 | 3579 | 2 (2) | 3 |
-| `ud-02-tirisfal` | 6–13 | 5.75 → 12.12 | 23650 | 14525 | 1 (7) | 2 |
-| `h-13-silverpine` | 13–15 | 12.12 → 14.38 | 18195 | 5052 | 18 (18) | 1 |
-| `h-15-barrens` | 15–18 | 14.38 → 18.21 | 46695 | 13469 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.21 → 22.05 | 51790 | 32132 | 16 (107) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.05 → 25.00 | 66315 | 20921 | 0 (13) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 25.00 → 27.44 | 66380 | 20996 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.44 → 31.01 | 102715 | 33546 | 98 (313) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 66900 | 43399 | 273 (327) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 51482 | 152 (151) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.02 | 69630 | 38121 | 765 (919) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59796 | 177 (184) | 4 |
+| `ud-01-deathknell` | 1–6 | 1.00 → 5.75 | 3190 | 3586 | 2 (2) | 3 |
+| `ud-02-tirisfal` | 6–13 | 5.75 → 12.11 | 23650 | 14373 | 2 (8) | 2 |
+| `h-13-silverpine` | 13–15 | 12.11 → 14.38 | 18195 | 5052 | 18 (18) | 1 |
+| `h-15-barrens` | 15–18 | 14.38 → 18.26 | 47945 | 13233 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.26 → 22.04 | 50540 | 32016 | 18 (106) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 25.00 | 66315 | 20915 | 0 (13) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 25.00 → 27.44 | 66380 | 20996 | 0 (207) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.44 → 31.01 | 102715 | 33550 | 98 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 67170 | 43819 | 270 (324) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1028) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (919) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
 | `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 618 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153285 | 154 (308) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153227 | 154 (308) | 9 |
 | `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.05 | 235560 | 68234 | 362 (392) | 6 |
 | `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1460) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (441): `complete-kill-xp` 349, `complete-no-kill` 18, `complete-no-objectives` 3, `level-grind` 5, `quest-profession` 1, `train-service` 2, `xp-unknown` 63.
+INFO (452): `complete-kill-xp` 360, `complete-no-kill` 18, `complete-no-objectives` 3, `level-grind` 5, `quest-profession` 1, `train-service` 2, `xp-unknown` 63.
 
 ### undead-warlock — Undead Warlock 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Scourge WARLOCK Horde. Результат: **0 ERROR, 0 WARN, 447 INFO**; принято предупреждений (`ok`): 17; из них на общих шагах: 0 ERROR, 0 WARN, принято 16.
+Модуль `FastesBoooy_Guides`, профиль: Scourge WARLOCK Horde. Результат: **0 ERROR, 0 WARN, 459 INFO**; принято предупреждений (`ok`): 25; из них на общих шагах: 0 ERROR, 0 WARN, принято 23.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1916080 (из них оценено 87590; квестов с оценённым опытом: 66, 4.6 % опыта квестов), за убийства по целям 817142, гринд 1351615 (~4898 убийств); максимум квестов в журнале 23 из 40; принято 718, сдано 718, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1917750 (из них оценено 87590; квестов с оценённым опытом: 66, 4.6 % опыта квестов), за убийства по целям 815589, гринд 1351605 (~4900 убийств); максимум квестов в журнале 23 из 40; принято 719, сдано 719, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4898 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 174 — и их квесты): ~6187. С попутными убийствами в пути на 15 % опыта квестов: ~3890 (худший случай ~5265).
+Гринд до порогов уровня (шаги `level`): ~4900 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 180 — и их квесты): ~6189. С попутными убийствами в пути на 15 % опыта квестов: ~3888 (худший случай ~5269).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
-| `ud-01-deathknell` | 1–6 | 1.00 → 5.83 | 3380 | 3732 | 0 (0) | 3 |
-| `ud-02-tirisfal` | 6–13 | 5.83 → 12.12 | 23650 | 14494 | 0 (5) | 2 |
-| `h-13-silverpine` | 13–15 | 12.12 → 14.32 | 17405 | 5052 | 17 (18) | 1 |
-| `h-15-barrens` | 15–18 | 14.32 → 18.18 | 46695 | 13677 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.18 → 22.04 | 51790 | 32174 | 19 (110) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 24.83 | 62010 | 19841 | 0 (49) | 5 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.83 → 27.32 | 66380 | 21800 | 0 (218) | 10 |
-| `h-27-ashenvale-needles` | 27–31 | 27.32 → 31.01 | 102715 | 33930 | 120 (314) | 7 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 67060 | 43399 | 273 (325) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 1 |
+| `ud-01-deathknell` | 1–6 | 1.00 → 5.83 | 3380 | 3750 | 0 (0) | 3 |
+| `ud-02-tirisfal` | 6–13 | 5.83 → 12.11 | 23650 | 14241 | 1 (6) | 2 |
+| `h-13-silverpine` | 13–15 | 12.11 → 14.31 | 17405 | 5052 | 18 (18) | 1 |
+| `h-15-barrens` | 15–18 | 14.31 → 18.23 | 47945 | 13447 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.23 → 22.05 | 50540 | 32076 | 22 (112) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.05 → 24.82 | 62010 | 19533 | 0 (47) | 5 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.31 | 66380 | 21558 | 0 (206) | 10 |
+| `h-27-ashenvale-needles` | 27–31 | 27.31 → 31.01 | 102715 | 34062 | 121 (325) | 7 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 67330 | 43819 | 270 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 50789 | 155 (154) | 1 |
 | `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.13 | 122745 | 56757 | 998 (1029) | 2 |
-| `h-41-arathi-badlands` | 41–44 | 41.13 → 44.02 | 69630 | 38105 | 721 (907) | 5 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 5 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 175055 | 95081 | 601 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153307 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 362 (392) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1460) | 0 |
+| `h-41-arathi-badlands` | 41–44 | 41.13 → 44.00 | 71030 | 37831 | 708 (908) | 5 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 5 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 175055 | 95081 | 602 (715) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153227 | 154 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.05 | 235560 | 68234 | 362 (392) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-<details><summary>Принятые предупреждения, `ok` (1)</summary>
+<details><summary>Принятые предупреждения, `ok` (2)</summary>
 
+- [library FastesBoooy_Guides] h-37-desolace-dustwallow#62 id=wlk-38-spirit (Classes/Warlock.lua) `skip-ahead` optional step [complete 4962] can be fast-forwarded: the later step h-37-desolace-dustwallow#62 id=h39-mannoroc-portals [complete 5581] is done as soon as its objectives are killed / looted on the way: the walk to step h-37-desolace-dustwallow#61 [complete 5943] passes them with 5581 "Portals of the Legion" in the log, becomes the forward anchor, and the guide then counts the travel / transient / optional / collect steps before it as done (move this step before that point or after the later step, merge it into the later step, or drop the overlap)
 - [library FastesBoooy_Guides] h-46-tanaris-feralas#1 id=wlk-46-menara (Classes/Warlock.lua) `db-override-unverified` accept 4975 "The Completed Orb of Noh'Orahil" (exclusive with 4962 "Shard of a Felhound" in the snapshot): the exclusivity check passes only because of the unverified DB override in tools/overrides/warlock.lua (source: original game (classes.md 5.5): Shard of a Felhound -> Orb of Noh'Orahil): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment)
 
 </details>
 
-INFO (447): `complete-kill-xp` 355, `complete-no-kill` 19, `complete-no-objectives` 3, `level-grind` 3, `quest-profession` 1, `xp-unknown` 66.
+INFO (459): `complete-kill-xp` 366, `complete-no-kill` 19, `complete-no-objectives` 3, `level-grind` 4, `quest-profession` 1, `xp-unknown` 66.
 
 ### undead-warrior — Undead Warrior 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Scourge WARRIOR Horde. Результат: **0 ERROR, 0 WARN, 440 INFO**; принято предупреждений (`ok`): 16; из них на общих шагах: 0 ERROR, 0 WARN, принято 16.
+Модуль `FastesBoooy_Guides`, профиль: Scourge WARRIOR Horde. Результат: **0 ERROR, 0 WARN, 452 INFO**; принято предупреждений (`ok`): 23; из них на общих шагах: 0 ERROR, 0 WARN, принято 23.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1912260 (из них оценено 85080; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 817341, гринд 1355160 (~4904 убийств); максимум квестов в журнале 23 из 40; принято 716, сдано 716, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1913930 (из них оценено 85080; квестов с оценённым опытом: 63, 4.5 % опыта квестов), за убийства по целям 816137, гринд 1354870 (~4904 убийств); максимум квестов в журнале 23 из 40; принято 717, сдано 717, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4904 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 166 — и их квесты): ~6144. С попутными убийствами в пути на 15 % опыта квестов: ~3907 (худший случай ~5216).
+Гринд до порогов уровня (шаги `level`): ~4904 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 172 — и их квесты): ~6146. С попутными убийствами в пути на 15 % опыта квестов: ~3907 (худший случай ~5220).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
-| `ud-01-deathknell` | 1–6 | 1.00 → 5.75 | 3190 | 3579 | 2 (2) | 3 |
-| `ud-02-tirisfal` | 6–13 | 5.75 → 12.34 | 26115 | 14479 | 0 (0) | 1 |
-| `h-13-silverpine` | 13–15 | 12.34 → 14.24 | 16145 | 4987 | 0 (16) | 1 |
-| `h-15-barrens` | 15–18 | 14.24 → 18.18 | 47745 | 13656 | 0 (0) | 13 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.18 → 22.04 | 51790 | 32162 | 19 (111) | 1 |
-| `h-22-hillsbrad` | 22–24 | 22.04 → 24.82 | 61855 | 19595 | 0 (51) | 5 |
-| `h-24-barrens-stonetalon` | 24–27 | 24.82 → 27.38 | 68865 | 22211 | 0 (202) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.38 → 31.01 | 102715 | 33729 | 108 (313) | 7 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 69960 | 43399 | 258 (312) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 51487 | 152 (151) | 1 |
+| `ud-01-deathknell` | 1–6 | 1.00 → 5.75 | 3190 | 3586 | 2 (2) | 3 |
+| `ud-02-tirisfal` | 6–13 | 5.75 → 12.32 | 26115 | 14231 | 0 (0) | 1 |
+| `h-13-silverpine` | 13–15 | 12.32 → 14.22 | 16145 | 4857 | 1 (17) | 1 |
+| `h-15-barrens` | 15–18 | 14.22 → 18.22 | 48995 | 13486 | 0 (0) | 12 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.22 → 22.04 | 50540 | 32091 | 22 (114) | 1 |
+| `h-22-hillsbrad` | 22–24 | 22.04 → 24.81 | 61855 | 19315 | 0 (49) | 5 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.81 → 27.37 | 68865 | 21998 | 0 (189) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.37 → 31.01 | 102715 | 33822 | 110 (326) | 7 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 70230 | 43831 | 255 (308) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
 | `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.02 | 69630 | 38121 | 765 (918) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59796 | 178 (185) | 4 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
 | `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.60 | 282810 | 155226 | 148 (300) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.60 → 55.04 | 235560 | 68234 | 345 (378) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.60 | 282810 | 155238 | 148 (301) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.60 → 55.05 | 235560 | 68234 | 346 (378) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1460) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (440): `complete-kill-xp` 351, `complete-no-kill` 18, `complete-no-objectives` 3, `level-grind` 3, `quest-profession` 1, `train-service` 1, `xp-unknown` 63.
+INFO (452): `complete-kill-xp` 362, `complete-no-kill` 18, `complete-no-objectives` 3, `level-grind` 4, `quest-profession` 1, `train-service` 1, `xp-unknown` 63.
 
 ### skyborne-druid — Skyborne Druid 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Skyborne DRUID Horde. Результат: **0 ERROR, 0 WARN, 513 INFO**; принято предупреждений (`ok`): 19; из них на общих шагах: 0 ERROR, 0 WARN, принято 19.
+Модуль `FastesBoooy_Guides`, профиль: Skyborne DRUID Horde. Результат: **0 ERROR, 0 WARN, 523 INFO**; принято предупреждений (`ok`): 25; из них на общих шагах: 0 ERROR, 0 WARN, принято 25.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1924535 (из них оценено 120750; квестов с оценённым опытом: 125, 6.3 % опыта квестов), за убийства по целям 816584, гринд 1343820 (~4852 убийств); максимум квестов в журнале 23 из 40; принято 728, сдано 728, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1926755 (из них оценено 120750; квестов с оценённым опытом: 125, 6.3 % опыта квестов), за убийства по целям 815087, гринд 1343060 (~4849 убийств); максимум квестов в журнале 23 из 40; принято 729, сдано 729, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4852 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 168 — и их квесты): ~6052. С попутными убийствами в пути на 15 % опыта квестов: ~3865 (худший случай ~5139).
+Гринд до порогов уровня (шаги `level`): ~4849 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 174 — и их квесты): ~6057. С попутными убийствами в пути на 15 % опыта квестов: ~3865 (худший случай ~5146).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
-| `sd-01-zephras` | 1–9 | 1.00 → 9.95 | 16865 | 10397 | 0 (0) | 2 |
-| `sd-02-zephras` | 9–13 | 9.95 → 13.32 | 21255 | 9196 | 0 (0) | 2 |
-| `sd-03-thunder-bluff` | 13–13 | 13.32 → 13.35 | 420 | 0 | 0 (0) | 2 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 13.35 → 14.17 | 7310 | 2310 | 0 (0) | 4 |
-| `h-13-silverpine` | 13–15 | 14.17 → 15.55 | 14575 | 3978 | 0 (0) | 3 |
-| `h-15-barrens` | 15–18 | 15.55 → 18.75 | 42125 | 12584 | 0 (0) | 14 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.75 → 22.44 | 55510 | 31036 | 0 (24) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.44 → 25.12 | 61855 | 18760 | 0 (52) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 25.12 → 27.52 | 65525 | 20863 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.52 → 31.01 | 102715 | 33470 | 82 (313) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (326) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (918) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 4 |
+| `sd-01-zephras` | 1–9 | 1.00 → 9.91 | 16865 | 10133 | 0 (0) | 2 |
+| `sd-02-zephras` | 9–13 | 9.91 → 13.29 | 21255 | 9148 | 0 (0) | 2 |
+| `sd-03-thunder-bluff` | 13–13 | 13.29 → 13.33 | 420 | 0 | 0 (0) | 2 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 13.33 → 14.15 | 7310 | 2358 | 0 (0) | 4 |
+| `h-13-silverpine` | 13–15 | 14.15 → 15.53 | 14575 | 4006 | 0 (0) | 3 |
+| `h-15-barrens` | 15–18 | 15.53 → 18.73 | 43375 | 11178 | 0 (0) | 13 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.73 → 22.39 | 54510 | 31160 | 0 (31) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.39 → 25.09 | 61855 | 18884 | 0 (49) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 25.09 → 27.50 | 65825 | 20996 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.50 → 31.01 | 102715 | 33486 | 86 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 67170 | 43819 | 270 (324) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 50789 | 155 (154) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (919) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
 | `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153307 | 154 (308) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153273 | 154 (308) | 9 |
 | `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.05 | 246260 | 71198 | 319 (349) | 6 |
 | `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (513): `complete-kill-xp` 353, `complete-no-kill` 29, `complete-no-objectives` 2, `hearth-unbound` 1, `level-grind` 1, `quest-profession` 1, `train-service` 1, `xp-unknown` 125.
+INFO (523): `complete-kill-xp` 363, `complete-no-kill` 29, `complete-no-objectives` 2, `hearth-unbound` 1, `level-grind` 1, `quest-profession` 1, `train-service` 1, `xp-unknown` 125.
 
 ### skyborne-hunter — Skyborne Hunter 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Skyborne HUNTER Horde. Результат: **0 ERROR, 0 WARN, 510 INFO**; принято предупреждений (`ok`): 19; из них на общих шагах: 0 ERROR, 0 WARN, принято 19.
+Модуль `FastesBoooy_Guides`, профиль: Skyborne HUNTER Horde. Результат: **0 ERROR, 0 WARN, 520 INFO**; принято предупреждений (`ok`): 24; из них на общих шагах: 0 ERROR, 0 WARN, принято 24.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1916495 (из них оценено 116850; квестов с оценённым опытом: 120, 6.1 % опыта квестов), за убийства по целям 814752, гринд 1353470 (~4888 убийств); максимум квестов в журнале 23 из 40; принято 722, сдано 722, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1918570 (из них оценено 117005; квестов с оценённым опытом: 120, 6.1 % опыта квестов), за убийства по целям 813021, гринд 1353445 (~4888 убийств); максимум квестов в журнале 23 из 40; принято 723, сдано 723, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4888 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 172 — и их квесты): ~6121. С попутными убийствами в пути на 15 % опыта квестов: ~3903 (худший случай ~5209).
+Гринд до порогов уровня (шаги `level`): ~4888 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 178 — и их квесты): ~6126. С попутными убийствами в пути на 15 % опыта квестов: ~3902 (худший случай ~5218).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
-| `sd-01-zephras` | 1–9 | 1.00 → 9.95 | 16865 | 10397 | 0 (0) | 2 |
-| `sd-02-zephras` | 9–13 | 9.95 → 13.38 | 22095 | 9024 | 0 (0) | 1 |
-| `sd-03-thunder-bluff` | 13–13 | 13.38 → 13.38 | 0 | 0 | 0 (0) | 1 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 13.38 → 14.19 | 7310 | 2262 | 0 (0) | 3 |
-| `h-13-silverpine` | 13–15 | 14.19 → 15.53 | 14155 | 3950 | 0 (0) | 3 |
-| `h-15-barrens` | 15–18 | 15.53 → 18.74 | 42125 | 12584 | 0 (0) | 14 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.74 → 22.30 | 51860 | 31093 | 0 (51) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.30 → 25.02 | 61855 | 18971 | 0 (51) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 25.02 → 27.45 | 66225 | 20996 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.45 → 31.01 | 102715 | 33534 | 96 (314) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (326) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (918) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153307 | 154 (307) | 9 |
+| `sd-01-zephras` | 1–9 | 1.00 → 9.91 | 16865 | 10133 | 0 (0) | 2 |
+| `sd-02-zephras` | 9–13 | 9.91 → 13.34 | 22095 | 8916 | 0 (0) | 1 |
+| `sd-03-thunder-bluff` | 13–13 | 13.34 → 13.34 | 0 | 0 | 0 (0) | 1 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 13.34 → 14.17 | 7310 | 2322 | 0 (0) | 3 |
+| `h-13-silverpine` | 13–15 | 14.17 → 15.51 | 14155 | 3992 | 0 (0) | 3 |
+| `h-15-barrens` | 15–18 | 15.51 → 18.72 | 43375 | 11210 | 0 (0) | 13 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.72 → 22.25 | 50860 | 31199 | 0 (58) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.25 → 24.98 | 61855 | 18965 | 0 (49) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.98 → 27.42 | 66380 | 21017 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.42 → 31.01 | 102715 | 33578 | 102 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 67170 | 43819 | 270 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (186) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (714) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153273 | 154 (308) | 9 |
 | `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 241170 | 69149 | 341 (392) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1305 (1461) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (510): `complete-kill-xp` 352, `complete-no-kill` 31, `complete-no-objectives` 2, `hearth-unbound` 1, `level-grind` 1, `quest-profession` 1, `train-service` 2, `xp-unknown` 120.
+INFO (520): `complete-kill-xp` 362, `complete-no-kill` 31, `complete-no-objectives` 2, `hearth-unbound` 1, `level-grind` 1, `quest-profession` 1, `train-service` 2, `xp-unknown` 120.
 
 ### skyborne-rogue — Skyborne Rogue 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Skyborne ROGUE Horde. Результат: **0 ERROR, 0 WARN, 504 INFO**; принято предупреждений (`ok`): 19; из них на общих шагах: 0 ERROR, 0 WARN, принято 19.
+Модуль `FastesBoooy_Guides`, профиль: Skyborne ROGUE Horde. Результат: **0 ERROR, 0 WARN, 514 INFO**; принято предупреждений (`ok`): 25; из них на общих шагах: 0 ERROR, 0 WARN, принято 25.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1912775 (из них оценено 115010; квестов с оценённым опытом: 116, 6.0 % опыта квестов), за убийства по целям 815871, гринд 1356190 (~4889 убийств); максимум квестов в журнале 23 из 40; принято 721, сдано 721, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1914885 (из них оценено 115170; квестов с оценённым опытом: 116, 6.0 % опыта квестов), за убийства по целям 814161, гринд 1355895 (~4888 убийств); максимум квестов в журнале 23 из 40; принято 722, сдано 722, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4889 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 172 — и их квесты): ~6090. С попутными убийствами в пути на 15 % опыта квестов: ~3909 (худший случай ~5177).
+Гринд до порогов уровня (шаги `level`): ~4888 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 178 — и их квесты): ~6096. С попутными убийствами в пути на 15 % опыта квестов: ~3908 (худший случай ~5186).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
-| `sd-01-zephras` | 1–9 | 1.00 → 9.95 | 16865 | 10397 | 0 (0) | 2 |
-| `sd-02-zephras` | 9–13 | 9.95 → 13.25 | 20415 | 9224 | 0 (0) | 1 |
-| `sd-03-thunder-bluff` | 13–13 | 13.25 → 13.25 | 0 | 0 | 0 (0) | 1 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 13.25 → 14.09 | 7310 | 2502 | 0 (0) | 3 |
-| `h-13-silverpine` | 13–15 | 14.09 → 15.45 | 14155 | 4006 | 0 (0) | 3 |
-| `h-15-barrens` | 15–18 | 15.45 → 18.68 | 42125 | 12654 | 0 (0) | 14 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.68 → 22.26 | 51860 | 31195 | 0 (58) | 0 |
-| `h-22-hillsbrad` | 22–24 | 22.26 → 25.16 | 66315 | 20550 | 0 (13) | 4 |
-| `h-24-barrens-stonetalon` | 24–27 | 25.16 → 27.55 | 65525 | 20863 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.55 → 31.01 | 102525 | 33454 | 76 (314) | 6 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (326) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (152) | 1 |
+| `sd-01-zephras` | 1–9 | 1.00 → 9.91 | 16865 | 10133 | 0 (0) | 2 |
+| `sd-02-zephras` | 9–13 | 9.91 → 13.22 | 20415 | 9176 | 0 (0) | 1 |
+| `sd-03-thunder-bluff` | 13–13 | 13.22 → 13.22 | 0 | 0 | 0 (0) | 1 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 13.22 → 14.07 | 7310 | 2550 | 0 (0) | 3 |
+| `h-13-silverpine` | 13–15 | 14.07 → 15.43 | 14155 | 4006 | 0 (0) | 3 |
+| `h-15-barrens` | 15–18 | 15.43 → 18.66 | 43375 | 11346 | 0 (0) | 13 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.66 → 22.21 | 50860 | 31217 | 0 (65) | 0 |
+| `h-22-hillsbrad` | 22–24 | 22.21 → 25.13 | 66315 | 20652 | 0 (12) | 4 |
+| `h-24-barrens-stonetalon` | 24–27 | 25.13 → 27.52 | 65525 | 20863 | 0 (208) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.52 → 31.01 | 102715 | 33466 | 81 (325) | 6 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 67170 | 43819 | 270 (323) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
 | `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.02 | 69630 | 38121 | 764 (918) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (185) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (714) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153307 | 154 (308) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 362 (392) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
+| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.00 | 71030 | 38121 | 750 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 618 (715) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153251 | 154 (308) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.05 | 235560 | 68234 | 362 (392) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.05 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (504): `complete-kill-xp` 352, `complete-no-kill` 29, `complete-no-objectives` 2, `hearth-unbound` 1, `level-grind` 1, `quest-profession` 1, `train-service` 2, `xp-unknown` 116.
+INFO (514): `complete-kill-xp` 362, `complete-no-kill` 29, `complete-no-objectives` 2, `hearth-unbound` 1, `level-grind` 1, `quest-profession` 1, `train-service` 2, `xp-unknown` 116.
 
 ### skyborne-shaman — Skyborne Shaman 1-60
 
-Модуль `FastesBoooy_Guides`, профиль: Skyborne SHAMAN Horde. Результат: **0 ERROR, 0 WARN, 514 INFO**; принято предупреждений (`ok`): 20; из них на общих шагах: 0 ERROR, 0 WARN, принято 20.
+Модуль `FastesBoooy_Guides`, профиль: Skyborne SHAMAN Horde. Результат: **0 ERROR, 0 WARN, 524 INFO**; принято предупреждений (`ok`): 26; из них на общих шагах: 0 ERROR, 0 WARN, принято 26.
 
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1913885 (из них оценено 117915; квестов с оценённым опытом: 123, 6.2 % опыта квестов), за убийства по целям 813496, гринд 1357485 (~4896 убийств); максимум квестов в журнале 23 из 40; принято 727, сдано 727, не сдано к концу 0.
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1915805 (из них оценено 117915; квестов с оценённым опытом: 123, 6.2 % опыта квестов), за убийства по целям 811712, гринд 1357350 (~4896 убийств); максимум квестов в журнале 23 из 40; принято 728, сдано 728, не сдано к концу 0.
 
-Гринд до порогов уровня (шаги `level`): ~4896 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 175 — и их квесты): ~6118. С попутными убийствами в пути на 15 % опыта квестов: ~3916 (худший случай ~5203).
+Гринд до порогов уровня (шаги `level`): ~4896 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 181 — и их квесты): ~6119. С попутными убийствами в пути на 15 % опыта квестов: ~3917 (худший случай ~5214).
 
 | сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
 |---|---|---|---:|---:|---:|---:|
-| `sd-01-zephras` | 1–9 | 1.00 → 10.08 | 17930 | 10286 | 0 (0) | 2 |
-| `sd-02-zephras` | 9–13 | 10.08 → 13.48 | 22095 | 9278 | 0 (0) | 1 |
-| `sd-03-thunder-bluff` | 13–13 | 13.48 → 13.48 | 0 | 0 | 0 (0) | 1 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 13.48 → 14.27 | 7310 | 2142 | 0 (0) | 3 |
-| `h-13-silverpine` | 13–15 | 14.27 → 15.60 | 14155 | 3819 | 0 (0) | 3 |
-| `h-15-barrens` | 15–18 | 15.60 → 18.78 | 42125 | 12541 | 0 (0) | 14 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.78 → 22.36 | 52640 | 30978 | 0 (48) | 1 |
-| `h-22-hillsbrad` | 22–24 | 22.36 → 25.06 | 61855 | 18952 | 0 (51) | 5 |
-| `h-24-barrens-stonetalon` | 24–27 | 25.06 → 27.51 | 67130 | 20996 | 0 (220) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.51 → 31.01 | 102715 | 33478 | 84 (313) | 7 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 66900 | 43399 | 274 (327) | 5 |
-| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 51482 | 151 (151) | 2 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 2 |
-| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.02 | 69630 | 38121 | 765 (919) | 5 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59803 | 178 (184) | 5 |
+| `sd-01-zephras` | 1–9 | 1.00 → 10.06 | 17930 | 10151 | 0 (0) | 2 |
+| `sd-02-zephras` | 9–13 | 10.06 → 13.46 | 22095 | 9200 | 0 (0) | 1 |
+| `sd-03-thunder-bluff` | 13–13 | 13.46 → 13.46 | 0 | 0 | 0 (0) | 1 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 13.46 → 14.26 | 7310 | 2142 | 0 (0) | 3 |
+| `h-13-silverpine` | 13–15 | 14.26 → 15.58 | 14155 | 3819 | 0 (0) | 3 |
+| `h-15-barrens` | 15–18 | 15.58 → 18.76 | 43375 | 11106 | 0 (0) | 13 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.76 → 22.31 | 51640 | 31057 | 0 (51) | 1 |
+| `h-22-hillsbrad` | 22–24 | 22.31 → 25.02 | 61855 | 18965 | 0 (50) | 5 |
+| `h-24-barrens-stonetalon` | 24–27 | 25.02 → 27.48 | 67130 | 20996 | 0 (207) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.48 → 31.01 | 102715 | 33502 | 90 (326) | 7 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.06 | 67170 | 43819 | 271 (323) | 5 |
+| `h-34-stranglethorn` | 34–37 | 34.06 → 36.06 | 46085 | 50789 | 154 (155) | 2 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.02 | 110880 | 55325 | 1009 (1029) | 2 |
+| `h-41-arathi-badlands` | 41–44 | 41.02 → 44.00 | 71030 | 38121 | 750 (918) | 5 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 186 (185) | 5 |
 | `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170955 | 95081 | 616 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153307 | 154 (308) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.57 | 277710 | 153273 | 154 (308) | 9 |
 | `h-53-azshara-ungoro-silithus` | 53–56 | 52.57 → 55.04 | 235560 | 68234 | 362 (392) | 6 |
-| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1461) | 0 |
-
-Собственных ошибок и предупреждений нет.
-
-INFO (514): `complete-kill-xp` 354, `complete-no-kill` 30, `complete-no-objectives` 2, `hearth-unbound` 1, `level-grind` 1, `quest-profession` 1, `train-service` 2, `xp-unknown` 123.
-
-### skyborne-warrior — Skyborne Warrior 1-60
-
-Модуль `FastesBoooy_Guides`, профиль: Skyborne WARRIOR Horde. Результат: **0 ERROR, 0 WARN, 506 INFO**; принято предупреждений (`ok`): 18; из них на общих шагах: 0 ERROR, 0 WARN, принято 18.
-
-Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1919715 (из них оценено 115590; квестов с оценённым опытом: 117, 6.0 % опыта квестов), за убийства по целям 816957, гринд 1348095 (~4862 убийств); максимум квестов в журнале 23 из 40; принято 723, сдано 723, не сдано к концу 0.
-
-Гринд до порогов уровня (шаги `level`): ~4862 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 166 — и их квесты): ~6070. С попутными убийствами в пути на 15 % опыта квестов: ~3879 (худший случай ~5151).
-
-| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
-|---|---|---|---:|---:|---:|---:|
-| `sd-01-zephras` | 1–9 | 1.00 → 9.95 | 16865 | 10397 | 0 (0) | 2 |
-| `sd-02-zephras` | 9–13 | 9.95 → 13.30 | 20835 | 9368 | 0 (0) | 1 |
-| `sd-03-thunder-bluff` | 13–13 | 13.30 → 13.30 | 0 | 0 | 0 (0) | 1 |
-| `h-12-orgrimmar-tirisfal` | 12–13 | 13.30 → 14.13 | 7310 | 2406 | 0 (0) | 3 |
-| `h-13-silverpine` | 13–15 | 14.13 → 15.48 | 14155 | 4006 | 0 (0) | 3 |
-| `h-15-barrens` | 15–18 | 15.48 → 18.70 | 42125 | 12602 | 0 (0) | 14 |
-| `h-18-stonetalon-ashenvale` | 18–22 | 18.70 → 22.28 | 51860 | 31186 | 0 (55) | 1 |
-| `h-22-hillsbrad` | 22–24 | 22.28 → 25.00 | 61855 | 18971 | 0 (52) | 5 |
-| `h-24-barrens-stonetalon` | 24–27 | 25.00 → 27.50 | 68155 | 21588 | 0 (201) | 9 |
-| `h-27-ashenvale-needles` | 27–31 | 27.50 → 31.01 | 102715 | 33490 | 87 (313) | 7 |
-| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 69960 | 43399 | 258 (312) | 4 |
-| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 51487 | 152 (151) | 1 |
-| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
-| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.02 | 69630 | 38121 | 765 (919) | 4 |
-| `h-44-swamp-stranglethorn` | 44–46 | 44.02 → 46.01 | 120640 | 59796 | 178 (184) | 4 |
-| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 617 (715) | 9 |
-| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.60 | 282810 | 155226 | 148 (301) | 9 |
-| `h-53-azshara-ungoro-silithus` | 53–56 | 52.60 → 55.04 | 235560 | 68234 | 345 (378) | 6 |
 | `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1460) | 0 |
 
 Собственных ошибок и предупреждений нет.
 
-INFO (506): `complete-kill-xp` 354, `complete-no-kill` 29, `complete-no-objectives` 2, `hearth-unbound` 1, `level-grind` 1, `quest-profession` 1, `train-service` 1, `xp-unknown` 117.
+INFO (524): `complete-kill-xp` 364, `complete-no-kill` 30, `complete-no-objectives` 2, `hearth-unbound` 1, `level-grind` 1, `quest-profession` 1, `train-service` 2, `xp-unknown` 123.
+
+### skyborne-warrior — Skyborne Warrior 1-60
+
+Модуль `FastesBoooy_Guides`, профиль: Skyborne WARRIOR Horde. Результат: **0 ERROR, 0 WARN, 516 INFO**; принято предупреждений (`ok`): 24; из них на общих шагах: 0 ERROR, 0 WARN, принято 24.
+
+Симуляция: конец маршрута на уровне **60.00** (оптимистично 60.00; план 60); опыт квестов 1922035 (из них оценено 115590; квестов с оценённым опытом: 117, 6.0 % опыта квестов), за убийства по целям 815171, гринд 1347585 (~4860 убийств); максимум квестов в журнале 23 из 40; принято 724, сдано 724, не сдано к концу 0.
+
+Гринд до порогов уровня (шаги `level`): ~4860 убийств мобов своего уровня; худший случай (не выполнены шаги `optional = true` — 172 — и их квесты): ~6075. С попутными убийствами в пути на 15 % опыта квестов: ~3878 (худший случай ~5158).
+
+| сегмент | план | уровень (симуляция) | опыт квестов | опыт мобов | гринд (худший) | журнал |
+|---|---|---|---:|---:|---:|---:|
+| `sd-01-zephras` | 1–9 | 1.00 → 9.91 | 16865 | 10133 | 0 (0) | 2 |
+| `sd-02-zephras` | 9–13 | 9.91 → 13.27 | 20835 | 9320 | 0 (0) | 1 |
+| `sd-03-thunder-bluff` | 13–13 | 13.27 → 13.27 | 0 | 0 | 0 (0) | 1 |
+| `h-12-orgrimmar-tirisfal` | 12–13 | 13.27 → 14.11 | 7310 | 2466 | 0 (0) | 3 |
+| `h-13-silverpine` | 13–15 | 14.11 → 15.46 | 14155 | 4006 | 0 (0) | 3 |
+| `h-15-barrens` | 15–18 | 15.46 → 18.68 | 43375 | 11298 | 0 (0) | 13 |
+| `h-18-stonetalon-ashenvale` | 18–22 | 18.68 → 22.23 | 50860 | 31208 | 0 (62) | 1 |
+| `h-22-hillsbrad` | 22–24 | 22.23 → 24.96 | 61855 | 18965 | 0 (49) | 5 |
+| `h-24-barrens-stonetalon` | 24–27 | 24.96 → 27.47 | 68555 | 21588 | 0 (189) | 9 |
+| `h-27-ashenvale-needles` | 27–31 | 27.47 → 31.01 | 102715 | 33506 | 91 (325) | 7 |
+| `h-31-hillsbrad-arathi` | 31–34 | 31.01 → 34.05 | 70230 | 43831 | 255 (309) | 4 |
+| `h-34-stranglethorn` | 34–37 | 34.05 → 36.06 | 46085 | 50789 | 155 (155) | 1 |
+| `h-37-desolace-dustwallow` | 37–41 | 36.06 → 41.01 | 110880 | 55325 | 1008 (1029) | 1 |
+| `h-41-arathi-badlands` | 41–44 | 41.01 → 44.00 | 71030 | 38121 | 751 (918) | 4 |
+| `h-44-swamp-stranglethorn` | 44–46 | 44.00 → 46.01 | 120640 | 59858 | 185 (185) | 4 |
+| `h-46-tanaris-feralas` | 46–50 | 46.01 → 49.40 | 170705 | 95081 | 618 (715) | 9 |
+| `h-50-hinterlands-searing-steppes` | 50–53 | 49.40 → 52.60 | 282810 | 155168 | 148 (300) | 9 |
+| `h-53-azshara-ungoro-silithus` | 53–56 | 52.60 → 55.04 | 235560 | 68234 | 345 (379) | 6 |
+| `h-56-felwood-winterspring-plaguelands` | 56–60 | 55.04 → 60.00 | 427570 | 106274 | 1304 (1460) | 0 |
+
+Собственных ошибок и предупреждений нет.
+
+INFO (516): `complete-kill-xp` 364, `complete-no-kill` 29, `complete-no-objectives` 2, `hearth-unbound` 1, `level-grind` 1, `quest-profession` 1, `train-service` 1, `xp-unknown` 117.
 
 ## INFO по кодам
 
@@ -1163,11 +1174,11 @@ INFO (506): `complete-kill-xp` 354, `complete-no-kill` 29, `complete-no-objectiv
 
 | код | всего | маршрутов | на маршрут (мин–макс) |
 |---|---:|---:|---:|
-| `complete-kill-xp` | 9722 | 28 | 342–355 |
+| `complete-kill-xp` | 10008 | 28 | 352–366 |
 | `complete-no-kill` | 560 | 28 | 16–31 |
 | `complete-no-objectives` | 63 | 28 | 2–4 |
 | `hearth-unbound` | 5 | 5 | 1 |
-| `level-grind` | 67 | 28 | 1–5 |
+| `level-grind` | 69 | 28 | 1–5 |
 | `quest-profession` | 28 | 28 | 1 |
 | `train-service` | 38 | 26 | 1–2 |
 | `xp-unknown` | 2088 | 28 | 62–125 |
@@ -1193,11 +1204,11 @@ INFO (506): `complete-kill-xp` 354, `complete-no-kill` 29, `complete-no-objectiv
 
 | где | маршруты | сообщение |
 |---|---|---|
-| dur-01-valley-of-trials#24 id=sha-dur-1516 (Classes/Shaman.lua) | `orc-shaman`, `troll-shaman` | accept 1516 "Call of Earth": the prerequisite check passes only because of the unverified DB override in tools/overrides/shaman.lua (source: https://www.wowhead.com/classic/quest=1516): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment) |
+| dur-01-valley-of-trials#22 id=sha-dur-1516 (Classes/Shaman.lua) | `orc-shaman`, `troll-shaman` | accept 1516 "Call of Earth": the prerequisite check passes only because of the unverified DB override in tools/overrides/shaman.lua (source: https://www.wowhead.com/classic/quest=1516): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment) |
 | h-46-tanaris-feralas#1 id=wlk-46-menara (Classes/Warlock.lua) | все 3 `*-warlock` | accept 4975 "The Completed Orb of Noh'Orahil" (exclusive with 4962 "Shard of a Felhound" in the snapshot): the exclusivity check passes only because of the unverified DB override in tools/overrides/warlock.lua (source: original game (classes.md 5.5): Shard of a Felhound -> Orb of Noh'Orahil): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment) |
 | h-12-orgrimmar-tirisfal#4 id=wlk-ganrul (Classes/Warlock.lua) | `troll-warlock` | accept 1501 "Creature of the Void": the race check passes only because of the unverified DB override in tools/overrides/warlock.lua (source: https://www.warcrafttavern.com/forever/guides/warlock-leveling/): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment) |
 | h-12-orgrimmar-tirisfal#15 id=wlk-ganrul-2 (Classes/Warlock.lua) | `troll-warlock` | accept 1504 "The Binding": the race check passes only because of the unverified DB override in tools/overrides/warlock.lua (source: https://www.warcrafttavern.com/forever/guides/warlock-leveling/): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment) |
 | h-15-barrens#7 id=h15-xr-arrive (Segments/Shared/15_Barrens.lua) | все 4 `tauren-*` | accept 844 "Plainstrider Menace" (exclusive with 854 "Journey to the Crossroads" in the snapshot): the exclusivity check passes only because of the unverified DB override in tools/overrides/shared.lua (source: Classic: Journey to the Crossroads (Thunder Bluff) is a breadcrumb, 844 stays available): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment) |
 | h-15-barrens#7 id=h15-xr-arrive (Segments/Shared/15_Barrens.lua) | все 4 `tauren-*` | accept 844 "Plainstrider Menace" (exclusive with 861 "The Hunter's Way" in the snapshot): the exclusivity check passes only because of the unverified DB override in tools/overrides/shared.lua (source: the DB chain 861 -> 860 (breadcrumbFor 844) -> 844; Classic quest chain The Hunter's Way): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment) |
-| mul-01-camp-narache#12 id=sha-mul-1519 (Classes/Shaman.lua) | `tauren-shaman` | accept 1519 "Call of Earth": the prerequisite check passes only because of the unverified DB override in tools/overrides/shaman.lua (source: https://www.wowhead.com/classic/quest=1519): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment) |
+| mul-01-camp-narache#11 id=sha-mul-1519 (Classes/Shaman.lua) | `tauren-shaman` | accept 1519 "Call of Earth": the prerequisite check passes only because of the unverified DB override in tools/overrides/shaman.lua (source: https://www.wowhead.com/classic/quest=1519): confirm it in game and set verified = true, or acknowledge it (ok = "db-override-unverified" with a -- CONFIRM: comment) |
 
