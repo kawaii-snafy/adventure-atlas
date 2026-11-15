@@ -7,7 +7,8 @@
 -- Reads tools/data/forever_db.lua with the DB overrides of tools/overrides applied (as the route tools
 -- do; --no-overrides: the bare snapshot) and writes addons/AdventureAtlas_Knowledge/Quests.lua: the
 -- quests a Horde character can take (the snapshot is Horde-focused, docs/dev/ATLAS.md) -- the full
--- records of the snapshot plus the brief out-of-scope index (name, levels, masks, zone only) -- as one call
+-- records of the snapshot plus the brief out-of-scope index (name, levels, masks, zone only) -- and the
+-- narrative goals built from them, as one call
 --
 --   AdventureAtlas.AddKnowledge({
 --       faction = "Horde",
@@ -25,22 +26,51 @@
 --           pa = { quest ids: all needed }, py = { quest ids: one of them needed }, nx = next quest id,
 --           x = XP reward at the quest level (when known), new = true (new in Forever)
 --       } },
+--       goals = { {                          -- narrative goals (tools/lib/goals.lua); order: aspect (story,
+--                                            --   dungeon, class, novelty), lo, id (novelty: curated order)
+--           id = "s886",                     -- unique; s / e = story chain / errands of one giver, c / k =
+--                                            --   class chain / errands, "d<areaID>" = dungeon, "n:<key>" =
+--                                            --   curated; suffix = lowest counted quest id. Never saved.
+--           a = "story" | "dungeon" | "class" | "novelty",
+--           z = zone key,                    -- home zone (story / class only; grouping, not navigation)
+--           lo = 10, hi = 16,                -- level band (effective level: l, else r)
+--           q = { 886, { 96101, 96604 } },   -- counted slots, topological order (ties: level, id); a table
+--                                            --   is an exclusive clique: one slot, any member done = done
+--           opt = { quest ids },             -- counted only once done (breadcrumbs, no starter, curated)
+--           ex = { [410] = { 411 } },        -- exclusives outside a clique: the key is lost once one is done
+--           d = areaID, en = "enUS name",    -- dungeon goals: the instance (C_Map.GetAreaInfo in game),
+--           at = { { uiMapID, x, y } },      --   its entrances, the source of lo / hi (lv = "db" |
+--           lv = "db", prep = { quest ids }, --   "src" | "derived") and the pa / py / nx ancestors outside
+--                                            --   the goal (counted in their own goals)
+--           name = { en = "", ru = "" }, note = { en = "", ru = "" }, -- curated (tools/data/narrative.lua):
+--           src = "url", v = false,          --   title, note, source, verified in game
+--           after = { [questID] = questID }, -- suggest the key only once the value's slot is not open (done,
+--                                            --   marked, gray or out; soft order)
+--           cnt = { [questID] = N },         -- the slot is suggested once N slots without a cnt key are done
+--           hint = { [questID] = { uiMapID, level } }, -- promote it there from that level on
+--           startObj = true,                 -- navigate to start objects (NPCs only without a placed object)
+--       } },
 --   })
 --
 -- NPCs of the Alliance (npc faction "A") are left out of s / e; chains (pa / py / nx) only name quests of
 -- this file. Internal flag quests (auto-rewarded, nobody starts or ends them, e.g. "DND FLAG ...") are left
 -- out. Zone keys: the quest's uiMapID (C_Map gives the localized name in game), else its AreaTable id
 -- (dungeons, cities and other areas without a quest map; C_Map.GetAreaInfo), else the quest sort of the
--- snapshot (zone < 0): a class (the client's class name) or one of CATEGORIES below (en + ru). The output
--- is deterministic (sorted); --check exits 1 when the file would change (CI), --stdout prints instead.
+-- snapshot (zone < 0): a class (the client's class name) or one of CATEGORIES below (en + ru). Goals: every
+-- quest of the file gets exactly one disposition -- a slot or an `opt` of one goal, or excluded with a
+-- reason (tools/lib/goals.lua; curated input tools/data/narrative.lua; counts and the goal ids added /
+-- removed go to stderr; a hard error of the goals exits 1). The output is deterministic (sorted); --check
+-- exits 1 when the file would change (CI), --stdout prints instead.
 
 local here = (arg and arg[0] or ""):match("^(.*)[/\\][^/\\]*$") or "."
 package.path = here .. "/?.lua;" .. package.path
 local root = here .. "/.."
 
 local DB = require("lib.fbdb")
+local Goals = require("lib.goals")
 
 local OUT = root .. "/addons/AdventureAtlas_Knowledge/Quests.lua"
+local CURATED = root .. "/tools/data/narrative.lua"
 local FACTION = "Horde"
 
 -- Quest sorts of the snapshot that are not a class (QuestieDB zone sort keys; each checked
@@ -155,7 +185,7 @@ local function collectQuests(db)
     return list
 end
 
---- Build the file text. @return text, notes (lines for stderr)
+--- Build the file text. @return text, notes (lines for stderr); error() on a hard error of the goals
 local function render(db)
     local hordeMask = db.enums.factionMasks[FACTION]
     local classSorts = {}
@@ -299,6 +329,14 @@ local function render(db)
         out[#out + 1] = string.format("        [%d] = { %s },", e.id, table.concat(f, ", "))
     end
     out[#out + 1] = "    },"
+
+    local fileIds, zoneOfQuest = {}, {}
+    for _, e in ipairs(quests) do
+        fileIds[e.id] = true
+        zoneOfQuest[e.id] = zoneIndex[e.zoneKey]
+    end
+    local goals, goalNotes = Goals.Build(db, fileIds, zoneOfQuest, Goals.LoadCurated(CURATED))
+    for _, line in ipairs(Goals.Lines(goals)) do out[#out + 1] = line end
     out[#out + 1] = "})"
     out[#out + 1] = ""
 
@@ -308,7 +346,28 @@ local function render(db)
     end
     notes[#notes + 1] = string.format("%d quests, %d zones, %d npcs, %d objects", #quests, #zoneKeys,
         #sortedKeys(npcs), #sortedKeys(objects))
+    for _, n in ipairs(goalNotes) do notes[#notes + 1] = n end
     return table.concat(out, "\n"), notes
+end
+
+--- Goal ids of a file text (the `id = "..."` of the goals lines). @return { [id] = true }
+local function goalIds(text)
+    local ids = {}
+    for id in (text or ""):gmatch('\n        { id = "([^"]+)", a = ') do ids[id] = true end
+    return ids
+end
+
+--- Note line: goal ids added / removed compared with the previous file (the ids, when few).
+local function goalIdDiff(old, text)
+    local before, after = goalIds(old), goalIds(text)
+    local added, removed = {}, {}
+    for _, id in ipairs(sortedKeys(after)) do if not before[id] then added[#added + 1] = id end end
+    for _, id in ipairs(sortedKeys(before)) do if not after[id] then removed[#removed + 1] = id end end
+    local line = string.format("goal ids vs the previous file: +%d -%d", #added, #removed)
+    if #added + #removed > 0 and #added + #removed <= 40 then
+        line = line .. ": +" .. table.concat(added, " +") .. " -" .. table.concat(removed, " -")
+    end
+    return line
 end
 
 local function main(argv)
@@ -336,16 +395,21 @@ local function main(argv)
         end
         if #rep.errors > 0 then return 1 end
     end
-    local text, notes = render(db)
-    for _, n in ipairs(notes) do io.stderr:write("gen_knowledge_data: " .. n .. "\n") end
-    if opts.stdout then
-        io.write(text)
-        return 0
+    local ok, text, notes = pcall(render, db)
+    if not ok then
+        for line in tostring(text):gmatch("[^\n]+") do io.stderr:write("gen_knowledge_data: ERROR " .. line .. "\n") end
+        return 1
     end
     local path = opts.out or OUT
     local fh = io.open(path, "rb")
     local old = fh and fh:read("*a")
     if fh then fh:close() end
+    notes[#notes + 1] = goalIdDiff(old, text)
+    for _, n in ipairs(notes) do io.stderr:write("gen_knowledge_data: " .. n .. "\n") end
+    if opts.stdout then
+        io.write(text)
+        return 0
+    end
     if opts.check then
         if old ~= text then
             io.stderr:write("gen_knowledge_data: " .. path .. " is out of date: run `make knowledge`\n")

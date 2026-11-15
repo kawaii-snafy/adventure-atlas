@@ -8,7 +8,8 @@
 addons/
   AdventureAtlas/                 ядро (без контента)
   AdventureAtlas_Knowledge/       данные базы знаний (LoadOnDemand, ## X-AdventureAtlas-Module: data):
-    Quests.lua                    квесты Орды из снимка БД (генерируется: make knowledge)
+    Quests.lua                    квесты Орды из снимка БД и цели режима повествования (генерируется:
+                                  make knowledge)
   AdventureAtlas_Guides/          все гайды: один маршрут на расу и класс (id <раса>-<класс>, 1-60)
     Data.lua                      имена квестов / NPC / мест, questMeta (генерируется: make routedata)
     Segments/<Зона>/              стартовые зоны (Tirisfal, Zephras, Durotar, Mulgore): классово-нейтральные
@@ -21,6 +22,8 @@ addons/
 tools/                            валидатор маршрутов, генераторы, симулятор
   data/forever_db.lua             снимок БД Forever (квесты/NPC/объекты/предметы/зоны)
   data/forever_api.lua            список API/событий/шаблонов клиента Forever
+  data/narrative.lua              ручные данные целей режима повествования (подземелья, новинки Forever)
+  lib/goals.lua                   сборка целей режима повествования (для gen_knowledge_data.lua)
   overrides/                      поправки к снимку БД с источником и отметкой «проверено в игре»
 tests/                            busted-спеки + мок WoW API
 docs/                             документация (маршруты: docs/routes/)
@@ -46,23 +49,62 @@ docs/                             документация (маршруты: do
 
 | Файл | Ответственность |
 |---|---|
-| `Core/Init.lua` | неймспейс, версия, диспетчер событий (`ns:On(event, fn)`), колбэки (`ns:Fire(msg, ...)` / `ns:Listen(msg, fn)`), SavedVariables (`AdventureAtlasDB`, `AdventureAtlasCharDB`), печать в чат |
+| `Core/Init.lua` | неймспейс, версия, диспетчер событий (`ns:On(event, fn)`), колбэки (`ns:Fire(msg, ...)` / `ns:Listen(msg, fn)`), SavedVariables (`AdventureAtlasDB`, `AdventureAtlasCharDB`; режим персонажа `cdb.mode` и `ns.IsNarrative()`), печать в чат |
 | `Core/Schema.lua` | **контракт формата маршрутов** (чистый Lua; общий с инструментами) |
 | `Core/Compose.lua` | **сборка маршрута** из своих сегментов, сегментов библиотеки (`UseSegments`), общих вставок (`AddLibraryInsert`) и вставок маршрута (`AddInsert`); хранилище общего содержимого (`AddLibrarySegment` / `AddLibraryInsert` / `AddLibraryData`). Чистый Lua, общий с инструментами (см. ниже) |
-| `Core/Compat.lua` | единственное место, где вызываются игровые API квестов/карты/предметов/тренера/полётов. Все вызовы защищены (`nil`-проверки, `pcall` где нужно). Возвращает нормализованные значения (в т. ч. серость квеста: `Compat.IsQuestGray`; загружен ли аддон: `Compat.IsAddOnLoaded`) |
+| `Core/Compat.lua` | единственное место, где вызываются игровые API квестов/карты/предметов/тренера/полётов. Все вызовы защищены (`nil`-проверки, `pcall` где нужно). Возвращает нормализованные значения (в т. ч. серость квеста: `Compat.IsQuestGray`, по уровням — `Compat.IsLevelGray`; загружен ли аддон: `Compat.IsAddOnLoaded`) |
 | `Core/Registry.lua` | `AdventureAtlas.RegisterRoute / AddSegment / AddRouteData / UseSegments / AddInsert / AddLibrarySegment / AddLibraryInsert / AddLibraryData`; хранение маршрутов и общего содержимого; прежние id маршрутов (`aliases`, `Registry:Get` находит маршрут и по алиасу); ленивая сборка (`Registry:Finalize`); список маршрутов без сборки (`Registry:List(true)`, `Registry:IsComposed`); выбор маршрута по фракции/расе/классу |
 | `Core/Steps.lua` | обработчики действий: `IsActionDone(action, step, ctx)`, тексты/иконки для UI |
-| `Core/Engine.lua` | активный маршрут (при активации сохранённый прогресс переносится с алиаса на id маршрута), отфильтрованный список шагов, курсор, фоновые цели, ручные отметки, перемотка вперёд, серые / недоступные / не взятые квесты, синхронизация по уровню, выбор награды (`GetRewardChoice`: `reward` шага, иначе таблица наград класса), реакции на события, колбэки `STEP_CHANGED`, `SYNC_SUGGESTION` |
+| `Core/Engine.lua` | активный маршрут (при активации сохранённый прогресс переносится с алиаса на id маршрута), отфильтрованный список шагов, курсор, фоновые цели, ручные отметки, перемотка вперёд, серые / недоступные / не взятые квесты, синхронизация по уровню, выбор награды (`GetRewardChoice`: `reward` шага, иначе таблица наград класса), реакции на события, колбэки `STEP_CHANGED`, `SYNC_SUGGESTION`; в режиме повествования маршрута нет (`SelectRoute` → `nil`, переключение — `MODE_CHANGED`) |
 | `Core/Automation.lua` | автопринятие/автосдача квестов маршрута (QUEST_DETAIL / QUEST_PROGRESS / QUEST_COMPLETE / GOSSIP_SHOW / QUEST_GREETING), выбор награды, автодиалог; задержка действий (`autoDelay` + случайная добавка) с перепроверкой; Shift — пауза автоматики |
-| `Core/Waypoint.lua` | расчёт расстояния/направления до цели шага, нативная метка Blizzard (`C_Map.SetUserWaypoint` + `C_SuperTrack`); цель, выбранная игроком (`Waypoint:SetCustom` / `ClearCustom` / `GetCustom`, «Вести стрелкой» в базе знаний), заменяет цель шага до прибытия в радиус 10 ярдов (строка в чат), колбэк `WAYPOINT_CUSTOM` |
+| `Core/Waypoint.lua` | расчёт расстояния/направления до цели шага, нативная метка Blizzard (`C_Map.SetUserWaypoint` + `C_SuperTrack`); цель, выбранная игроком (`Waypoint:SetCustom` / `ClearCustom` / `GetCustom`, «Вести стрелкой» в базе знаний, «Вести» режима повествования), заменяет цель шага до прибытия в радиус 10 ярдов (строка в чат), колбэк `WAYPOINT_CUSTOM` |
 | `Core/Knowledge.lua` | данные базы знаний: `AdventureAtlas.AddKnowledge` (аддон `AdventureAtlas_Knowledge`, грузится по требованию `Knowledge:Load`), поиск и фильтры `Knowledge:Search`, доступность квеста расе / классу, статус (выполнен / в журнале), локализованные названия зон |
-| `UI/StepFrame.lua` | окно шагов (текущий шаг, «Попутно», следующие невыполненные), прогресс целей, кнопки «Назад» / «Вперёд» / «Настройки», плашка синхронизации по уровню |
+| `Core/Narrative.lua` | режим повествования (`ns.Narrative`): цели из `data.goals` базы знаний, чистая оценка `Narrative.Evaluate` (полосы аспектов, состояние целей), подсказка «Куда сейчас» (`Where`, `Best`), галки игрока (`cdb.marks`), режим (`GetMode` / `SetMode`), стрелка к подсказке и следование (`Lead` / `Stop`, ref `nar:<квест>`); колбэк `NARRATIVE_UPDATED` |
+| `UI/StepFrame.lua` | окно шагов (текущий шаг, «Попутно», следующие невыполненные), прогресс целей, кнопки «Назад» / «Вперёд» / «Настройки», плашка синхронизации по уровню; в режиме повествования — карточка «Куда сейчас» |
 | `UI/Arrow.lua` | стрелка-навигатор с дистанцией |
 | `UI/AtlasKnowledge.lua` | вкладка «База знаний»: поиск, уровни, фильтры (`ns.db.knowledge`), виртуальный список (10 строк поверх результатов), карточка квеста, «Вести стрелкой» (`Waypoint:SetCustom`) |
-| `UI/Atlas.lua` | окно атласа с вкладками: «Твоё приключение» (маршрут персонажа, прогресс, главы — `Engine:GetChapters`), «База знаний» (`UI/AtlasKnowledge.lua`); страница вкладки строится при первом показе, выбранная вкладка и позиция — в `ns.db.frames.atlas` |
+| `UI/AtlasNarrative.lua` | вид режима повествования на вкладке «Твоё приключение»: «Куда сейчас» с кнопкой «Вести», полосы аспектов, фильтры (`ns.db.narrative`), виртуальный список целей по зонам с галками «сам» / «не надо», подсказка цели |
+| `UI/Atlas.lua` | окно атласа с вкладками: «Твоё приключение» (кнопки режима; маршрут персонажа, прогресс, главы — `Engine:GetChapters`, или вид повествования `UI/AtlasNarrative.lua`), «База знаний» (`UI/AtlasKnowledge.lua`); страница вкладки строится при первом показе, выбранная вкладка и позиция — в `ns.db.frames.atlas` |
 | `UI/MinimapButton.lua` | кнопка на краю миникарты без внешних библиотек: левый клик — атлас, правый — настройки, перетаскивание по кругу (угол в `ns.db.minimap.angle`); настройка `minimapButton`, `/aa minimap` |
-| `UI/Options.lua` | панель настроек + `/aa`. Кнопки маршрутов и `/aa routes` показывают только маршруты, подходящие персонажу (остальные — числом; `/aa routes all` — все id и названия без сборки); один раз за сессию строка в чат о загруженных папках прежнего имени (`FastesBoooy`, `FastesBoooy_Guides`, `FastesBoooy_Horde`, `FastesBoooy_UndeadPaladin`, `FastesBoooy_SkyborneDruid`) |
+| `UI/Options.lua` | панель настроек + `/aa` (в т. ч. `/aa mode`). Кнопки маршрутов и `/aa routes` показывают только маршруты, подходящие персонажу (остальные — числом; `/aa routes all` — все id и названия без сборки); один раз за сессию строка в чат о загруженных папках прежнего имени (`FastesBoooy`, `FastesBoooy_Guides`, `FastesBoooy_Horde`, `FastesBoooy_UndeadPaladin`, `FastesBoooy_SkyborneDruid`) |
 | `Locales/*.lua` | строки интерфейса (ruRU, enUS) |
+
+## Режим повествования (`Core/Narrative.lua`)
+
+Второй режим прокачки, по персонажу (`cdb.mode = "speedrun" | "narrative"`, по умолчанию `"speedrun"`):
+вместо маршрута — гибкие цели с полосами прогресса, галками и подсказкой «Куда сейчас». Решения и правила —
+`docs/dev/ATLAS.md` (запись от 2026-11-15).
+
+Данные целей:
+
+```
+tools/data/forever_db.lua (+ tools/overrides) ─┐
+tools/data/narrative.lua (ручное: белый список   ├─ tools/gen_knowledge_data.lua ── tools/lib/goals.lua (Goals.Build)
+  подземелий, новинки, titles/exclude/opt)       ┘        │
+                                                          ▼
+          addons/AdventureAtlas_Knowledge/Quests.lua: AdventureAtlas.AddKnowledge{ ..., quests = ..., goals = {...} }
+                                                          │  (make knowledge; CI: make knowledge-check)
+                                                          ▼
+          Core/Knowledge.lua (data.goals) ── Core/Narrative.lua: Load (проверка формы, индексы) → Evaluate → Where
+                                                          │
+                                                          ▼
+                                 UI/AtlasNarrative.lua, UI/StepFrame.lua, Waypoint:SetCustom (стрелка)
+```
+
+* Цель — `{ id, a = "story" | "dungeon" | "class" | "novelty", z, lo, hi, q = { слоты }, opt, ex, ... }`; слот —
+  квест или клика взаимоисключающих квестов (сделан любой — слот сделан). Полный формат — в заголовке
+  `tools/gen_knowledge_data.lua`, правила сборки — `tools/README.md`, раздел 11. Записи квестов при этом не
+  меняются: цели — отдельный ключ `goals`, ссылаются на квесты того же файла.
+* Весь прогресс — из состояния игры через `Compat` (сданные квесты, журнал, уровень); серость — по уровням
+  (`Compat.IsLevelGray`), а не `C_QuestLog.IsQuestTrivial`, чтобы полосы не мигали по мере кеширования квестов.
+  Сохраняются только галки игрока `cdb.marks[questID] = "done" | "skip"` (по номеру квеста: перегенерация,
+  которая перегруппирует цели, их не теряет; `/aa reset` их не трогает) и настройки вида `db.narrative`.
+* В режиме повествования `Engine:SelectRoute` возвращает `nil`: курсор, синхронизация и отметки маршрута не
+  пишутся, автоматика молчит (`Automation:CanAct` требует маршрут). Обратное переключение возвращает маршрут с
+  того же места.
+* Пересчёт — только в режиме повествования: на события квестов и уровня, галки и смену режима (с задержкой
+  0,5 с, один пересчёт на пачку событий); «Куда сейчас» — ещё на смену зоны и раз в 10 с (по таймеру
+  `NARRATIVE_UPDATED` — только если показанное изменилось: строки, расстояния, уровень ожидания).
 
 ## Общие сегменты и вставки (`Core/Compose.lua`)
 
@@ -389,6 +431,7 @@ docs/                             документация (маршруты: do
 | `make simulate` | «прогон» каждого маршрута через настоящий движок на моке: каждый шаг должен завершаться ровно тем действием, которое он требует, награда — выбором маршрута. По процессу на маршрут, `JOBS` процессов одновременно (список маршрутов — `simulate_routes.lua --list-routes`; модуль с ошибкой загрузки роняет цель) |
 | `make simulate-sync` | «игрок обогнал маршрут»: маршруты `SYNC_ROUTES` со свежим персонажем уровней 10 / 23 / 35 / 48 (`--ahead L`), прыжок посреди сегмента с журналом (`--ahead-at`), игра с опережением (`--level-plus`); предложения синхронизации применяются, `accept` с невыполнимыми предпосылками-квестами маршрута — ошибка («unreachable accept»). Все маршруты — `make simulate-sync-full` (ночной запуск CI) |
 | `make check` | всё перечисленное и фикстуры: то, что запускает CI (`.github/workflows/ci.yml`); `make check-fast` — быстрый круг (lint, валидатор, фикстуры, симуляция одного маршрута) |
+| `make knowledge` / `make knowledge-check` | перегенерировать / проверить актуальность `AdventureAtlas_Knowledge/Quests.lua` (квесты и цели режима повествования) |
 | `make report` | `docs/VALIDATION.md`: сводный отчёт валидатора — сводка по маршрутам, сравнение путей, сообщения об общих шагах один раз для всех маршрутов, пороги уровня, собственные сообщения каждого маршрута |
 
 Команды, опции и коды сообщений — [tools/README.md](../tools/README.md).

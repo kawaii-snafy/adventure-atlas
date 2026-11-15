@@ -1,7 +1,7 @@
 -- UI tests on the strict widget mock: step window (layout invariants: top anchor, fixed
--- button row; Back / Forward / Settings; upcoming list; level-sync banner + Undo link), arrow,
--- settings panel (incl. level sync) and the slash commands (/aa ... incl. status,
--- xp, sync), in enUS and ruRU.
+-- button row; Back / Forward / Settings; upcoming list; level-sync banner + Undo link; the narrative
+-- card), arrow, settings panel (incl. level sync) and the slash commands (/aa ... incl. status,
+-- xp, sync, mode), in enUS and ruRU.
 
 local H = require("fixtures.core.helpers")
 
@@ -371,6 +371,26 @@ describe("step window", function()
         H.settle(m)
         assert.is_true(has(texts(f), "Переход к «4-5 Брилл» по уровню."))
         assert.equal("Вернуть", f.banner.undoButton:GetText())
+    end)
+
+    it("shows the narrative card in narrative mode: the main suggestion, the log counts, two detours (ruRU)", function()
+        local fixture = "tests/fixtures/narrative/data.lua"
+        m, ns = H.boot({ locale = "ruRU", fixture = false, quests = false,
+            player = { race = "Orc", class = "WARRIOR", level = 12, mapID = 1413, x = 50, y = 50 },
+            setup = function(mm)
+                for id, q in pairs(dofile(fixture).quests) do mm:DefineQuest(id, { title = q.n, level = q.l }) end
+            end })
+        ns.Knowledge:Add(dofile(fixture))
+        ns.Narrative:SetMode("narrative")
+        H.settle(m)
+        refresh()
+        local t = texts(frame())
+        for _, want in ipairs({ "Повествование", "Сюжет: 0/11", "Взять «Oasis One» — Oasis Keeper, The Barrens · 20 ярд.",
+            "В журнале: 0 · к сдаче: 0", "Попутно", "Взять «Warrior Call» — Warrior Trainer, Orgrimmar · 1031 ярд.",
+            "Взять «Bag One» — Bag Maker, Durotar · 1569 ярд. · лучший момент" }) do
+            assert.is_true(has(t, want), "missing text: " .. want .. " in " .. table.concat(t, " | "))
+        end
+        assert.is_false(frame().forwardButton:IsEnabled(), "no route steps")
     end)
 
     it("hides with /aa hide, in combat with hideInCombat, and shows again", function()
@@ -764,6 +784,33 @@ describe("slash commands", function()
         m:SetShift(true)
         assert.is_true(has(slash("/aa status"), "Automation: paused"))
         m:SetShift(false)
+    end)
+
+    it("mode: toggles the mode and says so; status shows the mode and the automation resting", function()
+        m, ns = H.boot()
+        assert.is_true(has(slash("/aa help"), "/aa mode [speedrun | narrative] - leveling mode of this character "
+            .. "(no argument: switch)"))
+        assert.same({ "Narrative mode: goals and hints are in the atlas (/aa atlas). Automation is off." }, slash("/aa mode"))
+        assert.equal("narrative", ns.cdb.mode)
+        local out = slash("/aa status")
+        assert.equal("Mode: narrative (no route)", out[2])
+        assert.equal("Automation: off in narrative mode", out[3])
+        assert.same({ "Unknown mode: bogus (speedrun or narrative)" }, slash("/aa mode bogus"))
+        assert.same({ "Route: Test route" }, slash("/aa mode"))
+        assert.equal("speedrun", ns.cdb.mode)
+        assert.same({ "Mode: speedrun" }, slash("/aa mode speedrun"), "the current mode again: say it")
+    end)
+
+    it("route commands in narrative mode say there is no route; /aa route saves the choice for speedrun", function()
+        m, ns = H.boot()
+        slash("/aa mode narrative")
+        local cursor = ns.cdb.cursorHint
+        local NO_ROUTE = "Narrative mode has no route. Type /aa mode speedrun to go back to it."
+        assert.same({ NO_ROUTE }, slash("/aa next"))
+        assert.same({ NO_ROUTE }, slash("/aa sync"))
+        assert.equal(cursor, ns.cdb.cursorHint)
+        assert.same({ "Route saved: Test route. It applies in speedrun mode (/aa mode speedrun)." },
+            slash("/aa route " .. H.ROUTE_ID))
     end)
 
     it("next / prev / skip / reset", function()

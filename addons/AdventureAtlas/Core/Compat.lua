@@ -278,6 +278,14 @@ function Compat.TrivialRange(level)
     return Compat.FallbackTrivialRange(level or Compat.PlayerFacts().level)
 end
 
+--- The level rule of gray quests (FrameXML GetRelativeDifficultyColor): a quest of `questLevel` is gray
+-- for a player of `playerLevel` when playerLevel - questLevel > range (Compat.TrivialRange). A level <= 0
+-- (none / scales with the player) is never gray. Stable while the level does not change, unlike the
+-- client's IsQuestTrivial (answers only for cached quests): Core/Narrative.lua counts with it.
+function Compat.IsLevelGray(questLevel, playerLevel, range)
+    return questLevel > 0 and playerLevel - questLevel > range
+end
+
 --- Is the quest gray (trivial) for the player, like the client colours it? The client's own
 -- answer C_QuestLog.IsQuestTrivial(questID) when it has the quest's data (HaveQuestData: for an
 -- uncached quest the difficulty APIs may misreport -- Questie notes the same on Forever); else
@@ -294,7 +302,7 @@ function Compat.IsQuestGray(questID, questLevel, playerLevel, range)
     if type(questLevel) ~= "number" or questLevel <= 0 then return false end
     playerLevel = tonumber(playerLevel) or Compat.PlayerFacts().level
     range = tonumber(range) or Compat.TrivialRange(playerLevel)
-    return playerLevel - questLevel > range
+    return Compat.IsLevelGray(questLevel, playerLevel, range)
 end
 
 --- XP the quest in the log would give right now (0 when unknown).

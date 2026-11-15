@@ -25,9 +25,11 @@ Core\Engine.lua
 Core\Automation.lua
 Core\Waypoint.lua
 Core\Knowledge.lua
+Core\Narrative.lua
 UI\StepFrame.lua
 UI\Arrow.lua
 UI\Options.lua
 UI\AtlasKnowledge.lua
+UI\AtlasNarrative.lua
 UI\Atlas.lua
 UI\MinimapButton.lua

@@ -27,7 +27,7 @@
 #                     validate, then simulate a part of the shared segments from a start state (OUT: end state)
 #   make report       write docs/VALIDATION.md (validator Markdown report; fails when no report was written)
 #   make routedata    regenerate Data.lua of every guide module (addons/AdventureAtlas_Guides/Data.lua)
-#   make knowledge    regenerate the knowledge base quests (addons/AdventureAtlas_Knowledge/Quests.lua)
+#   make knowledge    regenerate the knowledge base quests + narrative goals (addons/AdventureAtlas_Knowledge/Quests.lua)
 #   make api BIR=... WOWUI=...          regenerate tools/data/forever_api.lua
 #   make db RESEARCH=... CONVERSION=... regenerate tools/data/forever_db.lua (objective counts:
 #                     tools/data/wowhead_requirements.json)

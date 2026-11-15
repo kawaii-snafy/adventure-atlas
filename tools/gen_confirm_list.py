@@ -3,7 +3,8 @@
 
 Collects every `-- CONFIRM` comment of addons/AdventureAtlas_Guides (segments, race files, class files) with the
 step id it belongs to (the step on the comment line, or the first step after a comment block) and prints
-docs/routes/confirm-in-game.md (Russian frame, the comment text as written):
+docs/routes/confirm-in-game.md (Russian frame, the comment text as written), followed by the fixed list of the
+narrative mode (NARRATIVE below: its data has no `-- CONFIRM` comments; docs/dev/ATLAS.md, 2026-11-15):
 
     python3 -I tools/gen_confirm_list.py > docs/routes/confirm-in-game.md
 """
@@ -47,6 +48,27 @@ def item_text(par, header):
         t = t[:1].upper() + t[1:]
     return t
 
+
+# In-game checks of the narrative mode (Core/Narrative.lua, tools/data/narrative.lua), printed after the guides.
+NARRATIVE = """## Режим повествования
+
+Цели собраны по снимку базы и вики (`tools/data/narrative.lua`: у ручных записей `v = false`, в атласе — «не
+проверено в игре»). Подтвердили — поставьте записи `v = true`; не подтвердилось — поправьте `tools/data/narrative.lua`
+и выполните `make knowledge`. Неверный мягкий порядок (`after`, `hint`) меняет только подсказки, не счёт.
+
+| Что проверить | Где в данных / коде |
+|---|---|
+| Засчитывает ли `C_QuestLog.IsQuestFlaggedCompleted` квесты Forever, которые начинаются с объекта (спальный мешок, книги библиотеки), и варианты походной жизни (правило «сделан любой из клики» безопасно в обоих случаях) | `Compat.IsQuestTurnedIn` |
+| Спальный мешок: порядок у Орды (79192 даётся и у объектов 415106 / 417072 в Степях), доступны ли Западный Край и Лок Модан (стража 30-го уровня), где взять 80001 Rekindle | `goals` → `sleeping-bag` (`after`, `hint`, `opt`) |
+| Библиотека Подгорода: пороги 10 / 20 / 25 книг (только по вебу), могут ли сдавать все классы, книги 60-го уровня (Oran Snakewrithe), книги в зонах Альянса | `goals` → `library` (`cnt`) |
+| Порядок «Unending Torment» (Руины Лордерона, 97288-97292; только по вебу); доступ Орды и уровни City of Dalaran (28-33); выведенные из квестов уровни 11 подземелий (например, Пик Чёрной горы с 40-го из-за 4788) | `dungeons` |
+| Походная жизнь: работает ли цель костра (сесть у огня) как в маршрутах | `goals` → `camping` |
+| Карта под игроком: `GetBestMapForUnit` может вернуть город или подкарту, тогда `hint` по карте зоны не срабатывает в пещерах | `Narrative:Where` (`hint`) |
+| Группировка: большие сюжетные цели (Тернистая долина 19 квестов, Танарис 18, Степи 15), цели из одного квеста, зоны Альянса с парой квестов Орды — нужны ли `titles` / `exclude` | `tools/data/narrative.lua` (`titles`, `exclude`) |
+| Элитные и групповые цепочки: в базе нет флага элиты, подсказка может вести одиночку к ним (выход — «не надо» и ручной `opt`) | `opt` |
+| Настройки подсказки: 400 / 1500 ярдов, уровень + 3, проверка раз в 10 с, подводки за 2 уровня до подземелья; время загрузки и пересчёта при входе в режиме повествования | константы в начале `Core/Narrative.lua` |
+| Ширина колонок атласа с русскими строками («3/6 · пропущено: 2») и знаки `·` / `—` в шрифтах по умолчанию | `UI/AtlasNarrative.lua` |
+"""
 
 out = []
 for rel in order:
@@ -95,7 +117,8 @@ print("держится на поправке БД, поставьте ей `ver
 print("Пересобрать список: `python3 -I tools/gen_confirm_list.py > docs/routes/confirm-in-game.md`.\n")
 print("Общие вопросы плана (E.1-E.22: полёт таурена и скайборна в Оргриммар, тренеры паладина, таймер 812, опыт новых")
 print("квестов Forever, цена верховой езды) — `docs/dev/PLAN.md`, раздел E; что проверяется только в игре в самом аддоне —")
-print("конец [docs/VALIDATION.md](../VALIDATION.md).\n")
+print("конец [docs/VALIDATION.md](../VALIDATION.md). Проверки режима повествования — в конце списка")
+print("([«Режим повествования»](#режим-повествования)).\n")
 for rel, items in out:
     print("## `%s`\n" % rel)
     print("| Строка | Шаг | Что проверить |")
@@ -103,3 +126,4 @@ for rel, items in out:
     for line, step, text in items:
         print("| %d | %s | %s |" % (line, ("`%s`" % step) if step else "заголовок файла", text.replace("|", "\\|")))
     print()
+print(NARRATIVE, end="")

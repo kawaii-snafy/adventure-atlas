@@ -7,6 +7,17 @@
 -- come from the client cache when it has them (localized), zone names from C_Map / the class name from
 -- C_CreatureInfo, NPC and object names stay enUS.
 --
+-- The same data carries the goals of the narrative mode (Core/Narrative.lua reads data.goals): an array of
+--   { id = "s886" (unique; s/e story chain / errands, c/k class chain / errands, d<areaID> dungeon, n:<key>
+--            curated), a = "story" | "dungeon" | "class" | "novelty", z = zone key (story / class),
+--     lo, hi = level band, q = { counted slots: questID | { exclusive clique: questIDs } },
+--     opt = { questIDs counted only once done }, ex = { [questID] = { exclusive partners } },
+--     dungeon: d = AreaTable id, en, at = { { uiMap, x, y }, ... } (entrances), lv = "db" | "src" | "derived",
+--              prep = { lead-in questIDs of other goals },
+--     curated: name / note = { en, ru }, src, v, after = { [q] = q2 }, cnt = { [q] = n },
+--              hint = { [q] = { uiMap, level } }, startObj = true }
+-- (tools/gen_knowledge_data.lua documents the generated format).
+--
 -- Exposes ns.Knowledge and the public AdventureAtlas.AddKnowledge.
 
 -- luacheck: ignore 212/self (singleton module keeps the colon method style)
@@ -77,16 +88,19 @@ ns.public.AddKnowledge = function(data) return Knowledge:Add(data) end
 function Knowledge:IsLoaded() return self.data ~= nil end
 
 --- Load AdventureAtlas_Knowledge if needed. @return true, or false + the client's reason ("MISSING",
--- "DISABLED", ...)
+-- "DISABLED", ...). A failure is remembered for the session (the addon cannot appear without a reload), so the
+-- step window, which asks every second in narrative mode, does not call LoadAddOn again.
 function Knowledge:Load()
     if self.data then return true end
+    if self.failed then return false, self.failed end
     local reason
     if C_AddOns and C_AddOns.LoadAddOn then
         local ok, loaded, why = pcall(C_AddOns.LoadAddOn, self.ADDON)
         if not ok then reason = "ERROR" elseif not loaded then reason = why end
     end
     if self.data then return true end
-    return false, reason or "MISSING"
+    self.failed = reason or "MISSING"
+    return false, self.failed
 end
 
 function Knowledge:Get(id) return self.data and self.data.quests[id] end
