@@ -6,6 +6,9 @@
 --     step, or completing / turning in such a quest in a required step after an optional accept;
 --   * WARN complete-far-from-trigger: the `complete` step of an area-trigger quest (exploration) does
 --     not lead to the trigger (escorts and an earlier step at the trigger are fine);
+--   * WARN skip-ahead by objectives passed on the way: the walk passes enough spawns of a later
+--     `complete` step's objectives (quest in the log) to finish it early; the visits / collects between
+--     would be fast-forwarded;
 --   * WARN travel-trip / travel-revisit: a trip back to a place whose work could have been done at an
 --     earlier step there, and coming back to an objective area passed with the quest in the log;
 --   * the snapshot data they use: Wowhead Forever objective counts, triggers, escorts, professions.
@@ -177,6 +180,31 @@ describe("validator checks", function()
                 { go = true, at = AWAY },
                 { turnin = 6395, npc = 1661, at = AT_ELRETH },
             }, AFTER_376), "travel-revisit"))
+        end)
+    end)
+
+    describe("skip-ahead by objectives killed on the way", function()
+        -- 90902 needs 5 Injured Deathguards (15 spawns around 31.6, 63.7). The walk Aramis -> 29.5, 60.0
+        -- passes 6 of them within 50 yards, the walk Aramis -> 31.1, 72.0 only 2.
+        local function route(away)
+            return {
+                { accept = 90902, npc = 244808, at = AT_ARAMIS },
+                { go = true, at = away },
+                { train = true, npc = 244808, at = AT_ARAMIS },
+                { collect = { [2875] = 1 }, at = AT_ARAMIS },
+                { complete = 90902, at = { 1420, 31.6, 63.7 } },
+            }
+        end
+
+        it("the later complete, done on the way, fast-forwards the visit and the collect before it", function()
+            local r = run(route({ 1420, 29.5, 60.0 }), DEATHKNELL)
+            -- the go step itself is no loss: the player walked past it
+            assert.are.same({ 3, 4 }, codeSteps(r, "skip-ahead", "WARN"))
+            assert.matches("killed / looted on the way", firstMsg(r, "skip-ahead").msg, 1, true)
+        end)
+
+        it("passing fewer spawns than the objective needs does not finish it early", function()
+            assert.are.same({}, codeSteps(run(route({ 1420, 31.1, 72.0 }), DEATHKNELL), "skip-ahead"))
         end)
     end)
 

@@ -94,6 +94,9 @@ V.DEFAULTS = {
     travelAreaYards = 90,   -- "at the objective area": a step this close to the `at` of the complete step
     travelLeaveYards = 200, -- "left the place": a later step this far away (or on another map)
     unknownMapYards = 1400, -- assumed width of a map without a known world size (the at-far tolerance ratio)
+    -- skip-ahead: the walk between two step positions "passes" an objective spawn when it comes this
+    -- close (the player kills those mobs on the way and finishes the goal early); 0 = off
+    skipPassYards = 50,
 }
 
 V.SEVERITIES = { "ERROR", "WARN", "INFO" }
@@ -1712,20 +1715,96 @@ local function stepActions(step)
 end
 V.StepActions = stepActions
 
+--- Spawn points of each objective of quest q, in objectiveList order: { [k] = { [uiMap] = { {x, y}, ... } } }.
+-- Creatures and kill credit: their spawns; objects: theirs; items: the spawns of their drop sources
+-- (creatures and objects). An objective without known spawns gets an empty table; a quest with
+-- reqItems gets no objectives (it cannot be finished by passing them). Cached per run.
+function Run:objectiveSpawns(q)
+    self.objSpawnCache = self.objSpawnCache or {}
+    local cached = self.objSpawnCache[q]
+    if cached then return cached end
+    local db, out = self.db, {}
+    local rec = DB.Quest(db, q, self.profile.class)
+    -- a quest that also needs items it does not count (reqItems: used on the objective) is not done
+    -- by passing its objectives
+    if rec and rec.reqItems and #rec.reqItems > 0 then rec = nil end
+    for k, e in ipairs(rec and objectiveList(rec) or {}) do
+        local sp = {}
+        local function add(spawns)
+            for map, list in pairs(spawns or {}) do
+                local dst = sp[map] or {}
+                sp[map] = dst
+                for _, p in ipairs(list) do dst[#dst + 1] = p end
+            end
+        end
+        local function addNpc(id) local n = db.npcs[id]; add(n and n.spawns) end
+        local function addObject(id) local o = db.objects[id]; add(o and o.spawns) end
+        if e.kind == "creature" then
+            addNpc(e.id)
+        elseif e.kind == "killCredit" then
+            for _, id in ipairs(e.ids or { e.id }) do addNpc(id) end
+        elseif e.kind == "object" then
+            addObject(e.id)
+        elseif e.kind == "item" then
+            local it = db.items[e.id]
+            for _, id in ipairs(it and it.npcDrops or {}) do addNpc(id) end
+            for _, id in ipairs(it and it.objectDrops or {}) do addObject(id) end
+        end
+        out[k] = sp
+    end
+    self.objSpawnCache[q] = out
+    return out
+end
+
+--- Marks in `seen` (key "map:index") the spawns of `spawns` that the walk from `from` (nil, or
+-- another map: only the point itself) to `to` comes within `yards` of. Needs the map's world size.
+-- @return the number of newly marked spawns
+function Run:walkPasses(from, to, spawns, yards, seen)
+    local list = spawns[to.map]
+    local z = self.db.zones[to.map]
+    local size = z and z.size
+    if not list or not size then return 0 end
+    local sx, sy = size[1] / 100, size[2] / 100
+    local bx, by = to.x * sx, to.y * sy
+    local ax, ay = bx, by
+    if from and from.map == to.map then ax, ay = from.x * sx, from.y * sy end
+    local dx, dy = bx - ax, by - ay
+    local len2 = dx * dx + dy * dy
+    local added = 0
+    for n, p in ipairs(list) do
+        local key = to.map .. ":" .. n
+        if not seen[key] then
+            local px, py = p[1] * sx, p[2] * sy
+            local t = len2 > 0 and math.max(0, math.min(1, ((px - ax) * dx + (py - ay) * dy) / len2)) or 0
+            local cx, cy = ax + t * dx - px, ay + t * dy - py
+            if cx * cx + cy * cy <= yards * yards then seen[key], added = true, added + 1 end
+        end
+    end
+    return added
+end
+
 --- WARN skip-ahead. The engine's forward anchor is the last non-bg step with accept/turnin/complete
--- whose stateful actions are all done; every transient action and every `optional` step before it
--- then counts as done. A non-bg step whose accept / complete can be finished EARLY -- by an earlier
--- bg step (a bg `complete` covering its objectives, a bg `accept` / `turnin` of its quest), by an
--- earlier step completing the same objectives, or by the start state (quest in "complete") --
--- becomes that anchor as soon as the earlier goal is done, and the travel / transient / optional
--- non-bg steps between the two are fast-forwarded although the player never did them (its
+-- whose stateful actions are all done; every transient action, every `optional` step and every
+-- `collect` before it then counts as done. A non-bg step whose accept / complete can be finished
+-- EARLY -- by an earlier bg step (a bg `complete` covering its objectives, a bg `accept` / `turnin`
+-- of its quest), by an earlier step completing the same objectives, by the walk passing its
+-- objectives while the quest is in the log (within skipPassYards of at least as many of its spawns
+-- as it needs: the player kills them on the way, the "По пути" hints even ask for it; a step of
+-- `go` actions only is no loss then: the player walked past it) or by the start state (quest in
+-- "complete") --
+-- becomes that anchor as soon as the earlier goal is done, and the travel / transient / optional /
+-- collect non-bg steps between the two are fast-forwarded although the player never did them (its
 -- turnin / abandon actions, read from the game, keep a step from being early). Reported once per
--- such step, at that step (`-- WARN-OK: reason` goes there).
+-- such step, at that step (`ok = "skip-ahead"` with the reason in a comment goes there).
 function Run:checkSkipAhead()
     local steps = self.walked
     local cover = {}     -- quest -> { [objective index] = { index, step } } (first early source)
+    local passed = {}    -- quest -> { [objective index] = { index, step, passed = true } } since its last accept
+    local passSeen = {}  -- quest -> { [objective index] = { ["map:n"] = true } }: spawns passed since then
     local acceptSrc = {} -- quest -> { index, step }: bg accept / turnin
     local acceptAt = {}  -- quest -> index of its last accept so far (0: in the start state's log)
+    local passYards = self.opts.skipPassYards or V.DEFAULTS.skipPassYards
+    local lastAt         -- position of the last non-bg step with `at` (start of the walk to the next one)
     local nObj = {}
     local function objectiveCount(q)
         if nObj[q] == nil then
@@ -1733,6 +1812,12 @@ function Run:checkSkipAhead()
             nObj[q] = rec and #objectiveList(rec) or 0
         end
         return nObj[q]
+    end
+    -- the earlier of two sources (nil-safe)
+    local function first(a, b)
+        if not a then return b end
+        if not b then return a end
+        return b.index < a.index and b or a
     end
     local function wanted(a)
         if a.objectives and #a.objectives > 0 then return a.objectives end
@@ -1747,53 +1832,75 @@ function Run:checkSkipAhead()
         end
     end
     local state = self.opts.startState
-    for _, q in ipairs(state and state.log or {}) do acceptAt[q] = 0 end
+    local inLog = {}     -- quests in the log at the current step (their walk passes are early sources)
+    for _, q in ipairs(state and state.log or {}) do acceptAt[q], inLog[q], passed[q], passSeen[q] = 0, true, {}, {} end
     for _, q in ipairs(state and state.complete or {}) do coverAll(q, { index = 0 }) end
     local reported = {}
     for i, s in ipairs(steps) do
         if not s.bg then
-            local early, src, quest = -1, nil, nil
+            -- two windows: `any` takes every early source, `fixed` only those that do not depend on the
+            -- walk (bg goal, earlier step, start state); a step of `go` actions only counts in `fixed`
+            local any = { early = -1 }
+            local fixed = { early = -1 }
             local anchor, ok = false, true
+            local function take(w, c, q)
+                if not c then w.dead = true
+                elseif c.index > w.early then w.early, w.src, w.quest = c.index, c, q end
+            end
             for _, a in ipairs(s.actions) do
                 local t = a.type
                 if t == "complete" then
                     anchor = true
-                    local cov = cover[a.quest]
+                    local cov, pas = cover[a.quest], passed[a.quest]
                     for _, k in ipairs(wanted(a)) do
                         local c = cov and cov[k]
-                        if not c then ok = false break end
-                        if c.index > early then early, src, quest = c.index, c, a.quest end
+                        take(any, first(c, pas and pas[k]), a.quest)
+                        take(fixed, c, a.quest)
                     end
-                    -- the bg goal counts only once the quest is in the log
+                    -- the goal counts only once the quest is in the log
                     local acc = acceptAt[a.quest]
-                    if ok and acc and acc > early then early = acc end
+                    for _, w in ipairs({ any, fixed }) do
+                        if acc and acc > w.early then w.early = acc end
+                    end
                 elseif t == "accept" then
                     anchor = true
-                    local c = acceptSrc[a.quest]
-                    if not c then ok = false
-                    elseif c.index > early then early, src, quest = c.index, c, a.quest end
+                    take(any, acceptSrc[a.quest], a.quest)
+                    take(fixed, acceptSrc[a.quest], a.quest)
                 elseif t == "turnin" or t == "abandon" then
                     ok = false -- read from the game, not finished by a bg goal
                 end
                 -- collect / level may be done early anyway; transient actions are no anchor evidence
-                if not ok then break end
+                if not ok or any.dead then break end
             end
-            if ok and anchor and src then
-                for j = early + 1, i - 1 do
+            if ok and anchor and not any.dead and any.src then
+                for j = any.early + 1, i - 1 do
                     local v = steps[j]
-                    if not v.bg and (v.transient or v.optional) and not reported[v] then
+                    local collect, goOnly = false, true
+                    for _, a in ipairs(v.actions) do
+                        if a.type == "collect" then collect = true end
+                        if a.type ~= "go" then goOnly = false end
+                    end
+                    local w = (not fixed.dead and fixed.src and j > fixed.early) and fixed or any
+                    if not v.bg and (v.transient or v.optional or collect) and not reported[v]
+                        and not (goOnly and w.src.passed) then
                         reported[v] = true
+                        local src = w.src
                         local how
-                        if src.step then
+                        if src.passed then
+                            how = format("as soon as its objectives are killed / looted on the way: the walk to step %s "
+                                .. "[%s] passes them with %s in the log", stepLabel(src.step), stepActions(src.step),
+                                self:qn(w.quest))
+                        elseif src.step then
                             how = format("as soon as %sstep %s [%s] is done", src.step.bg and "bg " or "earlier ",
                                 stepLabel(src.step), stepActions(src.step))
                         else
-                            how = format("from the start (quest %s is complete in the start state)", self:qn(quest))
+                            how = format("from the start (quest %s is complete in the start state)", self:qn(w.quest))
                         end
                         local m = self:add("WARN", "skip-ahead", v, "%s step [%s] can be fast-forwarded: the later step %s [%s] "
                             .. "is done %s, becomes the forward anchor, and the guide then counts the travel / "
-                            .. "transient / optional steps before it as done (move this step before the bg goal or "
-                            .. "after the later step, or drop the overlap)", v.optional and "optional" or "transient",
+                            .. "transient / optional / collect steps before it as done (move this step before that "
+                            .. "point or after the later step, merge it into the later step, or drop the overlap)",
+                            v.optional and "optional" or (collect and "collect" or "transient"),
                             stepActions(v), stepLabel(s), stepActions(s), how)
                         if m then self.msgOrd[m] = self.walkedOrd[j] end
                     end
@@ -1804,7 +1911,7 @@ function Run:checkSkipAhead()
         for _, a in ipairs(s.actions) do
             local q = a.quest
             if a.type == "accept" then
-                acceptAt[q] = i
+                acceptAt[q], inLog[q], passed[q], passSeen[q] = i, true, {}, {}
                 if s.bg and not acceptSrc[q] then acceptSrc[q] = { index = i, step = s } end
             elseif a.type == "complete" then
                 -- a bg goal -- or an earlier step completing the same objectives (the later one is then
@@ -1817,6 +1924,32 @@ function Run:checkSkipAhead()
                 coverAll(q, { index = i, step = s })
                 if not acceptSrc[q] then acceptSrc[q] = { index = i, step = s } end
             end
+            if a.type == "turnin" or a.type == "abandon" then inLog[q] = nil end
+        end
+        -- the walk to this step passes objectives of the quests in the log: they may be done before
+        -- this step itself (index i - 1: this step is skippable too)
+        if s.at and not s.bg and passYards > 0 then
+            -- a flight or the hearthstone is no walk: only the arrival point counts
+            local from = lastAt
+            for _, a in ipairs(s.actions) do
+                if a.type == "fly" or a.type == "hearth" then from = nil end
+            end
+            for q in pairs(inLog) do
+                local pas, seen = passed[q], passSeen[q]
+                local rec = DB.Quest(self.db, q, self.profile.class)
+                local objectives = rec and objectiveList(rec) or {}
+                -- (a quest taken at this very step was not in the log on the walk here)
+                for k, spawns in ipairs(acceptAt[q] ~= i and self:objectiveSpawns(q) or {}) do
+                    if not pas[k] then
+                        seen[k] = seen[k] or {}
+                        local need = math.max(1, objectives[k] and objectives[k].count or 1)
+                        local n = (seen[k].n or 0) + self:walkPasses(from, s.at, spawns, passYards, seen[k])
+                        seen[k].n = n
+                        if n >= need then pas[k] = { index = i - 1, step = s, passed = true } end
+                    end
+                end
+            end
+            lastAt = s.at
         end
     end
 end
