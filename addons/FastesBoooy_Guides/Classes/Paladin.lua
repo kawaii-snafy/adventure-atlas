@@ -9,25 +9,27 @@
 -- Tirisfal 1-12 (Segments/Tirisfal; level before the first step of the insert, validator normal run):
 --   Deathknell, Aramis Hammerhand in the church (he teaches up to level 6)
 --     after ud01-364        2.6   the letter 98601 (Sarvis) > 90902 (Aramis), training at 1 (the Mindless Ones
---                                 reward pays it), 90902 runs along the first loop
+--                                 reward pays it); the note sends the heals of 90902 along the first loop
+--     after ud01-xp-4       3.7   90902 finished: the Injured Deathguards on the way from the graveyard back to
+--                                 the church, the last pass before the turn-in
 --     after ud01-aramis     4.0   90902 turned in, 91208 + 91209 (both need level 4: the gate ud01-xp-4 gives it
 --                                 with the two generic turn-ins of ud01-church-4), training at 4. The anchor is
 --                                 the generic accept of 98389 at Aramis himself, not ud01-church-4: a training
 --                                 step in front of an accept at the same NPC is fast-forwarded (look-ahead rule)
---     after ud01-boxes            91208 (Frightened Paladin, west of the church)
+--     after ud01-cocoons          91208 (Frightened Paladin, west of the church, on the way back from the cave)
 --     after ud01-98389            91208 turned in (Aramis; the generic 98389 is turned in to him right before)
 --   Brill, Shari Stilwell by the stables (outside the inn, between the entrance and the inn)
---     after ud02-dillinger-report  6.5   91209 turned in, training at 6, Wooden Mallet (optional): Shari stands on
+--     after ud02-dillinger-report  6.8   91209 turned in, training at 6, Wooden Mallet (optional): Shari stands on
 --                                 the way from Dillinger to the inn, so the visit comes before ud02-sethearth
 --     after ud02-shari-99144  8.3  training at 8 (99144, a quest of every class, is turned in to her first)
 --     after ud02-level-10    10.2  91282 "A Second Home", training at 10
 --     after ud02-carolai-2   12.6  training at 12 (Carolai stands 35 yd from Shari)
 --   Bandarion Keep and Shadowvale: the chain 91282 > 91285 > 91294 > 91316 / 91317 > 95803 runs next to the
---     generic keep quests (96899 > 96896 > 98545, 99152, 99153, 95314), same order as before the split:
+--     generic keep quests (96899 > 96896 > 98545, 99152, 99153, 95314), in the order of play:
 --     before ud02-keep (Breton), after ud02-leonid-letter (murlocs, Driftwood Smasher, Hilda), after ud02-hilda
---     (the tour, Danitha, Jorin), after ud02-ephram (the two along-the-way goals), after ud02-elixir-bg (Rudolph
---     Gelhardt's head: behind the generic along-the-way goals, so all four are listed while he is hunted), after
---     ud02-shadowvale (Shadowvale), after ud02-hilda-2 (turn-ins), after ud02-lvl-12 (94427, optional).
+--     (the tour, Danitha, Jorin), after ud02-ephram (Rudolph Gelhardt's head, at the entrance of Shadowvale), after
+--     ud02-elixir-bg (the lumber, among the generic elixir bottles), after ud02-shadowvale (the Tarnished, finished
+--     on the way back), after ud02-hilda-2 (turn-ins), after ud02-lvl-12 (94427, optional).
 --   Undercity, after ud02-fp-uc: Tanis Alderwood 94427 > 94434 (optional: 10 Linen Cloth), Lady Sylvanas 95803
 --     (the Royal Quarter walk exists only for it: 460 XP estimated, and the chain ends there).
 --   Skipped: the rest of the Lesson in Divinity chain 94435+ (Redemption). It runs Undercity > Bandarion Keep (west
@@ -38,7 +40,7 @@
 --   Trainer in the DB) stands at the keep: the route talks to her for 91294 at 12.1 but trains in Brill (12.6).
 --   XP of the group (all estimated, Forever-new quests): 98601 40, 90902 170, 91208 355, 91209 355, 91282 /
 --   91285 / 91294 / 91316 660 each, 91317 / 95803 / 94427 / 94434 460 each, plus the kills of 91285 and 91317:
---   the paladin leaves Tirisfal 0.7 level above the other classes (12.79 against 12.10).
+--   the paladin leaves Tirisfal 0.7 level above the other classes (12.76 against 12.09).
 --   Quest rewards of the generic Tirisfal quests: the segments only say "pick the armour your class can wear"; what
 --   a paladin takes (mail, the two-hander) is named in the note of the pal-tir step that stands in front of the
 --   turn-ins: pal-tir-train-1 (3901 / 376), pal-tir-91208 (3902 / 380, 381, 382), pal-tir-train-8 (426, 398, 358),
@@ -121,16 +123,29 @@ insert({
                        .. "the paladin trainer in the church." } },
         { id = "pal-tir-train-1", train = true, npc = 244808, at = { 1420, 31.1, 66.41 },
           spells = { { ru = "Аура благочестия", en = "Devotion Aura" } },
-          note = { ru = "Выучите Ауру благочестия (10 меди — хватает денег за зомби). Награды при следующей сдаче "
-                       .. "в церкви (скелеты, лапы и крылья): кольчужные поножи и кожаный пояс.",
-                   en = "Train Devotion Aura (10 copper, paid by The Mindless Ones reward). Rewards at the next "
-                       .. "turn-ins in the church (skeletons, paws and wings): Roamer's Leggings (mail) and Old "
-                       .. "Leather Belt." } },
-        { id = "pal-tir-heal-bg", complete = 90902, bg = true, at = { 1420, 31.6, 63.7 },
-          note = { ru = "Свет небес на раненых стражников смерти, лежащих по всей деревне (5). "
-                       .. "Лечите, когда мана полная.",
-                   en = "Cast Holy Light on the Injured Deathguards lying around the village (5), "
-                       .. "whenever your mana is full." } },
+          note = { ru = "Выучите Ауру благочестия (10 меди — хватает денег за зомби). По пути дальше: Свет небес "
+                       .. "на раненых стражников смерти, лежащих по всей деревне, когда мана полная — доберёте "
+                       .. "перед возвращением в церковь. Награды при следующей сдаче в церкви (скелеты, лапы и "
+                       .. "крылья): кольчужные поножи и кожаный пояс.",
+                   en = "Train Devotion Aura (10 copper, paid by The Mindless Ones reward). On the way from here: "
+                       .. "Holy Light on the Injured Deathguards lying around the village whenever your mana is "
+                       .. "full - you finish them before you go back to the church. Rewards at the next turn-ins "
+                       .. "in the church (skeletons, paws and wings): Roamer's Leggings (mail) and Old Leather "
+                       .. "Belt." } },
+    },
+})
+
+-- 90902: the last pass by the Injured Deathguards before the turn-in at Aramis is the walk from the graveyard
+-- (ud01-xp-4) back to the vendor and the church; four of them lie on that way.
+insert({
+    after = "ud01-xp-4",
+    class = "PALADIN",
+    steps = {
+        { id = "pal-tir-heal-bg", complete = 90902, at = { 1420, 32.9, 63.6 },
+          note = { ru = "Вылечите Светом небес 5 раненых стражников смерти (сколько осталось): четверо лежат по "
+                       .. "дороге с кладбища к церкви. Мало маны — подождите её между лечениями.",
+                   en = "Heal 5 Injured Deathguards with Holy Light (those still left): four lie on the way from "
+                       .. "the graveyard to the church. Low on mana: let it come back between the heals." } },
     },
 })
 
@@ -160,13 +175,17 @@ insert({
     },
 })
 
+-- 91208: the Frightened Paladin stands west of the church, on the way back from Night Web's Hollow (after the
+-- cocoons of 98389, the last step in the cave).
 insert({
-    after = "ud01-boxes",
+    after = "ud01-cocoons",
     class = "PALADIN",
     steps = {
         { id = "pal-tir-frightened", complete = 91208, npc = 246143, at = { 1420, 27.69, 63.82 },
-          note = { ru = "Испуганный паладин к западу от церкви: заговорите с ней, она нападёт — убейте её.",
-                   en = "Frightened Paladin west of the church: talk to her, she turns hostile, kill her." } },
+          note = { ru = "На обратном пути из пещеры: Испуганный паладин к западу от церкви. Заговорите с ней, она "
+                       .. "нападёт — убейте её.",
+                   en = "On the way back from the cave: the Frightened Paladin west of the church. Talk to her, "
+                       .. "she turns hostile, kill her." } },
     },
 })
 
@@ -298,36 +317,41 @@ insert({
           at = { 1420, 22.09, 44.66 },
           note = { ru = "Данита Морр наверху.", en = "Danitha Morr upstairs." } },
         { id = "pal-tir-91316", accept = 91316, npc = 246393, at = { 1420, 22.69, 44.70 },
-          note = { ru = "Джорин Кроге: доски для ремонта крепости.", en = "Jorin Croge: lumber for the repairs." } },
+          note = { ru = "Джорин Кроге: доски для ремонта крепости (они в Тенистой долине). По пути туда: "
+                       .. "Потускневшие работяги (8) и фанатики (6) для Даниты — доберёте на обратном пути.",
+                   en = "Jorin Croge: lumber for the repairs (it lies in Shadowvale). On the way there: Danitha's "
+                       .. "Tarnished Drudges (8) and Zealots (6) - you finish them on the way back." } },
     },
 })
 
 ------------------------------------------------------------------------------------------------------------------
--- Shadowvale: the Tarnished, the lumber, Rudolph Gelhardt's head
+-- Shadowvale: Rudolph Gelhardt's head, the lumber, the Tarnished. The generic pass (Segments/Tirisfal): bottles in
+-- the middle of the vale (ud02-elixir-bg), the crystal at the south end, the bones on the way back
+-- (ud02-shadowvale). Rudolph stands among the Tarnished at the east edge of the vale, where the way from the keep
+-- comes in, so the head comes first; the lumber piles lie among the bottles, so the lumber follows them; the
+-- Tarnished hold the way between the keep and the vale, so they are finished on the way back (pal-tir-91316 names
+-- them for the way in).
 ------------------------------------------------------------------------------------------------------------------
 insert({
     after = "ud02-ephram",
     class = "PALADIN",
     steps = {
-        { id = "pal-tir-tarnished-bg", complete = 91317, bg = true, at = { 1420, 14.8, 63.1 },
-          note = { ru = "Потускневшие работяги (8) и фанатики (6) по всей Тенистой долине.",
-                   en = "Tarnished Drudges (8) and Zealots (6) all over Shadowvale." } },
-        { id = "pal-tir-lumber-bg", complete = 91316, bg = true, at = { 1420, 10.2, 65.5 },
-          note = { ru = "Кучи досок (12 досок) на земле в Тенистой долине.",
-                   en = "Lumber Piles (12 Sturdy Lumber) on the ground in Shadowvale." } },
+        { id = "pal-tir-head", collect = { [270435] = 1 }, npc = 259431, at = { 1420, 11.51, 64.18 },
+          note = { ru = "Вход в Тенистую долину: Рудольф Гельхардт (12) наверху, среди Потускневших на восточном "
+                       .. "краю долины. Заберите его голову.",
+                   en = "The way into Shadowvale: Rudolph Gelhardt (12) upstairs, among the Tarnished at the east "
+                       .. "edge of the vale. Loot his head." } },
     },
 })
 
--- The head is a blocking step: it stands behind the generic along-the-way goals (bones, elixir bottles), so all
--- four goals of Shadowvale are listed while the paladin hunts Rudolph (the engine lists only the bg steps in
--- front of the cursor).
 insert({
     after = "ud02-elixir-bg",
     class = "PALADIN",
     steps = {
-        { id = "pal-tir-head", collect = { [270435] = 1 }, npc = 259431, at = { 1420, 11.51, 64.18 },
-          note = { ru = "Рудольф Гельхардт (12) наверху: заберите его голову.",
-                   en = "Rudolph Gelhardt (12) upstairs: loot his head." } },
+        { id = "pal-tir-lumber-bg", complete = 91316, at = { 1420, 10.0, 65.7 },
+          note = { ru = "Кучи досок там же, среди бутылок: 12 крепких досок (почти все кучи в середине долины).",
+                   en = "The Lumber Piles lie in the same place, among the bottles: 12 Sturdy Lumber (nearly every "
+                       .. "pile in the middle of the vale)." } },
     },
 })
 
@@ -335,9 +359,11 @@ insert({
     after = "ud02-shadowvale",
     class = "PALADIN",
     steps = {
-        { id = "pal-tir-shadowvale", complete = { 91317, 91316 }, at = { 1420, 11.5, 65.5 },
-          note = { ru = "Добейте Потускневших и доски, прежде чем возвращаться в крепость.",
-                   en = "Finish the Tarnished and the lumber before you head back to the keep." } },
+        { id = "pal-tir-shadowvale", complete = 91317, at = { 1420, 15.3, 63.0 },
+          note = { ru = "На обратном пути к крепости добейте Потускневших между долиной и крепостью: 8 работяг "
+                       .. "и 6 фанатиков (и заберите голову Рудольфа, если её ещё нет).",
+                   en = "On the way back to the keep, finish the Tarnished between the vale and the keep: 8 "
+                       .. "Drudges and 6 Zealots (and loot Rudolph's head if you do not have it yet)." } },
     },
 })
 

@@ -13,24 +13,27 @@
 -- 64.34,63.53 and the Thunder Bluff lift 1456 31.78,65.92, the Sun Rock ramp, the Stonetalon -> Ashenvale road
 -- and the Astranaar bypass are RestedXP reference facts.
 --
--- Hub plan:
+-- Hub plan (every goal is a step of its own, in the order of play; what the player can also kill or loot on the
+-- way is a hint in the notes ("По пути: ..."), and the step that finishes it comes where the route passes those
+-- mobs / objects for the last time before the turn-in):
 --   start : 853 Apothecary Zamah is TIMED (45 min) and was accepted at the end of h-15 -> Thunder Bluff first:
 --           fly Camp Taurajo, 3261 > 882 (Jorn), gate h18-lvl-18, then Thunder Bluff: by flight (Skyborne,
 --           Tauren: they know the point) or on foot (Orc, Scourge, Troll); 853 (Zamah) first, then Tal: the
 --           walkers learn the flight point there (h18-fp-tb), everybody flies to Ratchet.
---   east  : Ratchet 865 (Mebok), 888 (Gazlowe); 821 (keg, bg: matriarch tusks + plainstrider kidneys at
---           Ishamuhale); zhevra carcass -> Ishamuhale 882; Stagnant Oasis 880 shells (+ Kolkar bracers 855);
---           hearth.
---   CT    : 882 > 907 (Jorn); main Bristleback camp NE of the camp: 878 + 899 tusks, Stormsnout blood 907 (+ 821
---           horn); 878 > 5052; 907 > 913, a Thunderhawk Cloudscraper for 913 (Owatanka 884, optional, bg); fly
---           to the Crossroads.
+--   east  : Ratchet 865 (Mebok), 888 (Gazlowe); zhevra carcass -> Ishamuhale 882; 821 (optional keg quest:
+--           matriarch tusks + plainstrider kidneys around the same tree); Stagnant Oasis 880 shells (+ Kolkar
+--           bracers 855); hearth.
+--   CT    : 882 > 907 (Jorn); main Bristleback camp NE of the camp: 878 + 899 tusks, Stormsnout blood 907 (+ the
+--           821 horn, optional); 878 > 5052; 907 > 913, a Thunderhawk Cloudscraper for 913, Owatanka 884 (optional,
+--           he roams the same slope); fly to the Crossroads.
 --   XR/W  : 899 + 880 > 1489 (Mankrik, Tonga); Lushwater: Hezrul 852 + bracers 855; Regthar; Witchwing Slayers
 --           875 on the way to the border.
 --   ST 1  : Seereth 1062 + Makaba 6548; Grimtotems; 6548 > 6629; Grundig 6629 + Kaya escort 6523; 6629/6523 >
---           6401; Xen'Zilla 6461; creepers; Ziz 1483 > 1093; Windshear Crag: loggers 1062, operators 1093; gate
---           h18-lvl-20 (still at the Crag); venomspitters 6461 and eggs 1069 on the way back; Ziz 1093 > 1094;
---           Sun Rock: 6562, 6401, flight path; fly Thunder Bluff (bind; Elder Rise 1489 > 1490); fly Ratchet: 821
---           (keg), 1094 > 1095, 1069.
+--           6401; Xen'Zilla 6461; the 6461 creepers along the path north-west to Ziz; Ziz 1483 > 1093; Windshear
+--           Crag: loggers 1062, operators 1093 (venomspitters and eggs on the way); gate h18-lvl-20 (still at the
+--           Crag); the rest of the venomspitters 6461 and eggs 1069 on the way back; Ziz 1093 > 1094; Sun Rock:
+--           6562, 6401, flight path; fly Thunder Bluff (bind; Elder Rise 1489 > 1490); fly Ratchet: 821 (keg,
+--           optional), 1094 > 1095, 1069.
 --   ST 2  : fly Crossroads (875); Seereth 1062 > 1063; Xen'Zilla 6461; Windshear Mine: Piznik 1090 > 1092
 --           (optional); Ziz 1095 (+ 1092); Talondeep Path north to Ashenvale.
 --   Ash   : Va'xug 98251 > 98252; road west past Astranaar; Zoram'gar 6562, 6442, 6462, flight path; optional
@@ -73,13 +76,16 @@
 --   every 878 kill also drops a tusk, and it counts the optional keg quests 819 / 821 as done.
 --
 -- Automation notes: transient steps (fp, fly, hearth, sethearth) come after the quest steps at the same place; a
--- background goal is only followed by its stateful `complete` with no transient step in between (6461, 1069),
--- otherwise the engine's anchor could fast-forward a flight or the hearth. Bracers 855 only appear in a combined
--- step here ({852, 855} at Lushwater): the h-15 bg goal may already be done. 899 (accepted in h-15, tusks may drop
--- early) is only completed together with 878 and turned in together with 880 (finished at the Stagnant Oasis
--- here), never in a step of its own. 821 (optional keg quest) only has bg steps (never anchors, hidden without
--- the quest). The level gates are plain `level` steps: a gate never anchors on its own (Core/Engine.lua: `level`
--- is no evidence of progress), so an early level-up never forwards the travel steps before it.
+-- `complete` whose goal the player may finish early on the way (6461 creepers, 821) has no transient step between
+-- the place where those mobs start and its own step, otherwise the engine's anchor could fast-forward a flight or
+-- the hearth. Bracers 855 only appear in a combined step here ({852, 855} at Lushwater): the h-15 goal may already
+-- be done. 899 (accepted in h-15, tusks may drop early) is only completed together with 878 and turned in
+-- together with 880 (finished at the Stagnant Oasis here), never in a step of its own. 821 (optional keg quest,
+-- taken in h-15 only if the keg was found) has optional steps only: its tusks and kidneys right after Ishamuhale,
+-- its horn right after the Stormsnouts (objectives 1 + 2 and 3, so neither forwards the other), the turn-in at
+-- Ratchet 2; without the quest the player presses Forward, or the next quest step forwards them. The level gates
+-- are plain `level` steps: a gate never anchors on its own (Core/Engine.lua: `level` is no evidence of progress),
+-- so an early level-up never forwards the travel steps before it.
 if not FastesBoooy.AddLibraryInsert then return end
 FastesBoooy.AddLibrarySegment({
     id = "h-18-stonetalon-ashenvale",
@@ -151,13 +157,6 @@ FastesBoooy.AddLibrarySegment({
                        .. "прошлого визита в Кабестан? Начните задание из него и сдайте пивовару Дрону рядом; возьмите и 821.",
                    en = "Mebok Mizzyrix: the horns. Skip Smart Drinks (Wailing Caverns). Found Chen's Empty Keg only after the last "
                        .. "Ratchet visit? Start the quest from it and hand it to Brewmaster Drohn next door; take 821 as well." } },
-        { id = "h18-keg-items", complete = 821, bg = true, at = { 1413, 61.4, 33.0 },
-          note = { ru = "Если взяли 821 (бочонок Чэня): 5 клыков равнинного льва — с матриархов саванны у сухого "
-                       .. "дерева Ишамухале, 5 почек долгонога — с долгоногов там же, рог рокочущей ящерицы — "
-                       .. "с грозорылов у Лагеря Таурахо (907).",
-                   en = "If you took 821 (Chen's keg): 5 Savannah Lion Tusks from the Savannah Matriarchs around "
-                       .. "Ishamuhale's dead tree, 5 Plainstrider Kidneys from the plainstriders there, the "
-                       .. "Thunder Lizard Horn from the Stormsnouts near Camp Taurajo (907)." } },
         { id = "h18-ratchet", turnin = 888, npc = 3391, at = { 1413, 62.68, 36.23 },
           note = { ru = "Газлоу. Ещё держите 896 с изумрудом - сдайте Диззивигу на пристани; без изумруда бросьте 896.",
                    en = "Gazlowe. Still have 896 with the emerald? Hand it to Dizzywig on the pier; without the emerald abandon 896." } },
@@ -168,11 +167,21 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "Сухое дерево: используйте тушу у него — придёт Ишамухале (19). Его клык.",
                    en = "The dead tree: use the carcass by it, Ishamuhale (19) comes to the meat. Loot his "
                        .. "fang." } },
+        -- 821 (optional): objectives 1 + 2 here, the horn (3) at the Stormsnouts (h18-keg-horn); turn-in h18-drohn.
+        -- 882 is listed again (done by the step above) so this step cannot become a forward anchor before
+        -- Ishamuhale: the lions and plainstriders are all over the Barrens and 821 may be in the log since h-15.
+        { id = "h18-keg-items", complete = { 882, [821] = { 1, 2 } }, optional = true, at = { 1413, 61.0, 32.8 },
+          note = { ru = "Только если взяли 821 (бочонок Чэня): здесь же, вокруг сухого дерева - 5 клыков равнинного льва с "
+                       .. "матриархов саванны (17-18) и 5 почек долгонога со сварливых долгоногов. Рог рокочущей ящерицы - "
+                       .. "позже, с грозорылов у Лагеря Таурахо. Нет задания - «Вперёд».",
+                   en = "Only if you took 821 (Chen's keg): right here around the dead tree - 5 Savannah Lion Tusks from the "
+                       .. "Savannah Matriarchs (17-18) and 5 Plainstrider Kidneys from the Ornery Plainstriders. The Thunder "
+                       .. "Lizard Horn comes later, from the Stormsnouts near Camp Taurajo. No such quest: press Forward." } },
         { id = "h18-shells", complete = 880, at = { 1413, 55.0, 42.4 },
-          note = { ru = "На юго-запад к Застойному оазису: 8 изменённых панцирей с черепах в воде. Попутно бейте колкаров вокруг "
-                       .. "(наручи для 855).",
+          note = { ru = "На юго-запад к Застойному оазису: 8 изменённых панцирей с черепах в воде. По пути бейте колкаров вокруг "
+                       .. "(наручи для 855 - доберёте у Цветущего оазиса).",
                    en = "South-west to the Stagnant Oasis: 8 Altered Snapjaw Shells from the snapjaws in the water. Kill the Kolkar "
-                       .. "around it on the way (bracers for 855)." } },
+                       .. "around it on the way (bracers for 855 - you finish them at the Lushwater Oasis)." } },
         { id = "h18-hearth-taurajo", hearth = "Camp Taurajo", at = { 1413, 45.58, 59.04 },
           note = { ru = "Камень возвращения в Лагерь Таурахо. Ещё на откате — бегите на север к Перекрёстку "
                        .. "и летите.",
@@ -193,27 +202,38 @@ FastesBoooy.AddLibrarySegment({
                        .. "Shard." } },
         { id = "h18-stormsnouts", complete = 907, at = { 1413, 47.40, 52.96 },
           note = { ru = "На обратном пути на запад: грозорылы (громовые ящеры) бродят между лагерями Дыбогривов "
-                       .. "— 3 крови (и рог рокочущей ящерицы, если взяли 821). Серый кодо Лакота'мани тоже "
-                       .. "ходит тут — его копыто начинает задание для Йорна.",
+                       .. "— 3 крови (рог рокочущей ящерицы для 821 падает с них же - шаг ниже). Серый кодо Лакота'мани "
+                       .. "тоже ходит тут — его копыто начинает задание для Йорна.",
                    en = "On the way back west: Stormsnouts (thunder lizards) roam between the Bristleback camps "
-                       .. "- 3 Thunder Lizard Blood (and the Thunder Lizard Horn if you took 821). The grey kodo "
-                       .. "Lakota'mani walks here too: his hoof starts a quest for Jorn." } },
+                       .. "- 3 Thunder Lizard Blood (the Thunder Lizard Horn for 821 drops from them too: next step). The "
+                       .. "grey kodo Lakota'mani walks here too: his hoof starts a quest for Jorn." } },
+        -- 907 listed again: no forward anchor before the Stormsnouts (the horn may drop at the h18-lvl-18 grind)
+        { id = "h18-keg-horn", complete = { 907, [821] = { 3 } }, optional = true, at = { 1413, 47.40, 52.96 },
+          note = { ru = "Только если взяли 821: здесь же добейте грозорылов, пока не выпадет рог рокочущей ящерицы. Нет "
+                       .. "задания - «Вперёд».",
+                   en = "Only if you took 821: keep killing the Stormsnouts here until the Thunder Lizard Horn drops. No "
+                       .. "such quest: press Forward." } },
         { id = "h18-mangletooth", turnin = 878, accept = 5052, npc = 3430, at = { 1413, 44.55, 59.26 } },
         { id = "h18-blood-shard", complete = 5052, turnin = 5052, npc = 3430, at = { 1413, 44.55, 59.26 },
           note = { ru = "Сразу отдайте один Осколок крови. Лишние осколки — на усиления у Кривозуба.",
                    en = "Hand over one Blood Shard right away. Spare shards buy buffs from Mangletooth." } },
         { id = "h18-jorn-3", turnin = 907, accept = 913, npc = 3387, at = { 1413, 44.86, 59.14 } },
-        { id = "h18-owatanka", accept = 884, bg = true, use = 5102, at = { 1413, 45.4, 62.8 },
-          note = {
-              ru = "Оватанка (24, громовой ящер) бродит у 44-49, 60-63: его шип начинает задание. "
-                  .. "Не встретили - не ищите.",
-              en = "Owatanka (24, a thunder lizard) roams at 44-49, 60-63: his tailspike starts a quest. Not seen - "
-                  .. "do not search.",
-          } },
         { id = "h18-cloudscraper", complete = 913, at = { 1413, 47.33, 62.40 },
-          note = { ru = "Громовые ястребы-облакорезы кружат к юго-востоку от лагеря: убейте одного ради крыльев.",
-                   en = "Thunderhawk Cloudscrapers circle south-east of the camp: kill one for the wings." } },
-        { id = "h18-owatanka-turnin", turnin = 884, optional = true, npc = 3387, at = { 1413, 44.86, 59.14 },
+          note = { ru = "Громовые ястребы-облакорезы кружат к юго-востоку от лагеря: убейте одного ради крыльев. Там же бродит "
+                       .. "редкий Оватанка (24) - шаг ниже.",
+                   en = "Thunderhawk Cloudscrapers circle south-east of the camp: kill one for the wings. The rare Owatanka "
+                       .. "(24) roams the same slope: next step." } },
+        -- Optional (rare, item-started quest): he roams where the cloudscrapers are; the 913 turn-in forwards it. 913
+        -- is listed again in this step and the next one, so neither becomes a forward anchor before the cloudscraper
+        -- when the tailspike dropped earlier (it would forward the Thunder Bluff training and flight steps).
+        { id = "h18-owatanka", accept = 884, complete = 913, optional = true, use = 5102, at = { 1413, 47.1, 61.4 },
+          note = {
+              ru = "По желанию: Оватанка (24, громовой ящер) бродит здесь же, у 44-49, 60-63 - его шип начинает задание. "
+                  .. "Не встретили - не ищите, «Вперёд».",
+              en = "Optional: Owatanka (24, a thunder lizard) roams right here at 44-49, 60-63 - his tailspike starts a "
+                  .. "quest. Not seen - do not search, press Forward.",
+          } },
+        { id = "h18-owatanka-turnin", turnin = 884, complete = 913, optional = true, npc = 3387, at = { 1413, 44.86, 59.14 },
           note = {
               ru = "Только если взяли «Оватанку».",
               en = "Only if you have Owatanka.",
@@ -273,28 +293,30 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "Макаба. 6401 — в Приют Солнечного Камня.", en = "Makaba. 6401 goes to Sun Rock Retreat." } },
         { id = "h18-xenzilla", accept = 6461, npc = 12816, at = { 1442, 71.25, 95.02 },
           note = { ru = "На юго-запад в Малака'джин: Ксен'Зилла.", en = "South-west to Malaka'jin: Xen'Zilla." } },
-        { id = "h18-creepers-bg", complete = 6461, bg = true, at = { 1442, 63.35, 83.86 },
-          note = { ru = "Попутно: 10 глубокомшистых ползунов (по пути на северо-запад к Зизу) и 7 плевунов "
-                       .. "(у Зиза и Утёса Ветрорезов).",
-                   en = "Along the way: 10 Deepmoss Creepers (on the way north-west to Ziz) and 7 Deepmoss "
-                       .. "Venomspitters (around Ziz and Windshear Crag)." } },
+        -- 6461 objective 1: the creepers stand along the path from Malaka'jin north-west to Ziz (59-61, 72-78 is
+        -- the last group before Ziz); none near Ziz or the Crag. Objective 2 (venomspitters): h18-venomspitters.
+        { id = "h18-creepers-bg", complete = { [6461] = { 1 } }, at = { 1442, 59.7, 74.8 },
+          note = { ru = "По тропе на северо-запад к Зизу: 10 ползунов из густого мха (16-17) стоят вдоль неё, последние - "
+                       .. "южнее хижины Зиза. Моховых ядоплюев для того же задания - у Зиза и по дороге на вырубку.",
+                   en = "Along the path north-west to Ziz: 10 Deepmoss Creepers (16-17) stand by it, the last ones south of "
+                       .. "Ziz' hut. The Deepmoss Venomspitters for the same quest are around Ziz and on the way to the "
+                       .. "logging camp." } },
 
         ------------------------------------------------------------------
         -- Ziz Fizziks and Windshear Crag (level 20)
         ------------------------------------------------------------------
         { id = "h18-ziz", turnin = 1483, accept = 1093, npc = 4201, at = { 1442, 58.99, 62.60 },
           note = { ru = "На северо-запад к хижине Зиза Физзикса.", en = "North-west to Ziz Fizziks' hut." } },
-        { id = "h18-eggs-bg", complete = 1069, bg = true, at = { 1442, 62.07, 60.81 },
-          note = { ru = "Попутно: 15 яиц глубокомшистых пауков у корней деревьев (здесь и на Утёсе Ветрорезов). "
-                       .. "Из яиц иногда вылезает паук.",
-                   en = "Along the way: 15 Deepmoss Eggs at the foot of the trees (here and in Windshear "
-                       .. "Crag). A spider sometimes hatches." } },
         { id = "h18-windshear", complete = { 1062, 1093 }, at = { 1442, 67.13, 51.23 },
-          note = { ru = "Утёс Ветрорезов (вырубка Торговой компании): 15 лесорубов; операторы — чертежи "
-                       .. "Супержнеца 6000. Шредеры XT:4 и XT:9 (23) ходят по вырубке — обходите.",
-                   en = "Windshear Crag (Venture Co. logging): 15 Venture Co. Loggers; Operators drop the "
-                       .. "Super Reaper 6000 Blueprints. Shredders XT:4 and XT:9 (23) patrol the camp: avoid "
-                       .. "them." } },
+          note = { ru = "На северо-восток к Утёсу Ветрорезов (вырубка Торговой компании): 15 лесорубов; операторы — чертежи "
+                       .. "Супержнеца 6000. Шредеры XT:4 и XT:9 (23) ходят по вырубке — обходите. По пути и на вырубке: "
+                       .. "моховые ядоплюи (7, задание Ксен'Зиллы) и яйца глубокомшистых пауков у корней деревьев (15, "
+                       .. "задание Мебока; иногда вылезает паук) - доберёте на обратном пути к Зизу.",
+                   en = "North-east to Windshear Crag (Venture Co. logging): 15 Venture Co. Loggers; Operators drop the "
+                       .. "Super Reaper 6000 Blueprints. Shredders XT:4 and XT:9 (23) patrol the camp: avoid them. On the "
+                       .. "way and in the camp: Deepmoss Venomspitters (7, Xen'Zilla's quest) and Deepmoss Eggs at the foot "
+                       .. "of the trees (15, Mebok's quest; a spider sometimes hatches) - you finish them on the way back to "
+                       .. "Ziz." } },
         -- Trainer-hub gate before Thunder Bluff 2 (see the header). It stands here, while the player is still at the
         -- Crag (the mobs of 18-20), not after the next step, which walks 430 yd back to Ziz.
         { id = "h18-lvl-20", level = { 19, 0.88 }, at = { 1442, 67.13, 51.23 },
@@ -305,12 +327,12 @@ FastesBoooy.AddLibrarySegment({
                        .. "and new ranks at the trainers in Thunder Bluff. Short of 19 + 88%: kill more loggers and operators here "
                        .. "(18-20): around Ziz there are only venomspitters of 17-18, and nothing to kill at Sun Rock." } },
         -- 6461 objective 1 (Deepmoss Creepers) is not part of this step: no creeper spawns near Ziz (the nearest are
-        -- 340 yd south).
+        -- 340 yd south); h18-creepers-bg did them on the path from Malaka'jin.
         { id = "h18-venomspitters", complete = { [6461] = { 2 }, 1069 }, at = { 1442, 61.63, 61.56 },
-          note = { ru = "Доберите моховых ядоплюев и яйца по дороге обратно к Зизу. Ползуны из густого мха (6461) - только к югу от "
-                       .. "Зиза (60.8, 71.9) и у Малака'джина: доберите их позже, по дороге к Ксен'Зилле.",
-                   en = "Finish the Deepmoss Venomspitters and the eggs on the way back to Ziz. Deepmoss Creepers (6461) are only "
-                       .. "south of Ziz (60.8, 71.9) and around Malaka'jin: finish them later on the way back to Xen'Zilla." } },
+          note = { ru = "По дороге обратно к Зизу: добейте 7 моховых ядоплюев (17-18, вокруг его хижины) и 15 яиц глубокомшистых "
+                       .. "пауков у корней деревьев.",
+                   en = "On the way back to Ziz: finish the 7 Deepmoss Venomspitters (17-18, around his hut) and the 15 "
+                       .. "Deepmoss Eggs at the foot of the trees." } },
         { id = "h18-ziz-2", turnin = 1093, accept = 1094, npc = 4201, at = { 1442, 58.99, 62.60 },
           note = { ru = "1094 — в Кабестан (полетите туда из Громового Утёса).",
                    en = "1094 goes to Ratchet (you fly there from Thunder Bluff)." } },
@@ -348,10 +370,14 @@ FastesBoooy.AddLibrarySegment({
         { id = "h18-fly-ratchet-2", fly = "Ratchet", at = { 1413, 63.08, 37.16 },
           note = { ru = "Обратно по мосту к Талу на центральную вершину: летите в Кабестан.",
                    en = "Back over the bridge to Tal on the central mesa: fly to Ratchet." } },
-        { id = "h18-drohn", turnin = 821, bg = true, npc = 3292, at = { 1413, 62.26, 38.39 },
-          note = { ru = "Если брали 821: сдайте его пивовару Дрону рядом с Мебоком (следующее, 822, не берите).",
-                   en = "If you took 821: turn it in to Brewmaster Drohn next to Mebok (skip the next one, "
-                       .. "822)." } },
+        -- 821 has no guard here (no quest of this visit is still open in a way a guard could use): an early turn-in
+        -- needs every 821 item at Ratchet 1 and a talk to Drohn the route does not ask for (h18-mebok only starts 819
+        -- there for a keg found late).
+        { id = "h18-drohn", turnin = 821, optional = true, npc = 3292, at = { 1413, 62.26, 38.39 },
+          note = { ru = "Только если брали 821: сдайте его пивовару Дрону рядом с Мебоком (следующее, 822, не берите). Нет "
+                       .. "задания - «Вперёд».",
+                   en = "Only if you took 821: turn it in to Brewmaster Drohn next to Mebok (skip the next one, 822). No "
+                       .. "such quest: press Forward." } },
         { id = "h18-sputtervalve", turnin = 1094, accept = 1095, npc = 3442, at = { 1413, 62.98, 37.22 },
           note = { ru = "Спаттервальв. 1095 — обратно Зизу.", en = "Sputtervalve. 1095 goes back to Ziz." } },
         { id = "h18-mebok-eggs", turnin = 1069, npc = 3446, at = { 1413, 62.37, 37.62 },

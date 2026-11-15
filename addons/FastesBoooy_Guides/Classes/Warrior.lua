@@ -378,9 +378,11 @@ insert({
     },
 })
 -- Level 10 in Brill: the Brill variant of Defensive Stance (1818 > 1819 > 1820 > 1821 > 1822). The shared gate
--- ud02-level-10 guarantees the level; the next shared step (Terrence, south edge of Brill) starts from the village.
+-- ud02-level-10 guarantees the level. Anchored after ud02-terrence (96895, south edge of Brill, 35 yd from the
+-- inn): the shared accept comes first, so the chain and its optional Agamand trip do not leave it behind for a
+-- second walk to Terrence (validator: travel-trip).
 insert({
-    after = "ud02-level-10",
+    after = "ud02-terrence",
     class = "WARRIOR",
     race = "Scourge",
     steps = {
@@ -676,12 +678,21 @@ insert({
     class = "WARRIOR",
     steps = {
         { id = "war-ruga", turnin = 1823, accept = 1824, npc = 6394, at = RUGA,
-          note = { ru = "Руга Рваный Тотем рядом с Манглзубом: «Trial at the Field of Giants» — 5 дёргающихся усиков.",
-                   en = "Ruga Ragetotem next to Mangletooth: Trial at the Field of Giants - 5 Twitching Antennae." } },
-        { id = "war-antennae-bg", complete = 1824, bg = true, at = { 1413, 42.1, 69.4 },
-          note = { ru = "Попутно: силитиды на Поле Гигантов (по пути на юг, у холмиков для 868) — 5 усиков.",
-                   en = "On the way: the silithids of the Field of Giants (on the way south, by the mounds of 868) - "
-                       .. "5 antennae." } },
+          note = { ru = "Руга Рваный Тотем рядом с Манглзубом: «Trial at the Field of Giants» — 5 дёргающихся усиков "
+                       .. "(силитиды на Поле Гигантов, по пути на юг).",
+                   en = "Ruga Ragetotem next to Mangletooth: Trial at the Field of Giants - 5 Twitching Antennae (the "
+                       .. "silithids of the Field of Giants, on the way south)." } },
+    },
+})
+-- The antennae at the mounds of 868 (h-24-silithid-eggs: the silithids come out of them), before Gann.
+insert({
+    after = "h-24-silithid-eggs",
+    class = "WARRIOR",
+    steps = {
+        { id = "war-antennae-bg", complete = 1824, at = { 1413, 44.6, 71.0 },
+          note = { ru = "Там же на Поле Гигантов: силитиды у курганов (и вылезшие из них) — 5 дёргающихся усиков.",
+                   en = "In the same Field of Giants: the silithids by the mounds (and those that come out of them) - 5 "
+                       .. "Twitching Antennae." } },
     },
 })
 insert({
@@ -869,9 +880,19 @@ insert({
                    en = "The Fallen Hero of the Horde also gives the warrior quest Warrior Kinship: 7 Helboars in "
                        .. "the Blasted Lands (5,100 XP). Do not take his follow-ups (50 Shadowsworn, the Sunken "
                        .. "Temple)." } },
-        { id = "war-helboars-bg", complete = 8423, bg = true, at = { 1419, 44.6, 33.4 },
-          note = { ru = "Попутно: адские кабаны (52-53) в центре Выжженных земель — 7 штук.",
-                   en = "On the way: Helboars (52-53) in the centre of the Blasted Lands - 7 of them." } },
+    },
+})
+-- the Helboars live in the centre of the Blasted Lands, where the shared route ends with its level gate: they are
+-- killed there, right before the gate
+insert({
+    before = "h-50-hinterlands-searing-steppes-level-gate",
+    class = "WARRIOR",
+    steps = {
+        { id = "war-helboars", complete = 8423, at = { 1419, 50.2, 39.7 },
+          note = { ru = "Центр Выжженных земель: 7 зловепрей (адских кабанов, 52-53) для «Warrior Kinship» — первыми, "
+                       .. "потом добор частей и опыт на шаге ниже.",
+                   en = "The centre of the Blasted Lands: 7 Helboars (52-53) for Warrior Kinship - first, then the parts "
+                       .. "and XP on the next step." } },
     },
 })
 insert({

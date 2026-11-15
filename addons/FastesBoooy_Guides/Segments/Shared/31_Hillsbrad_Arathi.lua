@@ -26,24 +26,25 @@
 --          flight master), fly Tarren Mill.
 --   TM1  : hearth (Innkeeper Shay); 552 (Thaivand), 533 (Krusk), 544 (Voidglare), 556 (Bel'varil), 676 (Tallow),
 --          509 (Lydon). 532 and 567 come in from h-22.
---   L1   : south Alterac Syndicate camp (533 missive) -> Growless Cave yetis (552 rod) -> Dalaran internment camp
+--   L1   : south Alterac Syndicate camp (533 missive; 535 Valik at the camp: accepted, done and turned in there) ->
+--          Growless Cave yetis (552 rod) -> Dalaran internment camp
 --          (544 traitors + 556 tokens) -> Hillsbrad town hall (532; 567 Clerk Horrace) -> Tarren Mill.
 --   TM2  : 556 > 557 (Bel'varil), 544 > 545 (Voidglare), 532 > 539 (Darthalia), 533 > 503 (Krusk), 552 > 553
 --          (Thaivand).
 --   L2   : Alterac yeti cave (553 Flame of Uzel) -> Dalaran dome, south side (545 summoners + slaves, 557 bracers)
 --          -> Azurelode Mine (539; 567 Miner Hackett) -> Growless Cave (553 Flames of Azel and Veraz) -> Helcular's
 --          Grave (553) -> Mudsnout gnolls (509 blossoms) -> Tarren Mill.
---   TM3  : 557 (Bel'varil), 545 (Voidglare), 509 > 513 (Lydon); optional Strahnbrad out-and-back (Jailor Borhuin
---          37 key, free Gol'dir: 503 > 506; 506 at Krusk); 539 + 567 (Darthalia) = h-33-tarrenmill-end.
+--   TM3  : 557 (Bel'varil), 545 (Voidglare), 509 > 513 (Lydon), 539 + 567 (Darthalia) = h-33-tarrenmill-end;
+--          optional Strahnbrad out-and-back (Jailor Borhuin 37 key, free Gol'dir: 503 > 506; 506 at Krusk).
 --   AR   : Thoradin's Wall gate -> Boulderfist Hall (676) -> Dabyrie's Farmstead (1164) -> Shards of Myzrael (642).
 --   HF1  : fp, hearth; 655 (Gor'mul); 676 > 677 (Drum Fel); 655 > 671 + 672 (Tor'gan); 97539 (Victor, Forever-new).
---   A    : Witherbark Village (677, level gate), Drywhisker kobolds (642 motes) -> Iridescent Shards (642); raptor
---          eyes (672) and spidersilk (97539) all the time.
---   HF2  : 672 > 674 (Tor'gan) > 675 (Gor'mul); 677 > 678 (Drum Fel); 675 > 701 (Tor'gan).
+--   A    : south: Highland Striders + Plains Creepers just past Hammerfall (672 eyes, 97539 spidersilk) ->
+--          Witherbark Village (677, level gate) -> north past Hammerfall: Drywhisker kobolds (642 motes) ->
+--          Iridescent Shards (642).
+--   HF2  : 672 > 674 (Tor'gan) > 675 (Gor'mul); 677 > 678 (Drum Fel); 675 > 701 (Tor'gan); 97539 (Victor).
 --   B    : Highland Fleshstalkers (701) + Boulderfist Brutes / Magi (678) -> Boulderfist Hall -> Northfold Manor
 --          (671) -> hearth.
---   HF3  : 678 (Drum Fel); 701 + 671 > 702 (Tor'gan) > 847 (Gor'mul); 97539 (Victor); 847 (Tor'gan) =
---          h-34-hammerfall-end.
+--   HF3  : 678 (Drum Fel); 701 + 671 > 702 (Tor'gan) > 847 (Gor'mul); 847 (Tor'gan) = h-34-hammerfall-end.
 -- Deviations from the plan:
 --   * 639 Sigil of Strom is not taken: the Sigil drops only from the Stromgarde Syndicate (Prowler 36-37, Conjuror
 --     35-36, Magus 37-38), which are ELITE (DB rank 1, Wowhead Forever tooltip "Elite"). h-41 (level 41) has to
@@ -54,37 +55,46 @@
 --     a go step at Boulderfist Hall in loop B, the closest safe point to the Stone of Inner Binding.
 --   * Added 678 Call to Arms (plan: h-41): its Boulderfist Brutes / Magi (35-37) stand next to the 701 Fleshstalkers,
 --     and 677 is turned in before loop B. h-41 continues with 679 / 680.
---   * Strahnbrad (503 / 506) is optional and an out-and-back trip from Tarren Mill before h-33-tarrenmill-end: Gol'dir
---     stands in a 34-37 town (Syndicate Spies, Argus Shadow Mages, Jailor Borhuin 37) with Baron Vardus (40) next
---     to him, at ~31.6 in the validator's model; the direct line Strahnbrad -> Alterac yeti cave would cross
---     Crushridge Hold (ogres 34-36, elites 38-40). 503 is still accepted at TM2 (abandon it when skipping).
+--   * Strahnbrad (503 / 506) is optional and an out-and-back trip from Tarren Mill after h-33-tarrenmill-end (the
+--     mandatory turn-ins are done first, so the way back only serves the optional 506): Gol'dir stands in a 34-37
+--     town (Syndicate Spies, Argus Shadow Mages, Jailor Borhuin 37) with Baron Vardus (40) next to him, at ~31.6 in
+--     the validator's model; the direct line Strahnbrad -> Alterac yeti cave would cross Crushridge Hold (ogres
+--     34-36, elites 38-40). 503 is still accepted at TM2 (abandon it when skipping: the guide then skips its steps).
 --   * 567 Dangerous!: Horrace (town hall, loop 1) and Hackett (Azurelode Mine, loop 2). Objectives 2 + 4 (Wilkes,
 --     Kalaba) were killed in h-22, but the state format cannot record partial objectives, so the town-hall step also
 --     lists them (leftovers are in the fields next to it; ~250 kill XP counted twice).
 --   * Added Forever-new 97539 Silky Sutures (Doctor Gregory Victor, Hammerfall; Surgical Spidersilk from the Plains
---     Creepers that are everywhere on the Arathi loops; XP unknown; ender Victor: DB supplement from the Wowhead
---     Forever tooltip "Return ... to Doctor Gregory Victor in Hammerfall"). On the path, so not optional.
+--     Creepers that are everywhere on the Arathi loops - loop A starts in a dense patch of them and of the 672
+--     Striders just south of Hammerfall: one step for both; XP unknown; ender Victor: DB supplement from the Wowhead
+--     Forever tooltip "Return ... to Doctor Gregory Victor in Hammerfall"). On the path, so not optional; turned in
+--     at the second Hammerfall visit.
+--   * Added 535 Valik (270 XP + ~2 kills): Henchman Valik stands at the south edge of the Syndicate camp loop 1 clears
+--     for 533 anyway, and the Southshore Stout drops from the two Drunken Footpads of that camp (93 % on Wowhead
+--     Forever; Innkeeper Shay also sells it): accept, do and turn in at one place (533 must be in the log, it is).
 --   * Hearthstone: bound in Tarren Mill on arrival and not used in Hillsbrad (the druid's level-32 insert after
 --     h-33-tarrenmill-end uses it to come back from Moonglade), bound in Hammerfall on arrival there and used from
 --     Northfold Manor at the end of loop B.
 --   * Level gate in Witherbark Village (loop A), not at the end of the segment: the player meets the 35-38 kobolds,
 --     Fleshstalkers and Brutes of the last loops at 33.4+ instead of ~32.4.
 -- Skipped: 541 / 547 (Dun Garok, elites), 518 Crown of Will (Crushridge elites, 34+), 7321 (cooking), 1361
---   (breadcrumb to Desolace), 535 Valik (270 XP), 515 (back from Faranell), 566 (40), 93680 / 92434 / 97287 / 96984 /
+--   (breadcrumb to Desolace), 515 (back from Faranell), 566 (40), 93680 / 92434 / 97287 / 96984 /
 --   96986 (Forever City of Dalaran dungeon chain: object 670427 / Modera image positions and Horde access unknown),
 --   95663 (Excavation Site dungeon), 673 / 679 / 680 (40, h-41), 1051 (SM Graveyard + elite Nancy Vishas), 92519 /
 --   92707 / 92867 (no giver in the data), 79976 / 79949 (SoD-era ids).
 -- Carried out: 513 (Faranell, Undercity), 1164 (Genavie Callow, Undercity) -> h-34; 5762 (Hemet, Stranglethorn);
 --   1106 (from h-27, Martek in the Badlands, h-41).
 -- XP (validator, Classic quest XP + objective kills, optional steps counted): quests ~67 k (1153 and the optional
---   1013 included) + objective kills ~44 k from 31.01. The gate h-31-hillsbrad-arathi-level-gate (33 + 43%: ~269
---   same-level kills in the validator's model, ~323 without the optional steps, fewer with the mobs killed on the
---   way) covers the rest; the turn-ins and objective kills after it make 34.05 in both cases.
+--   1013 and 535 included) + objective kills ~44 k from 31.01. The gate h-31-hillsbrad-arathi-level-gate (33 + 43%:
+--   ~270 same-level kills in the validator's model, ~323 without the optional steps, fewer with the mobs killed on
+--   the way) covers the rest; the turn-ins and objective kills after it make 34.05 in both cases.
 -- Automation notes: accepts at one NPC sit in one step; transient steps (fp, sethearth, fly, go, hearth) come before
 --   the quest steps of the same place. The class insert anchors h-31-uc-arrive (next: fly), h-31-tarrenmill-arrive
---   (sethearth; next: Thaivand) and h-33-tarrenmill-end (Darthalia, last Tarren Mill step; next: the go step east)
---   are not followed by a same-NPC accept. The optional Strahnbrad steps sit before the mandatory Darthalia turn-in:
---   a player who skips them just turns in at Darthalia and the engine fast-forwards them.
+--   (sethearth; next: Thaivand) and h-33-tarrenmill-end (Darthalia, last mandatory Tarren Mill step; next: the
+--   optional Strahnbrad steps, then the go step east) are not followed by a same-NPC accept. A player who skips
+--   Strahnbrad abandons 503 (its three optional steps are then skipped by the guide) or presses Forward; walking on
+--   without either, the next stateful step (676 in Arathi) fast-forwards them.
+-- No background steps: every goal is a step in the order of play (the raptor eyes and the spidersilk of loop A: one
+--   step where loop A starts, in the densest patch of their mobs).
 if not FastesBoooy.AddLibraryInsert then return end
 FastesBoooy.AddLibrarySegment({
     id = "h-31-hillsbrad-arathi",
@@ -155,12 +165,20 @@ FastesBoooy.AddLibrarySegment({
                    en = "Apothecary Lydon: Elixir of Agony - 6 Mudsnout Blossoms (later, in the south-east)." } },
 
         ------------------------------------------------------------------
-        -- Loop 1: south Alterac -> Growless Cave -> Dalaran camp -> Hillsbrad town hall (level 31-32)
+        -- Loop 1: south Alterac (Syndicate camp, Valik) -> Growless Cave -> Dalaran camp -> Hillsbrad town hall (31-32)
         ------------------------------------------------------------------
-        { id = "h-31-hillsbrad-alterac-field", complete = 533, at = { 1416, 58.30, 67.98 },
-          note = { ru = "На север в Альтеракские горы: лагерь Синдиката (преступники и воры 32-34) — послание.",
-                   en = "North into the Alterac Mountains: the Syndicate camp (Footpads and Thieves 32-34) - the "
-                       .. "Missive." } },
+        { id = "h31-valik", accept = 535, npc = 2333, at = { 1416, 57.17, 69.51 },
+          note = { ru = "На север в Альтеракские горы, к лагерю Синдиката: на его южном краю Подручный Валлик — "
+                       .. "«Валлик» (кружка эля из Южнобережья).",
+                   en = "North into the Alterac Mountains, to the Syndicate camp: Henchman Valik at its south edge - "
+                       .. "Valik (a Southshore Stout)." } },
+        { id = "h-31-hillsbrad-alterac-field", complete = { 533, 535 }, at = { 1416, 58.30, 67.98 },
+          note = { ru = "Лагерь Синдиката (преступники и воры 32-34): послание; эль из Южнобережья — с пьяного "
+                       .. "преступника (их двое в лагере, эль падает почти всегда).",
+                   en = "The Syndicate camp (Footpads and Thieves 32-34): the Missive; the Southshore Stout from a "
+                       .. "Drunken Footpad (two of them in the camp, it almost always drops)." } },
+        { id = "h31-valik-2", turnin = 535, npc = 2333, at = { 1416, 57.17, 69.51 },
+          note = { ru = "Валлик: эль.", en = "Valik: the stout." } },
         { complete = 552, at = { 1424, 44.33, 29.78 },
           note = { ru = "На юго-запад в пещеру йети в Хилсбраде (пещерные и лютые йети 30-32): Жезл Гелькулара.",
                    en = "South-west to the Hillsbrad yeti cave (Cave and Ferocious Yetis 30-32): Helcular's Rod." } },
@@ -244,21 +262,23 @@ FastesBoooy.AddLibrarySegment({
         { turnin = 509, accept = 513, npc = 2216, at = { 1424, 61.44, 19.06 },
           note = { ru = "Лидон: следующий «Эликсир агонии» отнесёте Фаранеллу в Подгород (позже).",
                    en = "Lydon: the next Elixir of Agony goes to Faranell in the Undercity (later)." } },
-        -- Strahnbrad is a 34-37 town (Baron Vardus 40 patrols next to Gol'dir): optional, 4900 quest XP.
-        { complete = 503, at = { 1416, 61.90, 42.38 }, optional = true,
-          note = { ru = "По желанию (с 33-го или вдвоём): на север по дороге в Странбрад (Синдикат 34-36, барон Вардус "
-                       .. "40 ходит рядом). Тюремный надзиратель Борхин (37) — ключ, откройте оковы Гол'дира. Не идёте — "
-                       .. "сразу к Дарталии (шаги пропустятся) и бросьте 503.",
-                   en = "Optional (at 33+ or with a friend): north along the road to Strahnbrad (Syndicate 34-36, Baron "
-                       .. "Vardus 40 walks nearby). Jailor Borhuin (37) - the key, open Gol'dir's shackles. Not going: "
-                       .. "go straight to Darthalia (the steps are skipped) and abandon 503." } },
-        { id = "h-31-gol-dir", turnin = 503, accept = 506, npc = 2316, at = { 1416, 59.96, 43.74 }, optional = true,
-          note = { ru = "Гол'дир: «Наследие Блэкмура».", en = "Gol'dir: Blackmoore's Legacy." } },
-        { turnin = 506, npc = 2229, at = { 1424, 63.24, 20.66 }, optional = true,
-          note = { ru = "Обратно в Мельницу Таррен: Круск.", en = "Back to Tarren Mill: Krusk." } },
         { id = "h-33-tarrenmill-end", turnin = { 539, 567 }, npc = 2215, at = { 1424, 62.33, 20.45 },
           note = { ru = "Дарталия. Следующую «Битву за Хилсбрад» (Дун Гарок, элита) не берите.",
                    en = "Darthalia. Skip the next Battle of Hillsbrad (Dun Garok, elites)." } },
+        -- Strahnbrad is a 34-37 town (Baron Vardus 40 patrols next to Gol'dir): optional, 4900 quest XP; after the
+        -- mandatory Tarren Mill turn-ins, so that the trip back only turns in 506 (at Krusk).
+        { complete = 503, at = { 1416, 61.90, 42.38 }, optional = true,
+          note = { ru = "По желанию (с 33-го или вдвоём): на север по дороге в Странбрад (Синдикат 34-36, барон Вардус "
+                       .. "40 ходит рядом). Тюремный надзиратель Борхин (37) — ключ, откройте оковы Гол'дира. Не идёте — "
+                       .. "бросьте 503 (гайд сам пропустит эти шаги) и сразу на юго-восток.",
+                   en = "Optional (at 33+ or with a friend): north along the road to Strahnbrad (Syndicate 34-36, Baron "
+                       .. "Vardus 40 walks nearby). Jailor Borhuin (37) - the key, open Gol'dir's shackles. Not going: "
+                       .. "abandon 503 (the guide skips these steps itself) and head south-east right away." } },
+        { id = "h-31-gol-dir", turnin = 503, accept = 506, npc = 2316, at = { 1416, 59.96, 43.74 }, optional = true,
+          note = { ru = "Гол'дир: «Наследие Блэкмура».", en = "Gol'dir: Blackmoore's Legacy." } },
+        { turnin = 506, npc = 2229, at = { 1424, 63.24, 20.66 }, optional = true,
+          note = { ru = "Обратно в Мельницу Таррен: Круск. Затем на юго-восток.",
+                   en = "Back to Tarren Mill: Krusk. Then south-east." } },
 
         ------------------------------------------------------------------
         -- Tarren Mill -> Thoradin's Wall -> Hammerfall (level 33)
@@ -304,32 +324,29 @@ FastesBoooy.AddLibrarySegment({
                        .. "Creepers, they are everywhere." } },
 
         ------------------------------------------------------------------
-        -- Arathi loop A: Witherbark Village (level gate) -> Drywhisker kobolds -> Iridescent Shards (level 33)
+        -- Arathi loop A: raptor eyes + spidersilk -> Witherbark Village (level gate) -> Drywhisker kobolds -> Iridescent
+        -- Shards (level 33)
         ------------------------------------------------------------------
-        { complete = 672, bg = true, at = { 1417, 69.06, 46.43 },
-          note = { ru = "Попутно: глаза с долгоногов (30-31) и твердозубов (33-34) — 10 штук.",
-                   en = "On the way: eyes from Highland Striders (30-31) and Thrashers (33-34) - 10 of them." } },
-        { complete = 97539, bg = true, at = { 1417, 65.23, 51.99 },
-          note = { ru = "Попутно: шёлк с равнинных ползунов (32-36).",
-                   en = "On the way: spidersilk from the Plains Creepers (32-36)." } },
+        { id = "h33-eyes-spidersilk", complete = { 672, 97539 }, at = { 1417, 68.80, 50.30 },
+          note = { ru = "На юг, сразу за Павшим Молотом: долгоноги нагорья (30-31) — 10 глаз ящеров; равнинные ползуны "
+                       .. "(32-33) — 12 хирургических паучьих шелков.",
+                   en = "South, just past Hammerfall: Highland Striders (30-31) - 10 raptor eyes; Plains Creepers "
+                       .. "(32-33) - 12 Surgical Spidersilk." } },
         { id = "h-31-arathi-highlands-field", complete = 677, at = { 1417, 67.54, 67.88 },
-          note = { ru = "На юг к деревне Сухокожих: по 10 метателей топоров и охотников за головами, 8 знахарей (32-35). "
-                       .. "Нимар Душегуб (37) бродит по деревне.",
-                   en = "South to Witherbark Village: 10 Axe Throwers, 10 Headhunters, 8 Witch Doctors (32-35). Nimar "
+          note = { ru = "Дальше на юг к деревне Сухокожих: по 10 метателей топоров и охотников за головами, 8 знахарей "
+                       .. "(32-35). Нимар Душегуб (37) бродит по деревне.",
+                   en = "On south to Witherbark Village: 10 Axe Throwers, 10 Headhunters, 8 Witch Doctors (32-35). Nimar "
                        .. "the Slayer (37) walks the village." } },
         { id = "h-31-hillsbrad-arathi-level-gate", level = { 33, 0.43 }, at = { 1417, 67.54, 67.88 },
-          ok = { ["level-grind"] = 280 }, -- end-of-segment gate: 273 / 274 kills in the normal run (druid / paladin)
+          ok = { ["level-grind"] = 280 }, -- end-of-segment gate: 269-271 kills in the normal run (by profile)
           note = { ru = "Бейте троллей деревни (32-35, плотно, лучший опыт рядом) до 33-го + 43%: оставшиеся задания "
                        .. "Арати дают ~0,5 уровня — 34-й к Тернистой долине. Сытная еда даёт +5% за убийства.",
                    en = "Keep killing the village trolls (32-35: dense, the best XP nearby) up to level 33 + 43%: the "
                        .. "rest of the Arathi quests give ~0.5 level - 34 for Stranglethorn. Well Fed food: +5% kill "
                        .. "XP." } },
-        { complete = 672, at = { 1417, 69.06, 46.43 },
-          note = { ru = "На север: не хватает глаз — долгоноги южнее Павшего Молота.",
-                   en = "North: eyes missing - Highland Striders south of Hammerfall." } },
         { complete = 642, at = { 1417, 78.94, 38.32 },
-          note = { ru = "Восточнее Павшего Молота: кобольды Сухоусов (35-36) — 12 частиц Мизраэли.",
-                   en = "East of Hammerfall: Drywhisker Kobolds (35-36) - 12 Motes of Myzrael." } },
+          note = { ru = "На север мимо Павшего Молота и восточнее его: кобольды Сухоусов (35-36) — 12 частиц Мизраэли.",
+                   en = "North past Hammerfall and east of it: Drywhisker Kobolds (35-36) - 12 Motes of Myzrael." } },
         { id = "h-31-iridescent-shards", turnin = 642, object = 2701, at = { 1417, 84.31, 30.95 },
           note = { ru = "Ущелье Сухоусов: Радужные осколки (землекопы и геодезисты 36-38 рядом). «Связывающие камни» не "
                        .. "берите: у камней элементали 38-39.",
@@ -349,6 +366,8 @@ FastesBoooy.AddLibrarySegment({
         { turnin = 675, accept = 701, npc = 2706, at = { 1417, 74.72, 36.29 },
           note = { ru = "Тор'ган: «Коварство ящера» — 12 сердец плотоглотов.",
                    en = "Tor'gan: Guile of the Raptor - 12 Fleshstalker hearts." } },
+        { id = "h33-victor-97539", turnin = 97539, npc = 12920, at = { 1417, 73.41, 36.89 },
+          note = { ru = "Доктор Виктор рядом: паучий шёлк.", en = "Doctor Victor next to him: the spidersilk." } },
 
         ------------------------------------------------------------------
         -- Arathi loop B: Fleshstalkers + Boulderfist Brutes -> Northfold Manor -> hearth (level 34)
@@ -379,8 +398,6 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "Тор'ган. «Зловещая магия» (40, элита) не берите.", en = "Tor'gan. Skip the next Foul Magics (40, elite)." } },
         { turnin = 702, accept = 847, npc = 2792, at = { 1417, 72.64, 33.93 },
           note = { ru = "Гор'муль.", en = "Gor'mul." } },
-        { turnin = 97539, npc = 12920, at = { 1417, 73.41, 36.89 },
-          note = { ru = "Доктор Виктор: паучий шёлк.", en = "Doctor Victor: the spidersilk." } },
         { id = "h-34-hammerfall-end", turnin = 847, npc = 2706, at = { 1417, 74.72, 36.29 },
           note = { ru = "Тор'ган. Эликсир 513 и головы 1164 сдадите в Подгороде.",
                    en = "Tor'gan. 513 and the 1164 heads are handed in at the Undercity." } },

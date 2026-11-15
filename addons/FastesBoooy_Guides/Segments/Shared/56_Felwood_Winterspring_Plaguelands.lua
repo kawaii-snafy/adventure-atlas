@@ -30,22 +30,25 @@
 --   WSW : Salfa 8465 > 8464; Donova 980 + 3908 > 4842 + 5082; west Winterfall camps (5082, firewater flask 5083);
 --         Donova 5083 > 5084; Deadwood Cauldron 5084 > 5085; Donova 5085 > 5086; Toxic Horrors (Felwood) 5086, Irontree
 --         Warpwoods 4102;
---         Donova 5086 > 5087; runners 5087; Donova 5087.
---   WSE : Everlook fp, 4808 > 4809, 3783, (5054), 6029 + 6030; loop A: Raging Owlbeasts, (Ursius), yetis,
---         chimaeras, Winterfall Village (5082, 8464); Everlook 3783 > 977, 4809, (5054 > 5055); loop B: Ice
---         Thistle matriarchs (977), (Brumeran), Everlook 977, Darkwhisper Gorge 4842; Donova 4842 + 5082; Salfa 8464;
---         through Timbermaw Hold, Bloodvenom 4521; Maybess 4102; hearth Orgrimmar.
+--         Donova 5086 > 5087; runners 5087; Donova 5087; Ragged Owlbeasts on the way east (4521).
+--   WSE : Everlook fp, 4808 > 4809, 3783, (5054), 6029 + 6030; loop A: Raging Owlbeasts (4521), (Ursius),
+--         Winterfall Village (5082, 8464), Ice Thistle yetis (3783), chimaeras (4809); Everlook 3783 > 977, 4809,
+--         (5054 > 5055); loop B: Ice Thistle matriarchs (977), (Brumeran), Everlook 977, Darkwhisper Gorge 4842; Donova
+--         4842 + 5082; Salfa 8464; through Timbermaw Hold, Bloodvenom 4521; Maybess 4102; hearth Orgrimmar.
 --   UC  : zeppelin; hearth Undercity; 81952 (Owen Thadd); 5094 (Balthazad); 3542; 3568 > 3569 > 3570; 5961 (Sylvanas).
 --   WPL : Bulwark 6029 + 5405, 5094 > 5096, flame; L1 Scarlet camp 5096; Bulwark 5096 > 5098 + 5228, 5228 > 5229;
 --         L2 Felstone (5021 > 5023, cauldron 5229 > 5230), Andorhal towers 5098; Bulwark 5230 > 5231, 5098 > 838 > 964;
 --         L3 Dalson's Tears 5231 > 5232, Dalson's farm 5060, Kirsta 6004 > 6023 > 6025 (Northridge Scarlet, Radley,
---         Durgen, Hearthglen overlook), Chromie 4971 > 4972, Andorhal skeletons 964; Bulwark 5232 > 5233, 964;
+--         Durgen, Hearthglen overlook), Chromie 4971 > 4972 (Andorhal skeletons 964 with the lockboxes, before the
+--         4972 turn-in); Bulwark 5232 > 5233, 964;
 --         L4 Mulgris 4984 > 4985, Writhing Haunt 5233 > 5234, Marlene 5142; Darrowshire (EPL) Pamela 5142 > 5149 >
 --         5241 + 5152; Marlene 5152 > 5153 (monument), Chromie 5153 > 5154 (Andorhal tome) > 5210; Bulwark 5234 > 5235; L5 Gahrron's
 --         Withering 5235 > 5236; hearth Undercity 5023 > 5049 > 5050; Bulwark 5236, 5238; Felstone 5050 > 5051.
---   EPL : Tirion 5542 + 5543 + 5544; south-west runts / bats / grubs; Nathanos 5961 > 6022 + 6042 + 6133; Corin's
---         Crossing 6022, central hounds / bats; Light's Hope fp, 5241 + 5210 > 5211 + 5181, 6030, (optional
---         Stratholme: 5251, 5212, 5243, 5214), 6021 + 5281; north field 6042 + frenzied hounds, lodge 6133, spirits 5211;
+--   EPL : Tirion 5542 + 5543 + 5544; runts on the way south (5542); Nathanos 5961 > 6022 + 6042 + 6133; bats / grubs
+--         at Marris Stead (5543, 5544); central Noxious Plaguebats / hounds (6042, 5542), Corin's Crossing 6022 (timed,
+--         last before the chapel); Light's Hope fp, 5241 + 5210 > 5211 + 5181, 6030, (optional Stratholme: 5251, 5212,
+--         5243, 5214), 6021 + 5281; north field: frenzied hounds (5542) + monstrous bats (6042), lodge 6133, spirits
+--         5211 (Scourge kills from the chapel on, finished on the Cannibal Ghouls);
 --         Augustus 6164, Egan 5281 (optional 5282 + Stratholme); Tirion 5542-5544 > 5742 > 5781; Nathanos 6022 + 6042 +
 --         6133; Undercroft 5781 + 6021; Tirion 5781; Horgus' Skull + Marduk's Sword (5181); Light's Hope 5211 + 5181
 --         (optional Stratholme turn-ins); level gate at the Diseased Flayers north of the chapel; Alen 6021 (end, 60).
@@ -85,8 +88,17 @@
 --     the chapel, 5282 at Egan; the main gate is next to Terrordale). h57-winterspring-grind is mandatory now (57, no
 --     longer 57 + 86%); the end gate moved after the chapel turn-ins (Diseased Flayers north of the chapel) so that
 --     the optional Stratholme turn-ins count before it.
+--   * Explicit steps (r4): no background ("along the way") steps any more - every goal is a step where it is done, in
+--     the order of play, and the notes say what to kill on the way before it. Reordered against back-and-forth: the
+--     Ragged Owlbeasts on the way from Donova to Everlook; the Andorhal skeletons with Chromie's lockboxes (before her
+--     turn-in, not a second walk in); the Eastern Plaguelands runts on the way from Tirion to Nathanos, the central
+--     bats / hounds before the timed Corin's Crossing, the frenzied hounds / monstrous bats before the lodge (no walk
+--     back south). Accepted travel-revisit: 4506 (the kitten is released at the moonwell, the cat is led back to Winna).
 -- Automation notes: transient steps (fp, sethearth, hearth, fly, go) come before the quest steps of their hub; one
---   step per NPC; bg goals have a later non-bg finishing step; optional steps are followed by a mandatory anchor.
+--   step per NPC; no bg steps ("kill X on the way" is a note, the goal is finished by a step of its own; objective
+--   lists, complete = { [Q] = { n } }, split a goal over the areas of its mobs); a goal the notes let the player
+--   start early is finished by a step with no transient / optional step between the start and it (a step done early
+--   becomes the forward anchor); optional steps are followed by a mandatory anchor.
 --   Class anchors: h-58-org-arrive / h-58-uc-arrive are at ~57.2 since the densify pass; the last Undercity stop
 --   (after h59-hearth-uc) ends at ~57.99 and 58 comes at the Bulwark (h-59-wpl-end, ~58.05): the 58 ranks are best
 --   trained with the 60 set after h-60-end (docs/routes/shared-path.md, the anchor table).
@@ -151,11 +163,12 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "Дрека'Сур: «Последняя битва супруга» (властитель Рор на юге, позже).",
                    en = "Dreka'Sur: A Husband's Last Battle (Overlord Ror in the south, later)." } },
         { id = "h56-shadowhold-entrance", go = true, radius = 15, at = { 1448, 35.45, 59.06 },
-          note = { ru = "Южнее заставы, Джеденар: вход в пещеру Оплот Теней (35.5,59.1).",
-                   en = "South of the post, Jaedenar: the entrance of the Shadow Hold cave (35.5,59.1)." } },
-        { complete = 5155, bg = true, at = { 1448, 37.34, 60.76 },
-          note = { ru = "Попутно в Джеденаре: 4 гончих, 4 стража, 6 адептов, 6 сектантов (50-52).",
-                   en = "On the way in Jaedenar: 4 Hounds, 4 Guardians, 6 Adepts, 6 Cultists (50-52)." } },
+          note = { ru = "Южнее заставы, Джеденар: вход в пещеру Оплот Теней (35.5,59.1). Гончих, стражей, адептов и "
+                       .. "сектантов Джеденара (50-52) у входа бейте по пути — «Силы Джеденара» (добор после "
+                       .. "сопровождения).",
+                   en = "South of the post, Jaedenar: the entrance of the Shadow Hold cave (35.5,59.1). Kill the Jaedenar "
+                       .. "Hounds, Guardians, Adepts and Cultists (50-52) by the entrance on the way - Forces of Jaedenar "
+                       .. "(finished after the escort)." } },
         { accept = 5202, use = 13140, at = { 1448, 37.89, 50.66 },
           note = { ru = "В пещере: головорезы, темноплеты, чернокнижники и легионеры Джеденара (52-55) — с них странный "
                        .. "красный ключ, нажмите его.",
@@ -169,8 +182,8 @@ FastesBoooy.AddLibrarySegment({
                    en = "She goes deeper for her gear, then to the exit (35.5,59.1); mobs attack on the way - protect "
                        .. "her." } },
         { id = "h-56-felwood-field-loop", complete = 5155, at = { 1448, 37.34, 60.76 },
-          note = { ru = "Джеденар снаружи: добейте гончих, стражей, адептов и сектантов.",
-                   en = "Jaedenar outside: finish the Hounds, Guardians, Adepts and Cultists." } },
+          note = { ru = "Джеденар снаружи: добейте гончих, стражей (по 4), адептов и сектантов (по 6).",
+                   en = "Jaedenar outside: finish the Hounds, Guardians (4 each), Adepts and Cultists (6 each)." } },
         { complete = 4505, use = 12566, at = { 1448, 32.32, 66.56 },
           note = { ru = "На юго-запад, руины с сатирами Нефритового Пламени (50-52): наполните флакон у оскверненного "
                        .. "лунного колодца.",
@@ -182,6 +195,7 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "Снова к лунному колодцу: выпустите котенка у колодца (переноска).",
                    en = "Back to the moonwell: release the kitten next to it (the carrier)." } },
         { complete = 4506, at = { 1448, 34.26, 52.32 },
+          ok = "travel-revisit", -- the chain itself: the kitten is released at the moonwell, the cat is led back to Winna
           note = { ru = "Оскверненная кошка идёт за вами: приведите её к Винне и щелкните по ней.",
                    en = "The corrupted cat follows you: lead it to Winna and click it." } },
         { turnin = 4506, npc = 9996, at = { 1448, 34.21, 52.34 },
@@ -254,14 +268,13 @@ FastesBoooy.AddLibrarySegment({
                        .. "возьмите «Выяснение причин» и «Угроза со стороны Зимней Спячки». «Эликсир Видере» не берите.",
                    en = "South to the hot springs: Donova Snowden - The New Springs and It's a Secret to Everybody; take "
                        .. "Strange Sources and Threat of the Winterfall. Skip The Videre Elixir." } },
-        { complete = { [4521] = { 2 } }, bg = true, at = { 1452, 44.07, 38.79 },
-          note = { ru = "Попутно на западе: 15 лохматых совухов (53-55).",
-                   en = "On the way in the west: 15 Ragged Owlbeasts (53-55)." } },
         { id = "h-56-winterspring-field-loop", complete = { [5082] = { 1, 3 } }, at = { 1452, 36.38, 39.95 },
           note = { ru = "Лагеря Зимней Спячки (30-35,36 и 39-43,44): по 8 землепроходцев и тотемистов; дозорных — "
-                       .. "сколько встретите. Ждите пустую флягу для огненной воды.",
+                       .. "сколько встретите. Ждите пустую флягу для огненной воды. Лохматые совухи (53-55) вокруг — для "
+                       .. "Трулла, бейте по пути (15; добор — по дороге в Круговзор).",
                    en = "The Winterfall camps (30-35,36 and 39-43,44): 8 Pathfinders and 8 Totemics; Den Watchers as you "
-                       .. "meet them. Watch for an Empty Firewater Flask." } },
+                       .. "meet them. Watch for an Empty Firewater Flask. Ragged Owlbeasts (53-55) around - for Trull, kill "
+                       .. "them on the way (15; finished on the way to Everlook)." } },
         { accept = 5083, use = 12771, at = { 1452, 36.38, 39.95 },
           note = { ru = "Пустая фляга для огненной воды (с любого фурболга Зимней Спячки) — нажмите её.",
                    en = "Empty Firewater Flask (from any Winterfall furbolg) - click it." } },
@@ -295,13 +308,16 @@ FastesBoooy.AddLibrarySegment({
         { turnin = 5087, npc = 9298, at = { 1452, 31.27, 45.16 },
           note = { ru = "Донова: ящик. «Верховный вождь племени Зимней Спячки» (элита 59 с охраной) не берите.",
                    en = "Donova: the crate. Skip High Chief Winterfall (elite 59 with guards)." } },
+        { id = "h57-ragged-owlbeasts", complete = { [4521] = { 2 } }, at = { 1452, 43.80, 37.80 },
+          note = { ru = "На восток к Круговзору: лохматые совухи (53-55) у дороги (37-55, 34-47) — добейте 15.",
+                   en = "East towards Everlook: Ragged Owlbeasts (53-55) along the way (37-55, 34-47) - finish 15." } },
 
         ------------------------------------------------------------------
         -- Winterspring east: Everlook and two loops (level 57)
         ------------------------------------------------------------------
         { id = "h-57-everlook-arrive", fp = "Everlook", npc = 11139, at = { 1452, 60.47, 36.30 },
-          note = { ru = "На восток в Круговзор (совухи по дороге): Югрек — точка полёта.",
-                   en = "East to Everlook (owlbeasts on the way): Yugrek - learn the flight point." } },
+          note = { ru = "Дальше на восток в Круговзор: Югрек — точка полёта.",
+                   en = "On east to Everlook: Yugrek - learn the flight point." } },
         { turnin = 4808, accept = 4809, npc = 10468, at = { 1452, 61.63, 38.61 },
           note = { ru = "Фелнок Сталлист: письмо; возьмите «Рога стылодыхов».",
                    en = "Felnok Steelspring: the letter; take Chillwind Horns." } },
@@ -317,26 +333,26 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "Грегор Грейстоун: два донесения (Бастион и Часовня Последней Надежды).",
                    en = "Gregor Greystone: two reports (the Bulwark and Light's Hope Chapel)." } },
         { complete = 4521, at = { 1452, 55.62, 33.76 },
-          note = { ru = "К северо-западу от Круговзора: 15 бешеных совухов (51-62,28-37); лохматых добейте западнее "
-                       .. "(47-55,35-43). Йети и химеры тут же — попутно.",
-                   en = "North-west of Everlook: 15 Raging Owlbeasts (51-62,28-37); finish the Ragged ones just west "
-                       .. "(47-55,35-43). Yetis and chimaeras there too - on the way." } },
+          note = { ru = "К северо-западу от Круговзора: 15 бешеных совухов (51-62,28-37).",
+                   en = "North-west of Everlook: 15 Raging Owlbeasts (51-62,28-37)." } },
         { complete = 5054, optional = true, at = { 1452, 60.92, 32.90 },
           note = { ru = "Необязательно: Урсиус (элита 56) на склоне к северо-западу от Круговзора.",
                    en = "Optional: Ursius (elite 56) on the slope north-west of Everlook." } },
-        { complete = 3783, bg = true, at = { 1452, 67.36, 42.31 },
-          note = { ru = "Попутно: йети с Холмов ледополоха (55-56) — 10 толстых шкур.",
-                   en = "On the way: Ice Thistle Yetis (55-56) - 10 Thick Yeti Furs." } },
-        { complete = 4809, bg = true, at = { 1452, 57.69, 43.48 },
-          note = { ru = "Попутно: хладноветрые химеры (55-57) — 8 целых рогов.",
-                   en = "On the way: Chillwind Chimaeras (55-57) - 8 Uncracked Chillwind Horns." } },
+        -- the yeti / chimaera hint starts here, after the optional Ursius step: furs or horns finished before it would
+        -- make the 3783 / 4809 steps the forward anchor and skip that optional step
         { complete = { 5082, 8464 }, at = { 1452, 67.19, 36.78 },
-          note = { ru = "На восток, деревня Зимней Спячки: 8 дозорных, 8 ведмедей, 8 шаманов (55-58).",
-                   en = "East, Winterfall Village: 8 Den Watchers, 8 Ursa, 8 Shamans (55-58)." } },
+          note = { ru = "На восток, деревня Зимней Спячки: 8 дозорных, 8 ведмедей, 8 шаманов (55-58). Йети с Холмов "
+                       .. "ледополоха (55-56) и хладноветрые химеры (55-57) вокруг: бейте по пути — толстые шкуры для Юми "
+                       .. "и целые рога для Фелнока (добор — ниже).",
+                   en = "East, Winterfall Village: 8 Den Watchers, 8 Ursa, 8 Shamans (55-58). Ice Thistle Yetis (55-56) "
+                       .. "and Chillwind Chimaeras (55-57) around: kill them on the way - Thick Yeti Furs for Umi and "
+                       .. "Uncracked Chillwind Horns for Felnok (finished below)." } },
         { complete = 3783, at = { 1452, 67.36, 42.31 },
-          note = { ru = "Южнее, Холмы ледополоха: добейте шкуры йети.", en = "South, Ice Thistle Hills: finish the furs." } },
+          note = { ru = "Южнее, Холмы ледополоха: йети (55-56) — добейте 10 толстых шкур.",
+                   en = "South, Ice Thistle Hills: Ice Thistle Yetis (55-56) - finish the 10 Thick Yeti Furs." } },
         { complete = 4809, at = { 1452, 66.47, 50.49 },
-          note = { ru = "Дальше на юг: химеры — добейте рога.", en = "Further south: chimaeras - finish the horns." } },
+          note = { ru = "Дальше на юг: хладноветрые химеры (55-57) — добейте 8 целых рогов.",
+                   en = "Further south: Chillwind Chimaeras (55-57) - finish the 8 Uncracked Chillwind Horns." } },
         { turnin = 3783, accept = 977, npc = 10305, at = { 1452, 60.88, 37.62 },
           note = { ru = "Круговзор, Юми: шкуры; возьмите следующую часть (рога матриархов и патриархов).",
                    en = "Everlook, Umi: the furs; take the next part (horns from matriarchs and patriarchs)." } },
@@ -524,25 +540,27 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "На юг в Андорал, таверна: Хроми — «Вопрос времени» (она даёт темпоральный смещатель).",
                    en = "South to Andorhal, the inn: Chromie - A Matter of Time (she gives you the Temporal "
                        .. "Displacer)." } },
-        { complete = 964, bg = true, at = { 1422, 44.58, 68.47 },
-          note = { ru = "Попутно в Андорале: скелеты-палачи и послушники (53-56) — 15 фрагментов.",
-                   en = "On the way in Andorhal: Skeletal Executioners and Acolytes (53-56) - 15 fragments." } },
         { complete = 4971, use = 12627, at = { 1422, 48.14, 65.18 },
           note = { ru = "Восток Андорала: используйте темпоральный смещатель рядом с силосной башней, затем убейте "
                        .. "появившихся временных паразитов (55-57) - 15 по Wowhead Forever (в БД и WCLBox 10; верен "
-                       .. "счётчик в журнале). Паразиты сами не стоят - без смещателя их нет.",
+                       .. "счётчик в журнале). Паразиты сами не стоят - без смещателя их нет. Скелетов-палачей и "
+                       .. "послушников (53-56) по пути бейте - фрагменты для Дитерса (добор - со сундучками Хроми).",
                    en = "East Andorhal: use the Temporal Displacer next to a silo, then kill the Temporal Parasites "
                        .. "(55-57) that appear - 15 per Wowhead Forever (the DB and WCLBox say 10; trust the quest log "
-                       .. "counter). They do not stand around - no displacer, no parasites." } },
+                       .. "counter). They do not stand around - no displacer, no parasites. Kill the Skeletal "
+                       .. "Executioners and Acolytes (53-56) on the way - fragments for Dithers (finished with Chromie's "
+                       .. "lockboxes)." } },
         { turnin = 4971, accept = 4972, npc = 10667, at = { 1422, 39.46, 66.76 },
           note = { ru = "Хроми: «Отсчет времени».", en = "Chromie: Counting Out Time." } },
         { complete = 4972, at = { 1422, 42.98, 70.07 },
           note = { ru = "Небольшие сундучки среди руин Андорала: 5 часов.",
                    en = "Small Lockboxes in the Andorhal rubble: 5 watches." } },
-        { turnin = 4972, npc = 10667, at = { 1422, 39.46, 66.76 },
-          note = { ru = "Хроми: часы.", en = "Chromie: the watches." } },
         { complete = 964, at = { 1422, 44.58, 68.47 },
-          note = { ru = "Андорал: добейте фрагменты скелетов.", en = "Andorhal: finish the skeletal fragments." } },
+          note = { ru = "Там же, среди руин: скелеты-палачи и послушники (53-56) — добейте 15 фрагментов скелетов.",
+                   en = "Right there in the rubble: Skeletal Executioners and Acolytes (53-56) - finish the 15 Skeletal "
+                       .. "Fragments." } },
+        { turnin = 4972, npc = 10667, at = { 1422, 39.46, 66.76 },
+          note = { ru = "Назад к Хроми: часы.", en = "Back to Chromie: the watches." } },
         { turnin = 5232, accept = 5233, npc = 11055, at = { 1420, 83.04, 71.91 },
           note = { ru = "Назад в Бастион, Вандис: «Цель: Призрачная ферма».",
                    en = "Back to the Bulwark, Vandis: Target: Writhing Haunt." } },
@@ -639,50 +657,44 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "Джанис: оберег.", en = "Janice: the charm." } },
 
         ------------------------------------------------------------------
-        -- Eastern Plaguelands: Tirion, the south-west, Nathanos, Pamela (level 59)
+        -- Eastern Plaguelands: Tirion, the south-west, Nathanos (level 59)
         ------------------------------------------------------------------
         { id = "h-58-tirion-fordring", accept = { 5542, 5543, 5544 }, npc = 1855, at = { 1423, 5.16, 35.57 },
           note = { ru = "На северо-восток мимо пещеры Кристы и за реку: хижина Тириона Фордринга — «Псы-демоны», "
                        .. "«Окровавленные небеса», «Мясо личинок-трупоедов».",
                    en = "North-east past Kirsta's cave and across the river: Tirion Fordring's hut - Demon Dogs, Blood "
                        .. "Tinged Skies, Carrion Grubbage." } },
-        { complete = { [5542] = { 1 } }, bg = true, at = { 1423, 16.27, 59.44 },
-          note = { ru = "Попутно на юго-западе: 20 карликовых чумных псов (53-54).",
-                   en = "On the way in the south-west: 20 Plaguehound Runts (53-54)." } },
-        { complete = 5543, bg = true, at = { 1423, 21.56, 63.75 },
-          note = { ru = "Попутно: 30 чумных нетопырей (53-55).", en = "On the way: 30 Plaguebats (53-55)." } },
-        { complete = 5544, bg = true, at = { 1423, 24.53, 61.54 },
-          note = { ru = "Попутно: 15 кусков мяса с личинок-падальщиков (54-55) и падальщиков-пожирателей.",
-                   en = "On the way: 15 slabs of meat from Carrion Grubs (54-55) and Carrion Devourers." } },
+        { complete = { [5542] = { 1 } }, at = { 1423, 16.27, 59.44 },
+          note = { ru = "На юг вдоль западного края: карликовые чумные псы (53-54, гуще всего 10-20, 50-70) — 20. Чумных "
+                       .. "нетопырей и личинок-падальщиков тут же бейте по пути (добор — у Натаноса).",
+                   en = "South along the west edge: Plaguehound Runts (53-54, thickest at 10-20, 50-70) - 20. Kill the "
+                       .. "Plaguebats and Carrion Grubs here on the way too (finished at Nathanos)." } },
         { id = "h-58-nathanos-blightcaller", turnin = 5961, accept = { 6022, 6042, 6133 }, npc = 11878,
           at = { 1423, 22.23, 63.51 },
-          note = { ru = "На юг вдоль западного края, имение Марриса: Натанос Гнилостень — «Защитник королевы банши»; "
-                       .. "возьмите «Преднамеренное убийство» (ступка), «Мелочи нежизни» и «Охота на следопытов».",
-                   en = "South along the west edge, Marris Stead: Nathanos Blightcaller - The Champion of the Banshee "
-                       .. "Queen; take To Kill With Purpose (the mortar), Un-Life's Little Annoyances and The Ranger "
-                       .. "Lord's Behest." } },
+          note = { ru = "Восточнее, имение Марриса: Натанос Гнилостень — «Защитник королевы банши»; возьмите "
+                       .. "«Преднамеренное убийство» (ступка), «Мелочи нежизни» и «Охота на следопытов».",
+                   en = "East of them, Marris Stead: Nathanos Blightcaller - The Champion of the Banshee Queen; take To "
+                       .. "Kill With Purpose (the mortar), Un-Life's Little Annoyances and The Ranger Lord's Behest." } },
         { id = "h-58-eastern-plaguelands-field", complete = 5543, at = { 1423, 21.56, 63.75 },
-          note = { ru = "Юго-запад: добейте чумных нетопырей.", en = "South-west: finish the Plaguebats." } },
+          note = { ru = "Вокруг имения: чумные нетопыри (53-55) — добейте 30.",
+                   en = "Around the stead: Plaguebats (53-55) - finish 30." } },
         { complete = 5544, at = { 1423, 24.53, 61.54 },
-          note = { ru = "Там же: добейте мясо личинок.", en = "Same area: finish the grub meat." } },
-        { complete = { [5542] = { 1 } }, at = { 1423, 16.27, 59.44 },
-          note = { ru = "Добейте карликовых чумных псов.", en = "Finish the Plaguehound Runts." } },
+          note = { ru = "Там же: личинки-падальщики (54-55) — добейте 15 кусков мяса.",
+                   en = "Same area: Carrion Grubs (54-55) - finish the 15 slabs of meat." } },
 
         ------------------------------------------------------------------
         -- Eastern Plaguelands: centre and Light's Hope Chapel (level 59)
         ------------------------------------------------------------------
-        { complete = { [6042] = { 1 } }, bg = true, at = { 1423, 44.65, 49.98 },
-          note = { ru = "Попутно в центре: 20 пагубных нетопырей (54-56).",
-                   en = "On the way in the centre: 20 Noxious Plaguebats (54-56)." } },
-        { complete = 6022, use = 15454, at = { 1423, 52.57, 58.01 },
-          note = { ru = "На восток, Перекресток Корина: нежить Плети (55-57) — 7 кусков живой гнили за 10 минут, затем "
-                       .. "разотрите их ступкой.",
-                   en = "East, Corin's Crossing: the Scourge (55-57) - 7 Living Rot within 10 minutes, then grind them "
-                       .. "with the mortar." } },
-        { complete = { [5542] = { 2 } }, at = { 1423, 46.19, 49.51 },
-          note = { ru = "Северо-западнее: 5 чумных псов (55-56).", en = "North-west of it: 5 Plaguehounds (55-56)." } },
         { complete = { [6042] = { 1 } }, at = { 1423, 44.65, 49.98 },
-          note = { ru = "Там же: добейте пагубных нетопырей.", en = "Same area: finish the Noxious Plaguebats." } },
+          note = { ru = "На восток в центр: пагубные нетопыри (54-56) — 20. Чумные псы тут же (следующий шаг).",
+                   en = "East into the centre: Noxious Plaguebats (54-56) - 20. Plaguehounds right there (next step)." } },
+        { complete = { [5542] = { 2 } }, at = { 1423, 46.19, 49.51 },
+          note = { ru = "Там же: 5 чумных псов (55-56).", en = "Same area: 5 Plaguehounds (55-56)." } },
+        { complete = 6022, use = 15454, at = { 1423, 52.57, 58.01 },
+          note = { ru = "На юго-восток, Перекресток Корина: нежить Плети (55-57) — 7 кусков живой гнили за 10 минут, "
+                       .. "затем разотрите их ступкой.",
+                   en = "South-east, Corin's Crossing: the Scourge (55-57) - 7 Living Rot within 10 minutes, then grind "
+                       .. "them with the mortar." } },
         { id = "h-59-lightshope-arrive", fp = "Light's Hope Chapel", npc = 12636, at = { 1423, 70.53, 47.55 },
           note = { ru = "На восток к Часовне Последней Надежды: Георгия — точка полёта.",
                    en = "East to Light's Hope Chapel: Georgia - learn the flight point." } },
@@ -716,27 +728,24 @@ FastesBoooy.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Eastern Plaguelands: north field, Terrordale, Tirion, the Undercroft, Nathanos (level 59)
         ------------------------------------------------------------------
-        { complete = 5211, bg = true, at = { 1423, 70.85, 37.95 },
-          note = { ru = "Попутно: убивайте нежить Плети (свежеватели у часовни, вурдалаки на северо-западе) — на трупах "
-                       .. "появляются духи Дарроушира, поговорите с 15.",
-                   en = "On the way: kill the Scourge (flayers by the chapel, ghouls in the north-west) - Darrowshire "
-                       .. "Spirits appear on the corpses, talk to 15." } },
-        { complete = { [5542] = { 3 } }, bg = true, at = { 1423, 51.69, 28.28 },
-          note = { ru = "Попутно на севере: 5 бесноватых чумных псов (57-58).",
-                   en = "On the way in the north: 5 Frenzied Plaguehounds (57-58)." } },
+        { complete = 5542, at = { 1423, 51.69, 28.28 },
+          note = { ru = "На северо-запад: 5 бесноватых чумных псов (57-58). Нежить Плети по пути (зараженные "
+                       .. "свежеватели у часовни, дальше вурдалаки) бейте: на трупах появляются духи Дарроушира — "
+                       .. "поговорите с 15 (добор — на северо-западе).",
+                   en = "North-west: 5 Frenzied Plaguehounds (57-58). Kill the Scourge on the way (Diseased Flayers by "
+                       .. "the chapel, ghouls further on): Darrowshire Spirits appear on the corpses - talk to 15 "
+                       .. "(finished in the north-west)." } },
         { complete = { [6042] = { 2 } }, at = { 1423, 49.12, 26.64 },
-          note = { ru = "На северо-запад: 10 чудовищных чумных нетопырей (56-58); бесноватые псы и пожиратели рядом.",
-                   en = "North-west: 10 Monstrous Plaguebats (56-58); Frenzied Plaguehounds and Devourers next to them." } },
+          note = { ru = "Там же: 10 чудовищных чумных нетопырей (56-58).",
+                   en = "Same area: 10 Monstrous Plaguebats (56-58)." } },
         { complete = 6133, at = { 1423, 45.58, 12.80 },
           note = { ru = "На север, Сторожка Кель'Литиен: по 8 разведчиц дорог, следопытов и лесников (57-60), реестр "
                        .. "(45.3,12.7) в доме. Тяните по одному.",
                    en = "North, Quel'Lithien Lodge: 8 Pathstriders, Rangers and Woodsmen (57-60), the registry "
                        .. "(45.3,12.7) in the lodge. Pull one at a time." } },
-        { complete = 5542, at = { 1423, 51.69, 28.28 },
-          note = { ru = "Назад на юг: добейте бесноватых чумных псов.", en = "Back south: finish the Frenzied Plaguehounds." } },
         { complete = 5211, at = { 1423, 25.86, 23.04 },
-          note = { ru = "На запад вдоль северной окраины: вурдалаки-каннибалы (56-57) — добейте духов.",
-                   en = "West along the north: Cannibal Ghouls (56-57) - finish the spirits." } },
+          note = { ru = "На запад вдоль северной окраины: вурдалаки-каннибалы (56-57) — добейте 15 духов Дарроушира.",
+                   en = "West along the north: Cannibal Ghouls (56-57) - finish the 15 Darrowshire Spirits." } },
         { id = "h-58-augustus-the-touched", accept = 6164, npc = 12384, at = { 1423, 11.36, 26.37 },
           note = { ru = "Дальше на запад, Долина Ужаса: Август Помешанный — «Книга рецептов Августа».",
                    en = "Further west, Terrordale: Augustus the Touched - Augustus' Receipt Book." } },
@@ -796,7 +805,7 @@ FastesBoooy.AddLibrarySegment({
         { turnin = 5214, npc = 11033, optional = true, at = { 1423, 70.88, 48.43 },
           note = { ru = "По желанию: Смоки — табак.", en = "Optional: Smokey - the tobacco." } },
         { id = "h-56-felwood-winterspring-plaguelands-level-gate", level = { 59, 0.98 },
-          ok = { ["level-grind"] = 720 }, -- end gate of the route: 720 kills in the normal run
+          ok = { ["level-grind"] = 725 }, -- end gate of the route: 721 kills in the normal run
           at = { 1423, 70.85, 37.95 },
           note = { ru = "Сразу к северу от часовни: зараженные свежеватели (57-59, плотно, лучший лагерь рядом с "
                        .. "часовней). До 59-го + 98%: сдача Алену даёт 60-й. В группе — Стратхольм (выше).",

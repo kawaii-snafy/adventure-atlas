@@ -8,20 +8,24 @@
 -- tools/data/forever_db.lua (NPC/object spawns; centroids of the objective mob/object spawns
 -- for complete steps).
 --
--- Hub plan (Forever DB):
---   road  : 365 Simmer, 5481 Gordo (gloom weed on the road).
---   Brill1: 86784, 404, 96656 > 96607 > 96658 (camping), 383 > 427/99141/99134, 8 + hearth, 367,
---           Dillinger's report; Kristof's report + 97558 at the Rear Guard camp.
---   west  : 404, 367, 5481, Gordo's report, 365 pumpkins, 427 Scarlet Warriors, 97558 murloc skins,
---           99144 escort; hearth back.
+-- Hub plan (Forever DB). Every goal is a step of its own, in the order of play; where the mobs of a goal are
+-- passed earlier, the notes say "on the way" and a later step at the last pass finishes it.
+--   road  : 365 Simmer, 5481 Gordo (gloom weed on the walk to Brill).
+--   Brill1: 86784, 404 (the claws west of the camp, before Brill), 96656 > 96607 > 96658 (camping),
+--           383 > 427/99141/99134 (the motivator on the Deathguards around Zygand), 367, Dillinger: 404 > 426 +
+--           his report, 8 + hearth; Kristof's report + 97558 at the Rear Guard camp.
+--   west  : Gordo's report, 365 pumpkins, 97558 murloc skins, 427 Scarlet Warriors, 99144 escort,
+--           367 + 97558 hides and membranes (darkhounds and duskbats north-east of the farm); hearth back.
 --   Brill2: 367/365 > 368/407, 427/99141/99134 > 370, 398, 99144, 374, 358, 407, 354/362/375 (inn),
---           404 > 426, 5481 > 5482.
---   north : 358 gnolls, 5482, 398 Maggot Eye, 368 coast murlocs, Agamand Mills 426/362/354/361, 375.
+--           5481 > 5482.
+--   north : 5482 doom weed and 358 gnolls (same fields), 398 Maggot Eye, 368 coast murlocs, Agamand Mills
+--           east > north > west > south (354, 362, 426, 361), 375 pelts on the way back.
 --   Brill3: 5482 > 99142, 426, 368 > 369, 398, 361, 354/362 > 355, 375, 358/355 > 359.
 --   south : 370 Captain Perrine, 374 rings. Brill4: 370 > 371, level 10, 96895.
 --   east  : 97558, 359 > 360/356, 96895 > 96897/96898 > 96899, 356 + 99142 (Balnir), 371 + 374,
---           369 spiders, 356. Brill5: 369 > 492/445, 95314, 371, 374, 360, 492, 99142.
---   BK    : 96899 > 96896 > 98545; 99152, 99153, 95314 (Shadowvale); level 12.
+--           369 spiders, 374 finished, 356. Brill5: 369 > 492/445, 95314, 371, 374, 360, 492, 99142.
+--   BK    : 96899 > 96896 > 98545; 99152, 99153, 95314 (Shadowvale: bottles, crystal, bones on the way
+--           back); level 12.
 --   UC    : hearth to Brill, 95314, Undercity: 98545 Glix, flight path; out to the Silverpine road.
 -- Skipped: 405/357/366 (Undercity <-> Gunther back-and-forth), 408 (needs a second Agamand trip),
 --   372 (far north-east), 99156 Riptear and 95328 Whispering Horror (elites), other Camping 101 quests.
@@ -34,19 +38,18 @@
 -- Anchors for class files (docs/dev/PLAN.md C.2; level of the base profile before the step, normal run / worst
 -- case where it differs). The trainers of five classes (warrior, rogue, priest, mage, warlock) stand in the
 -- Brill inn, so the Brill anchors are the steps in the inn:
---   ud02-sethearth        6.38  bind in the inn (level 6: gate ud02-lvl-6): training at 6
---   ud02-brill-8          8.18  the level-8 visit, in the inn (Coleman, Gretchen): training at 8. Two generic
---                               steps of the visit follow on the way out of Brill (Dillinger, Holland); neither
---                               is at a trainer
---   ud02-level-10        10.16 / 10.11  generic gate in Brill, between Zygand and Terrence: training at 10,
+--   ud02-sethearth        6.66 / 6.58  bind in the inn (level 6: gate ud02-lvl-6): training at 6
+--   ud02-brill-8          8.23 / 8.19  the level-8 visit, in the inn (Coleman, Gretchen): training at 8. One generic
+--                               step of the visit follows on the way out of Brill (Holland), not at a trainer
+--   ud02-level-10        10.14 / 10.06  generic gate in Brill, between Zygand and Terrence: training at 10,
 --                               level-10 class quests
---   ud02-keep            11.69 / 11.65  first generic step at Bandarion Keep (Leonid, upstairs)
---   ud02-lvl-12          12.00 / 11.96  generic gate at the keep, before the hearth
---   ud02-hearth-2        12.01 / 12.00  back in the Brill inn: training at 12. ud02-carolai-2 (100 yd west of
+--   ud02-keep            11.66 / 11.60  first generic step at Bandarion Keep (Leonid, upstairs)
+--   ud02-lvl-12          11.97 / 11.91  generic gate at the keep, before the hearth
+--   ud02-hearth-2        12.01 / 12.01  back in the Brill inn: training at 12. ud02-carolai-2 (100 yd west of
 --                               the inn) is the last generic quest step of this visit
---   ud02-fp-uc           12.10 / 12.09  Undercity, Trade Quarter, after the generic quest step of the city:
+--   ud02-fp-uc           12.09 / 12.10  Undercity, Trade Quarter, after the generic quest step of the city:
 --                               trainers, weapon master, class quests
---   ud02-silverpine-road 12.10 / 12.09  last step
+--   ud02-silverpine-road 12.09 / 12.10  last step
 -- The paladin trainer Shari Stilwell stands outside the inn, next to the stables: 99144 (a quest for everyone)
 -- is turned in to her at ud02-shari-99144, and 99152 is a quest of Hilda the Breaker, a paladin trainer at the
 -- keep. The training inserts of the paladin file therefore follow these steps (and ud02-dillinger-report,
@@ -55,11 +58,9 @@
 -- Level gates (docs/dev/PLAN.md B.8), all plain and class-neutral (kills of the base profile, normal / worst):
 --   ud02-lvl-6     0 / 0  367 and 97558 need level 6; every class trains at 6 in Brill.
 --   ud02-level-10  0 / 0  96895 needs level 10; every class trains at 10 in Brill.
---   ud02-lvl-12    1 / 4  trainer-hub gate before the hearth to Brill: the trainers in Brill and in the
+--   ud02-lvl-12    3 / 9  trainer-hub gate before the hearth to Brill: the trainers in Brill and in the
 --                         Undercity have new ranks at 12, and the first Silverpine quests need 12 (421, gate
 --                         h13-lvl-12: 0 kills after this one).
--- A bg `complete` whose non-bg twin stands behind a trainer visit lets the engine fast-forward the training
--- steps of that visit (validator: skip-ahead). That is why ud02-rings-bg stands behind the level-10 visit.
 if not FastesBoooy.AddLibraryInsert then return end
 local _, ns = ...
 FastesBoooy.AddLibrarySegment({
@@ -77,9 +78,11 @@ FastesBoooy.AddLibrarySegment({
         { id = "ud02-gordo", accept = 5481, npc = 10666, at = { 1420, 43.06, 54.69 },
           note = { ru = "Гордо ходит по дороге между Мертвым Звоном и Бриллом — ищите его рядом.",
                    en = "Gordo walks the road between Deathknell and Brill - look for him nearby." } },
-        { id = "ud02-gloom-weed-bg", complete = 5481, bg = true, at = { 1420, 47.2, 53.3 },
-          note = { ru = "Попутно собирайте Мрачную траву (3) вдоль дороги до Брилла.",
-                   en = "Pick 3 Gloom Weed along the road to Brill." } },
+        -- 5481: the weed grows on both sides of the road all the way to Brill; the walk to Brill is the pass.
+        { id = "ud02-gloom-weed-bg", complete = 5481, at = { 1420, 50.3, 53.7 },
+          note = { ru = "По дороге на восток к Бриллу соберите 3 Мрачной травы: кусты растут по обе стороны дороги.",
+                   en = "On the road east to Brill, pick 3 Gloom Weed: the plants grow on both sides of the "
+                       .. "road." } },
         { id = "ud02-brill-gate", accept = { 86784, 404 }, npc = { 1742, 1496 }, at = { 1420, 58.35, 51.42 },
           note = { ru = "Вход в Брилл: стражники смерти Бартоломью и Диллинджер.",
                    en = "Brill entrance: Deathguards Bartholomew and Dillinger." } },
@@ -95,18 +98,22 @@ FastesBoooy.AddLibrarySegment({
         { id = "ud02-eleanor-2", turnin = 96607, accept = 96658, npc = 265812, at = { 1420, 57.28, 55.49 },
           note = { ru = "Элинор Шеклтон: следующее задание сдаётся у таверны Брилла.",
                    en = "Eleanor Shackleton: her next quest is turned in by the Brill inn." } },
+        -- 404 right here, before Brill: the Rotting Dead and Ravaged Corpses stand 180 yd west of the camp, and
+        -- the claws are turned in to Dillinger on the first visit (ud02-dillinger-report), not on a later trip.
+        { id = "ud02-putrid-claws", complete = 404, at = { 1420, 53.3, 54.4 },
+          note = { ru = "Гниющие мертвецы и растерзанные трупы к западу от лагеря: 7 гнилых когтей "
+                       .. "(сдаются Диллинджеру у входа в Брилл).",
+                   en = "Rotting Dead and Ravaged Corpses west of the camp: 7 Putrid Claws (turned in to Dillinger "
+                       .. "at the Brill entrance)." } },
         -- Requirement and trainer-hub gate: 367 (Johaan) and 97558 (Rear Guard camp) need level 6, and every
-        -- class trains at 6 in Brill. The base profile is at 6.29 here (0 kills), but about 1,700 XP of the way
-        -- to it are the estimated XP of the three camp quests (86784, 96656, 96607): the gate is the guarantee.
-        -- `at`: the Rotting Dead (5-6) and Ravaged Corpses (6-7) 180 yd west of the camp; they drop the claws
-        -- of 404.
+        -- class trains at 6 in Brill. Part of the XP of the way to it are the estimated XP of the three camp
+        -- quests (86784, 96656, 96607): the gate is the guarantee. `at`: the same Rotting Dead (5-6) and Ravaged
+        -- Corpses (6-7) as 404.
         { id = "ud02-lvl-6", level = 6, at = { 1420, 53.5, 54.2 },
           note = { ru = "6-й уровень перед Бриллом: он нужен для задания аптекаря Йохана, и у тренеров в Брилле "
-                       .. "новые умения. Не хватает — гниющие мертвецы и растерзанные трупы к западу от лагеря "
-                       .. "(с них же падают гнилые когти для 404).",
+                       .. "новые умения. Не хватает — бейте тех же гниющих мертвецов и растерзанные трупы.",
                    en = "Level 6 before Brill: Apothecary Johaan's quest needs it, and the trainers in Brill have "
-                       .. "new ranks. Short: the Rotting Dead and Ravaged Corpses west of the camp (they also drop "
-                       .. "the Putrid Claws for 404)." } },
+                       .. "new ranks. Short: more of the same Rotting Dead and Ravaged Corpses." } },
 
         ------------------------------------------------------------------
         -- Brill, first visit (level 6)
@@ -114,14 +121,20 @@ FastesBoooy.AddLibrarySegment({
         { id = "ud02-zygand-1", turnin = 383, accept = { 427, 99141, 99134 }, npc = 1515,
           at = { 1420, 60.59, 51.76 },
           note = { ru = "Палач Зиганд в центре Брилла.", en = "Executor Zygand in the middle of Brill." } },
-        { id = "ud02-motivator-bg", complete = 99134, bg = true, use = 286176, at = { 1420, 60.6, 52.2 },
-          note = { ru = "Используйте Мотиватор палача на 5 стражниках смерти в Брилле и вокруг него.",
-                   en = "Use the Executor's Motivator on 5 Deathguards in and around Brill." } },
+        -- 99134: seven Deathguards stand within 60 yd of Zygand (by him, at the stables and by the inn).
+        { id = "ud02-motivator-bg", complete = 99134, use = 286176, at = { 1420, 60.9, 52.3 },
+          note = { ru = "Сразу здесь: используйте Мотиватор палача (кнопка предмета) на 5 стражниках смерти — они "
+                       .. "стоят рядом с Зигандом, у конюшни и у таверны.",
+                   en = "Right here: use the Executor's Motivator (item button) on 5 Deathguards - they stand next "
+                       .. "to Zygand, at the stables and by the inn." } },
         { id = "ud02-johaan-1", accept = 367, npc = 1518, at = { 1420, 59.45, 52.40 },
           note = { ru = "Аптекарь Йохан (нужен 6-й уровень).", en = "Apothecary Johaan (needs level 6)." } },
-        { id = "ud02-dillinger-report", complete = { [99141] = { 1 } }, npc = 1496, at = { 1420, 58.2, 51.45 },
-          note = { ru = "Диллинджер у входа: попросите отчёт для палача Зиганда (вариант диалога).",
-                   en = "Dillinger at the entrance: ask for the report for Executor Zygand (gossip option)." } },
+        { id = "ud02-dillinger-report", complete = { [99141] = { 1 } }, turnin = 404, accept = 426, npc = 1496,
+          at = { 1420, 58.2, 51.45 },
+          note = { ru = "Диллинджер у входа: сдайте когти, возьмите его следующее задание (Мельницы Агамандов — "
+                       .. "позже, на северном круге) и попросите отчёт для палача Зиганда (вариант диалога).",
+                   en = "Dillinger at the entrance: turn in the claws, take his next quest (Agamand Mills - later, "
+                       .. "on the north loop) and ask for the report for Executor Zygand (gossip option)." } },
         { id = "ud02-sethearth", turnin = 8, sethearth = "Brill", npc = 5688, at = { 1420, 61.72, 52.05 },
           note = { ru = "Трактирщица Рене: сдайте письмо и сделайте таверну домом. В этой таверне стоят тренеры "
                        .. "большинства классов.",
@@ -137,31 +150,27 @@ FastesBoooy.AddLibrarySegment({
         { id = "ud02-rear-guard-1", complete = { [99141] = { 2 } }, accept = 97558, npc = { 251001, 3549 },
           at = { 1420, 65.34, 60.16 },
           note = { ru = "Лагерь к юго-востоку от Брилла: отчёт у Кристофа (вариант диалога), "
-                       .. "задание у Шелены Робарт.",
+                       .. "задание у Шелены Робарт (шкуры собираются на западном круге).",
                    en = "Camp south-east of Brill: report from Deathguard Kristof (gossip option), "
-                       .. "quest from Shelene Rhobart." } },
-        { id = "ud02-skins-bg", complete = 97558, bg = true, at = { 1420, 45.0, 52.0 },
-          note = { ru = "Попутно: перепонки с ночных мышей (8), шкуры гончих (6), шкуры мурлоков (3).",
-                   en = "Along the way: Duskbat Wing Membranes (8), Darkhound Hides (6), "
-                       .. "Vile Fin Murloc Skins (3)." } },
-        { id = "ud02-darkhound-blood-bg", complete = 367, bg = true, at = { 1420, 45.0, 54.0 },
-          note = { ru = "Попутно: кровь гончих (5) с дряхлых и проклятых гончих.",
-                   en = "Along the way: Darkhound Blood (5) from Decrepit and Cursed Darkhounds." } },
+                       .. "quest from Shelene Rhobart (the hides are collected on the west loop)." } },
 
         ------------------------------------------------------------------
         -- West loop: fields west of Brill, Solliden Farmstead (level 6-8)
         ------------------------------------------------------------------
-        { id = "ud02-putrid-claws", complete = 404, at = { 1420, 53.2, 55.0 },
-          note = { ru = "Гниющие мертвецы и Растерзанные трупы к западу от Брилла: 7 гнилых когтей.",
-                   en = "Rotting Dead and Ravaged Corpses west of Brill: 7 Putrid Claws." } },
+        -- The darkhounds and duskbats of 367 and 97558 (objectives 1, 2) live all along this loop; the step that
+        -- finishes them is ud02-darkhounds, the last field step before the hearth. 97558 objective 3 (murloc
+        -- skins) is ud02-murloc-skins.
         { id = "ud02-gordo-report", complete = { [99141] = { 3 } }, npc = 10666, at = { 1420, 43.06, 54.69 },
-          note = { ru = "Гордо на дороге: отчёт для Зиганда (вариант диалога).",
-                   en = "Gordo on the road: the report for Zygand (gossip option)." } },
-        { id = "ud02-scarlet-warriors-bg", complete = 427, bg = true, at = { 1420, 32.2, 47.3 },
-          note = { ru = "Алые воины (10) на ферме Соллиден.", en = "Scarlet Warriors (10) at Solliden Farmstead." } },
+          note = { ru = "Гордо на дороге на запад: отчёт для Зиганда (вариант диалога). По пути: гончие и ночные "
+                       .. "мыши — кровь гончих (5) для Йохана, шкуры гончих (6) и перепонки ночных мышей (8) для "
+                       .. "Шелены; доберёте к северо-востоку от фермы Соллиден.",
+                   en = "Gordo on the road west: the report for Zygand (gossip option). On the way: darkhounds and "
+                       .. "duskbats - Darkhound Blood (5) for Johaan, Darkhound Hides (6) and Duskbat Wing Membranes "
+                       .. "(8) for Shelene; you finish them north-east of Solliden Farmstead." } },
         { id = "ud02-pumpkins", complete = 365, at = { 1420, 36.4, 50.4 },
-          note = { ru = "Тыквы (10) на полях фермы Соллиден, между алыми воинами.",
-                   en = "10 Tirisfal Pumpkins in the Solliden Farmstead fields, among the Scarlet Warriors." } },
+          note = { ru = "Тыквы (10) на полях фермы Соллиден. По пути: алые воины (10) — доберёте у башни.",
+                   en = "10 Tirisfal Pumpkins in the Solliden Farmstead fields. On the way: the Scarlet Warriors "
+                       .. "(10) - you finish them by the tower." } },
         { id = "ud02-murloc-skins", complete = { [97558] = { 3 } }, at = { 1420, 32.7, 43.2 },
           note = { ru = "Мурлоки Гиблого Плавника на берегу озера к северу от фермы: 3 шкуры.",
                    en = "Vile Fin murlocs on the lake shore north of the farm: 3 skins." } },
@@ -179,9 +188,11 @@ FastesBoooy.AddLibrarySegment({
                        .. "Задание сдаётся в Брилле.",
                    en = "Escort: follow Bareth east out of the farmstead and protect him. "
                        .. "The quest is turned in at Brill." } },
-        { id = "ud02-darkhounds", complete = 367, at = { 1420, 41.0, 42.6 },
-          note = { ru = "Добейте гончих (и мышей для 97558) к северо-востоку от фермы.",
-                   en = "Finish the darkhounds (and duskbats for 97558) north-east of the farm." } },
+        { id = "ud02-darkhounds", complete = { 367, [97558] = { 1, 2 } }, at = { 1420, 41.0, 42.6 },
+          note = { ru = "Гончие и большие ночные мыши к северо-востоку от фермы: доберите кровь гончих (5), шкуры "
+                       .. "гончих (6) и перепонки ночных мышей (8).",
+                   en = "Darkhounds and Greater Duskbats north-east of the farm: finish the Darkhound Blood (5), "
+                       .. "Darkhound Hides (6) and Duskbat Wing Membranes (8)." } },
         { id = "ud02-hearth-1", hearth = "Brill", at = { 1420, 61.72, 52.05 },
           note = { ru = "Камень возвращения в Брилл.", en = "Hearth to Brill." } },
 
@@ -212,8 +223,6 @@ FastesBoooy.AddLibrarySegment({
                        .. "тренеры большинства классов.",
                    en = "Coleman Farthing and Gretchen Dedmar in the inn (need level 7). The trainers "
                        .. "of most classes stand here." } },
-        { id = "ud02-dillinger-2", turnin = 404, accept = 426, npc = 1496, at = { 1420, 58.2, 51.45 },
-          note = { ru = "Диллинджер у входа в Брилл.", en = "Dillinger at the Brill entrance." } },
         { id = "ud02-holland-2", turnin = 5481, accept = 5482, npc = 10665, at = { 1420, 57.44, 48.85 },
           note = { ru = "Младший аптекарь Холланд на северо-западной окраине Брилла.",
                    en = "Junior Apothecary Holland on the north-west edge of Brill." } },
@@ -221,41 +230,46 @@ FastesBoooy.AddLibrarySegment({
         ------------------------------------------------------------------
         -- North loop: gnolls, Garren's Haunt, coast, Agamand Mills (level 8-10)
         ------------------------------------------------------------------
-        { id = "ud02-pelts-bg", complete = 375, bg = true, at = { 1420, 62.8, 42.4 },
-          note = { ru = "Попутно: шкуры ночных мышей (5).", en = "Along the way: Duskbat Pelts (5)." } },
-        { id = "ud02-doom-weed-bg", complete = 5482, bg = true, at = { 1420, 57.3, 38.5 },
-          note = { ru = "Попутно: Роковая трава (10) на полях к северу от Брилла.",
-                   en = "Along the way: Doom Weed (10) in the fields north of Brill." } },
+        -- The Doom Weed grows among the gnolls: both in the fields north of Brill, before Garren's Haunt. The
+        -- Duskbat Pelts of 375 are finished by ud02-pelts on the way back from Agamand Mills.
+        { id = "ud02-doom-weed", complete = 5482, at = { 1420, 57.1, 39.5 },
+          note = { ru = "Роковая трава (10) на полях к северу от Брилла. По пути: гноллы Гнилошкуры для Севрена "
+                       .. "(доберёте шагом ниже) и большие ночные мыши — шкуры (5) для Гретхен, доберёте по дороге "
+                       .. "назад в Брилл.",
+                   en = "Doom Weed (10) in the fields north of Brill. On the way: the Rot Hide gnolls for Sevren "
+                       .. "(you finish them in the next step) and Greater Duskbats - Duskbat Pelts (5) for "
+                       .. "Gretchen, finished on the way back to Brill." } },
         { id = "ud02-gnolls", complete = 358, at = { 1420, 57.6, 38.0 },
-          note = { ru = "Гноллы Гнилошкуры к северу от Брилла: 8 грабителей могил, 5 дворняг и 8 бальзамирующих "
-                       .. "жидкостей.",
-                   en = "Rot Hide gnolls north of Brill: 8 Graverobbers, 5 Mongrels and 8 Embalming Ichor." } },
+          note = { ru = "Добейте гноллов Гнилошкуров в тех же полях: 8 грабителей могил, 5 дворняг (они ближе "
+                       .. "к Гарренской Тени) и 8 бальзамирующих жидкостей.",
+                   en = "Finish the Rot Hide gnolls in the same fields: 8 Graverobbers, 5 Mongrels (closer to "
+                       .. "Garren's Haunt) and 8 Embalming Ichor." } },
         { id = "ud02-maggot-eye", complete = 398, npc = 1753, at = { 1420, 58.66, 30.77 },
           note = { ru = "Глаз Личинки (11 ур.) в Гарренской Тени. Подтяните его по одному и приберегите "
                        .. "защитное умение на случай беды.",
                    en = "Maggot Eye (level 11) at Garren's Haunt. Pull him alone and keep a defensive cooldown "
                        .. "for emergencies." } },
         { id = "ud02-coast-murlocs", complete = 368, at = { 1420, 60.3, 27.9 },
-          note = { ru = "Мурлоки Гиблого Плавника на северном берегу: 5 чешуек (и шкуры для 97558).",
-                   en = "Vile Fin murlocs on the north coast: 5 scales (and skins for 97558)." } },
-        { id = "ud02-doom-weed", complete = 5482, at = { 1420, 57.3, 36.0 },
-          note = { ru = "Доберите Роковую траву на обратном пути на юг.", en = "Finish the Doom Weed heading back south." } },
-        { id = "ud02-agamand-bones-bg", complete = 426, bg = true, at = { 1420, 47.3, 36.0 },
-          note = { ru = "Скелеты Мельниц Агамандов: 5 зазубренных рёбер и 3 почерневших черепа. С них может "
-                       .. "выпасть Письмо Иветте — сохраните его.",
-                   en = "Agamand Mills skeletons: 5 Notched Ribs and 3 Blackened Skulls. They may drop "
-                       .. "A Letter to Yvette: keep it." } },
-        { id = "ud02-devlin", complete = 362, npc = 1657, at = { 1420, 47.23, 40.02 },
-          note = { ru = "Девлин Агаманд (9) у южных мельниц.", en = "Devlin Agamand (9) by the southern mills." } },
+          note = { ru = "Мурлоки Гиблого Плавника на северном берегу: 5 чешуек.",
+                   en = "Vile Fin murlocs on the north coast: 5 scales." } },
+        -- Agamand Mills in one sweep from the coast: east (Nissa), north (Gregor), west (Thurman), then the
+        -- southern mills (Devlin), where the skeletons of 426 are finished on the way out to Brill.
         { id = "ud02-nissa", complete = { [354] = { 2 } }, npc = 1655, at = { 1420, 49.74, 36.34 },
-          note = { ru = "Нисса Агаманд (10) — восточная часть деревни.", en = "Nissa Agamand (10) in the east of the village." } },
+          note = { ru = "С берега на юго-запад в Мельницы Агамандов: Нисса Агаманд (10) в восточной части деревни. "
+                       .. "По пути: скелеты — 5 зазубренных рёбер и 3 почерневших черепа для Диллинджера, доберёте "
+                       .. "у южных мельниц. С них может выпасть Письмо Иветте — сохраните его.",
+                   en = "From the coast south-west into Agamand Mills: Nissa Agamand (10) in the east of the "
+                       .. "village. On the way: the skeletons - 5 Notched Ribs and 3 Blackened Skulls for "
+                       .. "Dillinger, finished by the southern mills. They may drop A Letter to Yvette: keep it." } },
         { id = "ud02-gregor", complete = { [354] = { 1 } }, npc = 1654, at = { 1420, 45.79, 29.39 },
           note = { ru = "Грегор Агаманд (10) на севере деревни.", en = "Gregor Agamand (10) in the north of the village." } },
         { id = "ud02-thurman", complete = { [354] = { 3 } }, npc = 1656, at = { 1420, 42.84, 32.54 },
           note = { ru = "Турман Агаманд (10) на западе.", en = "Thurman Agamand (10) in the west." } },
+        { id = "ud02-devlin", complete = 362, npc = 1657, at = { 1420, 47.23, 40.02 },
+          note = { ru = "Девлин Агаманд (9) у южных мельниц.", en = "Devlin Agamand (9) by the southern mills." } },
         { id = "ud02-agamand-bones", complete = 426, at = { 1420, 47.6, 40.5 },
-          note = { ru = "Добейте рёбра и черепа, затем идите обратно в Брилл, убивая ночных мышей по пути.",
-                   en = "Finish the ribs and skulls, then head back to Brill killing duskbats on the way." } },
+          note = { ru = "Добейте рёбра и черепа у южных мельниц, затем идите обратно в Брилл.",
+                   en = "Finish the ribs and skulls by the southern mills, then head back to Brill." } },
         { id = "ud02-pelts", complete = 375, at = { 1420, 48.2, 47.1 },
           note = { ru = "Доберите шкуры ночных мышей по дороге в Брилл.", en = "Finish the Duskbat Pelts on the way to Brill." } },
 
@@ -311,12 +325,8 @@ FastesBoooy.AddLibrarySegment({
         ------------------------------------------------------------------
         -- East loop: Rear Guard, Argent emissary, Balnir Farmstead, Venomweb Vale (level 10-12)
         ------------------------------------------------------------------
-        -- The bg goal of 374 stands behind the level-10 visit of Brill on purpose: a bg `complete` in front of
-        -- it would let the later ud02-rings fast-forward every training step of that visit (validator:
-        -- skip-ahead). The rings of Perrine's camp are named in the note of ud02-perrine.
-        { id = "ud02-rings-bg", complete = 374, bg = true, at = { 1420, 79.2, 56.1 },
-          note = { ru = "Попутно: Алые кольца с печатью (10) со всех бойцов Алого ордена.",
-                   en = "Along the way: Scarlet Insignia Rings (10) from all Scarlet Crusade mobs." } },
+        -- 374: the rings drop from every Scarlet mob: Perrine's camp (named in ud02-perrine), Vachon's camp, and
+        -- the friars north of the spiders, where ud02-rings finishes them.
         { id = "ud02-rear-guard-2", turnin = { 97558, 359 }, accept = { 360, 356 }, npc = { 3549, 1495 },
           at = { 1420, 65.46, 60.18 },
           note = { ru = "Шелена Робарт и Линнея.", en = "Shelene Rhobart and Linnea." } },
@@ -335,14 +345,17 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "Ферма Бальнира: кровоточащие ужасы и блуждающие духи (по 8), Могильная трава (5).",
                    en = "Balnir Farmstead: Bleeding Horrors and Wandering Spirits (8 each), 5 Tomb Weed." } },
         { id = "ud02-vachon", complete = 371, at = { 1420, 79.2, 56.1 },
-          note = { ru = "Лагерь Алого ордена к северо-востоку от фермы: капитан Вашон (11) и 5 монахов.",
-                   en = "Scarlet camp north-east of the farm: Captain Vachon (11) and 5 Scarlet Friars." } },
+          note = { ru = "Лагерь Алого ордена к северо-востоку от фермы: капитан Вашон (11) и 5 монахов. Собирайте с "
+                       .. "них Алые кольца с печатью (374).",
+                   en = "Scarlet camp north-east of the farm: Captain Vachon (11) and 5 Scarlet Friars. Loot their "
+                       .. "Scarlet Insignia Rings (374)." } },
         { id = "ud02-venomweb", complete = 369, at = { 1420, 86.6, 52.0 },
           note = { ru = "Долина Ядовитой Паутины: 4 яда свирепых пауков.",
                    en = "Venomweb Vale: 4 Vicious Night Web Spider Venoms." } },
         { id = "ud02-rings", complete = 374, at = { 1420, 86.9, 43.2 },
-          note = { ru = "Если колец меньше 10 — монахи и фанатики к северу от пауков.",
-                   en = "Short on rings: Friars and Zealots just north of the spiders." } },
+          note = { ru = "Доберите Алые кольца с печатью (10): монахи и фанатики к северу от пауков.",
+                   en = "Finish the Scarlet Insignia Rings (10): the Friars and Zealots just north of the "
+                       .. "spiders." } },
         { id = "ud02-linnea", turnin = 356, npc = 1495, at = { 1420, 65.49, 60.25 },
           note = { ru = "Линнея (продолжение про Рваноклыка — элитное, пропустите).",
                    en = "Linnea (skip the Riptear follow-up: elite)." } },
@@ -393,23 +406,28 @@ FastesBoooy.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Shadowvale (level 12)
         ------------------------------------------------------------------
-        -- The two along-the-way goals stay the last steps in front of ud02-crystal: a class file that has a
-        -- blocking step in Shadowvale anchors it after ud02-elixir-bg (the engine lists only the bg steps in
-        -- front of the cursor), a class file with bg goals of its own anchors them after ud02-ephram.
-        { id = "ud02-bones-bg", complete = 99152, bg = true, at = { 1420, 11.5, 65.5 },
-          note = { ru = "Слабо светящиеся кости (6) с бродяг и мистиков Тенистой долины.",
-                   en = "Faintly Glowing Bones (6) from Shadowvale Lurchers and Mystics." } },
-        { id = "ud02-elixir-bg", complete = 95314, bg = true, at = { 1420, 10.2, 65.5 },
-          note = { ru = "Бутылки с шепчущим эликсиром (8) на земле и на стенах.",
-                   en = "Bottles of Whispering Elixir (8) on the ground and on the walls." } },
+        -- One pass: the bottles (objects) in the middle of the vale on the way in, the crystal at the south end,
+        -- the bones (Lurchers and Mystics, all over the middle) finished on the way back. A class file puts a goal
+        -- at the entrance of the vale after ud02-ephram, its object goals of the middle after ud02-elixir-bg and
+        -- the kills it finishes on the way back after ud02-shadowvale. ud02-elixir-bg keeps its old id: the
+        -- paladin file and the layout spec anchor on it.
+        { id = "ud02-elixir-bg", complete = 95314, at = { 1420, 10.2, 66.2 },
+          note = { ru = "Соберите 8 бутылок шепчущего эликсира — на земле и на стенах в середине Тенистой долины. "
+                       .. "По пути: бродяги и мистики Тенистой долины — слабо светящиеся кости (6) для Хильды, "
+                       .. "доберёте на обратном пути.",
+                   en = "Collect 8 Bottles of Whispering Elixir - on the ground and on the walls in the middle of "
+                       .. "Shadowvale. On the way: Shadowvale Lurchers and Mystics - Faintly Glowing Bones (6) for "
+                       .. "Hilda, finished on the way back." } },
         { id = "ud02-crystal", complete = 99153, object = 694895, at = { 1420, 9.74, 69.43 },
           note = { ru = "Светящийся осколок кристалла лежит внизу, на юге Тенистой долины. Шепчущие ужасы — "
                        .. "элита, обходите.",
                    en = "The Glowing Crystal Fragment lies down below in the south of Shadowvale. Whispering "
                        .. "Horrors are elite: avoid them." } },
-        { id = "ud02-shadowvale", complete = { 99152, 95314 }, at = { 1420, 11.5, 65.5 },
-          note = { ru = "Добейте всё в Тенистой долине и возвращайтесь в крепость.",
-                   en = "Finish everything in Shadowvale and head back to the keep." } },
+        { id = "ud02-shadowvale", complete = 99152, at = { 1420, 11.5, 65.5 },
+          note = { ru = "На обратном пути через середину долины добейте бродяг и мистиков: слабо светящиеся кости (6). "
+                       .. "Потом — в крепость.",
+                   en = "On the way back through the middle of the vale, finish the Lurchers and Mystics: Faintly "
+                       .. "Glowing Bones (6). Then back to the keep." } },
         { id = "ud02-ephram-2", turnin = 99153, npc = 259190, at = { 1420, 20.17, 46.49 },
           note = { ru = "Эфрам Барбаро.", en = "Ephram Barbaro." } },
         { id = "ud02-hilda-2", turnin = 99152, npc = 246389, at = { 1420, 21.96, 47.25 },

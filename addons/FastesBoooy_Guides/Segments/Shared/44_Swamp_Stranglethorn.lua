@@ -24,9 +24,9 @@
 -- Hub plan (Forever DB; no quest of the segment is limited to a race or class):
 --   GG 0 : sethearth Grom'gol; 572 (Mok'thardin), 584 (Nimboya), 598 (Kin'weelay); Bloodscalp chiefs (584) and
 --          Nesingwary 196 + 193 on the way north (the camp is on the road to Duskwood).
---   SW 1 : Stonard: fp, 1420 (Helgrum), 1424 (Fel'zerul), 698 + 1430 (Dar); crocolisks (698), Pool of Tears (1424),
---          east coast crawlers (1430); Tok'Kar 698 > 699; north-east snappers (699) + crawlers; Galen 1393 (escort) >
---          strongbox; Stonard 1424 > 1429 (carried to the Hinterlands, h-50), 1430.
+--   SW 1 : Stonard: fp, 1420 (Helgrum), 1424 (Fel'zerul), 698 + 1430 (Dar); crocolisks between Stonard and the lake
+--          (698), Pool of Tears (1424); Tok'Kar 698 > 699; east coast crawlers (1430) + north-east snappers (699);
+--          Galen 1393 (escort) > strongbox; Stonard 1424 > 1429 (carried to the Hinterlands, h-50), 1430.
 --   SW 2 : Tok'Kar 699 > 1422 > Katar 1426 (murlocs, inkspewers, flesheaters) > 1427 > Tok'Kar > Katar 1428
 --          (inkspewers, flesheaters, oracles) > Katar; hearth Grom'gol.
 --   GG 1 : cauldron 584 > 585 + 586; Jungle Stalkers (572, 196); Mok'thardin 572 > 571; fly Booty Bay.
@@ -35,7 +35,8 @@
 --   M 1  : Unbagwa 349; Elder Mistvale Gorillas (571, 606, 349 fang); Unbagwa 349 > Mokk (348); Shaky 606 > 607.
 --   BB 2 : MacKinley 607 > 609; Fin 348; Crazz 597 > 599 + Dizzy 576 + Deeg 587; Seahorn 599 > 604.
 --   E    : Ruins of Aboraz (621, 609), Venture Co. mine (600), Zul'Mamwe (586, 585 #3), Ziata'jai (585 #2), Balia'mah
---          (585 #1), necklaces (598) and tusks (209) from every Skullsplitter, Bhag'thera (193); Nesingwary 196, 193.
+--          (585 #1), necklaces (598) and tusks (209) from every Skullsplitter (finished in Balia'mah, the last ruins),
+--          Bhag'thera (193); Nesingwary 196, 193.
 --   GG 2 : 585 + 586 > 588 > 589, 598; 571 > 573; basilisks (589), naga explorers + Holy Spring (573, 617);
 --          GG 3: 573, 589; hearth Booty Bay.
 --   BB 3 : 209, 600 + 621, 617, 609; pirates south of Booty Bay (604, 576, 587), level gate; 576, 587, 604 > 608;
@@ -63,7 +64,7 @@
 --   Bangalash ELITE), 577 (level 36), 580 (level 50), 8551 (Gorlash ELITE), 670 (back to Arathi), 2760-2765 (Galvan,
 --   blacksmithing), 1115-1122 (Dream Dust / Goblin Sponsorship chains, other zones).
 -- XP (validator, 44.02 -> 46.01): quests 120 k (Classic values; 7.8 k of it estimated for 1422 / 349, which have no XP
---   in the data and are before the end gate), objective kills ~60 k, the rest ~48 k (~180 same-level kills) from the
+--   in the data and are before the end gate), objective kills ~60 k, the rest ~50 k (~186 same-level kills) from the
 --   end gate h-44-swamp-stranglethorn-level-gate (Bloodsail pirates 43-45 south of Booty Bay, 45 + 90%); the turn-ins
 --   after it (576, 587, 604, 608) make 46.0. Densification pass (34-46): the optional gate h44-level-swamp (Monstrous
 --   Crawlers 43-44 east of Katar, 44 + 75%) is gone - it only moved part of the grind to a lower level; added 1372
@@ -159,25 +160,24 @@ FastesBoooy.AddLibrarySegment({
                        .. "чудовищных крабов (восточный берег).",
                    en = "Dar by the west entrance: 8 Sawtooth Flanks (crocolisks and snappers) and 10 Monstrous "
                        .. "Crawler Legs (east coast)." } },
-        { complete = 698, bg = true, at = { 1435, 55.33, 44.98 },
-          note = { ru = "Попутно: острозубые кроколиски (38-39, между Каменором и озером) и крепкохваты (41-42, "
-                       .. "восток) - бока.",
-                   en = "On the way: Sawtooth Crocolisks (38-39, between Stonard and the lake) and Snappers (41-42, "
-                       .. "east) - flanks." } },
+        { id = "h44-sawtooth-flanks", complete = 698, at = { 1435, 55.20, 50.20 },
+          note = { ru = "На восток к Озеру Слез; по пути, между Каменором и озером, острозубые кроколиски (38-39) - 8 "
+                       .. "боков. Дальше к востоку кроколисков нет: доберите здесь.",
+                   en = "East towards the Pool of Tears; on the way, between Stonard and the lake, Sawtooth Crocolisks "
+                       .. "(38-39) - 8 flanks. There are no crocolisks further east: finish them here." } },
         { id = "h-44-swamp-of-sorrows", complete = 1424, object = { 30854, 30855, 30856 }, at = { 1435, 70.42, 53.20 },
           note = { ru = "Озеро Слез у Храма Атал'Хаккара: 10 артефактов на берегах и мелководье. Драконоиды 41-45 "
                        .. "вокруг - по одному.",
                    en = "The Pool of Tears by the Temple of Atal'Hakkar: 10 artifacts on the shores and in the "
                        .. "shallows. The dragonkin around are 41-45 - one at a time." } },
-        { complete = 1430, bg = true, at = { 1435, 96.53, 61.30 },
-          note = { ru = "Попутно: чудовищные крабы (43-44) по всему восточному берегу - ножки.",
-                   en = "On the way: Monstrous Crawlers (43-44) all along the east coast - legs." } },
         { id = "h-44-tok-kar-katar", turnin = 698, accept = 699, npc = 5592, at = { 1435, 81.32, 80.97 },
-          note = { ru = "По берегу на юг к Ток'Кару (Берег Туманного Тростника): 6 когтей острозубых крепкохватов.",
-                   en = "South along the coast to Tok'Kar (Misty Reed Strand): 6 Sawtooth Snapper Claws." } },
+          note = { ru = "На юго-восток к Ток'Кару (Берег Туманного Тростника): 6 когтей острозубых крепкохватов.",
+                   en = "South-east to Tok'Kar (Misty Reed Strand): 6 Sawtooth Snapper Claws." } },
         { complete = { 699, 1430 }, at = { 1435, 87.52, 20.53 },
-          note = { ru = "По восточному берегу на север: крепкохваты (когти) и крабы (ножки) до северо-востока.",
-                   en = "North along the east coast: snappers (claws) and crawlers (legs) up to the north-east." } },
+          note = { ru = "По восточному берегу на север: чудовищные крабы (43-44) по всему берегу - 10 ножек, крепкохваты "
+                       .. "(41-42) на северо-востоке - 6 когтей.",
+                   en = "North along the east coast: Monstrous Crawlers (43-44) all along the shore - 10 legs, Sawtooth "
+                       .. "Snappers (41-42) in the north-east - 6 claws." } },
         { id = "h-44-galen-goodward", accept = 1393, complete = 1393, npc = 5391, at = { 1435, 65.47, 18.16 },
           note = { ru = "На запад: Гален Добростраж в клетке в лагере Заблудших. Сопроводите его (Заблудшие 36-39 "
                        .. "нападают по пути).",
@@ -290,6 +290,7 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "Унбагва вызывает три волны горилл, последняя - Мокк Дикарь (44).",
                    en = "Unbagwa summons three waves of gorillas, the last one is Mokk the Savage (44)." } },
         { complete = 348, at = { 1434, 35.05, 60.88 },
+          ok = "travel-revisit", -- Mokk appears only when 349 is turned in (the gorilla fangs of the step above)
           note = { ru = "Убейте Мокка - сердце.", en = "Kill Mokk - the heart." } },
         { id = "h44-bootybay-606", turnin = 606, accept = 607, npc = 2502, at = { 1434, 26.90, 73.59 },
           note = { ru = "На юг к Филиппу «Трусишке» у причала к северу от Бухты.",
@@ -313,29 +314,28 @@ FastesBoooy.AddLibrarySegment({
         { id = "h44-bootybay-599", turnin = 599, accept = 604, npc = 2487, at = { 1434, 27.17, 77.01 },
           note = { ru = "Морской Рог: 10 висельников, карты и приказы - в конце, к югу от Бухты.",
                    en = "Seahorn: 10 Swashbucklers, the charts and the orders - at the end, south of Booty Bay." } },
-        { complete = { 576, 587 }, bg = true, at = { 1434, 29.01, 70.27 },
-          note = { ru = "Попутно: пираты Кровавого Паруса на берегу - понюшка и глаз Диззи.",
-                   en = "On the way: Bloodsail pirates on the coast - snuff and Dizzy's eye." } },
 
         ------------------------------------------------------------------
         -- Ruins of Aboraz, Venture Co. mine, Skullsplitter ruins, Nesingwary (45)
         ------------------------------------------------------------------
         { id = "h-44-yenniku", complete = { 621, 609 }, at = { 1434, 38.06, 55.92 },
           note = { ru = "На север к руинам Абораза (у Йеннику): смесь Занзила со всех его троллей и наг; Моури и "
-                       .. "Джон-Джон на западе руин, Чаки у Йеннику.",
+                       .. "Джон-Джон на западе руин, Чаки у Йеннику. По пути из Бухты: пираты Кровавого Паруса в лагере "
+                       .. "на берегу (28,70) - понюшка и глаз Диззи (доберёте в конце, к югу от Бухты).",
                    en = "North to the Ruins of Aboraz (by Yenniku): Zanzil's Mixture from all his trolls and naga; "
-                       .. "Maury and Jon-Jon on the west side, Chucky by Yenniku." } },
+                       .. "Maury and Jon-Jon on the west side, Chucky by Yenniku. On the way out of Booty Bay: the "
+                       .. "Bloodsail pirates in the camp on the shore (28,70) - snuff and Dizzy's eye (finished at the end, "
+                       .. "south of Booty Bay)." } },
         { id = "h45-venture-mine", complete = 600, at = { 1434, 41.66, 43.70 },
           note = { ru = "На север к руднику Торговой компании: горнорабочие - 10 синих кристаллов.",
                    en = "North to the Venture Co. mine: Strip Miners - 10 Singing Blue Crystals." } },
-        { complete = { 598, 209 }, bg = true, at = { 1434, 45.22, 36.19 },
-          note = { ru = "Попутно: все Дробители Черепов - ожерелья (25) и клыки (18).",
-                   en = "On the way: every Skullsplitter troll - necklaces (25) and tusks (18)." } },
         { complete = 586, at = { 1434, 46.38, 43.20 },
           note = { ru = "Руины Зул'Мамве на востоке: 8 охотников, 6 охотников за головами, 4 берсерка; Анатек Жестокий "
-                       .. "(45) - доспех.",
+                       .. "(45) - доспех. С этого места каждый Дробитель Черепов роняет ожерелья (25) и клыки (18): "
+                       .. "собирайте во всех руинах, доберёте в Балиа'ма.",
                    en = "The Ruins of Zul'Mamwe to the east: 8 Hunters, 6 Headhunters, 4 Berserkers; Ana'thek the "
-                       .. "Cruel (45) - the armor." } },
+                       .. "Cruel (45) - the armor. From here on every Skullsplitter troll drops necklaces (25) and tusks "
+                       .. "(18): loot them in all the ruins, finish them in Balia'mah." } },
         { complete = { [585] = { 3 } }, object = 2893, at = { 1434, 47.65, 39.54 },
           note = { ru = "Трофейные черепа в северной части Зул'Мамве.",
                    en = "The trophy skulls in the north part of Zul'Mamwe." } },
@@ -345,8 +345,11 @@ FastesBoooy.AddLibrarySegment({
         { complete = { [585] = { 1 } }, object = 2891, at = { 1434, 46.13, 32.33 },
           note = { ru = "На северо-восток: черепа в руинах Балиа'ма.",
                    en = "North-east: the skulls in the Balia'mah Ruins." } },
-        { complete = { 598, 209 }, at = { 1434, 45.22, 36.19 },
-          note = { ru = "Доберите ожерелья и клыки в руинах.", en = "Finish the necklaces and tusks in the ruins." } },
+        { id = "h45-skullsplitter-loot", complete = { 598, 209 }, at = { 1434, 45.80, 32.60 },
+          note = { ru = "Здесь же, в Балиа'ма (последние руины Дробителей Черепов по пути): доберите 25 ожерелий и 18 "
+                       .. "клыков.",
+                   en = "Right here in Balia'mah (the last Skullsplitter ruins on the way): finish the 25 necklaces and 18 "
+                       .. "tusks." } },
         { complete = 193, at = { 1434, 48.67, 24.16 },
           note = { ru = "Севернее: Баг'тира (элитная пантера 40, в незаметности) бродит у холмов - клык. Вы на 5 "
                        .. "уровней выше; не по силам - бросьте 193.",
@@ -401,13 +404,15 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "Маккинли. «Вскрыть ногу Моури» (613) не берите: ключ падает с элитных огров Мош'Огг.",
                    en = "MacKinley. Skip Cracking Maury's Foot (613): the key drops from the elite Mosh'Ogg ogres." } },
         { id = "h46-pirate-camp", complete = { 604, 576, 587 }, at = { 1434, 28.20, 82.21 },
-          note = { ru = "Лагерь пиратов к югу от Бухты: карты и приказы на столах, висельники, понюшка, глаз Диззи.",
-                   en = "The pirate camp south of Booty Bay: the charts and orders on the tables, Swashbucklers, "
-                       .. "snuff, Dizzy's eye." } },
+          note = { ru = "Лагерь пиратов к югу от Бухты: карты и приказы на столах, 10 висельников; с пиратов доберите 15 "
+                       .. "понюшек и глаз Диззи.",
+                   en = "The pirate camp south of Booty Bay: the charts and orders on the tables, 10 Swashbucklers; finish "
+                       .. "the 15 Snuff and Dizzy's eye from the pirates." } },
         -- level-grind of the next step (acknowledged with `ok`): end-of-segment gate of the plan, the only grind of the segment; the
         -- turn-ins after it make 46.0 (the hand-off level of h-46).
         { id = "h-44-swamp-stranglethorn-level-gate", level = { 45, 0.90 }, at = { 1434, 28.20, 82.21 },
-          ok = { ["level-grind"] = 180 }, -- 177 / 178 kills in the normal run (reason above)
+          ok = { ["level-grind"] = 190 }, -- 185 / 186 kills in the normal run (reason above; the optional Uldaman turn-in
+                                         -- of h-41 now comes before the h-41 gate, so less XP arrives after it)
           note = { ru = "Цель: 45 + 90% (сдачи ниже дадут 46 - уровень Танариса). Не хватает - пираты Кровавого Паруса "
                        .. "здесь и вдоль берега (морские волки и волхвы 43-45). В группе быстрее: Зул'Фаррак (Танарис).",
                    en = "Target: 45 + 90% (the turn-ins below make 46, the level for Tanaris). Short: the Bloodsail "

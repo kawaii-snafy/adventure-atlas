@@ -14,12 +14,12 @@
 --
 -- Anchors for class files (docs/dev/PLAN.md C.2; level of the base profile before the step):
 --   ud01-364       2.42  Sarvis hands out the letter of the class here (its quest needs 364); first training
---   ud01-church-4  3.74  the turn-ins of this step give level 4.0 (gate ud01-xp-4): training at 4
---   ud01-aramis    4.03  the optional accept of 98389 at Aramis: the last generic step in the church. A class
+--   ud01-church-4  3.71  the turn-ins of this step give level 4.0 (gate ud01-xp-4): training at 4
+--   ud01-aramis    4.01  the optional accept of 98389 at Aramis: the last generic step in the church. A class
 --                        whose trainer is Aramis (the paladin) puts its training after this step, not after
 --                        ud01-church-4 (look-ahead rule); for the others both anchors work
---   ud01-381       5.33  last visit of the Deathknell trainers (start-camp trainers teach up to level 6)
---   ud01-382       5.51  the last turn-in in the village; ud01-end (Calvin Montague, on the road) follows
+--   ud01-381       5.32  last visit of the Deathknell trainers (start-camp trainers teach up to level 6)
+--   ud01-382       5.50  the last turn-in in the village; ud01-end (Calvin Montague, on the road) follows
 -- Trainers: priest, mage, warlock and paladin in the church (next to Sarvis); warrior and rogue in the house
 -- across the road (next to the vendor Joshua Kien).
 --
@@ -65,14 +65,13 @@ FastesBoooy.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Loop 1 around the village (level 2-3)
         ------------------------------------------------------------------
-        { id = "ud01-skeletons-bg", complete = 3901, bg = true, at = { 1420, 33.0, 61.7 },
-          note = { ru = "Попутно бейте скелетов из Гремучей Клетки.",
-                   en = "Kill Rattlecage Skeletons whenever you pass them." } },
         { id = "ud01-damned", complete = 376, at = { 1420, 30.5, 61.0 },
           note = { ru = "Молодые падальщики и сумеречные мыши к западу и северу от церкви: "
-                       .. "6 лап падальщика и 6 крыльев сумеречной мыши.",
+                       .. "6 лап падальщика и 6 крыльев сумеречной мыши. По пути: скелеты из Гремучей Клетки "
+                       .. "на кладбище к северу — доберёте их шагом ниже.",
                    en = "Young Scavengers and Duskbats west and north of the church: "
-                       .. "6 Scavenger Paws and 6 Duskbat Wings." } },
+                       .. "6 Scavenger Paws and 6 Duskbat Wings. On the way: the Rattlecage Skeletons in the "
+                       .. "graveyard to the north - you finish them in the next step." } },
         { id = "ud01-skeletons", complete = 3901, at = { 1420, 33.0, 61.7 },
           note = { ru = "Добейте 8 скелетов на кладбище к северу от церкви.",
                    en = "Finish the 8 Rattlecage Skeletons in the graveyard north of the church." } },
@@ -152,8 +151,9 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "Убейте Сэмюэла Фиппса (5 ур.) к северу от лагеря и заберите его останки.",
                    en = "Kill Samuel Fipps (level 5) north of the camp and loot Samuel's Remains." } },
         { id = "ud01-marla-grave", complete = 6395, object = 178090, at = { 1420, 31.17, 65.08 },
-          note = { ru = "Вернитесь в деревню и кликните Могилу Марлы у церкви.",
-                   en = "Back in the village, click Marla's Grave by the church." } },
+          ok = "travel-revisit", -- the grave takes Samuel's Remains: Fipps (ud01-fipps) dies after 6395 is taken
+          note = { ru = "Вернитесь в деревню и кликните Могилу Марлы у церкви: в неё кладут останки Сэмюэла.",
+                   en = "Back in the village, click Marla's Grave by the church: Samuel's Remains go into it." } },
         { id = "ud01-6395", turnin = 6395, npc = 1661, at = { 1420, 30.86, 66.05 },
           note = { ru = "Послушница Элрет в церкви.", en = "Novice Elreth in the church." } },
         { id = "ud01-381", turnin = 381, accept = 382, npc = 1570, at = { 1420, 32.15, 66.01 },

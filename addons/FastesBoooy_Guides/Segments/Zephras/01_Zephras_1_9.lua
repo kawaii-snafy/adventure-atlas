@@ -2,10 +2,13 @@
 -- Segment "sd-01-zephras": Zephras Isle (uiMap 2521), levels 1-9, the start zone of the Skyborne (Windshaper
 -- side). Class-neutral: every Skyborne class walks it; what exists because of a class (the level-1 letter, the
 -- training visits, class gear, reward choices) is in Classes/<Class>.lua as shared inserts on the anchors below.
--- Thendal Grove (start; hearth back to the camp at 3) -> ursera den -> Al'Aketh camp -> Shen'dar Village (loops:
--- NE highlands, SW hippogryph vale + Vulgara, then straight down to Falaath and back up for one combined Shen'dar
--- visit, western watchtower + Falaath) -> ends at Constable Aonda with 92579 + 93948 (both lead to Valanaar) in
--- the quest log.
+-- Thendal Grove (start; hearth back to the camp at 3) -> ursera den -> Al'Aketh camp -> Galestrider meat and eggs
+-- on the walk south -> Shen'dar Village (92553 taken and turned in at once; loops: NE highlands with the Prideclaw
+-- pelts on the way back, SW hippogryph vale + Vulgara, then straight down to Falaath and back up for one combined
+-- Shen'dar visit, western watchtower + Falaath) -> ends at Constable Aonda with 92579 + 93948 (both lead to
+-- Valanaar) in the quest log.
+-- No background (bg) steps: every objective is a step at the place where it is finished, in the order it is
+-- played; "kill X on the way" hints sit in the notes of the steps where the player starts passing those mobs.
 --
 -- Anchors for the class files (docs/dev/PLAN.md C.2; level = validator level of the base profile before the step):
 --   sd01-rorian      2.8  Rorian: 92461 + 92474 in, 92464 out. The class letter (92482 hunter, 92483 rogue,
@@ -16,7 +19,7 @@
 --   sd01-innkeeper   6.0  Shen'dar inn (talk objective of 92514); sd01-raan-2 (6.2) is the last step west of the
 --                         trainers, sd01-aonda-2 the first east of them.
 --   sd01-shendar-8   9.1  the last generic step of the level-8 visit of Shen'dar (Teeri, turn-in of 92516);
---                         sd01-danarii-2 (8.9) is the step next to the trainers.
+--                         sd01-danarii-2 (9.0) is the step next to the trainers.
 -- Every step has an explicit id (prefix "sd01-"). No `reward` here: reward choices differ per class and live in
 -- the class reward table of the class file (FastesBoooy.AddLibraryData{ rewards = ... }).
 --
@@ -25,9 +28,9 @@
 -- Every Zephras quest is Forever-new, so its XP is unknown offline: the xp-unknown INFO on each turn-in is
 -- expected (estimated XP is used).
 -- Hearthstone: used once at level 3 from Yala back to the camp (default bind Thendal Village, as the reference
--- does), then left alone: it is not bound to Shen'dar, the run back up from Falaath (~12 map units) goes through
--- the Prideclaws for 92515, and the stone is ready again (>1 h later) for the Valanaar hearth at the end of sd-02
--- (sd02-hearth is ~45-60 min after Falaath).
+-- does), then left alone: it is not bound to Shen'dar, the run back up from Falaath is short (~7 map units up the
+-- ramp), and the stone is ready again (>1 h later) for the Valanaar hearth at the end of sd-02 (sd02-hearth is
+-- ~45-60 min after Falaath).
 if not FastesBoooy.AddLibraryInsert then return end
 FastesBoooy.AddLibrarySegment({
     id = "sd-01-zephras",
@@ -36,7 +39,7 @@ FastesBoooy.AddLibrarySegment({
         en = "1-9 Zephras Isle: Thendal Grove and Shen'dar",
     },
     zone = "Zephras Isle",
-    -- The base profile ends this segment at 9.95; the Skyborne shaman at 10.08 (the shaman letter 92484 and the
+    -- The base profile ends this segment at 9.9; the Skyborne shaman at 10.06 (the shaman letter 92484 and the
     -- Earth chain 92466 - 92468 of Classes/Shaman.lua are turned in here, Forever-new XP estimated). The planned
     -- range stays 1-9 (title, level sync) and the WARN of that one route is acknowledged (phase R).
     ok = "segment-level",
@@ -99,17 +102,18 @@ FastesBoooy.AddLibrarySegment({
               ru = "Расовое задание: «Небесное зрение» (Skysight).",
               en = "Racial quest: Skysight.",
           } },
-        { id = "sd01-dalia", accept = 93552, npc = 251363, at = { 2521, 43.37, 23.98 } },
-        { id = "sd01-windstones-bg", complete = 93552, bg = true,
+        { id = "sd01-dalia", accept = 93552, npc = 251363, at = { 2521, 43.37, 23.98 },
           note = {
-              ru = "Собирайте Raw Windstone (15 сгустков) по пути - они по всей роще.",
-              en = "Loot Raw Windstones (15 clusters) on the way - they are all over the grove.",
+              ru = "Dalia the Collector: 15 сгустков ветрокамня. Raw Windstone лежат по всей роще - подбирайте их "
+                  .. "по пути, доберёте у Yala.",
+              en = "Dalia the Collector: 15 windstone clusters. Raw Windstones lie all over the grove - loot them on "
+                  .. "the way, you finish them at Yala.",
           } },
         { id = "sd01-queen", complete = 92463, at = { 2521, 48.41, 28.53 },
           note = {
-              ru = "Cirrusfly Queen (3 ур.) на юго-востоке рощи. По пути бейте мобов и "
-                  .. "собирайте камни.",
-              en = "Cirrusfly Queen (level 3) in the south-east of the grove. Kill mobs and loot stones on the way.",
+              ru = "Cirrusfly Queen (3 ур.) на юго-востоке рощи. По пути: бейте мобов и подбирайте Raw Windstone.",
+              en = "Cirrusfly Queen (level 3) in the south-east of the grove. On the way: kill mobs and loot Raw "
+                  .. "Windstones.",
           } },
         { id = "sd01-yala", turnin = 92464, accept = 92465, npc = 249363, at = { 2521, 47.25, 21.98 },
           note = {
@@ -126,8 +130,8 @@ FastesBoooy.AddLibrarySegment({
           } },
         { id = "sd01-agitators", complete = { 92465, 93552 }, at = { 2521, 47.0, 20.3 },
           note = {
-              ru = "Вокруг Yala: 7 Al'Aketh Convert и 6 Roiling Winds; доберите камни.",
-              en = "Around Yala: 7 Al'Aketh Converts and 6 Roiling Winds; finish the windstones.",
+              ru = "Вокруг Yala: 7 Al'Aketh Convert и 6 Roiling Winds; доберите Raw Windstone (15 сгустков).",
+              en = "Around Yala: 7 Al'Aketh Converts and 6 Roiling Winds; finish the Raw Windstones (15 clusters).",
           } },
         { id = "sd01-level-3", level = 3,
           note = {
@@ -166,22 +170,19 @@ FastesBoooy.AddLibrarySegment({
         ---------------------------------------------------------------------
         -- Ursera den west of the camp (4-5)
         ---------------------------------------------------------------------
-        { id = "sd01-claws-bg", complete = 92473, bg = true,
-          note = {
-              ru = "Scrawny Ursera по всему западу рощи: 6 когтей.",
-              en = "Scrawny Ursera all over the west of the grove: 6 claws.",
-          } },
         { id = "sd01-den", complete = 92470, at = { 2521, 35.65, 26.07 },
           note = {
               ru = "Логово на западе: 8 Ursera Scavenger по пути, мать логова Urs'anah (5 ур.) "
-                  .. "в глубине - её голова.",
+                  .. "в глубине - её голова. По пути бейте и Scrawny Ursera (когти для Valreaa) - доберёте "
+                  .. "на обратном пути.",
               en = "Den to the west: 8 Ursera Scavengers on the way and the den mother Urs'anah (level 5) "
-                  .. "at the back - her head.",
+                  .. "at the back - her head. On the way: kill Scrawny Ursera too (claws for Valreaa) - you "
+                  .. "finish them on the way back.",
           } },
         { id = "sd01-claws", complete = 92473, at = { 2521, 39.6, 27.9 },
           note = {
-              ru = "Доберите когти Scrawny Ursera на обратном пути.",
-              en = "Finish the Scrawny Ursera claws on the way back.",
+              ru = "На обратном пути в лагерь добейте Scrawny Ursera: 6 когтей.",
+              en = "On the way back to the camp finish the Scrawny Ursera: 6 claws.",
           } },
         { id = "sd01-aetheen-2", turnin = 92470, accept = { 92472, 96638 }, npc = 251366, at = { 2521, 42.76, 23.66 } },
         { id = "sd01-valreaa-2", turnin = 92473, npc = 257551, at = { 2521, 42.41, 25.17 } },
@@ -204,14 +205,17 @@ FastesBoooy.AddLibrarySegment({
         ---------------------------------------------------------------------
         -- To Shen'dar Village (5-6)
         ---------------------------------------------------------------------
-        { id = "sd01-larder-bg", collect = { [5469] = 8, [6889] = 3 }, bg = true,
+        -- Strider Meat and Small Eggs drop without the quest: they are collected on the walk south, and 92553 is
+        -- taken and turned in at once at Zerril (sd01-zerril, sd01-zerril-2). `at`: Galestriders on the plateau
+        -- north of the village, on the line Hanaa -> Aonda.
+        { id = "sd01-larder", collect = { [5469] = 8, [6889] = 3 }, at = { 2521, 43.1, 40.7 },
           note = {
-              ru = "По дороге на юг бейте Galestrider: 8 Strider Meat и 3 Small Egg - для задания "
-                  .. "в Шен'даре, не продавайте. Смерч даёт +40% скорости (урон снимает), "
+              ru = "На юг к Шен'дару. На плато к северу от деревни бейте Galestrider: 8 Strider Meat и 3 Small Egg "
+                  .. "для повара Zerril в деревне, не продавайте. Смерч даёт +40% скорости (урон снимает), "
                   .. "кристаллы ветрокамня восполняют здоровье и ману.",
-              en = "On the way south kill Galestriders: 8 Strider Meat and 3 Small Eggs for a Shen'dar quest, "
-                  .. "do not sell them. A Tornado gives +40% speed (damage removes it), windstone crystals "
-                  .. "restore health and mana.",
+              en = "South to Shen'dar. On the plateau north of the village kill Galestriders: 8 Strider Meat and "
+                  .. "3 Small Eggs for the cook Zerril in the village, do not sell them. A Tornado gives +40% speed "
+                  .. "(damage removes it), windstone crystals restore health and mana.",
           } },
         { id = "sd01-aonda", turnin = 92472, accept = 92514, npc = 251523, at = { 2521, 45.67, 45.50 },
           note = {
@@ -241,48 +245,54 @@ FastesBoooy.AddLibrarySegment({
         { id = "sd01-raan-2", turnin = 96101, accept = 96646, npc = 263664, at = { 2521, 41.66, 44.80 } },
         { id = "sd01-aonda-2", turnin = 92514, accept = 92517, npc = 251523, at = { 2521, 45.67, 45.50 } },
         { id = "sd01-teeri", accept = { 93319, 92516 }, npc = 251906, at = { 2521, 44.46, 44.96 } },
-        { id = "sd01-indari", accept = 92515, npc = 251993, at = { 2521, 44.68, 44.52 } },
+        { id = "sd01-indari", accept = 92515, npc = 251993, at = { 2521, 44.68, 44.52 },
+          note = {
+              ru = "Indari Sunseam: 10 шкур Prideclaw. Их полно на всём нагорье - бейте по пути на северо-восток, "
+                  .. "доберёте на обратном пути в деревню.",
+              en = "Indari Sunseam: 10 Prideclaw pelts. They are all over the highlands - kill them on the way "
+                  .. "north-east, you finish them on the way back to the village.",
+          } },
         { id = "sd01-taleen", accept = 93951, npc = 251991, at = { 2521, 44.88, 44.18 } },
         { id = "sd01-zerril", complete = 96646, turnin = 96646, accept = 92553, npc = 251905, at = { 2521, 43.85, 43.84 },
           note = {
-              ru = "Повар Zerril: выучите кулинарию (это цель задания), затем "
-                  .. "возьмите задание на мясо и яйца (собрали по дороге - "
-                  .. "уже выполнено).",
-              en = "Cook Zerril: learn Cooking (that is the quest objective), then take the meat and eggs quest "
-                  .. "(collected on the way - already done).",
+              ru = "Повар Zerril: выучите кулинарию (это цель задания), сдайте и возьмите задание на мясо и яйца.",
+              en = "Cook Zerril: learn Cooking (that is the quest objective), turn it in and take the meat and eggs "
+                  .. "quest.",
           } },
-        { id = "sd01-pelts-bg", complete = 92515, bg = true,
+        { id = "sd01-zerril-2", complete = 92553, turnin = 92553, npc = 251905, at = { 2521, 43.85, 43.84 },
           note = {
-              ru = "Prideclaw по всему нагорью: 10 шкур.",
-              en = "Prideclaws all over the highlands: 10 pelts.",
-          } },
-        { id = "sd01-larder-bg-2", complete = 92553, bg = true,
-          note = {
-              ru = "Galestrider: 8 Strider Meat и 3 Small Egg (если не собрали по дороге).",
-              en = "Galestriders: 8 Strider Meat and 3 Small Eggs (if not done on the way).",
+              ru = "Сразу сдайте ему 8 Strider Meat и 3 Small Egg (собрали по дороге). Не хватает - добейте "
+                  .. "Galestrider прямо у деревни.",
+              en = "Hand him the 8 Strider Meat and 3 Small Eggs right away (collected on the way). Short of them - "
+                  .. "kill Galestriders right around the village.",
           } },
         ---------------------------------------------------------------------
         -- Loop 1: north-east highlands (6-7)
         ---------------------------------------------------------------------
         { id = "sd01-apprentices", complete = 94411, at = { 2521, 46.6, 38.9 },
           note = {
-              ru = "Северо-восток от деревни: 6 High Order Apprentice (маги).",
-              en = "North-east of the village: 6 High Order Apprentices (casters).",
-          } },
-        { id = "sd01-pilfered-bg", complete = 93319, bg = true,
-          note = {
-              ru = "Pilfered Windstone падают с Highlands Bandit (10).",
-              en = "Pilfered Windstones drop from Highlands Bandits (10).",
+              ru = "Северо-восток от деревни: 6 High Order Apprentice (маги). По пути бейте Prideclaw (шкуры).",
+              en = "North-east of the village: 6 High Order Apprentices (casters). On the way: kill Prideclaws "
+                  .. "(pelts).",
           } },
         { id = "sd01-bennic", complete = { [92517] = { 2 } }, at = { 2521, 50.62, 34.27 },
           note = {
-              ru = "«Badwind» Bennic (7 ур.) в пещере бандитов на северо-востоке.",
-              en = "\"Badwind\" Bennic (level 7) in the bandit cave to the north-east.",
+              ru = "«Badwind» Bennic (7 ур.) в пещере бандитов на северо-востоке. По пути бейте Highlands Bandit: "
+                  .. "с них падают Pilfered Windstone - доберёте на выходе.",
+              en = "\"Badwind\" Bennic (level 7) in the bandit cave to the north-east. On the way: kill Highlands "
+                  .. "Bandits, they drop the Pilfered Windstones - you finish them on the way out.",
           } },
         { id = "sd01-bandits", complete = { 92517, 93319 }, at = { 2521, 48.9, 37.9 },
           note = {
-              ru = "Добейте 10 Highlands Bandit и камни на выходе из пещеры.",
-              en = "Finish 10 Highlands Bandits and the windstones on the way out.",
+              ru = "На выходе из пещеры добейте 10 Highlands Bandit и 10 Pilfered Windstone.",
+              en = "On the way out of the cave finish 10 Highlands Bandits and 10 Pilfered Windstones.",
+          } },
+        -- `at`: Prideclaws between the bandit cave and the village (7 spawns within 3 map units)
+        { id = "sd01-pelts", complete = 92515, at = { 2521, 45.6, 41.0 },
+          note = {
+              ru = "На обратном пути в деревню добейте Prideclaw: 10 шкур (их полно между пещерой и деревней).",
+              en = "On the way back to the village finish the Prideclaws: 10 pelts (plenty between the cave and "
+                  .. "the village).",
           } },
         ---------------------------------------------------------------------
         -- Shen'dar, second visit (8)
@@ -303,6 +313,7 @@ FastesBoooy.AddLibrarySegment({
                   .. "Vulgara; lost the buff - see Sania again before Falaath. Read it - press Forward.",
           } },
         { id = "sd01-teeri-2", turnin = 93319, npc = 251906, at = { 2521, 44.46, 44.96 } },
+        { id = "sd01-indari-2", turnin = 92515, npc = 251993, at = { 2521, 44.68, 44.52 } },
         { id = "sd01-illaya-3", turnin = 94411, npc = 251902, at = { 2521, 43.51, 44.77 } },
         { id = "sd01-wanted", accept = 93318, object = 610954, at = { 2521, 43.38, 45.84 },
           note = {
@@ -317,19 +328,18 @@ FastesBoooy.AddLibrarySegment({
               ru = "На запад к обрыву. Спрыгните и планируйте «Шагом по воздуху».",
               en = "West to the cliff edge. Jump down and glide with Walk on Air.",
           } },
-        { id = "sd01-down-bg", complete = 93951, bg = true,
-          note = {
-              ru = "Hippogryph Down лежит на земле в долине (8).",
-              en = "Hippogryph Down lies on the ground in the vale (8).",
-          } },
         { id = "sd01-hippogryphs", complete = 92516, at = { 2521, 36.3, 53.6 },
           note = {
               ru = "8 Hippogryph Youth, 6 Hippogryph Protector и Hippogryph Matriarch (7 ур.) "
-                  .. "у западного края долины (33,54 / 35,54).",
+                  .. "у западного края долины (33,54 / 35,54). По пути подбирайте Hippogryph Down с земли.",
               en = "8 Hippogryph Youths, 6 Protectors and the Matriarch (level 7) at the west edge "
-                  .. "of the vale (33,54 / 35,54).",
+                  .. "of the vale (33,54 / 35,54). On the way: pick up Hippogryph Down from the ground.",
           } },
-        { id = "sd01-down", complete = 93951, at = { 2521, 36.0, 53.7 } },
+        { id = "sd01-down", complete = 93951, at = { 2521, 36.0, 53.7 },
+          note = {
+              ru = "Доберите Hippogryph Down: 8 перьев на земле долины.",
+              en = "Finish the Hippogryph Down: 8 feathers on the ground of the vale.",
+          } },
         { id = "sd01-vulgara", complete = 93318, at = { 2521, 42.66, 52.80 },
           note = {
               ru = "ЭЛИТА: Vulgara the Insatiable (8 ур.). Начинайте с полным здоровьем, используйте все "
@@ -373,7 +383,6 @@ FastesBoooy.AddLibrarySegment({
           } },
         { id = "sd01-danarii-2", accept = 92551, npc = 252172, at = { 2521, 45.24, 45.18 } },
         { id = "sd01-taleen-2", turnin = 93951, npc = 251991, at = { 2521, 44.88, 44.18 } },
-        { id = "sd01-zerril-2", turnin = 92553, npc = 251905, at = { 2521, 43.85, 43.84 } },
         { id = "sd01-shendar-8", turnin = 92516, npc = 251906, at = { 2521, 44.46, 44.96 } },
         ---------------------------------------------------------------------
         -- Loop 3: western watchtower + Falaath (9)
@@ -397,38 +406,28 @@ FastesBoooy.AddLibrarySegment({
               en = "Note next to him (read it), feather and signet on the bodies to the south-west, "
                   .. "kill Skypriest Aanders (level 8).",
           } },
-        { id = "sd01-caches-bg", complete = 92551, bg = true,
-          note = {
-              ru = "Supply Cache (тайники) в деревне Фалаат.",
-              en = "Supply Caches in Falaath Village.",
-          } },
         { id = "sd01-falaath", complete = 92550, at = { 2521, 49.0, 56.5 },
           note = {
               ru = "Фалаат: 6 Al'Aketh Stormcaller, 4 Living Lightning и голова Commander Cyclas "
-                  .. "(8 ур., восток деревни, 50,57).",
+                  .. "(8 ур., восток деревни, 50,57). По пути открывайте Supply Cache (тайники) - припасы "
+                  .. "падают и со Stormcaller.",
               en = "Falaath: 6 Al'Aketh Stormcallers, 4 Living Lightning and the head of Commander Cyclas "
-                  .. "(level 8, east side, 50,57).",
+                  .. "(level 8, east side, 50,57). On the way: open the Supply Caches - Stormcallers drop the "
+                  .. "supplies too.",
           } },
-        { id = "sd01-caches", complete = 92551, at = { 2521, 49.35, 55.77 } },
-        -- no separate "complete 92515" step here: the pelts are a bg goal since the first Shen'dar visit, so a
-        -- finish step done early would become the forward anchor and silently skip the glide / ramp hints; the
-        -- finish is merged into the turn-in below (Prideclaws on the ramp and around Shen'dar)
+        { id = "sd01-caches", complete = 92551, at = { 2521, 49.35, 55.77 },
+          note = {
+              ru = "Доберите 10 Stolen Shen'dar Supplies: тайники Supply Cache в деревне.",
+              en = "Finish the 10 Stolen Shen'dar Supplies: the Supply Caches in the village.",
+          } },
         { id = "sd01-ramp", go = true, at = { 2521, 46.4, 51.3 }, radius = 25,
           note = {
-              ru = "Пешком обратно на плато по подъёму (камень возвращения бережём для Валанаара), по пути "
-                  .. "бейте Prideclaw ради шкур (92515).",
-              en = "Walk back up the ramp to the plateau (the hearthstone is saved for Valanaar), killing "
-                  .. "Prideclaws for the pelts (92515) on the way.",
+              ru = "Пешком обратно на плато по подъёму (камень возвращения бережём для Валанаара).",
+              en = "Walk back up the ramp to the plateau (the hearthstone is saved for Valanaar).",
           } },
         ---------------------------------------------------------------------
         -- Shen'dar, final turn-ins (9)
         ---------------------------------------------------------------------
-        { id = "sd01-indari-2", complete = 92515, turnin = 92515, npc = 251993, at = { 2521, 44.68, 44.52 },
-          note = {
-              ru = "Нет 10 шкур - добейте Prideclaw у самой деревни (их полно в 2-6 единицах карты), затем сдайте.",
-              en = "Short of 10 pelts - kill Prideclaws right around the village (plenty within 2-6 map units), then "
-                  .. "turn in.",
-          } },
         { id = "sd01-danarii-3", turnin = 92551, npc = 252172, at = { 2521, 45.24, 45.18 } },
         { id = "sd01-end", turnin = { 92550, 93927 }, accept = { 92579, 93948 }, -- both continue in sd-02
           npc = 251523, at = { 2521, 45.67, 45.50 },

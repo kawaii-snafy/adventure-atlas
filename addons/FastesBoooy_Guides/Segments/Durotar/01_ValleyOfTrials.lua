@@ -9,13 +9,17 @@
 -- Coordinates: Forever uiMap 1411 (Durotar), map percent, from tools/data/forever_db.lua (NPC / object spawns;
 -- centroids of the objective mob / object spawns for complete steps).
 --
--- Hub plan (Forever DB):
+-- Hub plan (Forever DB). Every goal is a step of its own, in the order of play; what the player can also kill or
+-- pick on the way is a hint in the notes ("По пути: ..."), and the step that finishes it comes where the route
+-- passes those mobs for the last time:
 --   camp 1 : 4641 Kaltunk > Gornek (788, 97279).
 --   boars  : 788 boars + 97279 training weapons, east of the camp.
 --   camp 2 : 788 > 789 (letter of the class here), 97279 Kzan, 4402 Galgar, 792 Zureetha (warlock: 1485 Ruzan).
---   west   : 790 Hana'zua, scorpid tails 789, cactus apples 4402, Sarkoth 790 > 804.
+--   west   : 790 Hana'zua, Sarkoth 790 (scorpid tails 789 and cactus apples 4402 on the way), the rest of the tails
+--            and apples north of Hana'zua, 790 > 804.
 --   camp 3 : 789 + 804 Gornek, 4402 Galgar, 5441 Thazz'ril (needs level 3).
---   north 1: lazy peons 5441, 12 Vile Familiars 792 (warlock: 6 heads for 1485).
+--   north 1: 12 Vile Familiars 792 (warlock: 6 heads for 1485), lazy peons 5441 on the way there and just south of
+--            the familiars on the way back.
 --   camp 4 : 792 > 794 (warlock: 1485 > 1499 > 794), 5441 > 6394.
 --   north 2: the Burning Blade Coven: Yarrog 794, Thazz'ril's Pick 6394.
 --   camp 5 : 6394, 794 > 805, the Lost Journal 96652.
@@ -80,17 +84,18 @@ FastesBoooy.AddLibrarySegment({
         -- West of the Den: scorpids, cactus apples, Sarkoth (level 2-3)
         ------------------------------------------------------------------
         { id = "dur01-hanazua", accept = 790, npc = 3287, at = { 1411, 40.60, 62.58 },
-          note = { ru = "Хана'зуа к северо-западу от Логова.",
-                   en = "Hana'zua north-west of the Den." } },
-        { id = "dur01-tails-bg", complete = { 789, 4402 }, bg = true, at = { 1411, 43.0, 63.7 },
-          note = { ru = "Попутно: скорпиды-рабочие (хвосты) и кактусовые яблоки по всей долине.",
-                   en = "On the way: Scorpid Workers (tails) and Cactus Apples all over the valley." } },
+          note = { ru = "Хана'зуа к северо-западу от Логова. По пути: бейте скорпидов-рабочих (хвосты) и "
+                       .. "собирайте кактусовые яблоки - доберёте после Саркота.",
+                   en = "Hana'zua north-west of the Den. On the way: kill Scorpid Workers (tails) and pick Cactus "
+                       .. "Apples - you finish them after Sarkoth." } },
         { id = "dur01-sarkoth", complete = 790, at = { 1411, 40.5, 66.8 },
-          note = { ru = "Саркот - большой скорпид к югу от Хана'зуа.",
-                   en = "Sarkoth, the big scorpid south of Hana'zua." } },
+          note = { ru = "Саркот - большой скорпид к югу от Хана'зуа. По пути: те же скорпиды-рабочие и кактусовые "
+                       .. "яблоки.",
+                   en = "Sarkoth, the big scorpid south of Hana'zua. On the way: more Scorpid Workers and Cactus "
+                       .. "Apples." } },
         { id = "dur01-tails", complete = { 789, 4402 }, at = { 1411, 42.0, 60.5 },
-          note = { ru = "Добейте 10 хвостов скорпидов-рабочих и соберите 10 кактусовых яблок.",
-                   en = "Finish 10 Scorpid Worker Tails and 10 Cactus Apples." } },
+          note = { ru = "К северу от Хана'зуа: добейте 10 хвостов скорпидов-рабочих и 10 кактусовых яблок.",
+                   en = "North of Hana'zua: finish 10 Scorpid Worker Tails and 10 Cactus Apples." } },
         { id = "dur01-hanazua-2", turnin = 790, accept = 804, npc = 3287, at = { 1411, 40.60, 62.58 },
           note = { ru = "Хана'зуа: следующее задание сдаётся Горнеку.",
                    en = "Hana'zua: her next quest goes to Gornek." } },
@@ -104,18 +109,21 @@ FastesBoooy.AddLibrarySegment({
         { id = "dur01-thazzril", accept = 5441, npc = 11378, at = { 1411, 44.63, 68.65 },
           note = { ru = "Бригадир Тазз'рил к востоку от Логова (нужен 3-й уровень).",
                    en = "Foreman Thazz'ril east of the Den (needs level 3)." } },
-        { id = "dur01-peons-bg", complete = 5441, bg = true, at = { 1411, 43.9, 64.5 },
-          note = { ru = "Попутно: дубинкой из задания будите спящих ленивых батраков.",
-                   en = "On the way: use the blackjack from the quest on the sleeping Lazy Peons." } },
         { id = "dur01-vile-familiars", complete = 792, class = NOT_WARLOCK, at = { 1411, 44.4, 55.5 },
-          note = { ru = "На севере долины у пещеры: 12 злобных бесов-фамилиаров.",
-                   en = "In the north of the valley by the cave: 12 Vile Familiars." } },
+          note = { ru = "На севере долины у пещеры: 12 злобных бесов-фамилиаров. По пути: будите дубинкой из задания "
+                       .. "спящих ленивых батраков, остальных - сразу после бесов.",
+                   en = "In the north of the valley by the cave: 12 Vile Familiars. On the way: use the blackjack "
+                       .. "from the quest on the sleeping Lazy Peons - you finish them right after the familiars." } },
         { id = "dur01-warlock-heads", complete = 1485, class = "WARLOCK", at = { 1411, 44.4, 55.5 },
-          note = { ru = "На севере долины у пещеры: 6 голов злобных бесов-фамилиаров.",
-                   en = "In the north of the valley by the cave: 6 Vile Familiar Heads." } },
-        { id = "dur01-peons", complete = 5441, at = { 1411, 43.9, 64.5 },
-          note = { ru = "Добудите ленивых батраков на обратном пути.",
-                   en = "Finish the Lazy Peons on the way back." } },
+          note = { ru = "На севере долины у пещеры: 6 голов злобных бесов-фамилиаров. По пути: будите дубинкой из "
+                       .. "задания спящих ленивых батраков, остальных - сразу после бесов.",
+                   en = "In the north of the valley by the cave: 6 Vile Familiar Heads. On the way: use the "
+                       .. "blackjack from the quest on the sleeping Lazy Peons - you finish them right after the "
+                       .. "familiars." } },
+        -- the peons sleep around the valley edge; six of them lie just south of the familiars, on the way back
+        { id = "dur01-peons", complete = 5441, at = { 1411, 43.8, 58.8 },
+          note = { ru = "Южнее бесов, на обратном пути: разбудите дубинкой оставшихся ленивых батраков.",
+                   en = "South of the familiars, on the way back: wake the remaining Lazy Peons with the blackjack." } },
         { id = "dur01-familiars-done", turnin = 792, class = NOT_WARLOCK, npc = 3145, at = { 1411, 42.85, 69.15 } },
         { id = "dur01-warlock-1499", turnin = 1485, accept = 1499, class = "WARLOCK", npc = 5765,
           at = { 1411, 42.59, 69.00 } },

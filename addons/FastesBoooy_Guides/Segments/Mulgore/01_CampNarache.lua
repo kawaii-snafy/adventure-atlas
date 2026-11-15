@@ -7,6 +7,8 @@
 -- Graytongue (757, 95805) -> Antur Fallow (1656) -> camp (750 > 780, 3376) -> Brambleblade Ravine (780, 757, 3376,
 -- the map of 781) -> Ritual Fire (95805) -> camp (757, 780, 3376, 781 in; 763 and 96659 out, both lead to
 -- Bloodhoof Village).
+-- No background (`bg`) steps: the Plainstriders of 747 and the Battleboars of 780 are named in the note of the
+-- step where the path starts passing them ("По пути:") and finished at a regular step (mul01-striders, mul01-boars).
 --
 -- Anchors for the class files (docs/dev/PLAN.md C.2; level = validator level of the base profile before the step,
 -- read with --levels; the hand-over docs/dev/handover/p1-mulgore.md has the measured list):
@@ -40,15 +42,12 @@ FastesBoooy.AddLibrarySegment({
               ru = "Старт. Grull Hawkwind и Chief Hawkwind в центре лагеря: возьмите оба задания.",
               en = "Start. Grull Hawkwind and Chief Hawkwind in the middle of the camp: take both quests.",
           } },
-        { id = "mul01-striders-bg", complete = 747, bg = true, at = { 1412, 48.0, 79.5 },
-          note = {
-              ru = "По пути бейте равнинных долгоногов: 7 мяса и 7 перьев.",
-              en = "Kill Plainstriders on the way: 7 meat and 7 feathers.",
-          } },
         { id = "mul01-greatmother", turnin = 752, accept = 753, npc = 2991, at = { 1412, 48.82, 80.90 },
           note = {
-              ru = "Greatmother Hawkwind у колодца к юго-востоку от лагеря.",
-              en = "Greatmother Hawkwind at the well south-east of the camp.",
+              ru = "Greatmother Hawkwind у колодца к юго-востоку от лагеря. По пути: бейте равнинных долгоногов "
+                  .. "(7 мяса, 7 перьев), доберёте после кувшина.",
+              en = "Greatmother Hawkwind at the well south-east of the camp. On the way: kill Plainstriders (7 meat, "
+                  .. "7 feathers); finish them after the pitcher.",
           } },
         { id = "mul01-pitcher", complete = 753, object = 2907, at = { 1412, 49.00, 81.20 },
           note = {
@@ -57,8 +56,9 @@ FastesBoooy.AddLibrarySegment({
           } },
         { id = "mul01-striders", complete = 747, at = { 1412, 48.0, 79.5 },
           note = {
-              ru = "Добейте долгоногов вокруг колодца и по дороге в лагерь.",
-              en = "Finish the Plainstriders around the well and on the way back to the camp.",
+              ru = "Добейте равнинных долгоногов вокруг колодца и по дороге в лагерь: 7 мяса и 7 перьев.",
+              en = "Finish the Plainstriders around the well and on the way back to the camp: 7 meat and 7 "
+                  .. "feathers.",
           } },
         { id = "mul01-chief-1", turnin = 753, accept = 755, npc = 2981, at = { 1412, 43.91, 76.70 },
           note = {
@@ -109,15 +109,12 @@ FastesBoooy.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Brambleblade Ravine and the Ritual Fire (level 4-6)
         ------------------------------------------------------------------
-        { id = "mul01-boars-bg", complete = 780, bg = true, at = { 1412, 52.5, 79.5 },
-          note = {
-              ru = "Кабаны по пути и в ущелье: 8 рыл и 8 окороков.",
-              en = "Battleboars on the way and in the ravine: 8 snouts and 8 flanks.",
-          } },
         { id = "mul01-belts", complete = 757, at = { 1412, 57.4, 78.0 },
           note = {
-              ru = "Ущелье: 12 поясов с кабанов-людей Колючей Шкуры (воины и шаманы).",
-              en = "The ravine: 12 Bristleback Belts from the Bristleback Quilboar and Shamans.",
+              ru = "На восток в ущелье: 12 поясов с кабанов-людей Колючей Шкуры (воины и шаманы). По пути: бейте "
+                  .. "кабанов (8 рыл, 8 окороков), доберёте к югу от ущелья.",
+              en = "East into the ravine: 12 Bristleback Belts from the Bristleback Quilboar and Shamans. On the "
+                  .. "way: kill Battleboars (8 snouts, 8 flanks); finish them south of the ravine.",
           } },
         { id = "mul01-sharptusk", complete = 3376, at = { 1412, 61.00, 78.00 },
           note = {
@@ -131,8 +128,8 @@ FastesBoooy.AddLibrarySegment({
           } },
         { id = "mul01-boars", complete = 780, at = { 1412, 55.5, 86.5 },
           note = {
-              ru = "Добейте кабанов на выходе из ущелья, к югу.",
-              en = "Finish the battleboars south of the ravine exit.",
+              ru = "Добейте кабанов к югу от выхода из ущелья: 8 рыл и 8 окороков.",
+              en = "Finish the battleboars south of the ravine exit: 8 snouts and 8 flanks.",
           } },
         { id = "mul01-fire", turnin = 95805, object = 660739, at = { 1412, 56.60, 88.70 },
           note = {

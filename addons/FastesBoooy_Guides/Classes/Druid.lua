@@ -102,11 +102,12 @@
 --   50+52   before h54-hearth-org         53.05/53.03  Moonglade before the library hearth (Azshara -> Orgrimmar):
 --                                                      also accept 9063 Torwa Pathfinder there (optional: a
 --                                                      breadcrumb of 9052, not its prerequisite).
---   Torwa   after  h-53-torwa-pathfinder  53.15        9063 > 9052 (Bloodcaps on the loop, Gorishi Stings at the
---                                                      edge of the hive before h54-torwa-3), 9052 > 9051 at
---                                                      h54-torwa-3, Devilsaur stab in loop 2 (bg), 9051 at
---                                                      h55-torwa-end. 9053 (Sunken Temple) is not taken: the route's
---                                                      optional Sunken Temple run is in h-50, before 9051.
+--   Torwa   after  h-53-torwa-pathfinder  53.15        9063 > 9052 (Bloodcaps before h-54-marshal-arrive, Gorishi
+--                                                      Stings at the edge of the hive before h54-ungoro-crystals),
+--                                                      9052 > 9051 at h54-torwa-3, Devilsaur stab in loop 2 (after
+--                                                      h55-ungoro-springs-north), 9051 at h55-torwa-end. 9053 (Sunken
+--                                                      Temple) is not taken: the route's optional Sunken Temple run
+--                                                      is in h-50, before 9051.
 --   54      before h56-hearth-gadgetzan   55.05/55.04  Moonglade before the library hearth (the plan's slot before
 --                                                      h-55-cenarionhold-arrive would need a second Gadgetzan hearth
 --                                                      0.1 level after h55-hearth-gadgetzan).
@@ -1104,26 +1105,38 @@ FastesBoooy.AddLibraryInsert({
           } },
         { id = "dru-torwa-9052", accept = 9052, npc = 9619, at = { 1449, 71.64, 75.96 },
           note = {
-              ru = "У него же задание друидов «Яд кровоцвета»: 8 кровошляпочников и 8 жал Гориши.",
-              en = "From him too, the druid quest Bloodpetal Poison: 8 Bloodcaps and 8 Gorishi Stings.",
+              ru = "У него же задание друидов «Яд кровоцвета»: 8 кровошляпочников и 8 жал Гориши. Побеги кровоцвета "
+                  .. "(маленькие красные растения) растут по всему кратеру - срывайте кровошляпочники по пути.",
+              en = "From him too, the druid quest Bloodpetal Poison: 8 Bloodcaps and 8 Gorishi Stings. Bloodpetal "
+                  .. "Sprouts (small red plants) grow all over the crater - pick the Bloodcaps on the way.",
           } },
-        { id = "dru-bloodcap", complete = { [9052] = { 2 } }, bg = true, object = 164958, at = { 1449, 66.43, 32.87 },
+    },
+})
+-- The Bloodcaps are finished before the Marshal's Refuge flight point: a Bloodcap step after it, done early with the
+-- caps picked on the way, would become the forward anchor and skip that flight point step.
+FastesBoooy.AddLibraryInsert({
+    before = "h-54-marshal-arrive",
+    class = "DRUID",
+    steps = {
+        { id = "dru-bloodcap", complete = { [9052] = { 2 } }, object = 164958, at = { 1449, 72.00, 45.70 },
           note = {
-              ru = "Попутно по всему кратеру: 8 кровошляпочников с побегов кровоцвета (маленькие красные растения).",
-              en = "On the way all over the crater: 8 Bloodcaps from Bloodpetal Sprouts (small red plants).",
+              ru = "От трупа на север вдоль восточного края: побеги кровоцвета (маленькие красные растения, 68-76, "
+                  .. "23-58) - доберите 8 кровошляпочников (ещё побеги - у Укрытия Маршалла).",
+              en = "From the carcass north along the east side: Bloodpetal Sprouts (small red plants, 68-76, 23-58) - "
+                  .. "finish the 8 Bloodcaps (more sprouts around Marshal's Refuge).",
           } },
     },
 })
 FastesBoooy.AddLibraryInsert({
-    before = "h54-torwa-3",
+    before = "h54-ungoro-crystals", -- the crystals step leads from the lake back east to Torwa (h54-torwa-3)
     class = "DRUID",
     steps = {
         { id = "dru-gorishi-stings", complete = 9052, at = { 1449, 53.68, 76.31 },
           note = {
-              ru = "От плота на запад к краю улья Гориши: осы и рабочие из улья (51-52) - 8 жал Гориши. Доберите "
-                  .. "кровошляпочники, затем на восток к Торве.",
-              en = "From the raft west to the edge of the Gorishi hive: Gorishi Wasps and Workers (51-52) - 8 Gorishi "
-                  .. "Stings. Finish the Bloodcaps, then east to Torwa.",
+              ru = "От озера на запад к краю улья Гориши: осы и рабочие из улья (51-52) - 8 жал Гориши, затем назад на "
+                  .. "восток к озеру и Торве.",
+              en = "From the lake west to the edge of the Gorishi hive: Gorishi Wasps and Workers (51-52) - 8 Gorishi "
+                  .. "Stings, then back east past the lake to Torwa.",
           } },
     },
 })
@@ -1133,17 +1146,25 @@ FastesBoooy.AddLibraryInsert({
     steps = {
         { id = "dru-torwa-9051", turnin = 9052, accept = 9051, npc = 9619, at = { 1449, 71.64, 75.96 },
           note = {
-              ru = "Торва: «Яд кровоцвета», возьмите «Испытание яда» (шип девизавра - в сумке).",
-              en = "Torwa: Bloodpetal Poison; take Toxic Test (the Devilsaur Barb goes into your bags).",
+              ru = "Торва: «Яд кровоцвета», возьмите «Испытание яда» (шип девизавра - в сумке; девизавр - во 2-й петле, к "
+                  .. "северу от горячих источников).",
+              en = "Torwa: Bloodpetal Poison; take Toxic Test (the Devilsaur Barb goes into your bags; the devilsaur - "
+                  .. "in loop 2, north of the hot springs).",
           } },
-        { id = "dru-devilsaur", complete = 9051, bg = true, use = 22432, at = { 1449, 31.19, 36.42 },
+    },
+})
+FastesBoooy.AddLibraryInsert({
+    after = "h55-ungoro-springs-north",
+    class = "DRUID",
+    steps = {
+        { id = "dru-devilsaur", complete = 9051, use = 22432, at = { 1449, 31.19, 36.42 },
           note = {
-              ru = "Попутно во 2-й петле: девизавры (элита 54-56) бродят на западе (31, 36; к северу от горячих "
-                  .. "источников) и в центре (50, 61). Подкрадитесь, уколите шипом девизавра и уходите (Порыв, "
-                  .. "походный облик) - убивать не нужно.",
-              en = "On the way in loop 2: Devilsaurs (elite 54-56) roam the west (31, 36; north of the hot springs) and "
-                  .. "the centre (50, 61). Sneak up, stab one with the Devilsaur Barb and get away (Dash, Travel Form) - "
-                  .. "no kill needed.",
+              ru = "Здесь же, к северу от горячих источников (31, 36), бродит девизавр (элита 54-56; ещё один - севернее, "
+                  .. "35, 22). Подкрадитесь, уколите его шипом девизавра и уходите (Порыв, походный облик) - убивать не "
+                  .. "нужно.",
+              en = "Right here, north of the hot springs (31, 36), a Devilsaur roams (elite 54-56; another one further "
+                  .. "north, 35, 22). Sneak up, stab it with the Devilsaur Barb and get away (Dash, Travel Form) - no "
+                  .. "kill needed.",
           } },
     },
 })

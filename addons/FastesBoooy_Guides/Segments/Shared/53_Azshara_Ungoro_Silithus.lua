@@ -27,20 +27,21 @@
 --   ORG : 3507 (Belgrom), 3541 (Jes'rimon); fly Gadgetzan.
 --   GZ  : hearth Gadgetzan; 2641 > 2661 (Sprinkle), 4494 > 4496 (Pestlezugg), 4504 (Tran'rek), 2661 (Marin);
 --         optional 3520 (Steamwheedle Port).
---   UG  : Torwa 4289 + 4290 -> carcass (4290), gorilla caves (4289) -> Marshal's Refuge (fp; 4284, 3881, 3883, 3882,
---         4501, 4492, 4145, 4503, 4243).
---   L1  : tar pits (4504), A-Me 01 (4243), young diemetradons / bloodpetals / crate (3881) / fledglings east, Torwa
---         4289 + 4290 > 4291 + 4301, mates (4291), raft 3844 > 3845, ravasaurs (4300), Torwa 4291 > 4292.
---   L2  : Gorishi hive (3883, 4496), research equipment (3881), bone yard (3882), Krakle 974 > hot spot > 974 > 980,
---         trappers / frenzied pterrordax (4145, 4501, 4503), Fire Plume Ridge (crystals, flayers), Ringo 4492 >
---         4491 (escort) -> Marshal's Refuge turn-ins, 4284 > 4285 + 4287 + 4288, 3845 > 3908.
+--   UG  : Torwa 4289 + 4290 -> carcass (4290) -> Marshal's Refuge (fp; 4284, 3881, 3883, 3882, 4501, 4492, 4145,
+--         4503, 4243).
+--   L1  : tar pits (4504 + the Bloodpetal Flayers of 4145), gorilla caves (4289) + A-Me 01 (4243), Bloodpetal
+--         Lashers / Threshers (4145), crate (3881), Torwa 4289 + 4290 > 4291 + 4301, mates (4291 + the ravasaur claws 4300),
+--         raft 3844 > 3845, power crystals around the lake (4284), Torwa 4291 > 4292.
+--   L2  : Pterrordax (4501), Gorishi hive (3883, 4496), research equipment (3881), bone yard (3882), Krakle 974,
+--         Frenzied Pterrordax / Bloodpetal Trappers north of the springs (4501, 4503, 4145), Fire Plume Ridge hot
+--         spot (974), Ringo 4492 > 4491 (escort) -> Marshal's Refuge turn-ins, 4284 > 4285 + 4287 + 4288, 3845 > 3908.
 --   L3  : Northern Pylon (4285), U'cha (4301), Eastern Pylon (4287), Lar'korwi (4292), Torwa 4292 + 4301; hearth
---         Gadgetzan 4496, 4504; fly Marshal's Refuge, Western Pylon (4288), J.D. Collie 4285 + 4287 + 4288 > 4321 > 4321;
---         path to Silithus.
+--         Gadgetzan 4496, 4504; fly Marshal's Refuge, Krakle 974 > 980, Western Pylon (4288), J.D. Collie 4285 + 4287
+--         + 4288 > 4321 > 4321; path to Silithus.
 --   SI  : level 54 gate on the north-east field (the hold's quests need 54); Cenarion Hold fp, 8280, 8277, 8284;
 --         north-east field (8277, 8280) + the Silithus grind (54 + 74%, own-level mobs), tablets in
---         the north-west (8284); hold 8280 > 8281, 8277 > 8278, 8284 > 8285; crushers /
---         pincers (8281, 8278); south (8278); Ortell 8285; hold 8278, 8282, 8281; Noggle's Satchel (8282);
+--         the north-west (8284); hold 8280 > 8281, 8277 > 8278, 8284 > 8285; crushers (8281) and pincers next to
+--         them (8278 stingers); south (8278); Ortell 8285; hold 8278, 8282, 8281; Noggle's Satchel (8282);
 --         level 55 checkpoint on the way back; hold 8282.
 -- XP (validator from ~52.6, Classic quest XP + objective kills, optional steps counted): Azshara + Un'Goro reach
 --   ~53.9; the level 54 gate before the Cenarion Hold (reqLevel 54) is then almost free. The Silithus grind (~325
@@ -67,11 +68,21 @@
 --     (the Western Pylon on the way back to Marshal's Refuge). h55-silithus-grind (same id) is now the mandatory
 --     level 54 step before the hold (it was an optional level 55 step after the first accepts); the end gate went from
 --     55 + 97% to 55.
+--   * Explicit steps (r4): no background ("along the way") steps any more - every goal is a step where it is done, in
+--     the order of play, and the notes say what to kill / pick up on the way before it. Un'Goro regrouped so that
+--     each area is done in one visit: the gorilla caves once in loop 1 (pelts + A-Me 01; Torwa -> carcass -> straight
+--     to Marshal's Refuge), the bloodpetals where they grow (Flayers by the tar pits, Lashers / Threshers east,
+--     Trappers north of the springs), the power crystals finished around the lake (the densest field), the
+--     Pterrordax by the hive; 974 is done at the ridge with Ringo and turned in at Krakle on the Western Pylon trip
+--     (no Krakle - ridge - Krakle zigzag). Silithus: the Pincer stingers (8278) next to the crushers.
 -- Carried out: 980 + 3908 (Donova, Winterspring), 4300 (Jes'rimon, Orgrimmar), 3542 + 3568 + the book item for 81952
 --   (Undercity: Owen Thadd offers and takes the quest), 4808
 --   (Everlook).
 -- Automation notes: transient steps (fp, sethearth, hearth, fly, go) come before the quest steps of their hub; one
---   step per NPC; bg goals have a later non-bg finishing step; optional steps are followed by a mandatory anchor.
+--   step per NPC; no bg steps ("kill X on the way" is a note, the goal is finished by a step of its own; objective
+--   lists, complete = { [Q] = { n } }, split a goal over the areas of its mobs); a goal the notes let the player
+--   start early is finished by a step with no transient / optional step between the start and it (a step done early
+--   becomes the forward anchor); optional steps are followed by a mandatory anchor.
 if not FastesBoooy.AddLibraryInsert then return end
 FastesBoooy.AddLibrarySegment({
     id = "h-53-azshara-ungoro-silithus",
@@ -249,20 +260,18 @@ FastesBoooy.AddLibrarySegment({
                        .. "«Обезьяны Ун'Горо» и «Добыча Лар'корви».",
                    en = "From Gadgetzan west-south-west to the ramp down into Un'Goro Crater: Torwa Pathfinder at the "
                        .. "bottom - The Apes of Un'Goro and The Fare of Lar'korwi." } },
-        { complete = 4300, bg = true, at = { 1449, 67.39, 52.03 },
-          note = { ru = "Попутно: 8 белых когтей с любых равазавров (для Джес'римона в Оргриммаре, позже).",
-                   en = "On the way: 8 White Ravasaur Claws from any ravasaurs (for Jes'rimon in Orgrimmar, later)." } },
         { complete = 4290, at = { 1449, 68.74, 56.71 },
-          note = { ru = "На север: свежий труп жесткозуба (68.7,56.7) — возьмите кусок. Вокруг равазавры-охотники.",
-                   en = "North: the fresh threshadon carcass (68.7,56.7) - take a piece. Ravasaur Hunters around." } },
-        { complete = 4289, at = { 1449, 66.09, 16.13 },
-          note = { ru = "Вдоль восточного края на север к пещерам горилл: по 2 шкуры горилл, топотунов и рокотунов "
-                       .. "(50-53). Девизавры (элита) бродят по кратеру — обходите.",
-                   en = "North along the east side to the gorilla caves: 2 pelts each from Gorillas, Stompers and "
-                       .. "Thunderers (50-53). Devilsaurs (elite) roam the crater - avoid them." } },
+          note = { ru = "На север: свежий труп жесткозуба (68.7,56.7) — возьмите кусок. По пути и вокруг равазавры "
+                       .. "(48-51): бейте их — 8 белых когтей для Джес'римона (доберёте у самок Лар'корви, позже).",
+                   en = "North: the fresh threshadon carcass (68.7,56.7) - take a piece. Ravasaurs (48-51) on the way and "
+                       .. "around: kill them for 8 White Ravasaur Claws for Jes'rimon (the rest at the Lar'korwi mates, "
+                       .. "later)." } },
         { id = "h-54-marshal-arrive", fp = "Marshal's Refuge", npc = 10583, at = { 1449, 45.23, 5.83 },
-          note = { ru = "На запад в Укрытие Маршалла: Грайф — откройте точку полёта.",
-                   en = "West to Marshal's Refuge: Gryfe - learn the flight point." } },
+          note = { ru = "Вдоль восточного края на север, затем на северо-запад в Укрытие Маршалла (пещеры горилл — "
+                       .. "позже, в первой петле): Грайф — откройте точку полёта. Девизавры (элита) бродят по кратеру — "
+                       .. "обходите.",
+                   en = "North along the east side, then north-west to Marshal's Refuge (the gorilla caves come later, in "
+                       .. "loop 1): Gryfe - learn the flight point. Devilsaurs (elite) roam the crater - avoid them." } },
         { accept = 4284, npc = 9117, at = { 1449, 41.92, 2.70 },
           note = { ru = "Джей Ди Колли в пещере на севере: «Кристаллы Силы».",
                    en = "J.D. Collie in the cave to the north: Crystals of Power." } },
@@ -287,45 +296,47 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "Карна Сомнамбулер: «В поисках Чи-Та 3».", en = "Karna Remtravel: Chasing A-Me 01." } },
 
         ------------------------------------------------------------------
-        -- Un'Goro loop 1: north, east, south-east (level 54)
+        -- Un'Goro loop 1: tar pits, gorilla caves, east side down to Torwa (level 54)
         ------------------------------------------------------------------
-        { complete = 4284, bg = true, at = { 1449, 55.09, 49.27 },
-          note = { ru = "Попутно по всему кратеру: кристаллы силы лежат на земле — по 7 каждого цвета.",
-                   en = "On the way all over the crater: power crystals lie on the ground - 7 of each colour." } },
-        { complete = 4496, bg = true, at = { 1449, 48.36, 81.56 },
-          note = { ru = "Попутно: 5 горстей земли из куч земли Ун'Горо (по всему кратеру); железа — в улье Гориши.",
-                   en = "On the way: 5 Un'Goro Soil from the dirt piles (all over the crater); the gland comes from "
-                       .. "the Gorishi hive." } },
-        { complete = { 4503, 3882 }, bg = true, at = { 1449, 65.99, 31.64 },
-          note = { ru = "Попутно: чешуя (8 с деметродонов, 8 с жутедактилей) и 8 костей (с деметродонов).",
-                   en = "On the way: scales (8 from diemetradons, 8 from pterrordax) and 8 bones (diemetradons)." } },
-        { complete = 4501, bg = true, at = { 1449, 55.34, 10.37 },
-          note = { ru = "Попутно: 10 жутедактилей (у Укрытия и у улья на юге) и 15 бесноватых жутедактилей (запад).",
-                   en = "On the way: 10 Pterrordax (near the Refuge and by the hive in the south) and 15 Frenzied "
-                       .. "Pterrordax (west)." } },
-        { complete = 4145, bg = true, at = { 1449, 67.35, 33.95 },
-          note = { ru = "Попутно: кровоцветы — хлыстуны и крепкозубы на востоке, живодеры в центре, звероловы на западе.",
-                   en = "On the way: bloodpetals - Lashers and Threshers east, Flayers in the centre, Trappers west." } },
-        { id = "h-53-un-goro-crater", complete = 4504, at = { 1449, 48.16, 21.38 },
-          note = { ru = "Южнее Укрытия, смоляные ямы: смоляные скрытни и господины (52-54) — 12 сверхлипкой смолы "
-                       .. "(ещё смоляные твари и ползуны восточнее).",
-                   en = "South of the Refuge, the tar pits: Tar Lurkers and Tar Lords (52-54) - 12 Super Sticky Tar "
-                       .. "(also Tar Beasts and Creepers further east)." } },
+        -- the tar (4504, from Gadgetzan) shares a step with the Flayers of 4145 (accepted at the Refuge): tar looted on the
+        -- way in alone cannot complete it early and forward (skip) the Marshal's Refuge flight point step
+        { id = "h-53-un-goro-crater", complete = { 4504, [4145] = { 3 } }, at = { 1449, 48.16, 21.38 },
+          note = { ru = "Южнее Укрытия, смоляные ямы: смоляные скрытни и господины (52-54) — 12 сверхлипкой смолы; "
+                       .. "кровоцветы-живодеры (51-52) там же и южнее (44-48, 22-31) — 5. Отсюда собирайте по пути: "
+                       .. "кристаллы силы на земле (по 7 каждого цвета; гуще всего на востоке, добор — у озера перед "
+                       .. "третьим визитом к Торве) и горсти земли из куч земли Ун'Горо (5, добор — у улья Гориши).",
+                   en = "South of the Refuge, the tar pits: Tar Lurkers and Tar Lords (52-54) - 12 Super Sticky Tar; "
+                       .. "Bloodpetal Flayers (51-52) there and just south (44-48, 22-31) - 5. From here on pick up on the "
+                       .. "way: power crystals on the ground (7 of each colour; thickest in the east, finished by the lake "
+                       .. "before the third Torwa visit) and Un'Goro Soil from the dirt piles (5, finished at the Gorishi "
+                       .. "hive)." } },
+        { complete = 4289, at = { 1449, 66.09, 16.13 },
+          note = { ru = "На восток к пещерам горилл (севернее пути кружат жутедактили, 50-58, 7-13: бейте их для "
+                       .. "объявления, 10; добор — у улья Гориши): по 2 шкуры горилл, топотунов и рокотунов (50-53).",
+                   en = "East to the gorilla caves (Pterrordax circle north of the way, 50-58, 7-13: kill them for the "
+                       .. "sign, 10; the rest by the Gorishi hive): 2 pelts each from Gorillas, Stompers and Thunderers "
+                       .. "(50-53)." } },
         { id = "h-53-a-me-01", turnin = 4243, npc = 9623, at = { 1449, 67.66, 16.76 },
-          note = { ru = "На восток к пещерам горилл: робот Чи-Та 3. Продолжение не берите (нужен мифриловый корпус).",
-                   en = "East to the gorilla caves: the robot A-Me 01. Skip the follow-up (needs a Mithril Casing)." } },
-        { collect = { [11113] = 1 }, at = { 1449, 68.54, 36.54 },
-          note = { ru = "На юг: ящик с провизией (68.5,36.5) среди кровоцветов. Молодые деметродоны рядом.",
-                   en = "South: the Crate of Foodstuffs (68.5,36.5) among the bloodpetals. Young Diemetradons "
-                       .. "nearby." } },
-        { complete = { 4503, 3882 }, bg = true, at = { 1449, 79.20, 40.01 },
-          note = { ru = "Восточнее: птенцы жутедактилей (48-50) — чешуя.",
-                   en = "Further east: Fledgling Pterrordax (48-50) - scales." } },
+          note = { ru = "Там же робот Чи-Та 3. Продолжение не берите (нужен мифриловый корпус).",
+                   en = "Right there, the robot A-Me 01. Skip the follow-up (needs a Mithril Casing)." } },
+        { id = "h54-ungoro-lashers", complete = { [4145] = { 1, 4 } }, at = { 1449, 67.80, 33.60 },
+          note = { ru = "На юг вдоль восточного края: кровоцветы-хлыстуны и крепкозубы (48-50) — по 5. Молодые "
+                       .. "деметродоны тут же: бейте по пути — чешуя (Шиззлу) и кости (Искру).",
+                   en = "South along the east side: Bloodpetal Lashers and Threshers (48-50) - 5 each. Young "
+                       .. "Diemetradons right there: kill them on the way - scales (Shizzle) and bones (Spark)." } },
+        { complete = { [3881] = { 1 } }, object = 161526, at = { 1449, 68.54, 36.54 },
+          note = { ru = "Рядом: ящик с провизией (68.5,36.5) среди кровоцветов. Птенцы жутедактилей восточнее (77-81, "
+                       .. "38-42) — тоже чешуя.",
+                   en = "Nearby: the Crate of Foodstuffs (68.5,36.5) among the bloodpetals. Fledgling Pterrordax further "
+                       .. "east (77-81, 38-42) - scales too." } },
         { id = "h54-torwa-2", turnin = { 4289, 4290 }, accept = { 4291, 4301 }, npc = 9619, at = { 1449, 71.64, 75.96 },
-          note = { ru = "Вдоль восточного края на юг к Торве: возьмите «Запах Лар'корви» и «Могучая Уча».",
-                   en = "South along the east side to Torwa: take The Scent of Lar'korwi and The Mighty U'cha." } },
+          note = { ru = "Вдоль восточного края на юг к Торве (по пути кристаллы и равазавры): возьмите «Запах Лар'корви» "
+                       .. "и «Могучая Уча».",
+                   en = "South along the east side to Torwa (crystals and ravasaurs on the way): take The Scent of "
+                       .. "Lar'korwi and The Mighty U'cha." } },
         -- 4300 is finished together with 4291 (accepted at Torwa 2): a separate "complete 4300" step would be done as
-        -- soon as the bg claws are in the bags and would forward (skip) the Marshal's Refuge flight point step
+        -- soon as the claws killed on the way are in the bags and would forward (skip) the Marshal's Refuge flight point
+        -- step
         { complete = { 4291, 4300 }, at = { 1449, 64.92, 68.25 },
           note = { ru = "Западнее: самки Лар'корви (49-50) — 2 половые железы. Равазавры и бегуны вокруг (48-50): "
                        .. "добейте когти.",
@@ -339,6 +350,11 @@ FastesBoooy.AddLibrarySegment({
         { complete = 3845, use = 11107, at = { 1449, 63.11, 69.06 },
           note = { ru = "Откройте сумку (компас, карта, ключ) — для Линкена в Укрытии Маршалла.",
                    en = "Open the pack (compass, map, key) - for Linken at Marshal's Refuge." } },
+        { id = "h54-ungoro-crystals", complete = 4284, at = { 1449, 65.30, 73.30 },
+          note = { ru = "Кристаллы силы лежат густо вокруг озера и дальше к Торве (60-72, 66-80): доберите по 7 каждого "
+                       .. "цвета.",
+                   en = "Power crystals lie thick around the lake and on towards Torwa (60-72, 66-80): finish 7 of each "
+                       .. "colour." } },
         { id = "h54-torwa-3", turnin = 4291, accept = 4292, npc = 9619, at = { 1449, 71.64, 75.96 },
           note = { ru = "Торва: возьмите «Приманка для Лар'корви» (мешочек — позже, на востоке).",
                    en = "Torwa: take The Bait for Lar'korwi (the pouch - later, in the east)." } },
@@ -346,42 +362,42 @@ FastesBoooy.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Un'Goro loop 2: south, west, Fire Plume Ridge (level 54-55)
         ------------------------------------------------------------------
+        { id = "h54-ungoro-pterrordax", complete = { [4501] = { 1 } }, at = { 1449, 49.90, 89.10 },
+          note = { ru = "На запад к улью Гориши (юг кратера): над его южным краем кружат жутедактили (50-52; 43-58, "
+                       .. "85-93) — добейте 10 (с них и чешуя).",
+                   en = "West to the Gorishi hive (south of the crater): Pterrordax (50-52) circle over its south edge "
+                       .. "(43-58, 85-93) - finish 10 (scales from them too)." } },
         { complete = 3883, use = 11132, at = { 1449, 48.69, 85.32 },
-          note = { ru = "На запад к улью Гориши (юг кратера): у инкубатория внутри соскоблите образец стены улья.",
-                   en = "West to the Gorishi hive (south of the crater): scrape a Hive Wall Sample near the hatchery "
-                       .. "inside." } },
+          note = { ru = "Улей Гориши: у инкубатория внутри соскоблите образец стены улья.",
+                   en = "The Gorishi hive: scrape a Hive Wall Sample near the hatchery inside." } },
         { complete = 4496, at = { 1449, 48.36, 81.56 },
-          note = { ru = "Осы, рабочие и разорители Гориши (51-53) — ароматическая железа. Жутедактили у улья — для 4501.",
-                   en = "Gorishi Wasps, Workers and Reavers (51-53) - a Gorishi Scent Gland. Pterrordax by the hive - "
-                       .. "for 4501." } },
+          note = { ru = "Осы, рабочие и разорители Гориши (51-53) — ароматическая железа; горсти земли доберите из куч "
+                       .. "земли вокруг улья (всего 5).",
+                   en = "Gorishi Wasps, Workers and Reavers (51-53) - a Gorishi Scent Gland; finish the soil from the dirt "
+                       .. "piles around the hive (5 in all)." } },
         { complete = 3881, at = { 1449, 38.45, 66.06 },
-          note = { ru = "На северо-запад: исследовательское оборудование (38.5,66.1).",
-                   en = "North-west: the Research Equipment (38.5,66.1)." } },
+          note = { ru = "На северо-запад: исследовательское оборудование (38.5,66.1). По пути деметродоны (51-52) — "
+                       .. "чешуя и кости.",
+                   en = "North-west: the Research Equipment (38.5,66.1). Diemetradons (51-52) on the way - scales and "
+                       .. "bones." } },
         { complete = 3882, at = { 1449, 33.29, 73.19 },
-          note = { ru = "Юго-западнее кости динозавров лежат на земле (около 33,73), ещё — со старых деметродонов. "
-                       .. "Стегодоны здесь — элита, не трогайте.",
-                   en = "South-west, dinosaur bones lie on the ground (around 33,73); more from Elder Diemetradons. "
-                       .. "The Stegodons here are elite - leave them." } },
+          note = { ru = "Юго-западнее кости динозавров лежат на земле (около 33,73) — доберите 8. Стегодоны здесь — "
+                       .. "элита, не трогайте.",
+                   en = "South-west, dinosaur bones lie on the ground (around 33,73) - finish the 8. The Stegodons here "
+                       .. "are elite - leave them." } },
         { id = "h-53-krakle", accept = 974, npc = 10302, at = { 1449, 30.93, 50.44 },
-          note = { ru = "На север к горячим источникам Голакка: Кракл — «Найти источник».",
-                   en = "North to Golakka Hot Springs: Krakle - Finding the Source." } },
+          note = { ru = "На север к горячим источникам Голакка (по пути старые деметродоны, 53-55 — чешуя): Кракл — "
+                       .. "«Найти источник» (сдача — позже, по дороге к западному пилону).",
+                   en = "North to Golakka Hot Springs (Elder Diemetradons on the way, 53-55 - scales): Krakle - Finding "
+                       .. "the Source (turned in later, on the way to the Western Pylon)." } },
+        { id = "h55-ungoro-springs-north", complete = { 4501, 4503, 4145 }, at = { 1449, 33.20, 39.07 },
+          note = { ru = "К северу от источников: бесноватые жутедактили (51-54, всего 15) и кровоцветы-звероловы (52-53, "
+                       .. "5); старые деметродоны тут же — добейте жутедактилей, чешую и кровоцветы.",
+                   en = "North of the springs: Frenzied Pterrordax (51-54, 15 in all) and Bloodpetal Trappers (52-53, 5); "
+                       .. "Elder Diemetradons right there - finish the pterrordax, the scales and the bloodpetals." } },
         { complete = 974, use = 12472, at = { 1449, 49.69, 45.64 },
           note = { ru = "На восток на Вулкан Огненного Венца: термометр у горячих точек; самая горячая — 49.7,45.6.",
                    en = "East up Fire Plume Ridge: use the thermometer at the hot spots; the hottest is at 49.7,45.6." } },
-        { turnin = 974, accept = 980, npc = 10302, at = { 1449, 30.93, 50.44 },
-          note = { ru = "Назад к Краклу: возьмите «Новые источники» (Донова в Зимних Ключах, позже).",
-                   en = "Back to Krakle: take The New Springs (Donova in Winterspring, later)." } },
-        { complete = { 4501, 4503 }, at = { 1449, 33.20, 39.07 },
-          note = { ru = "К северу от источников: бесноватые жутедактили (51-54, всего 15) и кровоцветы-звероловы — "
-                       .. "добейте жутедактилей и чешую.",
-                   en = "North of the springs: Frenzied Pterrordax (51-54, 15 in all) and Bloodpetal Trappers - finish "
-                       .. "the pterrordax and the scales." } },
-        { complete = 4145, at = { 1449, 57.57, 53.76 },
-          note = { ru = "На восток через центр: кровоцветы-живодеры у Вулкана Огненного Венца.",
-                   en = "East through the centre: Bloodpetal Flayers around Fire Plume Ridge." } },
-        { complete = 4284, at = { 1449, 55.09, 49.27 },
-          note = { ru = "Добейте кристаллы силы (по 7 каждого цвета) вокруг вулкана.",
-                   en = "Finish the power crystals (7 of each colour) around the ridge." } },
         { id = "h-53-ringo", complete = 4492, turnin = 4492, accept = 4491, npc = 9999, at = { 1449, 51.90, 49.85 },
           note = { ru = "Ринго у подножия вулкана: «Дружеская помощь» (сопровождение).",
                    en = "Ringo at the foot of the ridge: A Little Help From My Friends (escort)." } },
@@ -447,9 +463,14 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "Тран'рек: смола.", en = "Tran'rek: the tar." } },
         { id = "h53-fly-marshal", fly = "Marshal's Refuge", npc = 10583, at = { 1449, 45.23, 5.83 },
           note = { ru = "Булкрек: летите в Укрытие Маршалла.", en = "Bulkrek: fly to Marshal's Refuge." } },
+        { turnin = 974, accept = 980, npc = 10302, at = { 1449, 30.93, 50.44 },
+          note = { ru = "На юго-запад к горячим источникам, Кракл: «Найти источник»; возьмите «Новые источники» (Донова в "
+                       .. "Зимних Ключах, позже).",
+                   en = "South-west to the hot springs, Krakle: Finding the Source; take The New Springs (Donova in "
+                       .. "Winterspring, later)." } },
         { complete = 4288, at = { 1449, 23.86, 59.19 },
-          note = { ru = "На юго-запад вдоль западного края: западный хрустальный пилон (23.9,59.2).",
-                   en = "South-west along the west side: the Western Crystal Pylon (23.9,59.2)." } },
+          note = { ru = "Дальше на юго-запад вдоль западного края: западный хрустальный пилон (23.9,59.2).",
+                   en = "Further south-west along the west side: the Western Crystal Pylon (23.9,59.2)." } },
         { id = "h-55-marshal-end", turnin = { 4285, 4287, 4288, 4321 }, accept = 4321, npc = 9117,
           at = { 1449, 41.92, 2.70 },
           note = { ru = "Назад на север к Джей Ди Колли: три пилона; возьмите и сразу сдайте «Разобраться в этом». "
@@ -511,15 +532,17 @@ FastesBoooy.AddLibrarySegment({
         { turnin = 8284, accept = 8285, npc = 15183, at = { 1451, 49.67, 37.46 },
           note = { ru = "Ехидная: «Дезертир» (табличку — отшельнику Ортеллу).",
                    en = "Larksbane: The Deserter (the tablet goes to Hermit Ortell)." } },
-        { complete = 8278, bg = true, at = { 1451, 38.83, 56.89 },
-          note = { ru = "Попутно: по 3 жала клешневиков (здесь), живодеров и клыка скальных пауков (юг).",
-                   en = "On the way: 3 stingers each from Pincers (here) and Flayers, 3 Rock Stalker fangs (south)." } },
         { id = "h-54-sandy-cookbook", complete = 8281, at = { 1451, 38.50, 56.20 },
-          note = { ru = "Южнее: 20 земляных сокрушителей (57-58); камнехвостые клешневики (56) там же.",
-                   en = "South: 20 Dredge Crushers (57-58); Stonelash Pincers (56) there too." } },
+          note = { ru = "На юго-запад: 20 земляных сокрушителей (57-58). Камнехвостые клешневики (56) там же — их жала на "
+                       .. "следующем шаге.",
+                   en = "South-west: 20 Dredge Crushers (57-58). Stonelash Pincers (56) there too - their stingers are the "
+                       .. "next step." } },
+        { id = "h55-silithus-pincers", complete = { [8278] = { 2 } }, at = { 1451, 38.30, 56.90 },
+          note = { ru = "Там же камнехвостые клешневики (56): 3 жала для «Последней надежды Ноггла».",
+                   en = "Right there, Stonelash Pincers (56): 3 Pincer Stingers for Noggle's Last Hope." } },
         { complete = 8278, at = { 1451, 38.93, 78.27 },
-          note = { ru = "Дальше на юг: камнехвостые живодеры и скальные пауки-скакуны (57-59).",
-                   en = "Further south: Stonelash Flayers and Rock Stalkers (57-59)." } },
+          note = { ru = "Дальше на юг: камнехвостые живодеры и скальные пауки-скакуны (57-59) — по 3 жала и клыка.",
+                   en = "Further south: Stonelash Flayers and Rock Stalkers (57-59) - 3 stingers and 3 fangs." } },
         { id = "h-54-hermit-ortell", turnin = 8285, npc = 15194, at = { 1451, 67.19, 69.76 },
           note = { ru = "На восток к отшельнику Ортеллу: табличка. «Сумеречный словарь» не берите (три хранителя 60-го "
                        .. "в лагерях Сумеречного Молота).",

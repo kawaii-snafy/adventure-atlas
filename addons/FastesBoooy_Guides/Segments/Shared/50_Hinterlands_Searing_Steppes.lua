@@ -23,24 +23,29 @@
 --   UC  : 2995 (Oran), 81949 (Owen Thadd), 864 (Zinge), 3568 (Cuely). Fly Tarren Mill, ride into the Hinterlands.
 --   HW  : Gilveradin 650 > 77; Highvale papers (2995); Rin'ji 2742 (escort out of the lodge); Skulk Rock crates (77).
 --   RV1 : fp, hearth; 7840, 7845 + 7850, 7815 + 7816, 7828 + 7829 + 7830 + 7849, 7861 + 7862, 7841, 7844, 7839.
---   L1  : coast snapjaws (7815), Gammerita (7816), Rin'ji's Secret 2742 > 2782, Lard's lunch (7840), Vilebranch camp
---         (7844, 7839), wilds (7829, 7830, 7828), Violet Tragan (2641), book 81954, Atal'ai Exile 1429 > 1444, Quel'Danil elves
---         (7841), Gilveradin 77 > 81; hearth.
+--   L1  : Gammerita (7816; snapjaws on the way), Rin'ji's Secret 2742 > 2782, northern shore snapjaws (7815), Lard's
+--         lunch (7840), Vilebranch camp (7844, 7839), wilds (7829, 7830; stalkers on the way), howlers + stalkers (7828),
+--         Violet Tragan (2641), book 81954, Atal'ai Exile 1429 > 1444, Quel'Danil elves (7841), Gilveradin 77 > 81;
+--         hearth.
 --   RV2 : turn-ins; 7841 > 7842.
---   L2  : skylords (7842 feathers), Jintha'Alor: skull pile, vessels, bones, elite trolls (7862), Hexx + guards
---         (7861), Elder Torntusk 7845 > 7846, Hitah'ya (key), 7846 > 7847.   RV3: turn-ins, fly Kargath.
+--   L2  : skylords (7842 feathers), Jintha'Alor: skull pile, bones (vessels 7850 and elite trolls 7862 on the way up),
+--         Hexx + guards (7861), Elder Torntusk 7845 > 7846, Hitah'ya (key), 7846 > 7847, the rest of the vessels and
+--         elite trolls on the lower tiers on the way out.   RV3: turn-ins, fly Kargath.
 --   KG  : hearth Kargath, 3821, (optional BRD: 4134, 3906, 4081).  SG: Thorium Point (fp, 7701 / 7728 / 7729 board, 7722,
 --         7723 / 7724 / 7727),
---         Kalaran 3441 > 3442, Slag Pit (incendosaurs 7727, 7701, 7722), Cauldron (7723, 3442, 7729 bg, 7728),
---         lava spiders (7724), 3442 > 3443 (daggers), 3443 > 3452 (Twilight cultists), Thorium Point turn-ins,
---         3452 > 3453 > 3454 > 3462 > 3463 (braziers), 3481 hoard, book 81955 (Cauldron). South through Blackrock
+--         Kalaran 3441 > 3442, Slag Pit (Maltorius 7701 + plans 7722 on the bottom level, then incendosaurs 7727 and
+--         taskmasters / slavers 7729 in its east part), Cauldron floor (7728; golems / elementals on the way), lava
+--         spiders (7724), book 81955, centre of the Cauldron (7723, 3442), 3442 > 3443 (daggers from the dwarves
+--         around Kalaran), 3443 > 3452 (Twilight cultists), Thorium Point turn-ins,
+--         3452 > 3453 > 3454 > 3462 > 3463 (braziers), 3481 hoard. South through Blackrock
 --         Mountain: book 81953 (Franclorn), optional Blackrock Depths block (3906 Pyron, 4081, 4134).
 --   BS  : Flame Crest fp, 4296, 4726; tablet; Dreadmaul Rock 3821 > 3822 (Krom'Grul); broodlings (4726);
 --         4726 > 4808, 4296; hearth Kargath 3822, (optional 4134, 3906, 4081); fly Stonard.
 --   SW  : Fallen Hero 2784 > 2621; Stonard 2621 > 2622, 1444 (+ optional 1445), 2622 > 2623; book 81947 (Pool of Tears),
 --         optional Sunken Temple (1445); Swamp Talkers; Fallen Hero 2623.
---   BL  : Bloodmages 2581 / 2583 / 2585 / 2601 / 2603 (shared parts: collect totals), Kum'isha 2521 / 3501 (random
---         drops), book 81956, field loop, level gate at the helboars, turn-ins; hearth Kargath (the stone is off its
+--   BL  : Bloodmages 2581 / 2583 / 2585 / 2601 / 2603 (shared parts: collect totals), jowls + pincers on the road south,
+--         Kum'isha 2521 / 3501 (random drops of any creature there), book 81956, brains in the east, level gate at the
+--         helboars (centre), Kum'isha's sphere / fragment there, turn-ins; hearth Kargath (the stone is off its
 --         cooldown since the Flame Crest hearth; Kargath -> Undercity skips the ride back to Stonard and the
 --         Stonard -> Kargath flight leg; only after the optional 1445 does the player go to Stonard and fly from there).
 -- Deviations from the plan (documented in the handoff):
@@ -75,8 +80,13 @@
 --   accept (h50-revantusk-hearth: Lard binds and gives 7840; a separate accept right after it would fast-forward the
 --   bind when the gossip auto-accept takes 7840 first); the paladin's training insert after h-50-uc-arrive (Oran) is followed by a
 --   step at another NPC (the level there is ~49.5 since the 46-60 densify pass: docs/routes/shared-path.md, anchors,
---   suggests merging pal-train-50 into the 52 set). Shared-item quests (Bloodmages) finish with collect totals; bg
---   goals get a later non-bg finishing step.
+--   suggests merging pal-train-50 into the 52 set). Shared-item quests (Bloodmages) finish with collect totals.
+-- Step by step (no bg steps): every goal is a regular step where it is done in play order; mobs passed earlier get a
+--   "по пути" / "on the way" hint in the notes of the steps that pass them, and the goal is finished by its own step
+--   at the last place the route passes them (snapjaws, stalkers, Jintha'Alor vessels / elite trolls, golems /
+--   elementals, Bloodmage parts). The travel checks (travel-trip / travel-revisit) report nothing here: the Slag Pit
+--   is done Maltorius first (he stands under Kalaran), the Blasted Lands go north -> south (jowls / pincers on the
+--   road, Kum'isha, east, centre) instead of Kum'isha -> back north -> east -> centre.
 if not FastesBoooy.AddLibraryInsert then return end
 FastesBoooy.AddLibrarySegment({
     id = "h-50-hinterlands-searing-steppes",
@@ -216,44 +226,43 @@ FastesBoooy.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Loop 1: north coast, Vilebranch camp, the wilds, west (level 50-51)
         ------------------------------------------------------------------
-        { complete = 7815, bg = true, at = { 1425, 78.43, 67.15 },
-          note = { ru = "Попутно: 10 морских хрустогрызов вдоль всего берега (в тексте задания и на Wowhead — 15; "
-                       .. "верен счётчик в журнале).",
-                   en = "On the way: 10 Saltwater Snapjaws all along the coast (the quest text and Wowhead say 15; "
-                       .. "trust the quest log counter)." } },
-        { complete = 7828, bg = true, at = { 1425, 65.64, 52.90 },
-          note = { ru = "Попутно: 5 среброгривых бродяг (восток и центр) и 5 ревунов (запад) - в тексте и на Wowhead "
-                       .. "по 15, верен счётчик в журнале.",
-                   en = "On the way: 5 Silvermane Stalkers (east and centre) and 5 Howlers (west) - the quest text and "
-                       .. "Wowhead say 15 each, trust the quest log counter." } },
         { complete = 7816, at = { 1425, 80.40, 58.23 },
-          note = { ru = "На север по берегу: черепаха Гаммерита (элита 48) — лучшая наживка Катума.",
-                   en = "North along the coast: the turtle Gammerita (elite 48) - Katoom's Best Lure." } },
+          note = { ru = "На север по берегу: черепаха Гаммерита (элита 48) — лучшая наживка Катума. По пути бейте "
+                       .. "морских хрустогрызов вдоль берега (доберёте на северном берегу, через шаг).",
+                   en = "North along the coast: the turtle Gammerita (elite 48) - Katoom's Best Lure. On the way: kill "
+                       .. "the Saltwater Snapjaws along the shore (you finish them on the northern shore, two steps "
+                       .. "below)." } },
         { id = "h-50-rin-ji-s", turnin = 2742, accept = 2782, object = 142127, at = { 1425, 86.30, 59.01 },
           note = { ru = "Отвесные скалы: тайник Рин'джи — «Секрет Рин'джи» (табличку несите Оран в Подгород).",
                    en = "Overlook Cliffs: Rin'ji's Secret - take Rin'ji's Secret (the tablet goes to Oran in "
                        .. "Undercity)." } },
         { complete = 7815, at = { 1425, 83.00, 49.80 },
-          note = { ru = "Хрустогрызов меньше 10? Их много на северном берегу.",
-                   en = "Fewer than 10 snapjaws? Plenty on the northern shore." } },
+          note = { ru = "Северный берег: добейте морских хрустогрызов до 10 (в тексте задания и на Wowhead — 15; верен "
+                       .. "счётчик в журнале).",
+                   en = "The northern shore: finish the Saltwater Snapjaws, 10 in all (the quest text and Wowhead say 15; "
+                       .. "trust the quest log counter)." } },
         { complete = 7840, at = { 1425, 84.47, 41.22 },
           note = { ru = "Островок на севере: корзина Лярда у похитителя из племени Порочной Ветви (49).",
                    en = "The islet to the north: Lard's basket by the Vilebranch Kidnapper (49)." } },
         { complete = { 7839, 7844 }, at = { 1425, 69.26, 46.74 },
           note = { ru = "На запад к лагерям Порочной Ветви у дороги (70,48 и 66,44): 6 охотников за скальпами и 2 "
                        .. "ворожея (в тексте и на Wowhead 30 и 15 - верен счётчик в журнале); инструменты Углежога "
-                       .. "лежат там же.",
+                       .. "лежат там же. Отсюда на запад бейте по пути среброгривых бродяг (доберёте на юго-западе).",
                    en = "West to the Vilebranch camps by the road (70,48 and 66,44): 6 Scalpers and 2 Soothsayers (the "
                        .. "quest text and Wowhead say 30 and 15 - trust the quest log counter); Slagtree's Lost Tools "
-                       .. "lie there too." } },
+                       .. "lie there too. From here on west: kill the Silvermane Stalkers on the way (you finish them "
+                       .. "in the south-west)." } },
         { id = "h-50-the-hinterlands-field", complete = { 7829, 7830 }, at = { 1425, 59.15, 49.93 },
           note = { ru = "Центр зоны: 10 диких совухов (в тексте и на Wowhead 20 - верен счётчик в журнале); перо из "
-                       .. "остроклювов-повелителей небес (46-48).",
+                       .. "остроклювов-повелителей небес (46-48). По пути: среброгривые бродяги.",
                    en = "Centre of the zone: 10 Savage Owlbeasts (the quest text and Wowhead say 20 - trust the quest "
-                       .. "log counter); the Skylord Plume from the Razorbeak Skylords (46-48)." } },
+                       .. "log counter); the Skylord Plume from the Razorbeak Skylords (46-48). On the way: Silvermane "
+                       .. "Stalkers." } },
         { complete = 7828, at = { 1425, 44.32, 56.98 },
-          note = { ru = "На юго-запад: среброгривые ревуны (45-46).",
-                   en = "South-west: Silvermane Howlers (45-46)." } },
+          note = { ru = "На юго-запад: 5 среброгривых ревунов (45-46); по дороге туда добейте 5 бродяг (в тексте и на "
+                       .. "Wowhead по 15 - верен счётчик в журнале).",
+                   en = "South-west: 5 Silvermane Howlers (45-46); finish the 5 Stalkers on the way there (the quest text "
+                       .. "and Wowhead say 15 each - trust the quest log counter)." } },
         { complete = 2641, at = { 1425, 40.63, 59.66 },
           note = { ru = "Рядом: сорвите фиалковый траган для «Маленького секрета Поливалки» (Танарис).",
                    en = "Nearby: pick a Violet Tragan for Sprinkle's Secret Ingredient (Tanaris)." } },
@@ -302,22 +311,16 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "На северо-запад к остроклювам-повелителям небес (46-48): 10 длинных перьев.",
                    en = "North-west to the Razorbeak Skylords (46-48): 10 Long Elegant Feathers." } },
         { complete = { [7849] = { 1 } }, at = { 1425, 58.56, 64.76 },
-          note = { ru = "На юг к Джинта'Алору: груда черепов (58.6,64.8) — череп Малькора.",
-                   en = "South to Jintha'Alor: the Pile of Skulls (58.6,64.8) - Malkhor's skull." } },
-        { complete = 7850, bg = true, at = { 1425, 63.53, 71.70 },
-          note = { ru = "Попутно: 5 сосудов с порченой кровью на ярусах Джинта'Алора (в тексте и на Wowhead 10 - "
-                       .. "верен счётчик в журнале).",
-                   en = "On the way: 5 Vessels of Tainted Blood on the tiers of Jintha'Alor (the quest text and Wowhead "
-                       .. "say 10 - trust the quest log counter)." } },
-        { complete = 7862, bg = true, at = { 1425, 63.48, 72.34 },
-          note = { ru = "Попутно (элита 47-50, по одному): 5 берсерков, 3 тёмных охотника, 3 кровопийцы, 2 пожирателя "
-                       .. "душ (в тексте и на Wowhead по 20 - верен счётчик в журнале; 20 - бросьте 7862).",
-                   en = "On the way (elites 47-50, one at a time): 5 Berserkers, 3 Shadow Hunters, 3 Blood Drinkers, "
-                       .. "2 Soul Eaters (the quest text and Wowhead say 20 each - trust the quest log counter; 20: "
-                       .. "abandon 7862)." } },
+          note = { ru = "На юг к Джинта'Алору: груда черепов (58.6,64.8) — череп Малькора. Дальше вверх по ярусам "
+                       .. "собирайте сосуды с порченой кровью и бейте элитных троллей Порочной Ветви (47-50, по одному) "
+                       .. "— доберёте на выходе из города.",
+                   en = "South to Jintha'Alor: the Pile of Skulls (58.6,64.8) - Malkhor's skull. Further up the tiers: "
+                       .. "pick up the Vessels of Tainted Blood and kill the elite Vilebranch trolls (47-50, one at a "
+                       .. "time) - you finish them on the way out of the city." } },
         { complete = { [7849] = { 2 } }, at = { 1425, 62.11, 75.35 },
-          note = { ru = "Груда костей в волчьем логове (62.1,75.4) — кости Малькора.",
-                   en = "The Pile of Bones in the wolf den (62.1,75.4) - Malkhor's bones." } },
+          note = { ru = "Груда костей в волчьем логове (62.1,75.4) — кости Малькора. По пути: сосуды и элитные тролли.",
+                   en = "The Pile of Bones in the wolf den (62.1,75.4) - Malkhor's bones. On the way: vessels and elite "
+                       .. "trolls." } },
         { complete = 7861, at = { 1425, 58.50, 80.50 },
           note = { ru = "Вершина: 5 стражей Аман'заси (элита 50-51; в тексте и на Wowhead 20 - верен счётчик в журнале, "
                        .. "20 - бросьте 7861) и жрица Ведьмиса (элита 51, 59.5,78.3).",
@@ -332,8 +335,13 @@ FastesBoooy.AddLibrarySegment({
         { turnin = 7846, accept = 7847, npc = 14757, at = { 1425, 59.69, 77.84 },
           note = { ru = "Обратно к старейшине.", en = "Back to the Elder." } },
         { complete = { 7850, 7862 }, at = { 1425, 63.50, 72.00 },
-          note = { ru = "Не хватает сосудов или элитных троллей? Нижние ярусы на востоке города.",
-                   en = "Vessels or elite trolls missing? The lower tiers on the east side of the city." } },
+          note = { ru = "По пути из города, нижние ярусы на востоке: добейте 5 сосудов с порченой кровью (в тексте и на "
+                       .. "Wowhead 10) и элитных троллей - 5 берсерков, 3 тёмных охотника, 3 кровопийцы, 2 пожирателя "
+                       .. "душ (в тексте и на Wowhead по 20; верен счётчик в журнале, 20 - бросьте 7862).",
+                   en = "On the way out of the city, the lower tiers on the east side: finish the 5 Vessels of Tainted "
+                       .. "Blood (the quest text and Wowhead say 10) and the elite trolls - 5 Berserkers, 3 Shadow "
+                       .. "Hunters, 3 Blood Drinkers, 2 Soul Eaters (the quest text and Wowhead say 20 each; trust the "
+                       .. "quest log counter, 20: abandon 7862)." } },
 
         ------------------------------------------------------------------
         -- Revantusk Village, last visit -> Kargath (level 51)
@@ -395,43 +403,47 @@ FastesBoooy.AddLibrarySegment({
         { accept = 3442, npc = 8479, at = { 1427, 39.06, 38.99 },
           note = { ru = "Каларан: «Неугасимое пламя» (4 сердца пламени, 4 масла големов).",
                    en = "Kalaran: The Flawless Flame (4 Hearts of Flame, 4 Golem Oils)." } },
-        { complete = 7729, bg = true, at = { 1427, 43.10, 32.67 },
-          note = { ru = "Попутно по всему Котлу: 15 надсмотрщиков и 15 поработителей Черного Железа.",
-                   en = "On the way, all over the Cauldron: 15 Dark Iron Taskmasters and 15 Slavers." } },
-        { complete = { 7723, 3442 }, bg = true, at = { 1427, 41.70, 48.31 },
-          note = { ru = "Попутно: 20 тяжелых боевых големов (масло), элементали магмы (сердца и масло).",
-                   en = "On the way: 20 Heavy War Golems (oil), Magma Elementals (hearts and oil)." } },
-        { complete = 7727, at = { 1427, 48.43, 28.01 },
-          note = { ru = "Шлаковая Яма (вход у Каларана): 20 пламезавров (47-49) в лавовых озёрах на востоке ямы.",
-                   en = "The Slag Pit (entrance by Kalaran): 20 Incendosaurs (47-49) in the lava pools of its east "
-                       .. "part." } },
-        { complete = { 7701, 7722 }, at = { 1427, 40.60, 35.80 },
-          note = { ru = "Глубже в Шлаковой Яме: надзиратель Мальториус (элита 50) — голова; секретные планы лежат "
-                       .. "рядом.",
-                   en = "Deeper in the Slag Pit: Overseer Maltorius (elite 50) - his head; the Secret Plans lie next "
-                       .. "to him." } },
+        { id = "h51-slag-pit-maltorius", complete = { 7701, 7722 }, at = { 1427, 40.60, 35.80 },
+          note = { ru = "Шлаковая Яма (вход у Каларана): на нижнем ярусе — надзиратель Мальториус (элита 50), голова; "
+                       .. "секретные планы лежат рядом. По пути бейте надсмотрщиков и поработителей Черного Железа "
+                       .. "(доберёте на шаге ниже).",
+                   en = "The Slag Pit (entrance by Kalaran): Overseer Maltorius (elite 50) on the bottom level - his "
+                       .. "head; the Secret Plans lie next to him. On the way: kill the Dark Iron Taskmasters and "
+                       .. "Slavers (you finish them on the next step)." } },
+        { id = "h51-slag-pit-east", complete = { 7727, 7729 }, at = { 1427, 44.60, 29.00 },
+          note = { ru = "Восточная часть Шлаковой Ямы: 20 пламезавров (47-49) в лавовых озёрах; добейте 15 "
+                       .. "надсмотрщиков и 15 поработителей Черного Железа (их больше всего здесь, в яме).",
+                   en = "The east part of the Slag Pit: 20 Incendosaurs (47-49) in the lava pools; finish the 15 Dark "
+                       .. "Iron Taskmasters and 15 Slavers (most of them are here, in the pit)." } },
         { complete = 7728, at = { 1427, 41.66, 55.82 },
-          note = { ru = "Дно Котла: фурма с кузнецов Черного Железа (40,50), труба с наблюдателей (34,55 и 52,58).",
-                   en = "Floor of the Cauldron: the Tuyere from the Dark Iron Steamsmiths (40,50), the Spyglass from "
-                       .. "the Lookouts (34,55 and 52,58)." } },
+          note = { ru = "Из ямы на юг, дно Котла: фурма с кузнецов Черного Железа (40,50), труба с наблюдателей (34,55 и "
+                       .. "52,58). По пути бейте тяжелых боевых големов (масло) и элементалей магмы (сердца и масло) — "
+                       .. "доберёте в центре Котла.",
+                   en = "Out of the pit and south, floor of the Cauldron: the Tuyere from the Dark Iron Steamsmiths "
+                       .. "(40,50), the Spyglass from the Lookouts (34,55 and 52,58). On the way: kill the Heavy War "
+                       .. "Golems (oil) and Magma Elementals (hearts and oil) - you finish them in the centre of the "
+                       .. "Cauldron." } },
         { complete = 7724, at = { 1427, 28.06, 59.49 },
-          note = { ru = "На запад: 20 опаляющих лавовых пауков (47-49).",
-                   en = "West: 20 Greater Lava Spiders (47-49)." } },
+          note = { ru = "На запад: 20 опаляющих лавовых пауков (47-49). Здесь же элементали (сердца пламени).",
+                   en = "West: 20 Greater Lava Spiders (47-49). Elementals here too (Hearts of Flame)." } },
         { collect = { [220352] = 1 }, object = 441253, at = { 1427, 37.80, 49.30 },
           note = { ru = "Дно Котла (37.8,49.3): книга «Разум из металла» — заберите её (контейнер; задание - у Оуэна "
                        .. "Тэдда в Подгороде).",
                    en = "Floor of the Cauldron (37.8,49.3): the book A Mind of Metal - loot it (a container; the quest is "
                        .. "Owen Thadd's, Undercity)." } },
         { id = "h-50-searing-gorge-field", complete = { 7723, 3442 }, at = { 1427, 40.83, 49.21 },
-          note = { ru = "Не хватает големов, сердец или масла? Центр Котла.",
-                   en = "Golems, hearts or oil missing? The centre of the Cauldron." } },
+          note = { ru = "Центр Котла по пути к Каларану: добейте 20 тяжелых боевых големов (масло) и 4 сердца пламени с "
+                       .. "элементалей, 4 масла големов.",
+                   en = "The centre of the Cauldron on the way to Kalaran: finish the 20 Heavy War Golems (oil) and the "
+                       .. "4 Hearts of Flame from the elementals, 4 Golem Oils." } },
         { turnin = 3442, accept = 3443, npc = 8479, at = { 1427, 39.06, 38.99 },
           note = { ru = "Каларан: «Древко факела» (8 кинжалов с ториевой обкладкой с дворфов).",
                    en = "Kalaran: Forging the Shaft (8 Thorium Plated Daggers from the dwarves)." } },
-        { complete = { 3443, 7729 }, at = { 1427, 43.10, 32.67 },
-          note = { ru = "Северная часть Котла: дворфы Черного Железа — кинжалы и остаток надсмотрщиков/поработителей.",
-                   en = "North part of the Cauldron: Dark Iron dwarves - the daggers and the rest of the "
-                       .. "Taskmasters / Slavers." } },
+        { complete = 3443, at = { 1427, 40.60, 38.60 },
+          note = { ru = "Рядом, вокруг Каларана и у входа в Шлаковую Яму: поработители и надсмотрщики Черного Железа — 8 "
+                       .. "кинжалов с ториевой обкладкой.",
+                   en = "Close by, around Kalaran and at the Slag Pit entrance: Dark Iron Slavers and Taskmasters - 8 "
+                       .. "Thorium Plated Daggers." } },
         { turnin = 3443, accept = 3452, npc = 8479, at = { 1427, 39.06, 38.99 },
           note = { ru = "Каларан: «Защита пламени» (символ Рагнароса).",
                    en = "Kalaran: The Flame's Casing (Symbol of Ragnaros)." } },
@@ -587,42 +599,47 @@ FastesBoooy.AddLibrarySegment({
         { accept = { 2601, 2603 }, npc = 7506, at = { 1419, 50.64, 14.30 },
           note = { ru = "Волшебница крови Линора: «Укус василиска» и «Стойкость стервятника».",
                    en = "Bloodmage Lynnore: The Basilisk's Bite and Vulture's Vigor." } },
-        { complete = { 2581, 2583, 2585, 2601, 2603 }, bg = true,
-          collect = { [8391] = 5, [8392] = 6, [8393] = 6, [8394] = 11, [8396] = 14 }, at = { 1419, 52.00, 33.00 },
-          note = { ru = "Попутно (задания делят добычу, нужно всего): 5 челюстей гиен, 6 легких вепря, 6 клешней "
-                       .. "скорпоков, 11 мозгов василисков, 14 желудков стервятников.",
-                   en = "On the way (the quests share the parts, totals needed): 5 Snickerfang Jowls, 6 Blasted Boar "
-                       .. "Lungs, 6 Scorpok Pincers, 11 Basilisk Brains, 14 Vulture Gizzards." } },
+        { id = "h-51-blasted-lands-field", collect = { [8391] = 5, [8393] = 6 }, at = { 1419, 48.20, 22.00 },
+          note = { ru = "Дальше на юг по дороге: голодные хохотуны (челюсти) и скорпоки-острожалы (клешни) - 5 челюстей и "
+                       .. "6 клешней (задания делят добычу, нужно всего). По пути бейте и стервятников: желудков нужно "
+                       .. "14, доберёте в центре.",
+                   en = "On south along the road: Starving Snickerfangs (jowls) and Scorpok Stingers (pincers) - 5 jowls "
+                       .. "and 6 pincers (the quests share the parts, totals needed). On the way: kill the vultures too - "
+                       .. "14 gizzards are needed, you finish them in the centre." } },
         { id = "h-51-kum-isha-the", accept = { 2521, 3501 }, npc = 7363, at = { 1419, 51.98, 35.65 },
-          note = { ru = "На юг к Кум'ише Коллекционеру: «Служба для Кум'иша» и «Счет идет на большие числа».",
-                   en = "South to Kum'isha the Collector: To Serve Kum'isha and Everything Counts In Large "
-                       .. "Amounts." } },
+          note = { ru = "На юг к Кум'ише Коллекционеру: «Служба для Кум'иша» и «Счет идет на большие числа». Безупречная "
+                       .. "сфера дренетиста и несовершенный осколок падают с любых местных существ - с этого места бейте "
+                       .. "всех по пути.",
+                   en = "South to Kum'isha the Collector: To Serve Kum'isha and Everything Counts In Large Amounts. The "
+                       .. "Flawless Draenethyst Sphere and the Imperfect Draenethyst Fragment drop from any creature here - "
+                       .. "from now on kill everything on the way." } },
         { collect = { [220353] = 1 }, object = 441254, at = { 1419, 55.40, 32.20 },
           note = { ru = "Чуть северо-восточнее (55.4,32.2): книга «Кодекс заклинателя» — заберите её (контейнер; задание "
                        .. "- у Оуэна Тэдда в Подгороде).",
                    en = "Just north-east (55.4,32.2): the book Conjurer's Codex - loot it (a container; the quest is "
                        .. "Owen Thadd's, Undercity)." } },
-        { complete = { 2521, 3501 }, bg = true, at = { 1419, 52.00, 41.47 },
-          note = { ru = "Попутно: безупречная сфера дренетиста и несовершенный осколок падают с любых местных "
-                       .. "существ.",
-                   en = "On the way: the Flawless Draenethyst Sphere and the Imperfect Draenethyst Fragment drop "
-                       .. "from any creature here." } },
-        { id = "h-51-blasted-lands-field", collect = { [8391] = 5, [8393] = 6 }, at = { 1419, 48.20, 22.00 },
-          note = { ru = "Север: голодные хохотуны (челюсти) и скорпоки-острожалы (клешни); стервятники здесь же.",
-                   en = "North: Starving Snickerfangs (jowls) and Scorpok Stingers (pincers); vultures here too." } },
         { collect = { [8394] = 11 }, at = { 1419, 59.80, 37.50 },
-          note = { ru = "Восток: краснокаменные василиски и хрусталиски — 11 мозгов; пеплогривые вепри и стервятники там же.",
-                   en = "East: Redstone Basilisks and Crystalhides - 11 brains; Ashmane Boars and vultures there too." } },
+          note = { ru = "Восток: краснокаменные василиски и хрусталиски — 11 мозгов; пеплогривые вепри (легкие) и "
+                       .. "стервятники там же.",
+                   en = "East: Redstone Basilisks and Crystalhides - 11 brains; Ashmane Boars (lungs) and vultures there "
+                       .. "too." } },
         { id = "h-50-hinterlands-searing-steppes-level-gate", complete = { 2581, 2583, 2585, 2601, 2603 },
-          ok = { ["level-grind"] = 160 }, -- end-of-segment gate: 154 kills in the normal run
+          ok = { ["level-grind"] = 160 }, -- end-of-segment gate: 156 kills in the normal run
           collect = { [8391] = 5, [8392] = 6, [8393] = 6, [8394] = 11, [8396] = 14 }, level = { 52, 0.30 },
           at = { 1419, 49.76, 42.23 },
-          note = { ru = "Центр: зловепри (52-53, плотно — лучший опыт рядом), стервятники-костегрызы, гиены. "
-                       .. "Добейте части и бейте зловепрей до 52-го + 30%: сдачи дадут ~52.6 — Азшара (волхв Римтори 55) "
-                       .. "и Ун'Горо идут с 52-го. Нет сферы или осколка Кум'иши — до 52 + 40%.",
-                   en = "Centre: Helboars (52-53, dense: the best XP nearby), Bonepickers, hyenas. Finish the parts "
-                       .. "and keep killing Helboars up to 52 + 30%: the turn-ins make ~52.6 - Azshara (Magus Rimtori 55) "
-                       .. "and Un'Goro are fine from 52. No sphere or fragment for Kum'isha - up to 52 + 40%." } },
+          note = { ru = "На запад, центр: зловепри (52-53, плотно — лучший опыт рядом), стервятники-костегрызы, гиены. "
+                       .. "Добейте части (всего 5 челюстей, 6 легких, 6 клешней, 11 мозгов, 14 желудков) и бейте "
+                       .. "зловепрей до 52-го + 30%: сдачи дадут ~52.6 — Азшара (волхв Римтори 55) и Ун'Горо идут с 52-го.",
+                   en = "West, the centre: Helboars (52-53, dense: the best XP nearby), Bonepickers, hyenas. Finish the "
+                       .. "parts (5 jowls, 6 lungs, 6 pincers, 11 brains, 14 gizzards in all) and keep killing Helboars "
+                       .. "up to 52 + 30%: the turn-ins make ~52.6 - Azshara (Magus Rimtori 55) and Un'Goro are fine "
+                       .. "from 52." } },
+        { id = "h52-kum-isha-drops", complete = { 2521, 3501 }, at = { 1419, 50.20, 39.70 },
+          note = { ru = "Там же, по пути к Кум'ише: сфера и осколок дренетиста ещё не выпали — бейте зловепрей дальше (до "
+                       .. "52 + 40%). Сферы так и нет — бросьте 2521, осколка нет — 3501 (гайд пропустит их шаги).",
+                   en = "Same place, on the way to Kum'isha: no Draenethyst Sphere or Fragment yet - keep killing "
+                       .. "Helboars (up to 52 + 40%). Still no sphere - abandon 2521, no fragment - 3501 (the guide "
+                       .. "skips their steps)." } },
         { turnin = { 2521, 3501 }, npc = 7363, at = { 1419, 51.98, 35.65 },
           note = { ru = "Кум'иша. Сферы нет — бросьте 2521 (гайд пропустит шаг).",
                    en = "Kum'isha. No sphere - abandon 2521 (the guide skips the step)." } },
