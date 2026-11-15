@@ -12,19 +12,23 @@ local m, ns
 
 local function N() return ns.Narrative end
 
--- Every fixture quest with one objective, so a quest in the log is incomplete until CompleteObjectives.
+-- Every fixture quest with one objective, so a quest in the log is incomplete until CompleteObjectives; the
+-- fixture items with their names.
 local function defineQuests(mm)
-    for id, q in pairs(dofile(FIXTURE).quests) do
+    local data = dofile(FIXTURE)
+    for id, q in pairs(data.quests) do
         mm:DefineQuest(id, { title = q.n, level = q.l, reqLevel = q.r, objectives = { { text = "done", required = 1 } } })
     end
+    for id, name in pairs(data.items) do mm:DefineItem(id, { name = name }) end
 end
 
--- The Orc warrior in narrative mode with the fixture goals (a fresh copy: tests may edit the records).
-local function boot(player)
+-- The Orc warrior in narrative mode with the fixture goals (a fresh copy: tests may edit the records);
+-- skills = { [line] = { rank, maxRank } }.
+local function boot(player, skills)
     local p = {}
     for k, v in pairs(ORC) do p[k] = v end
     for k, v in pairs(player or {}) do p[k] = v end
-    m, ns = H.boot({ fixture = false, quests = false, player = p, setup = defineQuests })
+    m, ns = H.boot({ fixture = false, quests = false, player = p, setup = defineQuests, mock = { skills = skills } })
     ns.Knowledge:Add(dofile(FIXTURE))
     N():SetMode("narrative")
     H.settle(m)
@@ -34,7 +38,8 @@ local function goal(id) return N().byId[id] end
 local function best(id) return N():Best(goal(id)) end
 local function where() return N():Where() end
 
--- Evaluate the fixture goals for a state: opts = { level, range, done = { ids }, log, marks, race, class }.
+-- Evaluate the fixture goals for a state: opts = { level, range, done = { ids }, log, marks, race, class,
+-- skill = { [line] = { rank, maxRank } }, known = { spellIDs } }.
 local function eval(opts)
     opts = opts or {}
     local data = ns.Knowledge.data
@@ -47,6 +52,16 @@ local function eval(opts)
         isFor = function(rec) return ns.Knowledge:IsFor(rec, facts) end,
         done = function(q) return done[q] == true end,
         log = opts.log or {}, marks = opts.marks or {},
+        skill = function(line)
+            local s = (opts.skill or {})[line]
+            if s then return s[1], s[2] end
+        end,
+        known = function(id)
+            for _, k in ipairs(opts.known or {}) do
+                if k == id then return true end
+            end
+            return false
+        end,
     })
 end
 
@@ -307,10 +322,13 @@ describe("narrative where now", function()
         assert.is_nil(N():Describe(main):find("another continent", 1, true))
     end)
 
-    it("names the level to wait for when nothing can be done", function()
+    it("names the level to wait for when nothing can be done, also next to a hint as the main suggestion", function()
         boot({ level = 1 })
         assert.is_nil(where().main)
         assert.equal(3, where().wait)
+        m:AddItem(2004)
+        H.settle(m)
+        assert.same({ "use", true, 3 }, { where().main.kind, where().main.side, where().wait })
     end)
 
     it("waits for the level a quest can be suggested at, not only its required level", function()
@@ -456,5 +474,226 @@ describe("narrative follow", function()
         assert.is_false(N():IsFollowing())
         changed()
         assert.equal(1011, ref())
+    end)
+end)
+
+describe("narrative professions", function()
+    after_each(function() m:AssertClean() end)
+
+    local HERB = { [182] = { 1, 75 } }
+
+    it("counts a profession's quests only once it is learned", function()
+        boot()
+        local res = eval()
+        assert.equal("none", res.goal.p182.state)
+        assert.same({ done = 0, open = 0, missed = 0 }, res.aspect.profession)
+        assert.same({ 0, 3 }, { eval({ skill = HERB }).aspect.profession.done, eval({ skill = HERB }).aspect.profession.open })
+    end)
+
+    it("locks a quest behind its skill rank: open but not available, the goal waits for the skill", function()
+        boot()
+        local skill = { [182] = { 30, 75 } }
+        local res = eval({ skill = skill })
+        assert.same({ false, 50 }, { res.q[1082].avail, res.q[1082].need })
+        assert.same({ "open", 50 }, { res.goal.p182.slot[3], res.goal.p182.skill })
+        local gs = eval({ skill = skill, done = { 1081, 1083 } }).goal.p182
+        assert.same({ "later", 50 }, { gs.state, gs.skill })
+    end)
+
+    it("never grays a profession quest", function()
+        boot()
+        assert.is_true(ns.Compat.IsLevelGray(6, 12, ns.Compat.FallbackTrivialRange(12)))
+        assert.is_false(eval({ skill = HERB }).q[1083].gray)
+    end)
+
+    it("loses Camping 101 once its camp spell is known: the total drops by one", function()
+        boot()
+        local res = eval({ skill = HERB, known = { 9001 } })
+        assert.is_true(res.q[1083].lost)
+        assert.same({ "out", 2 }, { res.goal.p182.slot[1], res.goal.p182.open })
+    end)
+
+    it("gates a profession quest by its required level only", function()
+        boot({ level = 9 }, HERB)
+        assert.is_true(N():Get().q[1081].avail)
+        assert.equal("take", N().candOf["1081"].kind)
+    end)
+end)
+
+describe("narrative hints", function()
+    after_each(function() m:AssertClean() end)
+
+    it("suggests training the next rank near the trainer from its skill and level", function()
+        boot(nil, { [182] = { 50, 75 } })
+        local c = N().candOf.t182
+        assert.same({ "train", true, 1413, "Herb Trainer", 1 }, { c.kind, c.side, c.map, c.place, c.bucket })
+        for _, case in ipairs({ { 12, { 40, 75 } }, { 12, { 140, 150 } }, { 9, { 50, 75 } } }) do
+            boot({ level = case[1] }, { [182] = case[2] })
+            assert.is_nil(N().candOf.t182)
+        end
+        goal("p182").sec = true -- a secondary keeps the level gate (Fishing) ...
+        changed()
+        assert.is_nil(N().candOf.t182)
+        goal("p182").nolv = true -- ... unless its rank-ups need no level (Cooking, First Aid)
+        changed()
+        assert.equal("train", N().candOf.t182.kind)
+    end)
+
+    it("never makes a side candidate main while another is left", function()
+        boot(nil, { [182] = { 50, 75 } })
+        assert.equal("s1001", where().main.goal.id) -- the train (prio 3) waits behind a take (prio 4)
+        for _, g in ipairs(N().goals) do
+            if g.a ~= "profession" then N():Mark(g, "skip") end
+        end
+        H.settle(m)
+        assert.same({ "p182", "train" }, { where().main.goal.id, where().main.kind })
+    end)
+
+    it("prefers a non-side detour of an aspect to a side one", function()
+        boot()
+        ns.Knowledge.data.npcs[108] = { "Bag Maker", 1413, 50, 60 } -- n:test's 1041 in bucket 1, prio 4
+        m:AddItem(2002) -- n:finds: start 1092 in bucket 1, prio 2
+        H.settle(m)
+        assert.equal("start", best("n:finds").kind)
+        local novelty
+        for _, c in ipairs(where().along) do
+            if c.goal.a == "novelty" then novelty = c end
+        end
+        assert.same({ "n:test", 1041 }, { novelty.goal.id, novelty.q })
+    end)
+
+    it("names the gathering of this zone while it still gives skill", function()
+        boot(nil, { [182] = { 60, 75 } })
+        local c = N().candOf.g182
+        assert.same({ "gather", 2, nil, 50, 60 }, { c.kind, c.bucket, c.map, c.e.lo, c.rank })
+        m:SetSkill(182, 160, 225)
+        H.settle(m)
+        assert.is_nil(N().candOf.g182)
+    end)
+
+    it("suggests starting a quest from an item in the bags, in a goal or among the finds", function()
+        boot()
+        m:AddItem(2001)
+        H.settle(m)
+        local main = where().main
+        assert.same({ "start", 1051, 1, false }, { main.kind, main.q, main.bucket, main.side })
+        assert.is_false(N():Lead(main, true))
+        m:AddItem(2002)
+        H.settle(m)
+        local c = best("n:finds")
+        assert.same({ "start", 1092, true }, { c.kind, c.q, c.side })
+    end)
+
+    it("keeps the goal's take gate for a quest started from an item: never a gray one", function()
+        boot({ level = 30 })
+        m:AddItem(2001)
+        H.settle(m)
+        assert.is_true(N():Get().q[1051].gray)
+        assert.is_nil(N().candOf["1051"])
+    end)
+
+    it("suggests a curated use for an item in the bags", function()
+        boot()
+        assert.is_nil(N().candOf.u2004)
+        m:AddItem(2004)
+        H.settle(m)
+        local c = N().candOf.u2004
+        assert.same({ "use", 112, "Crate Clerk" }, { c.kind, c.goal.use[1].n[1], c.place })
+        assert.is_true(c.bucket <= 2)
+        m:MoveTo(1420, 50, 50) -- the clerk on another continent: text only, no detour, no arrow
+        H.settle(m)
+        c = N().candOf.u2004
+        assert.same({ 4, true }, { c.bucket, c.far })
+        assert.is_false(N():Lead(c, true))
+        for _, a in ipairs(where().along) do assert.not_equal(c, a) end
+    end)
+
+    it("mutes the train and gather hints of a profession marked 'not interested'", function()
+        boot(nil, { [182] = { 60, 75 } })
+        assert.is_truthy(N().candOf.t182 and N().candOf.g182)
+        N():Mark(goal("p182"), "skip")
+        H.settle(m)
+        assert.is_nil(N().candOf.t182)
+        assert.is_nil(N().candOf.g182)
+    end)
+
+    it("describes each hint, flagging the unverified ones", function()
+        boot(nil, { [182] = { 60, 75 } })
+        m:AddItem(2001)
+        m:AddItem(2004)
+        H.settle(m)
+        local cand = N().candOf
+        assert.equal("Start \"Tirisfal Errand\": Tirisfal Token is in your bags", N():Describe(cand["1051"]))
+        assert.equal("Train Herbalism up to 150 -- Herb Trainer, The Barrens · 40 yd · not checked in game",
+            N():Describe(cand.t182))
+        assert.equal("Herbalism 60: here -- Mageroyal · not checked in game", N():Describe(cand.g182))
+        assert.equal("Sealed Test Crate: turn it in -- Crate Clerk, The Barrens · 100 yd · not checked in game",
+            N():Describe(cand.u2004))
+    end)
+end)
+
+describe("narrative profession and bag events", function()
+    after_each(function() m:AssertClean() end)
+
+    it("re-evaluates when a profession rank changes, not on an unchanged SKILL_LINES_CHANGED", function()
+        boot()
+        assert.equal("none", N():Get().goal.p182.state)
+        m:SetSkill(182, 50, 75)
+        H.settle(m)
+        local res = N():Get()
+        assert.equal("open", res.goal.p182.state)
+        m:Fire("SKILL_LINES_CHANGED")
+        H.settle(m)
+        assert.equal(res, N():Get())
+    end)
+
+    it("re-checks only where now when a watched item comes or goes, and tells the UI only then", function()
+        boot({ level = 1 }) -- nothing to suggest: the crate becomes the main suggestion
+        local res = N():Get()
+        local fired = H.record(ns, "NARRATIVE_UPDATED")
+        m:AddItem(9999) -- loot nobody watches: nothing to re-check
+        H.settle(m)
+        assert.equal(0, #fired)
+        assert.is_nil(best("n:finds"))
+        m:AddItem(2004)
+        H.settle(m)
+        assert.equal("use", where().main.kind)
+        assert.equal(1, #fired)
+        assert.equal(res, N():Get())
+    end)
+
+    it("follows a hint by its ref", function()
+        boot(nil, { [182] = { 50, 75 } })
+        local c = N().candOf.t182
+        assert.is_true(N():Lead(c, true))
+        assert.equal("nar:t182", ns.Waypoint:GetCustom().ref)
+        assert.is_true(N():IsLeading(c))
+        changed()
+        assert.equal("nar:t182", ns.Waypoint:GetCustom().ref) -- sticky while still a candidate
+    end)
+end)
+
+describe("Compat professions", function()
+    after_each(function() m:AssertClean() end)
+
+    it("reads a skill rank from C_SkillInfo, an unlearned line as nil", function()
+        boot(nil, { [182] = { 60, 75 }, [186] = { 0, 75 } })
+        assert.same({ 60, 75 }, { ns.Compat.SkillRank(182) })
+        assert.is_nil(ns.Compat.SkillRank(186))
+        assert.is_nil(ns.Compat.SkillRank(393))
+    end)
+
+    it("falls back to GetProfessions / GetProfessionInfo", function()
+        boot(nil, { [182] = { 60, 75 } })
+        m:ProvideNS("C_SkillInfo", { GetSkillLineInfoByID = function() return nil end })
+        assert.same({ 60, 75 }, { ns.Compat.SkillRank(182) })
+        assert.is_nil(ns.Compat.SkillRank(186))
+    end)
+
+    it("knows a spell from the spell book", function()
+        boot()
+        assert.is_false(ns.Compat.IsSpellKnown(9001))
+        m:LearnSpell(9001)
+        assert.is_true(ns.Compat.IsSpellKnown(9001))
     end)
 end)

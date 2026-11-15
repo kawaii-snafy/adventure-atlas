@@ -4,12 +4,16 @@
 --   local curated = Goals.LoadCurated("tools/data/narrative.lua")  -- error() when it does not load
 --   local goals, notes, excluded = Goals.Build(db, fileIds, zoneOf, curated)  -- error() on a hard error
 --   local lines = Goals.Lines(goals)                                -- the `goals = { ... }` text
+--   local npcIDs = Goals.ExtraNpcs(curated)                         -- NPCs the curated records name
 --
--- Groups the quests of the knowledge base (tools/gen_knowledge_data.lua) into goals of four aspects:
--- story, dungeon, class and novelty (curated in tools/data/narrative.lua). Every Horde record of the
+-- Groups the quests of the knowledge base (tools/gen_knowledge_data.lua) into goals of five aspects:
+-- story, dungeon, class, novelty (curated in tools/data/narrative.lua) and profession (one goal per skill
+-- line, from the quests that need the skill or sit under its quest sort). Every Horde record of the
 -- file gets exactly one disposition: a counted slot of a goal, an optional quest of a goal (`opt`), or
--- excluded with a reason (index-only, repeatable, endgame, ...; listed in the notes). The goal format
--- is documented in the header of tools/gen_knowledge_data.lua. Inputs:
+-- excluded with a reason (index-only, repeatable, endgame, ...; listed in the notes). The curated per-line
+-- data (rank-up places, camp blueprints, leveling brackets) and the dungeon notes are copied onto the
+-- goals after checks against the snapshot. The goal format is documented in the header of
+-- tools/gen_knowledge_data.lua. Inputs:
 --   db      = tools/data/forever_db.lua with the overrides applied (tools/lib/fbdb.lua)
 --   fileIds = { [questID] = true }  every quest of the file: full records and index-only entries
 --   zoneOf  = { [questID] = k }     zones[] key of each quest of the file (the file's zone numbering)
@@ -22,27 +26,37 @@ local Goals = {}
 
 local format, floor, sort, concat = string.format, math.floor, table.sort, table.concat
 
-local ASPECTS = { "story", "dungeon", "class", "novelty" }
-local ASPECT_RANK = { story = 1, dungeon = 2, class = 3, novelty = 4 }
+local ASPECTS = { "story", "dungeon", "class", "novelty", "profession" }
+local ASPECT_RANK = { story = 1, dungeon = 2, class = 3, novelty = 4, profession = 5 }
 -- quest sorts (zone < 0) of seasonal events, the legendaries and the reputation / war-effort sorts
 local EVENT_SORTS = {
     [-22] = true, [-284] = true, [-344] = true, [-364] = true, [-365] = true, [-366] = true, [-367] = true,
     [-368] = true, [-369] = true,
 }
--- quest sorts of the professions (stage 1 leaves them out; reqSkill quests too)
-local PROFESSION_SORTS = {
-    [-24] = true, [-101] = true, [-121] = true, [-182] = true, [-201] = true, [-264] = true, [-304] = true,
-    [-324] = true,
+-- quest sort of a profession -> its skill line (db.enums.professions); a quest without reqSkill under one of
+-- these sorts belongs to that line
+local SORT_LINE = {
+    [-24] = 182, [-101] = 356, [-121] = 164, [-182] = 165, [-201] = 202, [-264] = 197, [-304] = 185, [-324] = 129,
 }
+-- the rank word a crafting trainer's subtitle starts with, by train tier (1 = 75 -> 150, 2, 3)
+local RANK_WORD = { "Expert", "Artisan", "Master" }
+local RANK_WORDS = { Apprentice = true, Journeyman = true, Expert = true, Artisan = true, Master = true }
+local MAX_SKILL = 300
 local ENDGAME_REQ = 58      -- reqLevel from which a quest is endgame
 local BREADCRUMB_HOPS = 10  -- a breadcrumb may lead to another breadcrumb, at most this many times
 
 -- keys a curated entry may carry (anything else is a shape error)
-local TOP_KEYS = { dungeons = true, goals = true, titles = true, exclude = true, opt = true }
-local DUNGEON_KEYS = { xp = true, lo = true, hi = true, areas = true, after = true, add = true, src = true, v = true }
+local TOP_KEYS = { dungeons = true, goals = true, titles = true, exclude = true, opt = true, professions = true }
+local DUNGEON_KEYS = {
+    xp = true, lo = true, hi = true, areas = true, after = true, add = true, note = true, src = true, v = true,
+}
 local GOAL_KEYS = {
     key = true, name = true, q = true, opt = true, note = true, after = true, cnt = true, hint = true,
-    startObj = true, src = true, v = true,
+    startObj = true, use = true, src = true, v = true,
+}
+local PROFESSION_KEYS = {
+    name = true, note = true, sec = true, nolv = true, train = true, blueprints = true, brackets = true, src = true,
+    v = true,
 }
 
 --- Sorted keys of a table.
@@ -61,7 +75,8 @@ local function luaString(s)
     return (format("%q", s):gsub("\\\n", "\\n"))
 end
 
---- Load the curated file (one `return { ... }`, run in an empty environment like tools/overrides).
+--- Load the curated file (local constants, then one `return { ... }`; run in an empty environment like
+-- tools/overrides).
 function Goals.LoadCurated(path)
     local chunk, err = loadfile(path)
     if not chunk then error("cannot load " .. tostring(path) .. ": " .. tostring(err), 0) end
@@ -75,10 +90,11 @@ end
 --- Shape check of the curated table. Appends messages to errs.
 local function checkShape(cur, errs)
     local function bad(fmt, ...) errs[#errs + 1] = "narrative.lua: " .. format(fmt, ...) end
-    local function idList(v, what)
+    local function idList(v, what, nonEmpty)
         if type(v) ~= "table" then bad("%s: not a list", what) return end
+        if nonEmpty and #v == 0 then bad("%s: empty", what) end
         for i, id in ipairs(v) do
-            if not isId(id) then bad("%s[%d]: not a quest id", what, i) end
+            if not isId(id) then bad("%s[%d]: not an id", what, i) end
         end
     end
     local function idMap(v, what, valueOk)
@@ -108,7 +124,8 @@ local function checkShape(cur, errs)
             if d.areas ~= nil then idList(d.areas, what .. ".areas") end
             if d.add ~= nil then idList(d.add, what .. ".add") end
             if d.after ~= nil then idMap(d.after, what .. ".after", isId) end
-            if d.lo or d.after or d.add or d.src ~= nil or d.v ~= nil then provenance(d, what) end
+            if d.note ~= nil and not text(d.note) then bad("%s: note is not { en, ru }", what) end
+            if d.lo or d.after or d.add or d.note or d.src ~= nil or d.v ~= nil then provenance(d, what) end
         end
     end
     local keys = {}
@@ -123,7 +140,7 @@ local function checkShape(cur, errs)
             keys[g.key or i] = true
             if not text(g.name) then bad("%s: name = { en, ru } missing", what) end
             if g.note ~= nil and not text(g.note) then bad("%s: note is not { en, ru }", what) end
-            if type(g.q) ~= "table" or #g.q == 0 then bad("%s: q missing", what) else
+            if type(g.q) ~= "table" or (#g.q == 0 and g.use == nil) then bad("%s: q missing", what) else
                 for j, slot in ipairs(g.q) do
                     if type(slot) == "table" then idList(slot, format("%s.q[%d]", what, j))
                     elseif not isId(slot) then bad("%s.q[%d]: not a quest id", what, j) end
@@ -136,7 +153,73 @@ local function checkShape(cur, errs)
                 idMap(g.hint, what .. ".hint", function(h) return type(h) == "table" and isId(h[1]) and isId(h[2]) end)
             end
             if g.startObj ~= nil and g.startObj ~= true then bad("%s: startObj must be true or absent", what) end
+            if g.use ~= nil then
+                if type(g.use) ~= "table" or #g.use == 0 then bad("%s: use is not a list", what) else
+                    for j, u in ipairs(g.use) do
+                        local w = format("%s.use[%d]", what, j)
+                        if type(u) ~= "table" then bad("%s: not a table", w) else
+                            idList(u.i, w .. ".i", true)
+                            if u.n ~= nil then idList(u.n, w .. ".n", true) end
+                            if not text(u.t) then bad("%s: t = { en, ru } missing", w) end
+                        end
+                    end
+                end
+            end
             provenance(g, what)
+        end
+    end
+    for line, p in pairs(cur.professions or {}) do
+        local what = "professions[" .. tostring(line) .. "]"
+        if not isId(line) or type(p) ~= "table" then bad("%s: bad entry", what) else
+            for k in pairs(p) do
+                if not PROFESSION_KEYS[k] then bad("%s: unknown key %s", what, tostring(k)) end
+            end
+            if not text(p.name) then bad("%s: name = { en, ru } missing", what) end
+            if p.note ~= nil and not text(p.note) then bad("%s: note is not { en, ru }", what) end
+            if p.sec ~= nil and p.sec ~= true then bad("%s: sec must be true or absent", what) end
+            if p.nolv ~= nil and p.nolv ~= true then bad("%s: nolv must be true or absent", what) end
+            provenance(p, what)
+            if p.train ~= nil then
+                local n = type(p.train) == "table" and #p.train or 0
+                if n < 1 or n > (p.sec and 2 or 3) then
+                    bad("%s: train needs 1..%d tiers", what, p.sec and 2 or 3)
+                end
+                for k in pairs(type(p.train) == "table" and p.train or {}) do
+                    if not (isId(k) and k <= n) then bad("%s.train: tiers must be a prefix 1..n", what) end
+                end
+                for t = 1, n do
+                    local e, w = p.train[t], format("%s.train[%d]", what, t)
+                    if type(e) ~= "table" then bad("%s: not a table", w) else
+                        idList(e.n, w .. ".n", true)
+                        if e.i ~= nil and not isId(e.i) then bad("%s.i: not an item id", w) end
+                        for k in pairs(e) do
+                            if k ~= "n" and k ~= "i" then bad("%s: unknown key %s", w, tostring(k)) end
+                        end
+                    end
+                end
+            end
+            for _, k in ipairs({ "blueprints", "brackets" }) do
+                if p[k] ~= nil and type(p[k]) ~= "table" then bad("%s: %s is not a list", what, k) end
+            end
+            for j, b in ipairs(type(p.blueprints) == "table" and p.blueprints or {}) do
+                local w = format("%s.blueprints[%d]", what, j)
+                if type(b) ~= "table" or not (isId(b.i) and isId(b.need) and isId(b.d)) or (b.n ~= nil and not isId(b.n)) then
+                    bad("%s: needs ids i, need, d (n optional)", w)
+                end
+            end
+            local prevLo = 0
+            for j, b in ipairs(type(p.brackets) == "table" and p.brackets or {}) do
+                local w = format("%s.brackets[%d]", what, j)
+                if type(b) ~= "table" or not (isId(b.lo) and isId(b.hi) and b.lo < b.hi and b.hi <= MAX_SKILL) then
+                    bad("%s: needs integers 1 <= lo < hi <= %d", w, MAX_SKILL)
+                else
+                    if b.i == nil and b.m == nil then bad("%s: needs i or m", w) end
+                    if b.i ~= nil then idList(b.i, w .. ".i", true) end
+                    if b.m ~= nil then idList(b.m, w .. ".m", true) end
+                    if b.lo < prevLo then bad("%s: not ordered by lo", w) end
+                    prevLo = b.lo
+                end
+            end
         end
     end
     for id, t in pairs(cur.titles or {}) do
@@ -145,6 +228,66 @@ local function checkShape(cur, errs)
     for _, name in ipairs({ "exclude", "opt" }) do
         if cur[name] ~= nil then
             idMap(cur[name], name, function(r) return type(r) == "string" and r ~= "" end)
+        end
+    end
+end
+
+--- Map of an NPC's position in the file: the map with the most spawns (ties: lowest uiMapID), as
+-- tools/gen_knowledge_data.lua places an NPC no quest prefers. @return uiMapID or nil (no spawn)
+local function homeMap(spawns)
+    local best, count
+    for _, map in ipairs(sortedKeys(spawns or {})) do
+        local n = #spawns[map]
+        if n > 0 and (not count or n > count) then best, count = map, n end
+    end
+    return best
+end
+
+--- Checks of the curated profession / use records against the snapshot: every NPC known and not Alliance,
+-- trainers flagged trainer (book sellers vendor), the subtitle's rank word matching the tier; blueprint
+-- dungeons and bracket maps known. Calls fail(fmt, ...) per violation.
+local function checkDb(db, curated, fail)
+    local function npc(id, what)
+        local n = db.npcs[id]
+        if not n then fail("%s: npc %d is not in db.npcs", what, id) return nil end
+        if n.faction == "A" then fail("%s: npc %d (%s) is Alliance", what, id, n.name) end
+        return n
+    end
+    for _, line in ipairs(sortedKeys(curated.professions or {})) do
+        local p = curated.professions[line]
+        for t, e in ipairs(p.train or {}) do
+            for _, id in ipairs(e.n) do
+                local what = format("professions[%d].train[%d]", line, t)
+                local n = npc(id, what)
+                if n then
+                    local flags = n.flags or {}
+                    if e.i and not flags.vendor then fail("%s: npc %d (%s) is not a vendor", what, id, n.name) end
+                    if not e.i and not flags.trainer then fail("%s: npc %d (%s) is not a trainer", what, id, n.name) end
+                    local word = (n.sub or ""):match("^(%a+)")
+                    if word and RANK_WORDS[word] and word ~= RANK_WORD[t] then
+                        fail("%s: npc %d (%s) is <%s>, tier %d wants %s", what, id, n.name, n.sub, t, RANK_WORD[t])
+                    end
+                end
+            end
+        end
+        for j, b in ipairs(p.blueprints or {}) do
+            local what = format("professions[%d].blueprints[%d]", line, j)
+            if b.n and not db.npcs[b.n] then fail("%s: npc %d is not in db.npcs", what, b.n) end
+            if not db.dungeons[b.d] then fail("%s: dungeon %d is not in db.dungeons", what, b.d) end
+        end
+        for j, b in ipairs(p.brackets or {}) do
+            for _, m in ipairs(b.m or {}) do
+                if not db.zones[m] then fail("professions[%d].brackets[%d]: map %d is not in db.zones", line, j, m) end
+            end
+        end
+    end
+    for _, g in ipairs(curated.goals or {}) do
+        for j, u in ipairs(g.use or {}) do
+            for _, id in ipairs(u.n or {}) do
+                local what = format("goal %s use[%d]", g.key, j)
+                local n = npc(id, what)
+                if n and not homeMap(n.spawns) then fail("%s: npc %d (%s) has no spawn", what, id, n.name) end
+            end
         end
     end
 end
@@ -313,7 +456,7 @@ function Goals.Build(db, fileIds, zoneOf, curated)
     if #errs > 0 then error(concat(errs, "\n"), 0) end
 
     -- 1. disposition: aspect (+ dungeon area) or an exclusion reason; the first matching rule wins
-    local aspect, dungeonArea, excluded = {}, {}, {}
+    local aspect, dungeonArea, excluded, lineOf = {}, {}, {}, {}
     local function areasOf(q)
         local out = {}
         if (q.zone or 0) > 0 then out[#out + 1] = q.zone end
@@ -330,11 +473,12 @@ function Goals.Build(db, fileIds, zoneOf, curated)
         local zone, name = q.zone or 0, q.name or ""
         if DB.HasBit(q.special, REPEATABLE) then return nil, "repeatable" end
         if EVENT_SORTS[zone] then return nil, "event" end
-        if q.reqSkill or PROFESSION_SORTS[zone] then return nil, "profession" end
         if name:sub(1, 1) == "<" or name:find("REUSE", 1, true) then return nil, "placeholder" end
         if (q.reqLevel or 0) >= ENDGAME_REQ then return nil, "endgame" end
         if (q.level or 0) >= 60 and (q.reqLevel or 0) <= 10 then return nil, "anylevel" end
         if q.maxLevel or q.disabledBy or q.untilCompleted then return nil, "limited" end
+        local line = q.reqSkill and q.reqSkill[1] or SORT_LINE[zone]
+        if line then return "profession", line end
         if (q.classes or 0) ~= 0 or classOfSort[zone] then return "class" end
         local areas = areasOf(q)
         for _, a in ipairs(areas) do
@@ -350,6 +494,7 @@ function Goals.Build(db, fileIds, zoneOf, curated)
         if a then
             aspect[id] = a
             dungeonArea[id] = a == "dungeon" and extra or nil
+            lineOf[id] = a == "profession" and extra or nil
         else
             excluded[id] = extra
         end
@@ -376,6 +521,19 @@ function Goals.Build(db, fileIds, zoneOf, curated)
                 raw[#raw + 1] = byArea[area]
             end
             local m = byArea[area].members
+            m[#m + 1] = id
+        end
+    end
+    -- profession: one raw goal per skill line
+    local byLine = {}
+    for _, id in ipairs(fullIds) do
+        local line = aspect[id] == "profession" and lineOf[id]
+        if line then
+            if not byLine[line] then
+                byLine[line] = { a = "profession", members = {}, line = line }
+                raw[#raw + 1] = byLine[line]
+            end
+            local m = byLine[line].members
             m[#m + 1] = id
         end
     end
@@ -493,10 +651,11 @@ function Goals.Build(db, fileIds, zoneOf, curated)
         end
         raw[#raw + 1] = g
     end
-    -- a goal without a counted quest is dropped: its optional quests leave every bar
+    -- a goal without a counted quest is dropped (its optional quests leave every bar), except a curated goal
+    -- with `use` records (n:finds: no bar, only hints)
     local goalOf, kept = {}, {}
     for _, g in ipairs(raw) do
-        if #g.counted == 0 then
+        if #g.counted == 0 and not (g.curated and g.curated.use) then
             for _, id in ipairs(g.opt) do
                 excluded[id] = "optonly"
                 optReason[id] = nil
@@ -605,6 +764,7 @@ function Goals.Build(db, fileIds, zoneOf, curated)
             lo = math.min(lo, eff(id))
             hi = math.max(hi, eff(id))
         end
+        if #g.counted == 0 then lo, hi = 1, 60 end -- a slotless curated goal (n:finds)
         local first = math.huge
         for _, id in ipairs(g.counted) do first = math.min(first, id) end
         local goal = { a = g.a, lo = lo, hi = hi, ex = ex, order = g.order }
@@ -616,6 +776,18 @@ function Goals.Build(db, fileIds, zoneOf, curated)
             goal.q = slots
             goal.name, goal.note, goal.src, goal.v = c.name, c.note, c.src, c.v
             goal.after, goal.cnt, goal.hint, goal.startObj = c.after, c.cnt, c.hint, c.startObj
+            goal.use = c.use
+        elseif g.a == "profession" then
+            local c = curated.professions and curated.professions[g.line]
+            g.slots = slots
+            goal.raw = g
+            goal.id, goal.line = "p" .. g.line, g.line
+            if not c then
+                fail("profession line %d has no curated entry", g.line)
+            else
+                goal.name, goal.note, goal.src, goal.v, goal.sec, goal.nolv = c.name, c.note, c.src, c.v, c.sec, c.nolv
+                goal.train, goal.blueprints, goal.brackets = c.train, c.blueprints, c.brackets
+            end
         else
             g.slots = slots
             goal.raw = g
@@ -675,7 +847,7 @@ function Goals.Build(db, fileIds, zoneOf, curated)
                 derived[#derived + 1] = format("dungeon %s %s: derived band %d-%d", goal.id, info.name, goal.lo, goal.hi)
             end
             goal.after = d.after
-            goal.src, goal.v = d.src, d.v
+            goal.src, goal.v, goal.note = d.src, d.v, d.note
             -- ancestors over pa / py / next outside the goal that another goal owns
             local seen, prep, stack = {}, {}, {}
             for _, id in ipairs(g.counted) do stack[#stack + 1] = id end
@@ -716,8 +888,14 @@ function Goals.Build(db, fileIds, zoneOf, curated)
                 end
             end
         end
-        if goal.a == "novelty" and not (goal.src and goal.v ~= nil) then fail("goal %s: src / v missing", goal.id) end
+        if (goal.a == "novelty" or goal.a == "profession") and not (goal.src and goal.v ~= nil) then
+            fail("goal %s: src / v missing", goal.id)
+        end
     end
+    for _, line in ipairs(sortedKeys(curated.professions or {})) do
+        if not byId["p" .. line] then fail("professions[%d]: no goal", line) end
+    end
+    checkDb(db, curated, fail)
     for _, id in ipairs(sortedKeys(titles)) do
         if not byId[id] then fail("titles[%s]: no such goal", id) end
     end
@@ -795,10 +973,31 @@ function Goals.Lines(goals)
         return "{ " .. concat(out, ", ") .. " }"
     end
     local function text(t) return format("{ en = %s, ru = %s }", luaString(t.en), luaString(t.ru)) end
+    -- a nested record: its present keys in the given order (lists as { ... }, texts as { en, ru })
+    local function record(t, keys)
+        local out = {}
+        for _, k in ipairs(keys) do
+            local v = t[k]
+            if type(v) == "table" then
+                out[#out + 1] = k .. " = " .. (v.en and text(v) or list(v))
+            elseif v ~= nil then
+                out[#out + 1] = k .. " = " .. tostring(v)
+            end
+        end
+        return "{ " .. concat(out, ", ") .. " }"
+    end
+    local function records(t, keys)
+        local out = {}
+        for i, r in ipairs(t) do out[i] = record(r, keys) end
+        return "{ " .. concat(out, ", ") .. " }"
+    end
     local lines = { "    goals = {" }
     for _, g in ipairs(goals) do
         local f = { "id = " .. luaString(g.id), "a = " .. luaString(g.a) }
         if g.z then f[#f + 1] = "z = " .. g.z end
+        if g.line then f[#f + 1] = "line = " .. g.line end
+        if g.sec then f[#f + 1] = "sec = true" end
+        if g.nolv then f[#f + 1] = "nolv = true" end
         f[#f + 1] = "lo = " .. g.lo
         f[#f + 1] = "hi = " .. g.hi
         f[#f + 1] = "q = " .. list(g.q)
@@ -819,10 +1018,34 @@ function Goals.Lines(goals)
         if g.cnt then f[#f + 1] = "cnt = " .. map(g.cnt, tostring) end
         if g.hint then f[#f + 1] = "hint = " .. map(g.hint, list) end
         if g.startObj then f[#f + 1] = "startObj = true" end
+        if g.train then f[#f + 1] = "train = " .. records(g.train, { "n", "i" }) end
+        if g.blueprints then f[#f + 1] = "blueprints = " .. records(g.blueprints, { "i", "need", "d", "n" }) end
+        if g.brackets then f[#f + 1] = "brackets = " .. records(g.brackets, { "lo", "hi", "i", "m" }) end
+        if g.use then f[#f + 1] = "use = " .. records(g.use, { "i", "n", "t" }) end
         lines[#lines + 1] = "        { " .. concat(f, ", ") .. " },"
     end
     lines[#lines + 1] = "    },"
     return lines
+end
+
+--- NPCs the curated records name (rank-up places, blueprint bosses, `use` turn-ins): the generator writes
+-- them into the file's npcs table. @return sorted array of npc ids
+function Goals.ExtraNpcs(curated)
+    local set = {}
+    for _, p in pairs(curated.professions or {}) do
+        for _, e in ipairs(p.train or {}) do
+            for _, id in ipairs(e.n or {}) do set[id] = true end
+        end
+        for _, b in ipairs(p.blueprints or {}) do
+            if b.n then set[b.n] = true end
+        end
+    end
+    for _, g in ipairs(curated.goals or {}) do
+        for _, u in ipairs(g.use or {}) do
+            for _, id in ipairs(u.n or {}) do set[id] = true end
+        end
+    end
+    return sortedKeys(set)
 end
 
 return Goals

@@ -3,15 +3,16 @@
 -- The narrative view of the "Your adventure" atlas tab (UI/Atlas.lua builds and refreshes it through
 -- ns.AtlasNarrative.build / .refresh while the character is in narrative mode). Everything comes from
 -- ns.Narrative (Core/Narrative.lua; the shapes of res / gs / candidate / Where() are in its header).
--- Top to bottom (y from the top of the view, 532 x 370):
+-- Top to bottom (y from the top of the view, 532 x 410):
 --      0   "Where now" + the quest log counts
 --    -18   the main suggestion + Lead / Stop (Narrative:Lead(main, follow = true))
---    -40   up to 3 detours of the other aspects (a click leads to it, without follow)
---   -100   one row per aspect: label button (selects the list), progress bar, done/total and missed
---   -184   "hide done", "only new in Forever" (ns.db.narrative) + the captions of the two check box columns
---   -208   the goals of the selected aspect, a virtual list: ROWS pooled rows, zone header and goal rows; a
---          goal row leads to the goal's best candidate on click, explains the goal in its tooltip and has the
---          "did it myself" / "not interested" check boxes (Narrative:Mark)
+--    -40   up to 4 detours of the other aspects (a click leads to it, without follow)
+--   -118   one row per aspect (5): label button (selects the list), progress bar, done/total and missed
+--   -220   "hide done", "only new in Forever" (ns.db.narrative) + the captions of the two check box columns
+--   -248   the goals of the selected aspect, a virtual list: ROWS pooled rows, zone header and goal rows; a
+--          goal row leads to the goal's best candidate on click, explains the goal in its tooltip (profession
+--          goals: skill, next rank, leveling brackets, camp blueprints; dungeons: blueprints for the character's
+--          professions) and has the "did it myself" / "not interested" check boxes (Narrative:Mark)
 -- Without the knowledge base addon the view only says how to install it.
 
 -- luacheck: ignore 212/self
@@ -21,7 +22,7 @@ local _, ns = ...
 local UI = ns.UI
 local L = UI.L
 
-local type, ipairs, pairs, format = type, ipairs, pairs, string.format
+local type, ipairs, pairs, tostring, format, concat = type, ipairs, pairs, tostring, string.format, table.concat
 local floor, max, min = math.floor, math.max, math.min
 
 local AN = {}
@@ -29,14 +30,16 @@ ns.AtlasNarrative = AN
 
 local PAGE_WIDTH = 532   -- the atlas page (UI/Atlas.lua: WIDTH - 2 * PAD)
 local MAIN_WIDTH, LEAD_WIDTH = 436, 90
-local ALONG_ROWS, ALONG_HEIGHT = 3, 18
+local ALONG_ROWS, ALONG_HEIGHT = 4, 18
 local LABEL_WIDTH, BAR_WIDTH = 120, 260
 local ROWS, ROW_HEIGHT = 8, 20
 local SLIDER_WIDTH = 16
 local LIST_WIDTH = PAGE_WIDTH - SLIDER_WIDTH - 6
-local MARK_W, LEVEL_W, COUNT_W, TAG_W, COL_W = 14, 44, 110, 16, 50
+local MARK_W, LEVEL_W, COUNT_W, TAG_W, COL_W = 14, 54, 110, 16, 50
 local NEXT_SLOTS = 5     -- tooltip: open slots listed at most
 local PREP_LINES = 10    -- tooltip: lead-in quests of a dungeon listed at most
+local BRACKET_ITEMS = 3  -- tooltip: items named per leveling bracket at most
+local ASPECTS_TOP, FILTERS_TOP, LIST_TOP = -118, -220, -248
 
 local EMPTY = {}
 local GOLD, GREEN, GREY, RED, WHITE = { 1, 0.82, 0 }, { 0.45, 0.9, 0.45 }, { 0.6, 0.6, 0.6 }, { 1, 0.35, 0.3 },
@@ -67,6 +70,7 @@ local function aspectLabel(a)
     if a == "dungeon" then return L.UI_NAR_ASPECT_DUNGEON end
     if a == "class" then return L.UI_NAR_ASPECT_CLASS end
     if a == "novelty" then return L.UI_NAR_ASPECT_NOVELTY end
+    if a == "profession" then return L.UI_NAR_ASPECT_PROFESSION end
     return L.UI_NAR_ASPECT_STORY
 end
 
@@ -111,6 +115,7 @@ local function buildWhere(page, body)
     local header = text(body, "GameFontNormal", MAIN_WIDTH)
     header:SetPoint("TOPLEFT", body, "TOPLEFT", 0, 0)
     header:SetText(L.UI_NAR_WHERE)
+    page.header = header
     local inLog = body:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
     inLog:SetPoint("TOPRIGHT", body, "TOPRIGHT", 0, -2)
     inLog:SetJustifyH("RIGHT")
@@ -158,9 +163,11 @@ local function buildWhere(page, body)
     end
 end
 
--- Fill the "where now" block from Narrative:Where().
+-- Fill the "where now" block from Narrative:Where() (the level to wait for: in place of the main suggestion, or
+-- after the header when the main suggestion is a hint).
 local function renderWhere(page, w)
     local N = ns.Narrative
+    page.header:SetText(w.main and w.wait and format(L.UI_NAR_WHERE_WAIT_FMT, w.wait) or L.UI_NAR_WHERE)
     page.inLog:SetText(format(L.NAR_INLOG_FMT, w.inLog, w.ready))
     local main = page.main
     if w.main then
@@ -196,7 +203,7 @@ end
 local function buildAspects(page, body)
     page.aspects = {}
     for i, a in ipairs(ns.Narrative.ASPECTS) do
-        local y = -100 - (i - 1) * 20
+        local y = ASPECTS_TOP - (i - 1) * 20
         local label = UI.CreateButton(body, aspectLabel(a), nil, function()
             options().aspect = a
             page.offset = 0
@@ -250,7 +257,7 @@ end
 -- The filter line and the captions of the check box columns.
 local function buildFilters(page, body)
     local hideDone = filterCheck(page, body, "hideDone", L.UI_NAR_HIDE_DONE)
-    hideDone:SetPoint("TOPLEFT", body, "TOPLEFT", 0, -182)
+    hideDone:SetPoint("TOPLEFT", body, "TOPLEFT", 0, FILTERS_TOP)
     local onlyNew = filterCheck(page, body, "onlyNew", L.UI_NAR_ONLY_NEW)
     onlyNew:SetPoint("LEFT", hideDone.label, "RIGHT", 14, -1)
     page.checks = { hideDone = hideDone, onlyNew = onlyNew }
@@ -274,8 +281,8 @@ local function startZone(goal, rec)
     return nil
 end
 
--- Tooltip line of one quest of a goal: + done, > in the log, o otherwise with where to take it and the
--- required level when above the player's.
+-- Tooltip line of one quest of a goal: + done, > in the log, o otherwise with where to take it, the required
+-- level when above the player's and the skill rank it still needs (r.need).
 local function questLine(goal, q, r, level)
     local K = ns.Knowledge
     local title = K:Title(q)
@@ -284,11 +291,128 @@ local function questLine(goal, q, r, level)
     local rec = K:Get(q) or EMPTY
     local t = format("o %s - %s", title, startZone(goal, rec) or L.NAR_NO_PLACE)
     if (rec.r or 1) > level then t = t .. " (" .. format(L.UI_NAR_FROM_FMT, rec.r) .. ")" end
+    if r.need then t = t .. " (" .. format(L.UI_NAR_SKILL_FMT, r.need) .. ")" end
     return { t, WHITE[1], WHITE[2], WHITE[3] }
 end
 
--- The goal tooltip: the next open slots, the optional quests, a dungeon's lead-in quests, the curated note,
--- source and "not checked in game".
+-- A colored tooltip line { text, r, g, b }.
+local function line(t, c)
+    return { t, c[1], c[2], c[3] }
+end
+
+-- "Name, Zone" of the nearest positioned NPC of a list, else the first one's name.
+local function npcPlace(ids)
+    local K, C = ns.Knowledge, ns.Compat
+    local best, bestYards
+    for _, id in ipairs(ids or EMPTY) do
+        local name, map, x, y = K:Entity("n", id)
+        if map then
+            local yards = C.DistanceTo(map, x, y)
+            if not best or (yards and (not bestYards or yards < bestYards)) then
+                best, bestYards = format(L.NAR_PLACE_FMT, name, C.GetMapName(map) or ""), yards
+            end
+        end
+    end
+    return best or (ids and ids[1] and K:Entity("n", ids[1])) or L.NAR_NO_PLACE
+end
+
+-- Item names of a list, at most n, joined with ", ".
+local function itemNames(ids, n)
+    local names = {}
+    for i, id in ipairs(ids or EMPTY) do
+        if i > n then break end
+        names[i] = ns.Narrative:ItemName(id)
+    end
+    return concat(names, ", ")
+end
+
+-- One blueprint line: "<blueprint> -- <boss>, <dungeon> (skill N)" + " (in your bags)".
+local function blueprintLine(bp)
+    local where = {}
+    if bp.n then where[#where + 1] = ns.Knowledge:Entity("n", bp.n) end
+    where[#where + 1] = ns.Compat.AreaName(bp.d)
+    local t = format(L.UI_NAR_BLUEPRINT_FMT, ns.Narrative:ItemName(bp.i),
+        #where > 0 and concat(where, ", ") or L.NAR_NO_PLACE, bp.need)
+    if ns.Compat.ItemCount(bp.i) > 0 then t = t .. L.UI_NAR_IN_BAGS_TAG end
+    return line(t, WHITE)
+end
+
+-- One leveling bracket: "lo-hi: items -- zones" (items only / zones only when the other is missing).
+local function bracketLine(b, c)
+    local zones = {}
+    for _, map in ipairs(b.m or EMPTY) do zones[#zones + 1] = ns.Compat.GetMapName(map) or tostring(map) end
+    local items, where = b.i and itemNames(b.i, BRACKET_ITEMS), concat(zones, ", ")
+    local t = items and (#zones > 0 and format(L.UI_NAR_BRACKET_ZONES_FMT, items, where) or items) or where
+    return line(format(L.UI_NAR_BRACKET_FMT, b.lo, b.hi, t), c)
+end
+
+-- The profession lines of a goal tooltip before its quests: the skill and the next rank (the level only where it
+-- gates: not goal.nolv; green when it can be trained now), appended to `lines`.
+local function skillLines(goal, lines)
+    local N = ns.Narrative
+    local rank, maxRank = N:Skill(goal.line)
+    if not rank then return end
+    lines[#lines + 1] = line(format(L.UI_NAR_SKILL_TT_FMT, rank, maxRank), GOLD)
+    local tier, e, can = N:NextRank(goal)
+    if not tier then return end
+    local place = npcPlace(e.n)
+    local t
+    if e.i and goal.nolv then
+        t = format(L.UI_NAR_BOOK_TT_FMT, tier.to, tier.need, N:ItemName(e.i), place)
+    elseif e.i then
+        t = format(L.UI_NAR_BOOK_LV_TT_FMT, tier.to, tier.need, tier.lv, N:ItemName(e.i), place)
+    elseif goal.nolv then
+        t = format(L.UI_NAR_TRAIN_SEC_TT_FMT, tier.to, tier.need, place)
+    else
+        t = format(L.UI_NAR_TRAIN_TT_FMT, tier.to, tier.need, tier.lv, place)
+    end
+    lines[#lines + 1] = line(t, can and GREEN or WHITE)
+end
+
+-- The leveling brackets (the current ones in green, the next one in white; without the skill the first two) and
+-- the camp blueprints of a profession goal tooltip.
+local function professionLines(goal, lines)
+    local N = ns.Narrative
+    local rank = N:Skill(goal.line)
+    local brackets = {}
+    for _, b in ipairs(goal.brackets or EMPTY) do
+        if not rank then
+            if #brackets < 2 then brackets[#brackets + 1] = bracketLine(b, WHITE) end
+        elseif b.lo <= rank and rank < b.hi then
+            brackets[#brackets + 1] = bracketLine(b, GREEN)
+        elseif b.lo > rank then
+            brackets[#brackets + 1] = bracketLine(b, WHITE)
+            break
+        end
+    end
+    if #brackets > 0 then
+        lines[#lines + 1] = line(L.UI_NAR_BRACKETS, GOLD)
+        for _, l in ipairs(brackets) do lines[#lines + 1] = l end
+    end
+    if goal.blueprints and #goal.blueprints > 0 then
+        lines[#lines + 1] = line(L.UI_NAR_BLUEPRINTS, GOLD)
+        for _, bp in ipairs(goal.blueprints) do lines[#lines + 1] = blueprintLine(bp) end
+    end
+end
+
+-- The camp blueprints dropping in a dungeon for the professions the character has.
+local function lootLines(goal, lines)
+    local N = ns.Narrative
+    local header = false
+    for _, e in ipairs(N:Blueprints(goal.d)) do
+        if N:Skill(e.goal.line) then
+            if not header then
+                header = true
+                lines[#lines + 1] = line(L.UI_NAR_LOOT, GOLD)
+            end
+            lines[#lines + 1] = blueprintLine(e.bp)
+        end
+    end
+end
+
+-- The goal tooltip: (profession: the skill and the next rank) the next open slots, the optional quests, a
+-- dungeon's lead-in quests and blueprints, (profession: the leveling brackets and the camp blueprints) the
+-- curated note, source and "not checked in game".
 local function goalTooltip(row)
     local N = ns.Narrative
     local goal, gs = row.goal, row.gs
@@ -296,6 +420,7 @@ local function goalTooltip(row)
     local res = N:Get()
     local level = UI.PlayerLevel() or 1
     local lines = {}
+    if goal.line then skillLines(goal, lines) end
     local n = 0
     for i, slot in ipairs(goal.q) do
         if gs.slot[i] == "open" and n < NEXT_SLOTS then
@@ -331,6 +456,8 @@ local function goalTooltip(row)
             end
         end
     end
+    if goal.d then lootLines(goal, lines) end
+    if goal.line then professionLines(goal, lines) end
     local note = UI.Text(goal.note)
     if note then lines[#lines + 1] = { note, GOLD[1], GOLD[2], GOLD[3] } end
     if goal.src then lines[#lines + 1] = { format(L.UI_NAR_SOURCE_FMT, goal.src), GREY[1], GREY[2], GREY[3] } end
@@ -394,7 +521,7 @@ end
 -- The list frame with its pooled rows, the slider, the column captions and the "no goals" text.
 local function buildList(page, body)
     local list = CreateFrame("Frame", nil, body)
-    list:SetPoint("TOPLEFT", body, "TOPLEFT", 0, -208)
+    list:SetPoint("TOPLEFT", body, "TOPLEFT", 0, LIST_TOP)
     list:SetSize(LIST_WIDTH, ROWS * ROW_HEIGHT)
     list:EnableMouseWheel(true)
     list:SetScript("OnMouseWheel", function(_, delta) setOffset(page, page.offset - delta * 3) end)
@@ -442,8 +569,9 @@ local function setRowKind(row, isGoal)
     end
 end
 
--- Fill a goal row: state mark and color, title, level band, count (or "passed by" / "from level N"), tags
--- (* new in Forever, ? not checked in game) and the check boxes of its mark.
+-- Fill a goal row: state mark and color, title, level band (a learned profession: rank/max, "+" when the next
+-- rank can be trained now), count (or "passed by" / "from level N" / "skill N"), tags (* new in Forever,
+-- ? not checked in game) and the check boxes of its mark.
 local function renderGoal(row, goal, gs)
     local N = ns.Narrative
     local look = STATE_LOOK[gs.state] or STATE_LOOK.open
@@ -451,10 +579,19 @@ local function renderGoal(row, goal, gs)
     row.mark:SetText(look[1])
     for _, fs in ipairs({ row.mark, row.name, row.level, row.count }) do fs:SetTextColor(c[1], c[2], c[3]) end
     row.name:SetText(N:Title(goal))
-    row.level:SetText(format(L.UI_NAR_LEVELS_FMT, goal.lo, goal.hi))
+    local rank, maxRank
+    if goal.line then rank, maxRank = N:Skill(goal.line) end
+    if rank then
+        local _, _, can = N:NextRank(goal)
+        row.level:SetText(format(can and L.UI_NAR_RANK_UP_FMT or L.UI_NAR_RANK_FMT, rank, maxRank))
+    else
+        row.level:SetText(format(L.UI_NAR_LEVELS_FMT, goal.lo, goal.hi))
+    end
     local count
     if gs.state == "missed" and gs.done == 0 then
         count = L.UI_NAR_PASSED
+    elseif gs.state == "later" and gs.skill then -- skill-locked
+        count = format(L.UI_NAR_SKILL_FMT, gs.skill)
     elseif gs.state == "later" and gs.done == 0 and gs.later then -- level-locked (not only behind a chain)
         count = format(L.UI_NAR_FROM_FMT, gs.later)
     else
@@ -492,6 +629,10 @@ function AN.renderList(page)
             renderGoal(row, item.goal, item.gs)
             row:Show()
         end
+    end
+    -- an open goal tooltip follows its row (item names arrive later; the list may have moved under the mouse)
+    for _, row in ipairs(page.rows) do
+        if row.goal and GameTooltip and GameTooltip:IsOwned(row) then goalTooltip(row) end
     end
 end
 

@@ -21,17 +21,20 @@
 --           n = "enUS name", l = level (0 = none in the snapshot, -1 = scales; both pass every level range),
 --           r = required level (>= 1), z = zone key,
 --           ra = race mask (only when narrower than the faction), cl = class mask (only when set),
+--           sk = { skill line id, rank } (db reqSkill), sp = spell id (db reqSpell < 0: not available once known)
 --           s = { n = { npc ids }, o = { object ids }, i = { item ids } },   -- who / what starts it
 --           e = { n = { npc ids }, o = { object ids } },                     -- where it is turned in
 --           pa = { quest ids: all needed }, py = { quest ids: one of them needed }, nx = next quest id,
 --           x = XP reward at the quest level (when known), new = true (new in Forever)
 --       } },
 --       goals = { {                          -- narrative goals (tools/lib/goals.lua); order: aspect (story,
---                                            --   dungeon, class, novelty), lo, id (novelty: curated order)
+--                                            --   dungeon, class, novelty, profession), lo, id (novelty:
+--                                            --   curated order)
 --           id = "s886",                     -- unique; s / e = story chain / errands of one giver, c / k =
 --                                            --   class chain / errands, "d<areaID>" = dungeon, "n:<key>" =
---                                            --   curated; suffix = lowest counted quest id. Never saved.
---           a = "story" | "dungeon" | "class" | "novelty",
+--                                            --   curated, "p<skillLineID>" = profession; suffix = lowest
+--                                            --   counted quest id. Never saved.
+--           a = "story" | "dungeon" | "class" | "novelty" | "profession",
 --           z = zone key,                    -- home zone (story / class only; grouping, not navigation)
 --           lo = 10, hi = 16,                -- level band (effective level: l, else r)
 --           q = { 886, { 96101, 96604 } },   -- counted slots, topological order (ties: level, id); a table
@@ -51,6 +54,28 @@
 --           startObj = true,                 -- navigate to start objects (NPCs only without a placed object)
 --       } },
 --   })
+--
+-- The fields stages 2 and 3 added to the goals (the same block is in tools/data/narrative.lua and
+-- Core/Knowledge.lua):
+--   a = "story" | "dungeon" | "class" | "novelty" | "profession"
+--   id: "p<skillLineID>" = profession goal (generated); "n:finds" = the finds container (curated key "finds", reserved)
+--   line = 182,                      -- profession goals: skill line id (db.enums.professions)
+--   sec = true,                      -- profession goals: secondary (First Aid, Cooking, Fishing): no tier 3 (a quest)
+--   nolv = true,                     -- profession goals: rank-ups need no character level (Cooking, First Aid)
+--   train = { { n = { npcIDs } }, { n = { npcIDs }, i = itemID }, { n = { npcIDs } } },
+--                                    -- profession goals, indexed by tier (Narrative TIERS: 1 = 75->150, 2 = 150->225,
+--                                    --   3 = 225->300): trainers, or with i a book the NPCs sell; a tier may be absent
+--                                    --   (nil hole not allowed: tiers are a prefix, 1..#train)
+--   blueprints = { { i = itemID, need = 140, d = areaID, n = npcID | nil } },
+--                                    -- profession goals: camp blueprint, skill to learn it, dungeon, boss (when in the DB)
+--   brackets = { { lo = 50, hi = 70, i = { itemIDs } | nil, m = { uiMapIDs } | nil } },
+--                                    -- profession goals, ordered by lo: at skill lo..hi-1 gather / make i, found in m
+--                                    --   (at least one of i, m)
+--   use = { { i = { itemIDs }, n = { npcIDs } | nil, t = { en = "", ru = "" } } },
+--                                    -- curated goals: an item of i in the bags -> "<item>: t -- nearest of n"
+--   note = { en, ru }                -- also on dungeon goals now (curated)
+--   q = { }                          -- empty only for a goal with `use` (n:finds): never listed (state "none"), no bar;
+--                                    --   lo = 1, hi = 60
 --
 -- NPCs of the Alliance (npc faction "A") are left out of s / e; chains (pa / py / nx) only name quests of
 -- this file. Internal flag quests (auto-rewarded, nobody starts or ends them, e.g. "DND FLAG ...") are left
@@ -191,6 +216,7 @@ local function render(db)
     local classSorts = {}
     for class, sort in pairs(db.enums.classSorts) do classSorts[sort] = class end
 
+    local curated = Goals.LoadCurated(CURATED)
     local quests = collectQuests(db)
     local included = {}
     for _, e in ipairs(quests) do included[e.id] = true end
@@ -247,6 +273,11 @@ local function render(db)
             end
         end
         for _, id in ipairs(e.si) do items[id] = true end
+    end
+    -- NPCs of the curated profession / finds records (trainers, book sellers, bosses, turn-ins); unknown ids are
+    -- left to the hard error of Goals.Build
+    for _, id in ipairs(Goals.ExtraNpcs(curated)) do
+        if db.npcs[id] then npcs[id] = true end
     end
     table.sort(zoneKeys)
     local zoneIndex = {}
@@ -311,6 +342,8 @@ local function render(db)
         local races = q.races or 0
         if races ~= 0 and races ~= hordeMask then f[#f + 1] = "ra = " .. string.format("%.0f", races) end
         if (q.classes or 0) ~= 0 then f[#f + 1] = "cl = " .. tostring(q.classes) end
+        if q.reqSkill then f[#f + 1] = string.format("sk = { %d, %d }", q.reqSkill[1], q.reqSkill[2] or 0) end
+        if (q.reqSpell or 0) < 0 then f[#f + 1] = "sp = " .. tostring(-q.reqSpell) end
         local sp = {}
         if #e.sn > 0 then sp[#sp + 1] = "n = " .. idList(e.sn) end
         if #e.so > 0 then sp[#sp + 1] = "o = " .. idList(e.so) end
@@ -335,7 +368,7 @@ local function render(db)
         fileIds[e.id] = true
         zoneOfQuest[e.id] = zoneIndex[e.zoneKey]
     end
-    local goals, goalNotes = Goals.Build(db, fileIds, zoneOfQuest, Goals.LoadCurated(CURATED))
+    local goals, goalNotes = Goals.Build(db, fileIds, zoneOfQuest, curated)
     for _, line in ipairs(Goals.Lines(goals)) do out[#out + 1] = line end
     out[#out + 1] = "})"
     out[#out + 1] = ""

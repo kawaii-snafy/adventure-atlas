@@ -619,15 +619,18 @@ local function addSection(y, text)
     return addRow(y + SECTION_GAP - ROW_GAP, text, { color = COLORS.section, font = "GameFontNormalSmall" })
 end
 
--- Narrative mode: the "where now" card (ns.Narrative:Where): the main suggestion (or the level to wait
--- for), the quest log counts and up to NARRATIVE_ALONG detours. The rows are not clickable: follow moves
--- the arrow. @return new y
+-- Narrative mode: the "where now" card (ns.Narrative:Where): the main suggestion and / or the level to wait
+-- for (both when the main suggestion is a hint), the quest log counts and up to NARRATIVE_ALONG detours. The
+-- rows are not clickable: follow moves the arrow. @return new y
 local function narrativeRows(y)
     local N = ns.Narrative
     if not N:Load() then return addRow(y, L.UI_KB_NOT_INSTALLED, { color = COLORS.message }) end
     local w = N:Where()
     if w.main then
         y = addRow(y, N:Describe(w.main), { color = COLORS.current, font = "GameFontHighlight" })
+        if w.wait then -- the main suggestion is a hint: also the level with more to take
+            y = addRow(y, format(L.NAR_WAIT_FMT, w.wait), { color = COLORS.message })
+        end
     else
         y = addRow(y, w.wait and format(L.NAR_WAIT_FMT, w.wait) or L.UI_NAR_EMPTY, { color = COLORS.message })
     end

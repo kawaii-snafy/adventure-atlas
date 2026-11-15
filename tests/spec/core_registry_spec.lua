@@ -49,7 +49,7 @@ describe("core registry", function()
         assert.equal(1, pub.API_VERSION)
         assert.equal(2, pub.API_MINOR) -- AddLibraryInsert, route aliases, class reward table (core 0.4.0)
         assert.is_function(pub.AddLibraryInsert)
-        assert.equal("0.5.1", pub.version)
+        assert.equal("0.6.0", pub.version)
         assert.equal("test-route", pub.GetActiveRoute().id)
         assert.equal("tr-accept-363", pub.GetCurrentStep().id)
         assert.same({ "AdventureAtlas", "AdventureAtlasCharDB", "AdventureAtlasDB", "SLASH_ADVENTUREATLAS1", "SLASH_ADVENTUREATLAS2" },

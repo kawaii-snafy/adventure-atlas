@@ -1,7 +1,8 @@
 -- The narrative goals of the real knowledge base (addons/AdventureAtlas_Knowledge/Quests.lua, goals built by
 -- tools/lib/goals.lua): every goal loads, and the bars are honest for every race / class of the guides --
 -- playing every quest that can be taken, in order, never lowers a bar and ends with nothing open (100% is
--- reachable), without gray quests and with them (level 60).
+-- reachable), without gray quests and with them (level 60). The profession goals are played with every skill line
+-- at 300/300, so their quests count and none waits for a skill rank.
 
 local H = require("fixtures.core.helpers")
 
@@ -29,6 +30,7 @@ local function playThrough(goals, quests, facts, range)
             return mine[rec]
         end,
         done = function(q) return done[q] == true end,
+        skill = function() return 300, 300 end,
     }
     -- exclusive partners: clique members and the listed non-clique partners
     local partners = {}
@@ -105,6 +107,23 @@ describe("narrative goals of the knowledge base", function()
         assert.is_table(ns.Knowledge.data.goals)
         assert.equal(#ns.Knowledge.data.goals, #ns.Narrative.goals)
         assert.is_true(#ns.Narrative.goals > 0)
+    end)
+
+    it("carries the profession fields of the snapshot", function()
+        local quests = ns.Knowledge.data.quests
+        assert.same({ 165, 10 }, quests[769].sk)
+        assert.equal(1229432, quests[97906].sp)
+        local n = 0
+        for _, g in ipairs(ns.Narrative.goals) do
+            if g.a == "profession" then
+                n = n + 1
+                assert.is_number(g.line, g.id)
+                assert.equal("p" .. g.line, g.id)
+                assert.is_string(g.name.en, g.id)
+                assert.is_string(g.name.ru, g.id)
+            end
+        end
+        assert.equal(12, n)
     end)
 
     it("keeps the bars rising to 100% for every race / class of the guides", function()

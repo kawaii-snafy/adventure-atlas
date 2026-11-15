@@ -1,10 +1,11 @@
 -- AdventureAtlas / Core / Narrative.lua
 --
 -- Narrative mode: instead of a speed-leveling route, flexible goals (story chains and errands, dungeons with
--- their quests, class quests, Forever novelties) with progress bars per aspect, the player's check boxes and a
--- "where now" suggestion. The goals come with the knowledge base data (Core/Knowledge.lua, data.goals); all
--- progress is derived from the game state (through Compat), so switching modes is always safe. In narrative
--- mode the engine has no route (Engine:SelectRoute): no route state is written and the automation rests.
+-- their quests, class quests, Forever novelties, professions) with progress bars per aspect, the player's check
+-- boxes and a "where now" suggestion with hints along the way (rank-ups, gathering zones, items in the bags).
+-- The goals come with the knowledge base data (Core/Knowledge.lua, data.goals); all progress is derived from
+-- the game state (through Compat), so switching modes is always safe. In narrative mode the engine has no route
+-- (Engine:SelectRoute): no route state is written and the automation rests.
 --
 -- Saved per character: cdb.mode = "speedrun" | "narrative" (Narrative:SetMode fires MODE_CHANGED) and
 -- cdb.marks[questID] = "done" | "skip" (goal check boxes; keyed by quest id, so a regeneration that regroups
@@ -16,25 +17,43 @@
 --       aspect = { [aspect] = { done, open, missed } },  -- bar = done / (done + open); missed counts only the
 --                                                        --   goals the player has started (done > 0 or active > 0)
 --       zone   = { story = { [z] = { done, open, lo, hi } }, class = { ... } },  -- goals with a zone, state ~= "none"
---       q      = { [questID] = { mine (for this character), done, lost (can no longer be done), avail (can be
---                  taken now), gray (by level), inLog, complete } },  -- every quest the evaluation looked at
+--       q      = { [questID] = { mine (for this character; a profession quest (rec.sk) only with the profession
+--                  learned), done, lost (can no longer be done; rec.sp: also once the spell is known), avail (can
+--                  be taken now), gray (by level; never for profession quests), inLog, complete,
+--                  need (rec.sk: the skill rank the quest still needs, else nil) } },
+--                                                     -- every quest the evaluation looked at
+--       info   = fn(questID) -> the res.q record (memoised; for quests outside the goals),
 --   }
 --   gs = { done (counted slots done + optional quests done), open, missed, skip, active (open slots with a quest
 --          in the log), later (the lowest level above the player's at which a quest of an open slot can be
---          suggested: its required level, its level - RED, a dungeon's lo; or nil),
+--          suggested: its required level, its level - RED (not for profession quests: their gate is the required
+--          level only), a dungeon's lo; or nil), skill (the lowest skill rank a live quest of an open slot still
+--          needs, or nil),
 --          slot = { [i] = status of goal.q[i]: "done" | "skip" | "out" | "missed" | "open" },
 --          state = "none" (nothing for this character: hidden) | "skip" | "done" | "active" | "open" (something
 --                  can be taken now) | "later" | "missed" (shown as "passed by" when done == 0) }
---   candidate = { goal, q (questID), kind = "turnin" | "take" | "enter",
+--   The bars only rise on turn-ins, with two exceptions where the total changes: learning a profession adds its
+--   quests, and a known camp spell (rec.sp) takes the Camping 101 slot out.
+--   candidate = { goal, ref (string, unique: tostring(q) for quest kinds, "t<line>" train, "g<line>" gather,
+--          "u<itemID>" use), q (questID; nil for train / gather / use),
+--          kind = "turnin" | "take" | "enter" | "start" (an item in the bags starts q) | "train" (a rank-up can be
+--          trained now) | "gather" (this zone suits the skill) | "use" (a curated item is in the bags),
+--          i (the item: start / use), e (the data record: goal.train[tier] / the bracket / the use record),
+--          tier (train: TIERS[t]), rank (gather: the skill rank),
 --          map, x, y (uiMapID + percent; nil = no known place), place (NPC / object name; nil at an entrance),
 --          yards (nil = another continent / unknown), bucket (1: <= NEAR1 yd, 2: <= NEAR2 yd, 3: same continent,
---          4: another continent or no place: text only), far (known to be on another continent; false when the
---          player's position is unknown, e.g. inside an instance), prio (1 turn-in, 2 chain, 3 dungeon / lead-in, 4 other),
---          reason = nil | "chain" | "prep" | "hint", dungeon (the dungeon goal a lead-in quest leads to, or nil),
---          graySoon (bool), eff (quest level) }
---   Narrative:Where() = { main = candidate | nil, along = { candidate, ... } (the best of each other aspect
---          within NEAR2 yards; no quest twice), wait = level | nil (no candidate: the next level with something
---          to take), inLog, ready (goal quests in the log, of them complete) }
+--          4: another continent or no place: text only; start: 1, gather: 2, use: at most 2 unless its place is on
+--          another continent or of unknown distance), far (known to be on
+--          another continent; false when the player's position is unknown, e.g. inside an instance), prio (1
+--          turn-in, 2 chain / start, 3 dungeon / lead-in / train, 4 other), reason = nil | "chain" | "prep" | "hint",
+--          dungeon (the dungeon goal a lead-in quest leads to, or nil), graySoon (bool), eff (quest level; 0 for
+--          hints), side (bool: a candidate of a profession goal (but its turn-ins) or of the finds goal: never
+--          main while another exists, loses ties within a bucket), unverified (hint kinds of a goal with v = false) }
+--   Narrative:Where() = { main = candidate | nil (the first non-side candidate, else the first), along =
+--          { candidate, ... } (per other aspect its best non-side, else side, candidate within NEAR2 yards; at
+--          most ALONG; nothing twice), wait = level | nil (no candidate or only side ones: the next level with
+--          something to take; shown next to a side main),
+--          inLog, ready (goal quests in the log, of them complete) }
 -- Load adds a run-time field to the goal records: goal.new = true when a quest of the goal is new in Forever.
 
 local _, ns = ...
@@ -51,28 +70,48 @@ local Narrative = {
     byId = nil,       -- [goal.id] = goal
     prepOf = nil,     -- [questID] = { dungeon goals the quest leads to (goal.prep) }
     goalOf = nil,     -- [questID] = goal (counted or optional quest of it)
+    prof = nil,       -- profession goals (goal.line), data order
+    starts = nil,     -- [itemID] = { questIDs the item starts (rec.s.i), sorted }
+    watch = nil,      -- [itemID] = true: start items and the items of `use` records (the bags cache looks at them)
+    bpOf = nil,       -- [areaID] = { { goal, bp } }: camp blueprints dropping in the dungeon
+    finds = nil,      -- the finds goal (FINDS) or nil
+    bags = nil,       -- [itemID] = true for watched items in the bags; nil = re-read on demand
+    skillSig = nil,   -- the profession ranks of the last evaluation (SKILL_LINES_CHANGED compares)
     res = nil, state = nil, where = nil,
     dirty = true, whereDirty = true, pending = false, ticker = nil,
     bestOf = {},      -- last Where: [goal.id] = best candidate of the goal
-    candOf = {},      -- last Where: [questID] = best candidate of the quest
-    following = false, followQ = nil, -- follow: the arrow moves on with the suggestion; quest led to
+    candOf = {},      -- last Where: [candidate ref] = best candidate of the ref
+    following = false, followRef = nil, -- follow: the arrow moves on with the suggestion; candidate ref led to
     activeRef = nil,  -- ref of the waypoint we set last
     reached = nil,    -- ref of the waypoint the player arrived at (no re-lead to it)
     selfSet = false,  -- we are changing the waypoint ourselves
 }
 ns.Narrative = Narrative
 
-Narrative.ASPECTS = { "story", "dungeon", "class", "novelty" }
+Narrative.ASPECTS = { "story", "dungeon", "class", "novelty", "profession" }
 
 local RED = 3          -- take quests up to level L + RED
 local NEAR1 = 400      -- yards: bucket 1
 local NEAR2 = 1500     -- yards: bucket 2 (and "along the way")
 local PREP_LEAD = 2    -- lead-in quests of a dungeon count as such from its lo - PREP_LEAD
 local WALK = 5         -- prerequisite walk: links followed at most
-local ALONG = 3        -- "along the way" suggestions at most
+local ALONG = 4        -- "along the way" suggestions at most (one per other aspect)
+local GRAY_GAP = 100   -- gather: a bracket gives skill until its lo + GRAY_GAP (Classic "gray at the
+                       --   requirement + 100" rule; not checked in game)
 local TICK = 10        -- seconds: "where now" re-checked while narrative mode is on
 local DEBOUNCE = 0.5   -- seconds: changes coalesced into one recompute
 local MAX_DEPTH = 64   -- recursion guard of the chain evaluation
+
+local FINDS = "n:finds" -- the curated finds goal (q = {}, `use` records; tools/data/narrative.lua key "finds")
+-- Profession rank-ups by tier (goal.train[t]): at max rank `cap` the next rank (up to `to`) can be trained from
+-- skill `need` and character level `lv` (not for goal.nolv: Cooking, First Aid). Source: the professions rank
+-- table of https://www.warcrafttavern.com/forever/guides/profession-trainers/ (Fishing: the wow-professions
+-- fishing guide; not checked in game).
+local TIERS = {
+    { cap = 75, to = 150, need = 50, lv = 10 },
+    { cap = 150, to = 225, need = 125, lv = 20 },
+    { cap = 225, to = 300, need = 200, lv = 35 },
+}
 
 local REF = "nar:"
 local EMPTY = {}
@@ -135,10 +174,13 @@ end
 --- Evaluate the goals against a game state; pure (no game calls, no module state), so specs and the
 -- offline play-through call it directly. quests = the knowledge data's quests;
 -- st = { level, range (Compat.TrivialRange), isFor = fn(rec) -> bool, done = fn(questID) -> bool,
---        log = { [questID] = complete }, marks = { [questID] = "done" | "skip" } }. @return res (header)
+--        log = { [questID] = complete }, marks = { [questID] = "done" | "skip" },
+--        skill = fn(skillLineID) -> rank, maxRank | nil (nil function: no professions),
+--        known = fn(spellID) -> bool (nil: nothing known) }. @return res (header)
 function Narrative.Evaluate(goals, quests, st)
     local level, range = st.level, st.range
     local log, marks, done = st.log or EMPTY, st.marks or EMPTY, st.done
+    local skill, known = st.skill, st.known
     local isLevelGray = ns.Compat.IsLevelGray
 
     -- exclusive partners: the listed ones of non-clique quests and the other members of a clique (a quest
@@ -177,11 +219,15 @@ function Narrative.Evaluate(goals, quests, st)
             r.lost = not r.done
             return r
         end
-        r.mine = st.isFor(rec) and true or false
-        r.gray = isLevelGray(rec.l or 0, level, range)
+        local sk = rec.sk
+        local rank = sk and skill and skill(sk[1]) or nil
+        r.mine = st.isFor(rec) and (not sk or rank ~= nil) and true or false -- a profession you lack: out
+        r.gray = not sk and isLevelGray(rec.l or 0, level, range) or false   -- profession quests: never gray
+        if sk and (rank or 0) < sk[2] then r.need = sk[2] end
         depth = depth or 0
         if depth > MAX_DEPTH then return r end
         local lost, paDone, pyDone, pyLive = false, true, rec.py == nil or #rec.py == 0, false
+        if rec.sp and known and known(rec.sp) then lost = true end         -- the camp item is already learned
         for _, p in ipairs(exOf[id] or EMPTY) do
             if done(p) then lost = true end
         end
@@ -200,11 +246,11 @@ function Narrative.Evaluate(goals, quests, st)
         if not pyDone and not pyLive then lost = true end
         r.lost = lost and not r.done
         r.avail = r.mine and not r.lost and not r.done and not r.inLog and (rec.r or 1) <= level
-            and paDone and pyDone
+            and paDone and pyDone and r.need == nil
         return r
     end
 
-    local res = { goal = {}, aspect = {}, zone = { story = {}, class = {} }, q = Q }
+    local res = { goal = {}, aspect = {}, zone = { story = {}, class = {} }, q = Q, info = info }
     for _, a in ipairs(Narrative.ASPECTS) do res.aspect[a] = { done = 0, open = 0, missed = 0 } end
     for _, g in ipairs(goals) do
         local gs = { done = 0, open = 0, missed = 0, skip = 0, active = 0, slot = {} }
@@ -222,9 +268,10 @@ function Narrative.Evaluate(goals, quests, st)
                         if r.inLog then active = true end
                         if r.avail then canTake = true end
                         local rec = quests[m]
-                        local need = max(rec.r or 1, eff(rec) - RED)
+                        local need = rec.sk and (rec.r or 1) or max(rec.r or 1, eff(rec) - RED)
                         if g.a == "dungeon" then need = max(need, g.lo) end
                         if need > level and (gs.later == nil or need < gs.later) then gs.later = need end
+                        if r.need and (gs.skill == nil or r.need < gs.skill) then gs.skill = r.need end
                     end
                 end
                 if active then gs.active = gs.active + 1 end
@@ -266,16 +313,27 @@ end
 
 local isForCache = {} -- [quest record] = Knowledge:IsFor (race / class / faction do not change in a session)
 
--- The game state Evaluate needs, read through Compat.
+-- The game state Evaluate needs, read through Compat (skill ranks memoised for this state).
 local function gameState()
     local C = ns.Compat
     local facts = C.PlayerFacts()
     local log = {}
     for _, e in ipairs(C.GetQuestLogQuests()) do log[e.questID] = e.isComplete end
     local known = facts.race ~= nil and facts.class ~= nil
+    local ranks = {} -- [line] = { rank, maxRank } | false
     return {
         level = facts.level, range = C.TrivialRange(facts.level), log = log, marks = ns.cdb.marks,
-        done = C.IsQuestTurnedIn,
+        done = C.IsQuestTurnedIn, known = C.IsSpellKnown,
+        skill = function(line)
+            local v = ranks[line]
+            if v == nil then
+                local rank, maxRank = C.SkillRank(line)
+                v = rank and { rank, maxRank } or false
+                ranks[line] = v
+            end
+            if v then return v[1], v[2] end
+            return nil
+        end,
         isFor = function(rec)
             local v = isForCache[rec]
             if v == nil then
@@ -300,10 +358,12 @@ function Narrative:Load()
     if not ok then return false, reason end
     local data = ns.Knowledge.data
     local goals, byId, prepOf, goalOf = {}, {}, {}, {}
+    local prof, starts, watch, bpOf = {}, {}, {}, {}
     local bad, first = 0, nil
     for i, g in ipairs(type(data.goals) == "table" and data.goals or EMPTY) do
         if type(g) == "table" and type(g.id) == "string" and not byId[g.id] and ASPECT[g.a]
-            and type(g.q) == "table" and type(g.lo) == "number" and type(g.hi) == "number" then
+            and type(g.q) == "table" and type(g.lo) == "number" and type(g.hi) == "number"
+            and (g.a ~= "profession" or type(g.line) == "number") then
             goals[#goals + 1] = g
             byId[g.id] = g
         else
@@ -330,11 +390,55 @@ function Narrative:Load()
                 prepOf[q] = t
             end
         end
+        if g.a == "profession" then
+            prof[#prof + 1] = g
+            for _, bp in ipairs(g.blueprints or EMPTY) do
+                local t = bpOf[bp.d] or {}
+                t[#t + 1] = { goal = g, bp = bp }
+                bpOf[bp.d] = t
+            end
+        end
+        for _, u in ipairs(g.use or EMPTY) do
+            for _, item in ipairs(u.i or EMPTY) do watch[item] = true end
+        end
     end
+    for q, rec in pairs(data.quests) do
+        for _, item in ipairs((rec.s or EMPTY).i or EMPTY) do
+            local t = starts[item] or {}
+            t[#t + 1] = q
+            starts[item] = t
+            watch[item] = true
+        end
+    end
+    for _, t in pairs(starts) do sort(t) end
     if bad > 0 then ns.Print(L.MSG_NAR_BAD_GOALS_FMT, bad, first) end
     self.goals, self.byId, self.prepOf, self.goalOf = goals, byId, prepOf, goalOf
+    self.prof, self.starts, self.watch, self.bpOf, self.finds = prof, starts, watch, bpOf, byId[FINDS]
+    self.bags = nil
     self.dirty, self.whereDirty = true, true
     return true
+end
+
+-- The ranks of the character's profession lines as one string (the evaluation's skill function).
+local function skillSig(self, skill)
+    local t = {}
+    for i, g in ipairs(self.prof) do
+        local rank, maxRank = skill(g.line)
+        t[i] = tostring(rank) .. "/" .. tostring(maxRank)
+    end
+    return concat(t, ",")
+end
+
+-- Watched items in the bags (cached until BAG_UPDATE_DELAYED): { [itemID] = true }.
+local function bags(self)
+    if not self.bags then
+        local t = {}
+        for item in pairs(self.watch) do
+            if ns.Compat.ItemCount(item) > 0 then t[item] = true end
+        end
+        self.bags = t
+    end
+    return self.bags
 end
 
 --- The evaluation of the goals (cached; recomputed after Invalidate). nil before Load.
@@ -343,17 +447,50 @@ function Narrative:Get()
     if self.dirty or not self.res then
         self.dirty = false
         self.state = gameState()
+        self.skillSig = skillSig(self, self.state.skill)
         self.res = Narrative.Evaluate(self.goals, ns.Knowledge.data.quests, self.state)
         self.whereDirty = true
     end
     return self.res
 end
 
+--- Rank and max rank of a skill line in the last evaluation, or nil (not learned / before Load).
+function Narrative:Skill(line)
+    if not self:Get() then return nil end
+    return self.state.skill(line)
+end
+
+--- The next rank of a profession goal: TIERS[t], its data entry goal.train[t] and whether it can be trained now
+-- (skill >= need and, unless goal.nolv, level >= lv); nil when the line is not learned, its max rank is
+-- no tier's cap (300) or the tier has no entry.
+function Narrative:NextRank(goal)
+    local rank, maxRank = self:Skill(goal.line)
+    if not rank then return nil end
+    for t, tier in ipairs(TIERS) do
+        if maxRank == tier.cap then
+            local e = (goal.train or EMPTY)[t]
+            if not e then return nil end
+            return tier, e, rank >= tier.need and (goal.nolv or self.state.level >= tier.lv) and true or false
+        end
+    end
+    return nil
+end
+
+--- Camp blueprints dropping in a dungeon (AreaTable id): { { goal = profession goal, bp = blueprint } }.
+function Narrative:Blueprints(area)
+    return self.bpOf and self.bpOf[area] or EMPTY
+end
+
+--- Name of an item: the client's (localized), the knowledge base's (enUS), else "item N".
+function Narrative:ItemName(id)
+    return ns.Compat.ItemName(id) or ns.Knowledge:ItemName(id) or format(L.NAR_ITEM_FMT, id)
+end
+
 ---------------------------------------------------------------------------
 -- where now
 ---------------------------------------------------------------------------
 
--- All candidates of the evaluation, sorted (bucket, prio, graySoon, level, yards, quest id).
+-- All candidates of the evaluation, sorted (bucket, side, prio, graySoon, level, yards, quest id, ref, goal id).
 local function candidates(self, res, st)
     local K, C = ns.Knowledge, ns.Compat
     local quests = K.data.quests
@@ -406,8 +543,11 @@ local function candidates(self, res, st)
     end
 
     local list = {}
-    local function add(g, q, kind, at, prio, reason)
-        local c = { goal = g, q = q, kind = kind, prio = prio, reason = reason, bucket = 4 }
+    -- ref: a quest id (quest kinds) or the string ref of a hint; @return the candidate
+    local function add(g, ref, kind, at, prio, reason)
+        local q = type(ref) == "number" and ref or nil
+        local c = { goal = g, ref = q and tostring(q) or ref, q = q, kind = kind, prio = prio, reason = reason,
+                    bucket = 4, side = (g.a == "profession" or g == self.finds) and kind ~= "turnin" }
         if at then c.map, c.x, c.y, c.yards, c.place = at.map, at.x, at.y, at.yards, at.place end
         if c.map and c.yards then
             c.bucket = (c.yards <= NEAR1 and 1) or (c.yards <= NEAR2 and 2) or 3
@@ -419,10 +559,10 @@ local function candidates(self, res, st)
         if h and c.yards and here == h[1] and level >= h[2] then -- this continent only
             c.bucket, c.reason = min(c.bucket, 2), "hint"
         end
-        local rec = quests[q]
+        local rec = q and quests[q]
         c.eff = eff(rec)
-        c.graySoon = rec ~= nil and C.IsLevelGray(rec.l or 0, level + 1, range) -- gray at the next level
-        for _, d in ipairs(self.prepOf[q] or EMPTY) do
+        c.graySoon = rec and not rec.sk and C.IsLevelGray(rec.l or 0, level + 1, range) or false -- gray next level
+        for _, d in ipairs(q and self.prepOf[q] or EMPTY) do
             if level >= d.lo - PREP_LEAD and level <= d.hi then
                 c.dungeon = d
                 if c.prio > 3 then c.prio, c.reason = 3, c.reason or "prep" end
@@ -430,6 +570,15 @@ local function candidates(self, res, st)
             end
         end
         list[#list + 1] = c
+        return c
+    end
+    local inBags = bags(self)
+    -- is an item that starts the quest in the bags? (then the start rule suggests it, not the take)
+    local function startsFromBags(rec)
+        for _, item in ipairs((rec.s or EMPTY).i or EMPTY) do
+            if inBags[item] then return true end
+        end
+        return false
     end
 
     local function anyDone(ids)
@@ -439,13 +588,34 @@ local function candidates(self, res, st)
         end
         return false
     end
+    -- status of the counted slot of goal g that holds quest q (gs.slot), or nil (optional / outside the slots)
+    local function slotOf(g, gs, q)
+        for i, slot in ipairs(g.q) do
+            if contains(members(slot), q) then return gs.slot[i] end
+        end
+        return nil
+    end
     -- the soft order of goal g waits while the slot of its predecessor p is open (done, marked, gray or out
     -- slots let the next step through); a predecessor outside the slots has to be done
     local function waiting(g, gs, p)
-        for i, slot in ipairs(g.q) do
-            if contains(members(slot), p) then return gs.slot[i] == "open" end
-        end
+        local status = slotOf(g, gs, p)
+        if status then return status == "open" end
         return not (res.q[p] or EMPTY).done
+    end
+    -- does the goal hold quest m back: its soft order (after), or fewer done slots than its threshold (cnt counts
+    -- the done slots that carry no threshold themselves: the books, not the rewards)?
+    local function gated(g, gs, m)
+        if g.after and g.after[m] and waiting(g, gs, g.after[m]) then return true end
+        if not (g.cnt and g.cnt[m]) then return false end
+        local doneSlots = 0
+        for i, slot in ipairs(g.q) do
+            if gs.slot[i] == "done" and not g.cnt[members(slot)[1]] then doneSlots = doneSlots + 1 end
+        end
+        return doneSlots < g.cnt[m]
+    end
+    -- is a dungeon goal's level band (lo..hi) around the player? (other goals have no band)
+    local function inBand(g)
+        return g.a ~= "dungeon" or (level >= g.lo and level <= g.hi)
     end
     -- prerequisite walk: the first prerequisite on the way to quest `id` that can be taken now
     local function walk(id)
@@ -479,21 +649,13 @@ local function candidates(self, res, st)
         local gs = res.goal[g.id]
         if gs.state ~= "none" and gs.state ~= "skip" and gs.state ~= "done" then
             local dungeon = g.a == "dungeon"
-            local band = not dungeon or (level >= g.lo and level <= g.hi)
+            local band = inBand(g)
             local started = gs.done > 0 or gs.active > 0
-            -- cnt counts the done slots that carry no threshold themselves (the books, not the rewards)
-            local doneSlots, entered = 0, false
-            for i, slot in ipairs(g.q) do
-                if gs.slot[i] == "done" and not (g.cnt and g.cnt[members(slot)[1]]) then
-                    doneSlots = doneSlots + 1
-                end
-            end
+            local entered = false
             for i, slot in ipairs(g.q) do
                 if gs.slot[i] == "open" then
                     for _, m in ipairs(members(slot)) do
                         local r, rec = res.q[m], quests[m]
-                        local gated = (g.after and g.after[m] and waiting(g, gs, g.after[m]))
-                            or (g.cnt and g.cnt[m] and doneSlots < g.cnt[m])
                         if rec and r.mine and not r.lost then
                             if r.inLog then
                                 if r.complete then
@@ -502,7 +664,8 @@ local function candidates(self, res, st)
                                     entered = true
                                     add(g, m, "enter", entrance(g), 3)
                                 end
-                            elseif band and not gated and eff(rec) <= level + RED then
+                            elseif band and not gated(g, gs, m) and (rec.sk or eff(rec) <= level + RED)
+                                and not startsFromBags(rec) then
                                 if r.avail and not r.gray then
                                     local at = starter(g, rec)
                                     if not at and dungeon then
@@ -532,8 +695,77 @@ local function candidates(self, res, st)
         end
     end
 
+    -- hints (never counted). The bucket overrides come after add(): a text-only hint is never "far".
+    for _, g in ipairs(self.prof) do
+        local rank, maxRank = st.skill(g.line)
+        if rank and self:GoalMark(g) ~= "skip" then
+            -- train: a rank-up can be trained now (nearest trainer / book seller, else the first one's name)
+            local tier, e, can = self:NextRank(g)
+            if can then
+                local at = nearest(nil, "n", e.n) or { place = (K:Entity("n", e.n[1])) }
+                local c = add(g, "t" .. g.line, "train", at, 3)
+                c.e, c.tier = e, tier
+            end
+            -- gather: the highest bracket of this zone that still gives skill (not at the rank cap)
+            local pick
+            for _, b in ipairs(g.brackets or EMPTY) do
+                if here and rank < maxRank and contains(b.m, here) and b.lo <= rank and rank < b.lo + GRAY_GAP
+                    and (not pick or b.lo > pick.lo) then
+                    pick = b
+                end
+            end
+            if pick then
+                local c = add(g, "g" .. g.line, "gather", nil, 4)
+                c.bucket, c.e, c.rank = 2, pick, rank
+            end
+        end
+    end
+    -- use: a curated item in the bags (the first of each record's list)
+    for _, g in ipairs(self.goals) do
+        for _, e in ipairs(g.use or EMPTY) do
+            for _, item in ipairs(e.i) do
+                if inBags[item] then
+                    local c = add(g, "u" .. item, "use", e.n and nearest(nil, "n", e.n), 4)
+                    c.e, c.i = e, item
+                    -- near on this continent or text only; a place on another continent (or unknown) stays 4
+                    if c.yards or not c.map then c.bucket = min(c.bucket, 2) end
+                    break
+                end
+            end
+        end
+    end
+    -- start: an item in the bags starts a quest that can be taken now. A goal's quest keeps the goal's take gate
+    -- (goal not skipped or done, its slot open (optional quests: no slot), not gray, the dungeon band, after /
+    -- cnt, the level gate); a quest outside the goals belongs to the finds goal and is gated by nothing but its
+    -- required level (its quest level carries no meaning)
+    local function startable(owner, q, rec, r)
+        if owner == self.finds then return true end
+        local gs = res.goal[owner.id]
+        local status = slotOf(owner, gs, q)
+        return gs.state ~= "skip" and gs.state ~= "done" and (status == nil or status == "open") and not r.gray
+            and inBand(owner) and not gated(owner, gs, q) and (rec.sk ~= nil or eff(rec) <= level + RED)
+    end
+    local startSeen = {}
+    for item in pairs(inBags) do
+        for _, q in ipairs(self.starts[item] or EMPTY) do
+            local rec = quests[q]
+            local owner = self.goalOf[q] or self.finds
+            local r = rec and owner and res.info(q)
+            if r and not startSeen[q] and res.goal[owner.id] and ns.cdb.marks[q] == nil and r.avail
+                and startable(owner, q, rec, r) then
+                startSeen[q] = true
+                local c = add(owner, q, "start", nil, 2)
+                c.bucket, c.i = 1, item
+            end
+        end
+    end
+    for _, c in ipairs(list) do
+        if c.kind == "train" or c.kind == "gather" or c.kind == "use" then c.unverified = c.goal.v == false end
+    end
+
     sort(list, function(a, b)
         if a.bucket ~= b.bucket then return a.bucket < b.bucket end
+        if a.side ~= b.side then return b.side end
         if a.prio ~= b.prio then return a.prio < b.prio end
         if a.graySoon ~= b.graySoon then return a.graySoon end
         if a.eff ~= b.eff then return a.eff < b.eff end
@@ -541,7 +773,8 @@ local function candidates(self, res, st)
             if a.yards == nil or b.yards == nil then return b.yards == nil end
             return a.yards < b.yards
         end
-        if a.q ~= b.q then return a.q < b.q end
+        if (a.q or 0) ~= (b.q or 0) then return (a.q or 0) < (b.q or 0) end
+        if a.ref ~= b.ref then return a.ref < b.ref end
         return a.goal.id < b.goal.id
     end)
     return list
@@ -559,11 +792,11 @@ local function leadable(c)
     return c ~= nil and c.map ~= nil and c.bucket < 4
 end
 
--- Follow: keep the followed quest while it is still a candidate (sticky), else move on to the main
+-- Follow: keep the followed candidate (by ref) while it is still a candidate (sticky), else move on to the main
 -- suggestion; never back to the place the player has just reached.
 local function applyFollow(self)
     if not self.following then return end
-    local c = self.followQ and self.candOf[self.followQ]
+    local c = self.followRef and self.candOf[self.followRef]
     if not leadable(c) then
         c = self.where.main
         if not (leadable(c) and c.bucket <= 3) then c = nil end
@@ -576,8 +809,8 @@ local function applyFollow(self)
         end
         return
     end
-    if REF .. c.q == self.reached then return end
-    local at = cur and cur.ref == REF .. c.q and cur.at
+    if REF .. c.ref == self.reached then return end
+    local at = cur and cur.ref == REF .. c.ref and cur.at
     if not (at and at.map == c.map and at.x == c.x and at.y == c.y) then self:Lead(c, true) end
 end
 
@@ -589,28 +822,38 @@ function Narrative:Where()
     if self.whereDirty or not self.where then
         self.whereDirty = false
         local bestOf, candOf, best = {}, {}, {}
-        for _, c in ipairs(candidates(self, res, self.state)) do
+        local list = candidates(self, res, self.state)
+        for _, c in ipairs(list) do
             if not bestOf[c.goal.id] then
                 bestOf[c.goal.id] = c
                 best[#best + 1] = c
             end
-            if not candOf[c.q] then candOf[c.q] = c end
+            if not candOf[c.ref] then candOf[c.ref] = c end
         end
-        local main, along, wait = best[1], {}, nil
+        local main, along, wait = nil, {}, nil
+        for _, c in ipairs(list) do -- a side candidate is main only when nothing else is left
+            if not c.side then main = c; break end
+        end
+        main = main or list[1]
         if main then
-            local shown = { [main.q] = true } -- a quest is shown once (a prerequisite walk can offer it twice)
+            local shown = { [main.ref] = true } -- a candidate is shown once (a prerequisite walk can offer it twice)
             for _, a in ipairs(Narrative.ASPECTS) do
                 if a ~= main.goal.a and #along < ALONG then
+                    local pick
                     for _, c in ipairs(best) do
-                        if c.goal.a == a and not shown[c.q] then
-                            shown[c.q] = true
-                            if c.bucket <= 2 then along[#along + 1] = c end
-                            break
+                        if c.goal.a == a and not shown[c.ref] and c.bucket <= 2 and (not pick or (pick.side and not c.side)) then
+                            pick = c
+                            if not c.side then break end
                         end
+                    end
+                    if pick then
+                        shown[pick.ref] = true
+                        along[#along + 1] = pick
                     end
                 end
             end
-        else
+        end
+        if not main or main.side then -- only hints left (or nothing): the next level with more to take
             for _, g in ipairs(self.goals) do
                 local gs = res.goal[g.id]
                 if gs.later and gs.state ~= "none" and gs.state ~= "skip" and (wait == nil or gs.later < wait) then
@@ -768,22 +1011,49 @@ function Narrative:Title(goal)
     return ns.Knowledge:Title(first)
 end
 
+-- Localized text of a { en, ru } record.
+local function localized(t)
+    return (ns.locale == "ruRU" and t.ru) or t.en or ""
+end
+
 --- One localized line for a candidate: what to do, where, how far, and why it comes first (short: what and
 -- where only, the waypoint label: the arrow shows the live distance).
 function Narrative:Describe(cand, short)
     local place
     if not cand.map then
-        place = L.NAR_NO_PLACE
+        place = cand.place or L.NAR_NO_PLACE
     else
         local zone = ns.Compat.GetMapName(cand.map) or ""
         place = cand.place and format(L.NAR_PLACE_FMT, cand.place, zone) or zone
         if cand.far then place = format(L.NAR_FAR_FMT, place) end
     end
-    local text
-    if cand.kind == "enter" then
+    local kind, text = cand.kind
+    if kind == "enter" then
         text = format(L.NAR_ENTER_FMT, self:Title(cand.goal), place)
+    elseif kind == "start" then
+        text = format(L.NAR_START_FMT, ns.Knowledge:Title(cand.q), self:ItemName(cand.i))
+    elseif kind == "train" then
+        local e = cand.e
+        if e.i then
+            text = format(L.NAR_BOOK_FMT, self:ItemName(e.i), self:Title(cand.goal), cand.tier.to, place)
+        else
+            text = format(L.NAR_TRAIN_FMT, self:Title(cand.goal), cand.tier.to, place)
+        end
+    elseif kind == "gather" then
+        local names = {}
+        for k, id in ipairs(cand.e.i or EMPTY) do
+            if k > 3 then break end
+            names[k] = self:ItemName(id)
+        end
+        if #names > 0 then
+            text = format(L.NAR_GATHER_FMT, self:Title(cand.goal), cand.rank, concat(names, ", "))
+        else
+            text = format(L.NAR_GATHER_ZONE_FMT, self:Title(cand.goal), cand.rank)
+        end
+    elseif kind == "use" then
+        text = format(L.NAR_USE_FMT, self:ItemName(cand.i), localized(cand.e.t), cand.map and place or L.NAR_IN_BAGS)
     else
-        text = format(cand.kind == "turnin" and L.NAR_TURNIN_FMT or L.NAR_TAKE_FMT, ns.Knowledge:Title(cand.q), place)
+        text = format(kind == "turnin" and L.NAR_TURNIN_FMT or L.NAR_TAKE_FMT, ns.Knowledge:Title(cand.q), place)
     end
     if short then return text end
     if cand.yards then text = text .. " " .. format(L.NAR_YARDS_FMT, floor(cand.yards + 0.5)) end
@@ -791,7 +1061,8 @@ function Narrative:Describe(cand, short)
     if cand.reason == "hint" then why = L.NAR_WHY_HINT
     elseif cand.dungeon then why = format(L.NAR_WHY_PREP_FMT, self:Title(cand.dungeon))
     elseif cand.reason == "chain" then why = L.NAR_WHY_CHAIN
-    elseif cand.graySoon then why = L.NAR_WHY_GRAYSOON end
+    elseif cand.graySoon then why = L.NAR_WHY_GRAYSOON
+    elseif cand.unverified then why = L.NAR_WHY_UNVERIFIED end
     if why then text = text .. " · " .. why end
     return text
 end
@@ -804,15 +1075,15 @@ end
 -- @return false when the place is unknown or on another continent
 function Narrative:Lead(cand, follow)
     if not leadable(cand) then return false end
-    self.following, self.followQ = follow and true or false, cand.q
-    self.activeRef = REF .. cand.q
+    self.following, self.followRef = follow and true or false, cand.ref
+    self.activeRef = REF .. cand.ref
     setWaypoint(self, ns.Waypoint.SetCustom, cand.map, cand.x, cand.y, self:Describe(cand, true), self.activeRef)
     return true
 end
 
 --- Stop following and remove our waypoint (a target of the knowledge base stays).
 function Narrative:Stop()
-    self.following, self.followQ = false, nil
+    self.following, self.followRef = false, nil
     local cur = ns.Waypoint:GetCustom()
     if cur and isOurs(cur.ref) then
         setWaypoint(self, ns.Waypoint.ClearCustom)
@@ -823,7 +1094,7 @@ end
 --- Does the arrow lead to this candidate?
 function Narrative:IsLeading(cand)
     local cur = ns.Waypoint:GetCustom()
-    return cur ~= nil and cand ~= nil and cur.ref == REF .. cand.q
+    return cur ~= nil and cand ~= nil and cur.ref == REF .. cand.ref
 end
 
 --- Does the arrow move on with the suggestion?
@@ -850,7 +1121,7 @@ local function signature(w)
     local rows = { w.main } -- no main: no detours either
     for _, c in ipairs(w.along) do rows[#rows + 1] = c end
     for _, c in ipairs(rows) do
-        t[#t + 1] = format("%s:%d:%s:%s:%s", c.goal.id, c.q, c.kind, tostring(c.map),
+        t[#t + 1] = format("%s:%s:%s:%s:%s", c.goal.id, c.ref, c.kind, tostring(c.map),
             c.yards and floor(c.yards + 0.5) or "-")
     end
     return concat(t, "|")
@@ -937,9 +1208,48 @@ local function onQuestChange(event)
     if event == "QUEST_ACCEPTED" or event == "QUEST_TURNED_IN" then Narrative.reached = nil end
     Narrative:Invalidate()
 end
-for _, event in ipairs({ "QUEST_TURNED_IN", "QUEST_ACCEPTED", "QUEST_REMOVED", "QUEST_LOG_UPDATE", "PLAYER_LEVEL_UP" }) do
+for _, event in ipairs({ "QUEST_TURNED_IN", "QUEST_ACCEPTED", "QUEST_REMOVED", "QUEST_LOG_UPDATE", "PLAYER_LEVEL_UP",
+    "LEARNED_SPELL_IN_SKILL_LINE" }) do
     ns:On(event, onQuestChange)
 end
+
+-- a skill-up or a learned / unlearned profession: re-evaluate only when a rank of the profession lines changed
+ns:On("SKILL_LINES_CHANGED", function()
+    local self = Narrative
+    if not (ns.IsNarrative() and self.goals) then return end
+    local sig = skillSig(self, ns.Compat.SkillRank)
+    if sig ~= self.skillSig then
+        self.skillSig = sig
+        self:Invalidate()
+    end
+end)
+
+-- Do two sets ({ [key] = true }) hold the same keys?
+local function sameSet(a, b)
+    for k in pairs(a) do
+        if not b[k] then return false end
+    end
+    for k in pairs(b) do
+        if not a[k] then return false end
+    end
+    return true
+end
+
+-- the bags changed: only "where now" (start / use hints) can change, and only when a watched item came or went
+-- (looting and selling cost nothing); the UI hears of it only when what it shows changed
+ns:On("BAG_UPDATE_DELAYED", function()
+    local self = Narrative
+    local before = self.bags
+    self.bags = nil
+    if not (ns.IsNarrative() and self.goals) then return end
+    if before and sameSet(before, bags(self)) then return end
+    tick()
+end)
+
+-- an item name arrived: the texts change
+ns:Listen("ITEM_DATA_LOADED", function()
+    if ns.IsNarrative() and Narrative.goals then schedule() end
+end)
 
 -- moving changes only "where now"
 local function onMove()
@@ -957,6 +1267,6 @@ ns:Listen("WAYPOINT_CUSTOM", function(_, custom)
     if custom == nil then
         if self.activeRef then self.reached, self.activeRef = self.activeRef, nil end
     elseif not isOurs(custom.ref) then
-        self.following, self.followQ, self.activeRef = false, nil, nil
+        self.following, self.followRef, self.activeRef = false, nil, nil
     end
 end)

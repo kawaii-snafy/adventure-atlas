@@ -28,7 +28,7 @@ m:AssertClean()                            -- no script errors, no contract viol
 | `wow/luaenv.lua` | Lua 5.1 base + `string/table/math/bit/coroutine` restricted to client members + WoW extensions |
 | `wow/system.lua` | clock, `C_Timer`, events, error handler, TOC / SavedVariables, slash, popups, `Settings`, `C_AddOns` |
 | `wow/widgets.lua` | `CreateFrame`, widgets, templates, `UIParent`, `GameTooltip`, chat frame, fonts, UI helpers |
-| `wow/world.lua` | player / units / XP, maps & world transform, waypoints, bags, spells, trainer / vendor / taxi / binder |
+| `wow/world.lua` | player / units / XP, maps & world transform, waypoints, bags, spells, profession skill lines, trainer / vendor / taxi / binder |
 | `wow/quests.lua` | quest DB, `C_QuestLog`, quest dialogs, greeting, `C_GossipInfo`, NPC talk, Forever DB fallback |
 
 ## Strictness
@@ -81,7 +81,8 @@ faction, sex, level, xp, rested, money, mapID, x, y` (0-100), `facing` (rad), `o
 shift, ctrl, alt, guid` } (raceID / classID / faction derived; Skyborne = 95 Alliance / 96 Horde),
 `unmocked`, `raiseErrors`, `frameTime` (0.05 s), `time` (initial `GetTime()`, 1000), `epoch`,
 `projectID` (`WOW_PROJECT_ID`, 18 = `WOW_PROJECT_CAMELOT`), `build`, `maxLevel` (60), `levelLag` (true),
-`maxQuests` (40), `questLogHeaders` (true), `maps`, `bags` ({[itemID]=n}), `spells`, `bind`,
+`maxQuests` (40), `questLogHeaders` (true), `maps`, `bags` ({[itemID]=n}), `spells`,
+`skills` ({[skillLineID] = { rank, maxRank }}), `bind`,
 `completedQuests`, `savedVariables`, `serverDelay` (0), `secretUnits`, `restrictions`, `areaNames`,
 `backpackSlots` (16).
 
@@ -111,6 +112,10 @@ shift, ctrl, alt, guid` } (raceID / classID / faction derived; Skyborne = 95 All
   `SetLevel(n)`, `SetRested`, `SetMoney`, `EnterCombat` / `LeaveCombat`, `SetModifier(key, down)` /
   `SetShift(down)`, `SetTarget(npcID|nil)`, `LearnSpell(id)`, `SetSecretUnits(on)`, `MakeSecret()`,
   `SetRestriction(type, on)`.
+* **Professions**: `SetSkill(skillLineID, rank, maxRank)` (rank nil = unlearn; fires `SKILL_LINES_CHANGED`)
+  behind `C_SkillInfo.GetSkillLineInfoByID` (the documented struct, nil for a line not learned),
+  `GetProfessions` (indices 1..n over the learned lines, sorted by id) and `GetProfessionInfo(index)` (the 11
+  values, skill line 7th). `C_SpellBook.IsSpellKnown` / `IsSpellKnownOrInSpellBook` read `spells` / `LearnSpell`.
 * **Maps**: built-in Forever uiMapIDs (Tirisfal 1420, Undercity 1458, Silverpine 1421, Durotar 1411,
   Barrens 1413, Mulgore 1412, Orgrimmar 1454, Zephras Isle 2521 (no world position), ...).
   `DefineMap(id, { name, mapType, parent, continent, width, height, top, left, noWorld,

@@ -34,6 +34,9 @@ ns.ADDON = ADDON or "AdventureAtlas"
 --   2  core 0.4.0: + AddLibraryInsert, route aliases, class reward table
 --      core 0.5.0: renamed FastesBoooy -> AdventureAtlas (globals, folders, slash commands; no route API change);
 --                  + AddKnowledge for the knowledge base data addon (Core/Knowledge.lua; guarded by presence)
+--      core 0.5.1: version only (the guides were reworked step by step)
+--      core 0.6.0: narrative mode (Core/Narrative.lua): goals with aspect bars, "where now", the professions
+--                  aspect, finds and hints (no route API change)
 -- A module guards with `if (AdventureAtlas.API_MINOR or 0) < 1 then ... return end` (an older core
 -- has no API_MINOR at all) or, file by file, with `if not AdventureAtlas.AddLibraryInsert then return end`,
 -- see docs/ROUTE_FORMAT.md "Версия ядра".
@@ -41,7 +44,7 @@ local public = { API_VERSION = 1, API_MINOR = 2 }
 ns.public = public
 AdventureAtlas = public
 
-local DEFAULT_VERSION = "0.5.1"
+local DEFAULT_VERSION = "0.6.0"
 
 local function readVersion()
     if C_AddOns and C_AddOns.GetAddOnMetadata then

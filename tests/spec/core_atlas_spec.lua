@@ -337,11 +337,13 @@ describe("atlas narrative view", function()
 
     after_each(function() m:AssertClean() end)
 
-    -- The fixture quests with their titles (one objective each).
+    -- The fixture quests with their titles (one objective each) and the fixture items.
     local function defineQuests(mm)
-        for id, q in pairs(dofile(FIXTURE).quests) do
+        local data = dofile(FIXTURE)
+        for id, q in pairs(data.quests) do
             mm:DefineQuest(id, { title = q.n, level = q.l, reqLevel = q.r, objectives = { { text = "done", required = 1 } } })
         end
+        for id, name in pairs(data.items) do mm:DefineItem(id, { name = name }) end
     end
 
     -- The Orc warrior with the fixture knowledge base; narrative mode unless opts.speedrun; the atlas open.
@@ -374,12 +376,12 @@ describe("atlas narrative view", function()
         return lines
     end
 
-    it("shows where now, the four aspect bars and the goals grouped by zone, the player's zone first", function()
+    it("shows where now, the five aspect bars and the goals grouped by zone, the player's zone first", function()
         local p = boot()
         local t = texts()
         for _, s in ipairs({ "Where now", "In the log: 0 · ready: 0", "Accept \"Oasis One\" -- Oasis Keeper, The Barrens · 20 yd",
             "Lead", "Class: Accept \"Warrior Call\" -- Warrior Trainer, Orgrimmar · 1031 yd",
-            "Story", "Dungeons", "Class", "New in Forever", "0/11", "0/2", "0/3",
+            "Story", "Dungeons", "Class", "New in Forever", "Professions", "0/11", "0/2", "0/3",
             "Hide finished", "Only new in Forever", "did it", "skip" }) do
             assert.is_true(has(t, s), s)
         end
@@ -393,6 +395,86 @@ describe("atlas narrative view", function()
         local row = rowOf(p, "e1011")
         assert.same({ "o", "Errand Giver: errands", "12-13", "0/2" },
             { row.mark:GetText(), row.name:GetText(), row.level:GetText(), row.count:GetText() })
+        assert.equal("0/0", p.story.aspects.profession.count:GetText()) -- no profession learned
+    end)
+
+    it("shows a learned profession with its rank, a trainable rank-up and the skill a quest waits for", function()
+        local p = boot()
+        m:SetSkill(182, 50, 75)
+        H.settle(m)
+        m:Click(p.story.aspects.profession.label)
+        local row = rowOf(p, "p182")
+        assert.same({ "Herbalism", "50/75+", "0/3" }, { row.name:GetText(), row.level:GetText(), row.count:GetText() })
+        m:SetSkill(182, 30, 75)
+        m:SetCompletedQuests({ 1081, 1083 })
+        ns.Narrative:Invalidate()
+        H.settle(m)
+        row = rowOf(p, "p182")
+        assert.same({ "30/75", "skill 50" }, { row.level:GetText(), row.count:GetText() })
+    end)
+
+    it("explains a profession: skill, next rank, quests, leveling, blueprints, note", function()
+        local p = boot()
+        m:SetSkill(182, 50, 75)
+        m:AddItem(2003)
+        H.settle(m)
+        m:Click(p.story.aspects.profession.label)
+        assert.same({ "Herbalism", "Skill: 50/75",
+            "Next rank (up to 150): skill 50, level 10 -- Herb Trainer, The Barrens",
+            "o Camping 101: Herbalism - The Barrens", "o Root Samples - The Barrens", "o Rare Roots - The Barrens",
+            "Leveling the skill:", "50-70: Mageroyal -- The Barrens",
+            "Camp blueprints:", "Blueprint: Test Rack -- Hidden Hermit (skill 40) (in your bags)",
+            "Gather herbs.", "Source: https://example.invalid/herbalism", "not checked in game" },
+            tooltipOf(rowOf(p, "p182")))
+    end)
+
+    it("names the level to wait for next to a hint as the main suggestion", function()
+        boot()
+        m:SetLevel(1)
+        m:AddItem(2004)
+        ns.Narrative:Invalidate()
+        H.settle(m)
+        local t = texts()
+        assert.is_true(has(t, "Where now · more from level 3"))
+        assert.is_true(has(t, "Sealed Test Crate: turn it in -- Crate Clerk, The Barrens · 100 yd · not checked in game"))
+    end)
+
+    it("renews an open goal tooltip when an item name arrives", function()
+        local p = boot()
+        ns.Knowledge.data.items[785] = nil -- no enUS fallback: only the client's (uncached) name
+        m:DefineItem(785, { name = "Mageroyal", cached = false })
+        m:SetSkill(182, 50, 75)
+        H.settle(m)
+        m:Click(p.story.aspects.profession.label)
+        local row = rowOf(p, "p182")
+        m:Enter(row)
+        assert.is_true(has(m:TooltipLines(), "50-70: item 785 -- The Barrens"))
+        H.settle(m)
+        assert.is_true(has(m:TooltipLines(), "50-70: Mageroyal -- The Barrens"))
+        m:Leave(row)
+    end)
+
+    it("lists a dungeon's blueprints only for the professions the character has", function()
+        local p = boot()
+        m:Click(p.story.aspects.dungeon.label)
+        assert.is_false(has(tooltipOf(rowOf(p, "d718")), "Blueprints for your professions (not checked in game):"))
+        m:SetSkill(182, 1, 75)
+        H.settle(m)
+        local lines = tooltipOf(rowOf(p, "d718"))
+        assert.is_true(has(lines, "Blueprints for your professions (not checked in game):"))
+        assert.is_true(has(lines, "Blueprint: Test Rack -- Hidden Hermit (skill 40)"))
+    end)
+
+    it("shows up to four detours", function()
+        local p = boot()
+        m:SetLevel(15)
+        m:SetSkill(182, 50, 75)
+        H.settle(m)
+        local shown = {}
+        for _, row in ipairs(p.story.along) do
+            if row:IsShown() then shown[#shown + 1] = row.cand.goal.a end
+        end
+        assert.same({ "story", "class", "novelty", "profession" }, shown)
     end)
 
     it("'skip' and 'did it' mark the goal's open quests and change the bar", function()

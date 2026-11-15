@@ -3,7 +3,7 @@
 ## Notes: Adventure atlas for World of Warcraft: Forever (core: leveling route engine, quest automation, navigation arrow).
 ## Notes-ruRU: Атлас приключений для World of Warcraft: Forever (ядро: движок маршрутов прокачки, автоматизация квестов, стрелка-навигатор).
 ## Author: Adventure Atlas contributors
-## Version: 0.5.1
+## Version: 0.6.0
 ## Category: Quests
 ## Category-ruRU: Задания
 ## IconTexture: Interface\Icons\INV_Scroll_04

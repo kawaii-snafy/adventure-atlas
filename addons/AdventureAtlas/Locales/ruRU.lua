@@ -77,3 +77,16 @@ L.NAR_WHY_CHAIN = "продолжение"
 L.NAR_WHY_PREP_FMT = "ведёт к «%s»"
 L.NAR_WHY_HINT = "лучший момент"
 L.NAR_WHY_GRAYSOON = "скоро посереет"
+L.NAR_WHY_UNVERIFIED = "не проверено в игре"
+-- подсказки: %s = название задания, затем предмет
+L.NAR_START_FMT = "Начни «%s»: %s в сумке"
+-- %s = профессия, %d = предел навыка нового ранга, %s = место; книга: %s = книга, %s = профессия, %d, %s = место
+L.NAR_TRAIN_FMT = "Обучись: %s до %d — %s"
+L.NAR_BOOK_FMT = "Купи «%s» (%s до %d) — %s"
+-- %s = профессия, %d = навык, %s = травы / руда / ... здесь
+L.NAR_GATHER_FMT = "%s %d: здесь — %s"
+L.NAR_GATHER_ZONE_FMT = "%s %d: зона по твоему навыку"
+-- %s = предмет, %s = что с ним сделать, %s = место (или NAR_IN_BAGS)
+L.NAR_USE_FMT = "%s: %s — %s"
+L.NAR_IN_BAGS = "в сумке"
+L.NAR_ITEM_FMT = "предмет %d"

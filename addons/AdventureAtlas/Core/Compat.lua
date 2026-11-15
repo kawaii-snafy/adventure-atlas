@@ -1,7 +1,7 @@
 -- AdventureAtlas / Core / Compat.lua
 --
 -- The ONLY place in the addon that calls Blizzard quest / map / item / taxi /
--- unit / quest-dialog / gossip / waypoint APIs (WoW: Forever, Interface 16001,
+-- unit / skill / spell / quest-dialog / gossip / waypoint APIs (WoW: Forever, Interface 16001,
 -- modern C_QuestLog / C_GossipInfo / C_Map / C_SuperTrack API).
 --
 -- Rules:
@@ -359,6 +359,42 @@ end
 --- Forget the cached race/class/faction (tests, faction change).
 function Compat.ResetIdentity()
     identity = nil
+end
+
+-- The profession slots of GetProfessions as a count + array (nil holes: a missing profession is nil).
+local function professionSlots()
+    local function pack(...) return select("#", ...), { ... } end
+    return pack(try(GetProfessions))
+end
+
+--- Rank and max rank of a skill line (db.enums.professions id); nil when the character lacks it.
+-- C_SkillInfo.GetSkillLineInfoByID first; GetProfessions / GetProfessionInfo (7th value = skill line) as
+-- the fallback. An unlearned line reads nil or rank 0 (both nil here). @return rank, maxRank | nil
+function Compat.SkillRank(skillLineID)
+    if type(skillLineID) ~= "number" then return nil end
+    local info = C_SkillInfo and pub(try(C_SkillInfo.GetSkillLineInfoByID, skillLineID))
+    if type(info) == "table" then
+        local rank = pubNumber(info.rank)
+        if rank and rank > 0 then return rank, pubNumber(info.maxRank) or rank end
+    end
+    if not GetProfessions then return nil end
+    local n, slots = professionSlots()
+    for i = 1, n do
+        local idx = slots[i]
+        if pubNumber(idx) then
+            local _, _, rank, maxRank, _, _, line = try(GetProfessionInfo, idx)
+            rank = pubNumber(rank)
+            if pubNumber(line) == skillLineID and rank and rank > 0 then return rank, pubNumber(maxRank) or rank end
+        end
+    end
+    return nil
+end
+
+--- Does the character know the spell (spell book or tradeskill)?
+function Compat.IsSpellKnown(spellID)
+    if type(spellID) ~= "number" or not C_SpellBook then return false end
+    return pubBool(try(C_SpellBook.IsSpellKnown, spellID))
+        or pubBool(try(C_SpellBook.IsSpellKnownOrInSpellBook, spellID))
 end
 
 ---------------------------------------------------------------------------

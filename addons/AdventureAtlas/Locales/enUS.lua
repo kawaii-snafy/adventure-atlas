@@ -79,3 +79,16 @@ L.NAR_WHY_CHAIN = "continues a chain"
 L.NAR_WHY_PREP_FMT = "leads to \"%s\""
 L.NAR_WHY_HINT = "best moment"
 L.NAR_WHY_GRAYSOON = "turns gray soon"
+L.NAR_WHY_UNVERIFIED = "not checked in game"
+-- hints: %s = quest title, then the item name
+L.NAR_START_FMT = "Start \"%s\": %s is in your bags"
+-- %s = profession, %d = the rank's max skill, %s = the place; book: %s = book, %s = profession, %d, %s = the place
+L.NAR_TRAIN_FMT = "Train %s up to %d -- %s"
+L.NAR_BOOK_FMT = "Buy \"%s\" (%s up to %d) -- %s"
+-- %s = profession, %d = skill rank, %s = herbs / ores / ... found here
+L.NAR_GATHER_FMT = "%s %d: here -- %s"
+L.NAR_GATHER_ZONE_FMT = "%s %d: a zone for your skill"
+-- %s = item, %s = what to do with it, %s = the place (or NAR_IN_BAGS)
+L.NAR_USE_FMT = "%s: %s -- %s"
+L.NAR_IN_BAGS = "in your bags"
+L.NAR_ITEM_FMT = "item %d"

@@ -27,7 +27,7 @@ local ipairs, pairs, format, floor, max, min = ipairs, pairs, string.format, mat
 local Atlas = {}
 ns.Atlas = Atlas
 
-local WIDTH, HEIGHT = 560, 480
+local WIDTH, HEIGHT = 560, 520
 local PAD = 14
 local ROW_HEIGHT = 20
 local DEFAULT_TAB = "adventure"
