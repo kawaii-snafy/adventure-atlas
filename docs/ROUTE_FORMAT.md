@@ -599,6 +599,7 @@ addons/AdventureAtlas_Guides/
 | 1 | 0.3.0, 0.3.1 | синхронизация по уровню, серые и недоступные квесты, задержка автоматики, `questMeta` (API маршрутов не менялся) |
 | 2 | 0.4.0 | `AddLibraryInsert`; общие шаги не попадают в маршруты, которым не подходят их фильтры; `aliases` маршрута; таблица наград по классам (`rewards`); ключ `ok` шага и сегмента |
 | 2 | 0.5.0 | переименование FastesBoooy → Adventure Atlas: глобальная таблица `AdventureAtlas` (была `FastesBoooy`), папки `AdventureAtlas` / `AdventureAtlas_Guides`, `## Dependencies: AdventureAtlas` (API маршрутов не менялся) |
+| 2 | 0.5.1, 0.6.0 | 0.6.0: режим повествования (цели вместо маршрута, `docs/dev/ATLAS.md`); API маршрутов не менялся |
 
 Ядра до 0.5.0 назывались FastesBoooy и давали глобальную таблицу `FastesBoooy`. Модуль с
 `## Dependencies: AdventureAtlas` со старым ядром не загружается вовсе, поэтому проверки ниже нужны для будущих

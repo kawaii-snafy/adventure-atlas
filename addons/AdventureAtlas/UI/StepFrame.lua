@@ -7,7 +7,9 @@
 --               (ns.Engine:GetSyncSuggestion), or "jumped to X" + an Undo link for
 --               UNDO_SECONDS after a level sync (until the next step change)
 --   content     the current step (lines from ns.Steps:Describe), the "along the way"
---               background steps, the next N not-done steps (dimmed)
+--               background steps, the next N not-done steps (dimmed); in narrative mode
+--               (ns.IsNarrative) instead the "where now" card of ns.Narrative: the main
+--               suggestion, the quest log counts and up to two detours
 -- The window is anchored by its TOP edge (restore, drag, saved position) and only its
 -- height follows the content, so it grows / shrinks downward and the buttons never move;
 -- nothing in the button row is anchored to a content region.
@@ -17,7 +19,7 @@
 -- SETTINGS_CHANGED), frame position save/restore, guide visibility / combat state,
 -- engine actions shared with the slash commands (UI.Forward, UI.ApplySync...).
 --
--- Consumes only the internal core contract: ns.Engine, ns.Steps, ns.Schema,
+-- Consumes only the internal core contract: ns.Engine, ns.Steps, ns.Schema, ns.Narrative,
 -- ns.Compat (player level/XP), ns.db, ns.cdb, ns:Listen, ns:On. Frames are created
 -- lazily on DB_READY; no frame is created per refresh (rows are pooled).
 
@@ -414,6 +416,7 @@ local BANNER_PAD = 5
 local BANNER_BUTTON_H = 20
 local REFRESH_INTERVAL = 1
 local UNDO_SECONDS = 30
+local NARRATIVE_ALONG = 2 -- detours shown in narrative mode
 
 SF.TOP_BLOCK = TOP_BLOCK
 SF.UNDO_SECONDS = UNDO_SECONDS
@@ -616,13 +619,45 @@ local function addSection(y, text)
     return addRow(y + SECTION_GAP - ROW_GAP, text, { color = COLORS.section, font = "GameFontNormalSmall" })
 end
 
+-- Narrative mode: the "where now" card (ns.Narrative:Where): the main suggestion and / or the level to wait
+-- for (both when the main suggestion is a hint), the quest log counts and up to NARRATIVE_ALONG detours. The
+-- rows are not clickable: follow moves the arrow. @return new y
+local function narrativeRows(y)
+    local N = ns.Narrative
+    if not N:Load() then return addRow(y, L.UI_KB_NOT_INSTALLED, { color = COLORS.message }) end
+    local w = N:Where()
+    if w.main then
+        y = addRow(y, N:Describe(w.main), { color = COLORS.current, font = "GameFontHighlight" })
+        if w.wait then -- the main suggestion is a hint: also the level with more to take
+            y = addRow(y, format(L.NAR_WAIT_FMT, w.wait), { color = COLORS.message })
+        end
+    else
+        y = addRow(y, w.wait and format(L.NAR_WAIT_FMT, w.wait) or L.UI_NAR_EMPTY, { color = COLORS.message })
+    end
+    y = addRow(y, format(L.NAR_INLOG_FMT, w.inLog, w.ready), { color = COLORS.objective })
+    if #w.along > 0 then
+        y = addSection(y, L.UI_ALONG_THE_WAY)
+        for i = 1, min(NARRATIVE_ALONG, #w.along) do
+            y = addRow(y, N:Describe(w.along[i]), { color = COLORS.bg })
+        end
+    end
+    return y
+end
+
+-- Header: the route title and the current segment, or in narrative mode the mode name and the story
+-- progress; the step counter; the player level / XP.
 local function updateHeader(route, steps, cursor)
-    local title = route and UI.Text(route.title) or L.UI_TITLE
+    local narrative = ns.IsNarrative()
+    local title = (narrative and L.UI_MODE_NARRATIVE) or (route and UI.Text(route.title)) or L.UI_TITLE
     frame.title:SetText(title or "")
 
     local segText = ""
     local step = cursor and steps and steps[cursor]
-    if route and step and route.segmentById and step.segment then
+    if narrative then
+        local res = ns.Narrative:Load() and ns.Narrative:Get()
+        local story = res and res.aspect.story
+        if story then segText = format(L.UI_NAR_SF_STORY_FMT, story.done, story.done + story.open) end
+    elseif route and step and route.segmentById and step.segment then
         local seg = route.segmentById[step.segment]
         segText = seg and UI.Text(seg.title) or ""
     end
@@ -809,7 +844,9 @@ function SF:Refresh()
     updateButtons(route, steps, cursor)
 
     local y = layoutBanner(TOP_BLOCK + 2, current)
-    if not route then
+    if ns.IsNarrative() then
+        y = narrativeRows(y)
+    elseif not route then
         y = addRow(y, L.UI_NO_ROUTE, { color = COLORS.message })
     else
         if current then
@@ -1028,6 +1065,8 @@ ns:Listen("ROUTE_CHANGED", markDirty)
 ns:Listen("STEP_CHANGED", markDirty)
 ns:Listen("PROGRESS_UPDATED", markDirty)
 ns:Listen("SYNC_SUGGESTION", markDirty)
+ns:Listen("MODE_CHANGED", markDirty)
+ns:Listen("NARRATIVE_UPDATED", markDirty)
 ns:Listen("SYNC_APPLIED", function(_, record)
     SF.pendingUndo = record or true
     SF:MarkDirty()

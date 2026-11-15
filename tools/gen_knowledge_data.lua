@@ -7,7 +7,8 @@
 -- Reads tools/data/forever_db.lua with the DB overrides of tools/overrides applied (as the route tools
 -- do; --no-overrides: the bare snapshot) and writes addons/AdventureAtlas_Knowledge/Quests.lua: the
 -- quests a Horde character can take (the snapshot is Horde-focused, docs/dev/ATLAS.md) -- the full
--- records of the snapshot plus the brief out-of-scope index (name, levels, masks, zone only) -- as one call
+-- records of the snapshot plus the brief out-of-scope index (name, levels, masks, zone only) -- and the
+-- narrative goals built from them, as one call
 --
 --   AdventureAtlas.AddKnowledge({
 --       faction = "Horde",
@@ -20,27 +21,81 @@
 --           n = "enUS name", l = level (0 = none in the snapshot, -1 = scales; both pass every level range),
 --           r = required level (>= 1), z = zone key,
 --           ra = race mask (only when narrower than the faction), cl = class mask (only when set),
+--           sk = { skill line id, rank } (db reqSkill), sp = spell id (db reqSpell < 0: not available once known)
 --           s = { n = { npc ids }, o = { object ids }, i = { item ids } },   -- who / what starts it
 --           e = { n = { npc ids }, o = { object ids } },                     -- where it is turned in
 --           pa = { quest ids: all needed }, py = { quest ids: one of them needed }, nx = next quest id,
 --           x = XP reward at the quest level (when known), new = true (new in Forever)
 --       } },
+--       goals = { {                          -- narrative goals (tools/lib/goals.lua); order: aspect (story,
+--                                            --   dungeon, class, novelty, profession), lo, id (novelty:
+--                                            --   curated order)
+--           id = "s886",                     -- unique; s / e = story chain / errands of one giver, c / k =
+--                                            --   class chain / errands, "d<areaID>" = dungeon, "n:<key>" =
+--                                            --   curated, "p<skillLineID>" = profession; suffix = lowest
+--                                            --   counted quest id. Never saved.
+--           a = "story" | "dungeon" | "class" | "novelty" | "profession",
+--           z = zone key,                    -- home zone (story / class only; grouping, not navigation)
+--           lo = 10, hi = 16,                -- level band (effective level: l, else r)
+--           q = { 886, { 96101, 96604 } },   -- counted slots, topological order (ties: level, id); a table
+--                                            --   is an exclusive clique: one slot, any member done = done
+--           opt = { quest ids },             -- counted only once done (breadcrumbs, no starter, curated)
+--           ex = { [410] = { 411 } },        -- exclusives outside a clique: the key is lost once one is done
+--           d = areaID, en = "enUS name",    -- dungeon goals: the instance (C_Map.GetAreaInfo in game),
+--           at = { { uiMapID, x, y } },      --   its entrances, the source of lo / hi (lv = "db" |
+--           lv = "db", prep = { quest ids }, --   "src" | "derived") and the pa / py / nx ancestors outside
+--                                            --   the goal (counted in their own goals)
+--           name = { en = "", ru = "" }, note = { en = "", ru = "" }, -- curated (tools/data/narrative.lua):
+--           src = "url", v = false,          --   title, note, source, verified in game
+--           after = { [questID] = questID }, -- suggest the key only once the value's slot is not open (done,
+--                                            --   marked, gray or out; soft order)
+--           cnt = { [questID] = N },         -- the slot is suggested once N slots without a cnt key are done
+--           hint = { [questID] = { uiMapID, level } }, -- promote it there from that level on
+--           startObj = true,                 -- navigate to start objects (NPCs only without a placed object)
+--       } },
 --   })
+--
+-- The fields stages 2 and 3 added to the goals (the same block is in tools/data/narrative.lua and
+-- Core/Knowledge.lua):
+--   a = "story" | "dungeon" | "class" | "novelty" | "profession"
+--   id: "p<skillLineID>" = profession goal (generated); "n:finds" = the finds container (curated key "finds", reserved)
+--   line = 182,                      -- profession goals: skill line id (db.enums.professions)
+--   sec = true,                      -- profession goals: secondary (First Aid, Cooking, Fishing): no tier 3 (a quest)
+--   nolv = true,                     -- profession goals: rank-ups need no character level (Cooking, First Aid)
+--   train = { { n = { npcIDs } }, { n = { npcIDs }, i = itemID }, { n = { npcIDs } } },
+--                                    -- profession goals, indexed by tier (Narrative TIERS: 1 = 75->150, 2 = 150->225,
+--                                    --   3 = 225->300): trainers, or with i a book the NPCs sell; a tier may be absent
+--                                    --   (nil hole not allowed: tiers are a prefix, 1..#train)
+--   blueprints = { { i = itemID, need = 140, d = areaID, n = npcID | nil } },
+--                                    -- profession goals: camp blueprint, skill to learn it, dungeon, boss (when in the DB)
+--   brackets = { { lo = 50, hi = 70, i = { itemIDs } | nil, m = { uiMapIDs } | nil } },
+--                                    -- profession goals, ordered by lo: at skill lo..hi-1 gather / make i, found in m
+--                                    --   (at least one of i, m)
+--   use = { { i = { itemIDs }, n = { npcIDs } | nil, t = { en = "", ru = "" } } },
+--                                    -- curated goals: an item of i in the bags -> "<item>: t -- nearest of n"
+--   note = { en, ru }                -- also on dungeon goals now (curated)
+--   q = { }                          -- empty only for a goal with `use` (n:finds): never listed (state "none"), no bar;
+--                                    --   lo = 1, hi = 60
 --
 -- NPCs of the Alliance (npc faction "A") are left out of s / e; chains (pa / py / nx) only name quests of
 -- this file. Internal flag quests (auto-rewarded, nobody starts or ends them, e.g. "DND FLAG ...") are left
 -- out. Zone keys: the quest's uiMapID (C_Map gives the localized name in game), else its AreaTable id
 -- (dungeons, cities and other areas without a quest map; C_Map.GetAreaInfo), else the quest sort of the
--- snapshot (zone < 0): a class (the client's class name) or one of CATEGORIES below (en + ru). The output
--- is deterministic (sorted); --check exits 1 when the file would change (CI), --stdout prints instead.
+-- snapshot (zone < 0): a class (the client's class name) or one of CATEGORIES below (en + ru). Goals: every
+-- quest of the file gets exactly one disposition -- a slot or an `opt` of one goal, or excluded with a
+-- reason (tools/lib/goals.lua; curated input tools/data/narrative.lua; counts and the goal ids added /
+-- removed go to stderr; a hard error of the goals exits 1). The output is deterministic (sorted); --check
+-- exits 1 when the file would change (CI), --stdout prints instead.
 
 local here = (arg and arg[0] or ""):match("^(.*)[/\\][^/\\]*$") or "."
 package.path = here .. "/?.lua;" .. package.path
 local root = here .. "/.."
 
 local DB = require("lib.fbdb")
+local Goals = require("lib.goals")
 
 local OUT = root .. "/addons/AdventureAtlas_Knowledge/Quests.lua"
+local CURATED = root .. "/tools/data/narrative.lua"
 local FACTION = "Horde"
 
 -- Quest sorts of the snapshot that are not a class (QuestieDB zone sort keys; each checked
@@ -155,12 +210,13 @@ local function collectQuests(db)
     return list
 end
 
---- Build the file text. @return text, notes (lines for stderr)
+--- Build the file text. @return text, notes (lines for stderr); error() on a hard error of the goals
 local function render(db)
     local hordeMask = db.enums.factionMasks[FACTION]
     local classSorts = {}
     for class, sort in pairs(db.enums.classSorts) do classSorts[sort] = class end
 
+    local curated = Goals.LoadCurated(CURATED)
     local quests = collectQuests(db)
     local included = {}
     for _, e in ipairs(quests) do included[e.id] = true end
@@ -217,6 +273,11 @@ local function render(db)
             end
         end
         for _, id in ipairs(e.si) do items[id] = true end
+    end
+    -- NPCs of the curated profession / finds records (trainers, book sellers, bosses, turn-ins); unknown ids are
+    -- left to the hard error of Goals.Build
+    for _, id in ipairs(Goals.ExtraNpcs(curated)) do
+        if db.npcs[id] then npcs[id] = true end
     end
     table.sort(zoneKeys)
     local zoneIndex = {}
@@ -281,6 +342,8 @@ local function render(db)
         local races = q.races or 0
         if races ~= 0 and races ~= hordeMask then f[#f + 1] = "ra = " .. string.format("%.0f", races) end
         if (q.classes or 0) ~= 0 then f[#f + 1] = "cl = " .. tostring(q.classes) end
+        if q.reqSkill then f[#f + 1] = string.format("sk = { %d, %d }", q.reqSkill[1], q.reqSkill[2] or 0) end
+        if (q.reqSpell or 0) < 0 then f[#f + 1] = "sp = " .. tostring(-q.reqSpell) end
         local sp = {}
         if #e.sn > 0 then sp[#sp + 1] = "n = " .. idList(e.sn) end
         if #e.so > 0 then sp[#sp + 1] = "o = " .. idList(e.so) end
@@ -299,6 +362,14 @@ local function render(db)
         out[#out + 1] = string.format("        [%d] = { %s },", e.id, table.concat(f, ", "))
     end
     out[#out + 1] = "    },"
+
+    local fileIds, zoneOfQuest = {}, {}
+    for _, e in ipairs(quests) do
+        fileIds[e.id] = true
+        zoneOfQuest[e.id] = zoneIndex[e.zoneKey]
+    end
+    local goals, goalNotes = Goals.Build(db, fileIds, zoneOfQuest, curated)
+    for _, line in ipairs(Goals.Lines(goals)) do out[#out + 1] = line end
     out[#out + 1] = "})"
     out[#out + 1] = ""
 
@@ -308,7 +379,28 @@ local function render(db)
     end
     notes[#notes + 1] = string.format("%d quests, %d zones, %d npcs, %d objects", #quests, #zoneKeys,
         #sortedKeys(npcs), #sortedKeys(objects))
+    for _, n in ipairs(goalNotes) do notes[#notes + 1] = n end
     return table.concat(out, "\n"), notes
+end
+
+--- Goal ids of a file text (the `id = "..."` of the goals lines). @return { [id] = true }
+local function goalIds(text)
+    local ids = {}
+    for id in (text or ""):gmatch('\n        { id = "([^"]+)", a = ') do ids[id] = true end
+    return ids
+end
+
+--- Note line: goal ids added / removed compared with the previous file (the ids, when few).
+local function goalIdDiff(old, text)
+    local before, after = goalIds(old), goalIds(text)
+    local added, removed = {}, {}
+    for _, id in ipairs(sortedKeys(after)) do if not before[id] then added[#added + 1] = id end end
+    for _, id in ipairs(sortedKeys(before)) do if not after[id] then removed[#removed + 1] = id end end
+    local line = string.format("goal ids vs the previous file: +%d -%d", #added, #removed)
+    if #added + #removed > 0 and #added + #removed <= 40 then
+        line = line .. ": +" .. table.concat(added, " +") .. " -" .. table.concat(removed, " -")
+    end
+    return line
 end
 
 local function main(argv)
@@ -336,16 +428,21 @@ local function main(argv)
         end
         if #rep.errors > 0 then return 1 end
     end
-    local text, notes = render(db)
-    for _, n in ipairs(notes) do io.stderr:write("gen_knowledge_data: " .. n .. "\n") end
-    if opts.stdout then
-        io.write(text)
-        return 0
+    local ok, text, notes = pcall(render, db)
+    if not ok then
+        for line in tostring(text):gmatch("[^\n]+") do io.stderr:write("gen_knowledge_data: ERROR " .. line .. "\n") end
+        return 1
     end
     local path = opts.out or OUT
     local fh = io.open(path, "rb")
     local old = fh and fh:read("*a")
     if fh then fh:close() end
+    notes[#notes + 1] = goalIdDiff(old, text)
+    for _, n in ipairs(notes) do io.stderr:write("gen_knowledge_data: " .. n .. "\n") end
+    if opts.stdout then
+        io.write(text)
+        return 0
+    end
     if opts.check then
         if old ~= text then
             io.stderr:write("gen_knowledge_data: " .. path .. " is out of date: run `make knowledge`\n")

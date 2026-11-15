@@ -2,7 +2,7 @@
 --
 -- Player state and units, XP / levels (Classic Era XP table), maps with a per-map
 -- linear world transform, positions / facing, user waypoints and super tracking,
--- bags and items, spells, trainer / merchant / taxi / binder interactions, combat
+-- bags and items, spells, profession skill lines, trainer / merchant / taxi / binder interactions, combat
 -- and modifier keys.
 
 local ctx = ...
@@ -493,6 +493,22 @@ function M:LearnSpell(id)
     end)
 end
 
+--- Set a profession skill line (rank nil = unlearn it): SKILL_LINES_CHANGED.
+function M:SetSkill(id, rank, maxRank)
+    return self:_top(function()
+        self.skills[id] = rank and { rank, maxRank or rank } or nil
+        self:_dispatch("SKILL_LINES_CHANGED")
+    end)
+end
+
+-- learned skill lines, sorted (GetProfessions indices 1..n)
+function M:_skillLines()
+    local ids = {}
+    for id in pairs(self.skills) do ids[#ids + 1] = id end
+    table.sort(ids)
+    return ids
+end
+
 ---------------------------------------------------------------------------
 -- NPC interactions (trainer / merchant / taxi / binder)
 ---------------------------------------------------------------------------
@@ -698,6 +714,7 @@ ctx.register(function(m)
     end
     m.spells, m.spellDB = {}, {}
     for _, id in ipairs(opts.spells or {}) do m.spells[id] = true end
+    m.skills = U.deepcopy(opts.skills or {})
     m.npcs = {}
     m.bind = U.deepcopy(opts.bind or { name = "Deathknell" })
     m.target, m.mouseover, m.interaction, m.flight = nil, nil, nil, nil
@@ -1110,8 +1127,33 @@ ctx.register(function(m)
     end
     m:ProvideNS("C_SpellBook", {
         IsSpellKnown = function(spellID) return m.spells[spellID] == true end,
+        IsSpellKnownOrInSpellBook = function(spellID) return m.spells[spellID] == true end,
         IsSpellInSpellBook = function(spellID) return m.spells[spellID] == true end,
     })
+
+    -- skill lines (professions: m.skills[line] = { rank, maxRank }) ------------
+    m:ProvideNS("C_SkillInfo", {
+        GetSkillLineInfoByID = function(id)
+            local s = m.skills[id]
+            if not s then return nil end
+            return { skillID = id, name = "Skill " .. id, isHeader = false, isCollapsed = false, rank = s[1],
+                tempPoints = 0, modifier = 0, maxRank = s[2], isAbandonable = true, stepCost = 0, rankCost = 0,
+                minLevel = 0, costType = 0, parentSkillLineID = 0, skillLineCategoryID = 11, description = "" }
+        end,
+    })
+    m:ProvideAPI("GetProfessions", function()
+        local idx = {}
+        for i in ipairs(m:_skillLines()) do idx[i] = i end
+        return unpack(idx)
+    end)
+    -- name, texture, rank, maxRank, numSpells, spellOffset, skillLine, rankModifier, specializationIndex,
+    -- specializationOffset, skillLineName
+    m:ProvideAPI("GetProfessionInfo", function(index)
+        local id = m:_skillLines()[index]
+        if not id then return nil end
+        local s = m.skills[id]
+        return "Skill " .. id, 136243, s[1], s[2], 0, 0, id, 0, 0, 0, "Skill " .. id
+    end)
     m:ProvideNS("C_Spell", {
         GetSpellName = function(id)
             local d = spellDef(id)

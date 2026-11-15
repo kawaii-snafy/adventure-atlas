@@ -112,11 +112,18 @@ describe("knowledge base data", function()
         assert.equal("Warrior", K():ZoneName(K():Get(1498).z)) -- a class quest sort: the client's class name
     end)
 
-    it("passes the client's reason when the data addon cannot be loaded", function()
+    it("passes the client's reason when the data addon cannot be loaded, asking the client once a session", function()
         boot({ data = false })
+        local calls, load = 0, m.env.C_AddOns.LoadAddOn
+        m.env.C_AddOns.LoadAddOn = function(...)
+            calls = calls + 1
+            return load(...)
+        end
         local ok, why = K():Load()
         assert.is_false(ok)
         assert.equal("MISSING", why)
+        assert.same({ false, "MISSING" }, { K():Load() })
+        assert.equal(1, calls)
     end)
 
     it("lowers Cyrillic text for the search", function()

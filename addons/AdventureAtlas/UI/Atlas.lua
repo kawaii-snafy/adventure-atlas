@@ -2,15 +2,18 @@
 --
 -- The atlas window: one window with tabs, opened by the minimap button (UI/MinimapButton.lua),
 -- `/aa atlas` or the settings. Tabs (TABS below, in display order):
---   adventure   "Your adventure": the character's path -- for now the active leveling route: title,
---               level, progress, and its chapters (segments) with the current one marked
+--   adventure   "Your adventure": the character's path. Two mode buttons on top switch this character
+--               between the modes (ns.Narrative:SetMode); below them one of two views:
+--               speedrun: the active leveling route: title, level, progress, and its chapters
+--               (segments) with the current one marked;
+--               narrative: goals, progress bars and "where now" (UI/AtlasNarrative.lua)
 --   knowledge   "Knowledge base": the quests of Forever with search and filters (UI/AtlasKnowledge.lua)
 -- A tab's page is built the first time it is shown and refreshed while visible. The window and
 -- its selected tab live in ns.db.frames.atlas (position: UI.MakeMovable / UI.RestorePosition).
 -- The window is the named frame AdventureAtlasFrame, listed in UISpecialFrames: Escape closes it.
 --
--- Consumes ns.Engine (GetRoute / GetNaturalCursor / GetChapters) and ns.UI (toolkit of
--- UI/StepFrame.lua, incl. UI.PlayerLevel). Exposes ns.Atlas.
+-- Consumes ns.Engine (GetRoute / GetNaturalCursor / GetChapters), ns.Narrative (mode) and ns.UI (toolkit
+-- of UI/StepFrame.lua, incl. UI.PlayerLevel). Exposes ns.Atlas.
 
 -- luacheck: ignore 212/self (singleton module keeps the colon method style)
 
@@ -24,7 +27,7 @@ local ipairs, pairs, format, floor, max, min = ipairs, pairs, string.format, mat
 local Atlas = {}
 ns.Atlas = Atlas
 
-local WIDTH, HEIGHT = 560, 480
+local WIDTH, HEIGHT = 560, 520
 local PAD = 14
 local ROW_HEIGHT = 20
 local DEFAULT_TAB = "adventure"
@@ -40,32 +43,29 @@ local function atlasDB() return UI.FramesDB("atlas") end
 
 local PAGE_WIDTH = WIDTH - 2 * PAD
 local TOGGLE_WIDTH = 150
+local MODE_WIDTH = 130
+local VIEW_TOP = -28   -- the views start below the mode buttons
 local SCROLLBAR = 22   -- room right of the chapter list for the template's scroll bar
 local COUNT_WIDTH = 50
 
--- Fixed widths instead of a second (middle-edge) anchor: a RIGHT point would also pin the vertical
--- center of the region.
-local function buildAdventure(page)
-    local toggle = UI.CreateButton(page, "", nil, function()
-        UI.SetGuideHidden(not UI.IsGuideHidden())
-    end, TOGGLE_WIDTH, 22)
-    toggle:SetPoint("TOPRIGHT", page, "TOPRIGHT", 0, 2)
-    page.toggle = toggle
-
-    local title = page:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
-    title:SetPoint("TOPLEFT", page, "TOPLEFT", 0, 0)
-    title:SetWidth(PAGE_WIDTH - TOGGLE_WIDTH - 8)
+-- The speedrun view: route title, level / progress, bar, chapter list. Its widgets live in `view` and are
+-- kept on `page` (page.title, page.rows...). Fixed widths instead of a second (middle-edge) anchor: a RIGHT
+-- point would also pin the vertical center of the region.
+local function buildSpeedrun(page, view)
+    local title = view:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+    title:SetPoint("TOPLEFT", view, "TOPLEFT", 0, 0)
+    title:SetWidth(PAGE_WIDTH)
     title:SetJustifyH("LEFT")
     title:SetWordWrap(false)
     page.title = title
 
-    local info = page:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    local info = view:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     info:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -6)
     info:SetWidth(PAGE_WIDTH)
     info:SetJustifyH("LEFT")
     page.info = info
 
-    local bar = CreateFrame("StatusBar", nil, page)
+    local bar = CreateFrame("StatusBar", nil, view)
     bar:SetPoint("TOPLEFT", info, "BOTTOMLEFT", 0, -8)
     bar:SetSize(PAGE_WIDTH, 12)
     bar:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
@@ -76,25 +76,58 @@ local function buildAdventure(page)
     barBg:SetColorTexture(0, 0, 0, 0.5)
     page.bar = bar
 
-    local header = page:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    local header = view:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     header:SetPoint("TOPLEFT", bar, "BOTTOMLEFT", 0, -14)
     header:SetText(L.UI_ATLAS_CHAPTERS)
     page.header = header
 
     -- chapter list: pooled rows in a scroll child
-    local scroll = CreateFrame("ScrollFrame", nil, page, "UIPanelScrollFrameTemplate")
+    local scroll = CreateFrame("ScrollFrame", nil, view, "UIPanelScrollFrameTemplate")
     scroll:SetPoint("TOPLEFT", header, "BOTTOMLEFT", 0, -6)
-    scroll:SetPoint("BOTTOMRIGHT", page, "BOTTOMRIGHT", -SCROLLBAR, 0)
+    scroll:SetPoint("BOTTOMRIGHT", view, "BOTTOMRIGHT", -SCROLLBAR, 0)
     local list = CreateFrame("Frame", nil, scroll)
     list:SetSize(PAGE_WIDTH - SCROLLBAR - 8, ROW_HEIGHT)
     scroll:SetScrollChild(list)
     page.scroll, page.list, page.rows = scroll, list, {}
 
-    local empty = page:CreateFontString(nil, "OVERLAY", "GameFontDisable")
+    local empty = view:CreateFontString(nil, "OVERLAY", "GameFontDisable")
     empty:SetPoint("TOPLEFT", header, "BOTTOMLEFT", 0, -8)
     empty:SetWidth(PAGE_WIDTH)
     empty:SetJustifyH("LEFT")
     page.empty = empty
+end
+
+-- A view frame below the mode buttons.
+local function viewFrame(page)
+    local f = CreateFrame("Frame", nil, page)
+    f:SetPoint("TOPLEFT", page, "TOPLEFT", 0, VIEW_TOP)
+    f:SetPoint("BOTTOMRIGHT", page, "BOTTOMRIGHT", 0, 0)
+    return f
+end
+
+-- The tab: the mode buttons and the guide toggle on top, the speedrun view (page.speed) and the narrative
+-- view (page.story) below; refreshAdventure shows the one of the character's mode.
+local function buildAdventure(page)
+    local function modeButton(mode, label, tooltip)
+        return UI.CreateButton(page, label, { label, { tooltip } }, function()
+            ns.Narrative:SetMode(mode) -- MODE_CHANGED refreshes the tab
+        end, MODE_WIDTH, 22)
+    end
+    page.speedButton = modeButton("speedrun", L.UI_MODE_SPEEDRUN, L.UI_MODE_SPEEDRUN_TT)
+    page.speedButton:SetPoint("TOPLEFT", page, "TOPLEFT", 0, 2)
+    page.storyButton = modeButton("narrative", L.UI_MODE_NARRATIVE, L.UI_MODE_NARRATIVE_TT)
+    page.storyButton:SetPoint("LEFT", page.speedButton, "RIGHT", 6, 0)
+
+    local toggle = UI.CreateButton(page, "", nil, function()
+        UI.SetGuideHidden(not UI.IsGuideHidden())
+    end, TOGGLE_WIDTH, 22)
+    toggle:SetPoint("TOPRIGHT", page, "TOPRIGHT", 0, 2)
+    page.toggle = toggle
+
+    page.speed = viewFrame(page)
+    buildSpeedrun(page, page.speed)
+    page.story = viewFrame(page)
+    ns.AtlasNarrative.build(page.story)
 end
 
 local function showRowTooltip(row)
@@ -145,10 +178,9 @@ local function paintRow(row, ch)
     row.count:SetTextColor(r, g, b)
 end
 
-local function refreshAdventure(page)
+local function refreshSpeedrun(page)
     local E = ns.Engine
     local route = E and E:GetRoute()
-    page.toggle:SetText(UI.IsGuideHidden() and L.UI_ATLAS_SHOW_GUIDE or L.UI_ATLAS_HIDE_GUIDE)
     local level = UI.PlayerLevel() or 0
     local chapters = route and E:GetChapters() or {}
     if not route then
@@ -192,6 +224,26 @@ local function refreshAdventure(page)
             local range = max(0, #chapters * ROW_HEIGHT - page.scroll:GetHeight())
             page.scroll:SetVerticalScroll(min(range, max(0, (current - 2) * ROW_HEIGHT)))
         end
+    end
+end
+
+-- The mode buttons (the character's mode highlighted), the guide toggle, and the view of the mode.
+local function refreshAdventure(page)
+    local narrative = ns.IsNarrative()
+    page.toggle:SetText(UI.IsGuideHidden() and L.UI_ATLAS_SHOW_GUIDE or L.UI_ATLAS_HIDE_GUIDE)
+    if narrative then
+        page.storyButton:LockHighlight()
+        page.speedButton:UnlockHighlight()
+    else
+        page.speedButton:LockHighlight()
+        page.storyButton:UnlockHighlight()
+    end
+    page.speed:SetShown(not narrative)
+    page.story:SetShown(narrative)
+    if narrative then
+        ns.AtlasNarrative.refresh(page.story)
+    else
+        refreshSpeedrun(page)
     end
 end
 
@@ -311,9 +363,11 @@ end
 ---------------------------------------------------------------------------
 
 -- What each tab shows changes with these events (the others do not redraw it):
--- adventure: the route and its progress; knowledge: quest status, titles, the arrow's target.
+-- adventure: the route and its progress, the mode, the narrative goals (titles, the arrow's target);
+-- knowledge: quest status, titles, the arrow's target.
 local TAB_EVENTS = {
-    adventure = { "ROUTE_CHANGED", "STEP_CHANGED", "PROGRESS_UPDATED", "UI_VISIBILITY_CHANGED", "PLAYER_LEVEL_UP" },
+    adventure = { "ROUTE_CHANGED", "STEP_CHANGED", "PROGRESS_UPDATED", "UI_VISIBILITY_CHANGED", "PLAYER_LEVEL_UP",
+        "MODE_CHANGED", "NARRATIVE_UPDATED", "WAYPOINT_CUSTOM", "QUEST_TITLES" },
     knowledge = { "QUEST_TURNED_IN", "QUEST_ACCEPTED", "QUEST_REMOVED", "QUEST_TITLES", "WAYPOINT_CUSTOM",
         "ZONE_CHANGED_NEW_AREA" }, -- the zone: whether "Lead me" can point at the quest from here
 }
@@ -330,7 +384,8 @@ local function onEvent(event)
     if tabs and tabs[Atlas:SelectedTab()] then Atlas:Refresh() end
 end
 
-for _, e in ipairs({ "ROUTE_CHANGED", "STEP_CHANGED", "PROGRESS_UPDATED", "UI_VISIBILITY_CHANGED", "WAYPOINT_CUSTOM" }) do
+for _, e in ipairs({ "ROUTE_CHANGED", "STEP_CHANGED", "PROGRESS_UPDATED", "UI_VISIBILITY_CHANGED", "WAYPOINT_CUSTOM",
+    "MODE_CHANGED", "NARRATIVE_UPDATED" }) do
     ns:Listen(e, function() onEvent(e) end)
 end
 for _, e in ipairs({ "PLAYER_LEVEL_UP", "QUEST_TURNED_IN", "QUEST_ACCEPTED", "QUEST_REMOVED", "ZONE_CHANGED_NEW_AREA" }) do

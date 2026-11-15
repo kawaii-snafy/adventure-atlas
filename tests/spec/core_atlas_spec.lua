@@ -328,3 +328,263 @@ describe("atlas window", function()
         assert.is_falsy(f.isMoving)
     end)
 end)
+
+-- The narrative view of "Your adventure" (UI/AtlasNarrative.lua) on the goals of tests/fixtures/narrative/data.lua
+-- (its header lists the role of each goal); the player is an Orc warrior, level 12, at the Barrens 50, 50.
+describe("atlas narrative view", function()
+    local FIXTURE = "tests/fixtures/narrative/data.lua"
+    local ORC = { race = "Orc", class = "WARRIOR", level = 12, mapID = 1413, x = 50, y = 50 }
+
+    after_each(function() m:AssertClean() end)
+
+    -- The fixture quests with their titles (one objective each) and the fixture items.
+    local function defineQuests(mm)
+        local data = dofile(FIXTURE)
+        for id, q in pairs(data.quests) do
+            mm:DefineQuest(id, { title = q.n, level = q.l, reqLevel = q.r, objectives = { { text = "done", required = 1 } } })
+        end
+        for id, name in pairs(data.items) do mm:DefineItem(id, { name = name }) end
+    end
+
+    -- The Orc warrior with the fixture knowledge base; narrative mode unless opts.speedrun; the atlas open.
+    local function boot(opts)
+        opts = opts or {}
+        if opts.speedrun then
+            m, ns = H.boot({ setup = defineQuests }) -- the test route of the Undead paladin
+        else
+            m, ns = H.boot({ locale = opts.locale, fixture = false, quests = false, player = ORC, setup = defineQuests })
+        end
+        if opts.data ~= false then ns.Knowledge:Add(dofile(FIXTURE)) end
+        if not opts.speedrun then ns.Narrative:SetMode("narrative") end
+        H.settle(m)
+        atlas():Open()
+        return atlas():GetFrame().pages.adventure
+    end
+
+    -- The pooled list row showing a goal.
+    local function rowOf(p, id)
+        for _, row in ipairs(p.story.rows) do
+            if row:IsShown() and row.goal and row.goal.id == id then return row end
+        end
+        error("no row for " .. id)
+    end
+
+    local function tooltipOf(region)
+        m:Enter(region)
+        local lines = m:TooltipLines()
+        m:Leave(region)
+        return lines
+    end
+
+    it("shows where now, the five aspect bars and the goals grouped by zone, the player's zone first", function()
+        local p = boot()
+        local t = texts()
+        for _, s in ipairs({ "Where now", "In the log: 0 · ready: 0", "Accept \"Oasis One\" -- Oasis Keeper, The Barrens · 20 yd",
+            "Lead", "Class: Accept \"Warrior Call\" -- Warrior Trainer, Orgrimmar · 1031 yd",
+            "Story", "Dungeons", "Class", "New in Forever", "Professions", "0/11", "0/2", "0/3",
+            "Hide finished", "Only new in Forever", "did it", "skip" }) do
+            assert.is_true(has(t, s), s)
+        end
+        assert.is_false(has(t, "No route for this character")) -- the speedrun view is hidden
+        local rows = {}
+        for _, row in ipairs(p.story.rows) do
+            if row:IsShown() then rows[#rows + 1] = row.goal and row.goal.id or row.zone:GetText() end
+        end
+        assert.same({ "The Barrens  5-14 · 0/6", "s1061", "e1011", "s1001", "Durotar  12-13 · 0/4", "s1071",
+            "Tirisfal Glades  12-12 · 0/1", "s1051" }, rows)
+        local row = rowOf(p, "e1011")
+        assert.same({ "o", "Errand Giver: errands", "12-13", "0/2" },
+            { row.mark:GetText(), row.name:GetText(), row.level:GetText(), row.count:GetText() })
+        assert.equal("0/0", p.story.aspects.profession.count:GetText()) -- no profession learned
+    end)
+
+    it("shows a learned profession with its rank, a trainable rank-up and the skill a quest waits for", function()
+        local p = boot()
+        m:SetSkill(182, 50, 75)
+        H.settle(m)
+        m:Click(p.story.aspects.profession.label)
+        local row = rowOf(p, "p182")
+        assert.same({ "Herbalism", "50/75+", "0/3" }, { row.name:GetText(), row.level:GetText(), row.count:GetText() })
+        m:SetSkill(182, 30, 75)
+        m:SetCompletedQuests({ 1081, 1083 })
+        ns.Narrative:Invalidate()
+        H.settle(m)
+        row = rowOf(p, "p182")
+        assert.same({ "30/75", "skill 50" }, { row.level:GetText(), row.count:GetText() })
+    end)
+
+    it("explains a profession: skill, next rank, quests, leveling, blueprints, note", function()
+        local p = boot()
+        m:SetSkill(182, 50, 75)
+        m:AddItem(2003)
+        H.settle(m)
+        m:Click(p.story.aspects.profession.label)
+        assert.same({ "Herbalism", "Skill: 50/75",
+            "Next rank (up to 150): skill 50, level 10 -- Herb Trainer, The Barrens",
+            "o Camping 101: Herbalism - The Barrens", "o Root Samples - The Barrens", "o Rare Roots - The Barrens",
+            "Leveling the skill:", "50-70: Mageroyal -- The Barrens",
+            "Camp blueprints:", "Blueprint: Test Rack -- Hidden Hermit (skill 40) (in your bags)",
+            "Gather herbs.", "Source: https://example.invalid/herbalism", "not checked in game" },
+            tooltipOf(rowOf(p, "p182")))
+    end)
+
+    it("names the level to wait for next to a hint as the main suggestion", function()
+        boot()
+        m:SetLevel(1)
+        m:AddItem(2004)
+        ns.Narrative:Invalidate()
+        H.settle(m)
+        local t = texts()
+        assert.is_true(has(t, "Where now · more from level 3"))
+        assert.is_true(has(t, "Sealed Test Crate: turn it in -- Crate Clerk, The Barrens · 100 yd · not checked in game"))
+    end)
+
+    it("renews an open goal tooltip when an item name arrives", function()
+        local p = boot()
+        ns.Knowledge.data.items[785] = nil -- no enUS fallback: only the client's (uncached) name
+        m:DefineItem(785, { name = "Mageroyal", cached = false })
+        m:SetSkill(182, 50, 75)
+        H.settle(m)
+        m:Click(p.story.aspects.profession.label)
+        local row = rowOf(p, "p182")
+        m:Enter(row)
+        assert.is_true(has(m:TooltipLines(), "50-70: item 785 -- The Barrens"))
+        H.settle(m)
+        assert.is_true(has(m:TooltipLines(), "50-70: Mageroyal -- The Barrens"))
+        m:Leave(row)
+    end)
+
+    it("lists a dungeon's blueprints only for the professions the character has", function()
+        local p = boot()
+        m:Click(p.story.aspects.dungeon.label)
+        assert.is_false(has(tooltipOf(rowOf(p, "d718")), "Blueprints for your professions (not checked in game):"))
+        m:SetSkill(182, 1, 75)
+        H.settle(m)
+        local lines = tooltipOf(rowOf(p, "d718"))
+        assert.is_true(has(lines, "Blueprints for your professions (not checked in game):"))
+        assert.is_true(has(lines, "Blueprint: Test Rack -- Hidden Hermit (skill 40)"))
+    end)
+
+    it("shows up to four detours", function()
+        local p = boot()
+        m:SetLevel(15)
+        m:SetSkill(182, 50, 75)
+        H.settle(m)
+        local shown = {}
+        for _, row in ipairs(p.story.along) do
+            if row:IsShown() then shown[#shown + 1] = row.cand.goal.a end
+        end
+        assert.same({ "story", "class", "novelty", "profession" }, shown)
+    end)
+
+    it("'skip' and 'did it' mark the goal's open quests and change the bar", function()
+        local p = boot()
+        local story = p.story.aspects.story.count
+        m:Click(rowOf(p, "s1001").skip)
+        assert.same({ [1001] = "skip", [1002] = "skip", [1003] = "skip" }, ns.cdb.marks)
+        assert.equal("0/8", story:GetText())
+        assert.is_true(rowOf(p, "s1001").skip:GetChecked())
+        m:Click(rowOf(p, "s1001").done)
+        assert.same({ [1001] = "done", [1002] = "done", [1003] = "done" }, ns.cdb.marks)
+        assert.equal("3/11", story:GetText())
+        assert.same({ true, false }, { rowOf(p, "s1001").done:GetChecked(), rowOf(p, "s1001").skip:GetChecked() })
+        m:Click(rowOf(p, "s1001").done)
+        assert.same({}, ns.cdb.marks)
+        assert.equal("0/11", story:GetText())
+    end)
+
+    it("switches the mode and the view with the mode buttons", function()
+        local p = boot({ speedrun = true })
+        assert.is_true(has(texts(), "Chapters of the route"))
+        m:Click(p.storyButton)
+        assert.equal("narrative", ns.cdb.mode)
+        assert.is_nil(ns.Engine:GetRoute())
+        assert.is_true(has(texts(), "Where now"))
+        assert.is_false(has(texts(), "Chapters of the route"))
+        m:Click(p.speedButton)
+        assert.equal("speedrun", ns.cdb.mode)
+        assert.equal(H.ROUTE_ID, ns.Engine:GetRoute().id)
+        assert.is_true(has(texts(), "Chapters of the route"))
+        assert.is_false(has(texts(), "Where now"))
+    end)
+
+    it("Lead follows the main suggestion and turns into Stop; a goal row leads to its best candidate", function()
+        local p = boot()
+        local lead = p.story.leadButton
+        m:Click(lead)
+        assert.equal("nar:1001", ns.Waypoint:GetCustom().ref)
+        assert.is_true(ns.Narrative:IsFollowing())
+        assert.equal("Stop", lead:GetText())
+        m:Click(lead)
+        assert.is_nil(ns.Waypoint:GetCustom())
+        assert.equal("Lead", lead:GetText())
+        m:Click(rowOf(p, "e1011"))
+        assert.equal("nar:1011", ns.Waypoint:GetCustom().ref)
+        assert.is_false(ns.Narrative:IsFollowing())
+        m:Click(rowOf(p, "e1011"))
+        assert.is_nil(ns.Waypoint:GetCustom())
+    end)
+
+    it("explains a goal in its tooltip: open slots, optional quests, lead-ins, note, source, not checked", function()
+        local p = boot()
+        assert.same({ "Oasis One", "o Oasis One - The Barrens", "o Oasis Two - The Barrens",
+            "o Oasis Choice A - The Barrens", "Optional", "o Word of the Oases - Durotar" }, tooltipOf(rowOf(p, "s1001")))
+        m:Click(p.story.aspects.dungeon.label)
+        assert.same({ "Wailing Caverns", "o Fang Leaders - The Barrens (from 15)",
+            "o Deep Hermit - place unknown (from 15)", "Preparation", "o Errand Two - The Barrens" },
+            tooltipOf(rowOf(p, "d718")))
+        m:Click(p.story.aspects.novelty.label)
+        local lines = tooltipOf(rowOf(p, "n:test"))
+        assert.equal("Cozy test bag", lines[1])
+        assert.same({ "A bag to rest anywhere.", "Source: https://example.invalid/test-bag", "not checked in game" },
+            { lines[5], lines[6], lines[7] })
+        assert.equal("*?", rowOf(p, "n:test").tag:GetText())
+    end)
+
+    it("leaves optional quests this character can no longer do out of the tooltip", function()
+        local p = boot()
+        ns.Narrative.byId.s1001.ex = { [1005] = { 1001 } } -- 1005 is lost once 1001 is done
+        m:SetCompletedQuests({ 1001 })
+        ns.Narrative:Invalidate()
+        H.settle(m)
+        local lines = tooltipOf(rowOf(p, "s1001"))
+        assert.is_false(has(lines, "Optional"))
+        assert.is_false(has(lines, "o Word of the Oases - Durotar"))
+    end)
+
+    it("selects the listed aspect with its label and saves it", function()
+        local p = boot()
+        m:Click(p.story.aspects.dungeon.label)
+        assert.equal("dungeon", ns.db.narrative.aspect)
+        local row = rowOf(p, "d718")
+        assert.same({ "-", "Wailing Caverns", "15-24", "from 15" },
+            { row.mark:GetText(), row.name:GetText(), row.level:GetText(), row.count:GetText() })
+        assert.is_false(has(texts(), "Errand Giver: errands"))
+    end)
+
+    it("renders in ruRU", function()
+        boot({ locale = "ruRU" })
+        local t = texts()
+        for _, s in ipairs({ "Скоростной", "Повествование", "Куда сейчас", "В журнале: 0 · к сдаче: 0",
+            "Взять «Oasis One» — Oasis Keeper, The Barrens · 20 ярд.", "Вести", "Сюжет", "Подземелья", "Класс",
+            "Новое в Forever", "Скрыть завершённые", "Только новое в Forever", "сам", "не надо",
+            "Errand Giver: поручения" }) do
+            assert.is_true(has(t, s), s)
+        end
+    end)
+
+    it("says how to install the knowledge base when it is missing", function()
+        boot({ data = false })
+        assert.is_true(has(texts(), ns.L.UI_KB_NOT_INSTALLED))
+        assert.is_false(has(texts(), "Where now"))
+    end)
+
+    it("pools its rows: refreshing creates no frames", function()
+        local p = boot()
+        local n = #m.widgets
+        for _, a in ipairs({ "dungeon", "class", "novelty", "story" }) do m:Click(p.story.aspects[a].label) end
+        m:Click(rowOf(p, "s1001").skip)
+        for _ = 1, 3 do atlas():Refresh() end
+        assert.equal(n, #m.widgets)
+    end)
+end)

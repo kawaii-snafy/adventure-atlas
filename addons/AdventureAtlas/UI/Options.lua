@@ -780,7 +780,7 @@ end
 local function printHelp()
     out(L.UI_HELP_HEADER)
     for _, k in ipairs({ "atlas", "minimap", "show", "lock", "resetpos", "next", "sync", "reset", "routes", "route",
-        "config", "delay", "status", "xp", "debug" }) do
+        "mode", "config", "delay", "status", "xp", "debug" }) do
         out(L["UI_HELP_" .. k])
     end
 end
@@ -839,7 +839,9 @@ local function printStatus()
     out(format(L.UI_STATUS_VERSION_FMT, versionString(), api))
     local E = ns.Engine
     local route = E and E:GetRoute()
-    if not route then
+    if ns.IsNarrative() then
+        out(L.UI_STATUS_MODE_NARRATIVE)
+    elseif not route then
         out(L.UI_STATUS_NO_ROUTE)
     else
         out(format(L.UI_STATUS_ROUTE_FMT, UI.Text(route.title) or "", tostring(route.id)))
@@ -855,7 +857,9 @@ local function printStatus()
         if type(bg) == "table" and #bg > 0 then out(format(L.UI_STATUS_BG_FMT, #bg)) end
     end
     local auto
-    if not S().automation then
+    if ns.IsNarrative() then
+        auto = L.UI_NAR_AUTO_OFF -- no route: Automation:CanAct rests
+    elseif not S().automation then
         auto = L.UI_OFF
     elseif ns.Automation and ns.Automation.IsSuspended and ns.Automation:IsSuspended() then
         auto = L.UI_PAUSED
@@ -913,15 +917,25 @@ COMMANDS.resetpos = function()
 end
 -- the window's buttons: "Back" = Engine:Prev, "Forward" = Engine:Forward (UI.Forward);
 -- next / skip keep their own meaning (mark the step done / skipped)
-COMMANDS.next = function() if needEngine() then ns.Engine:Next() end end
-COMMANDS.prev = function() if needEngine() then UI.Back() end end
+-- The route commands below need the engine and a mode with a route (narrative mode has none: say so).
+local function needRouteMode()
+    if not needEngine() then return false end
+    if ns.IsNarrative() then
+        out(L.UI_NAR_NO_ROUTE)
+        return false
+    end
+    return true
+end
+
+COMMANDS.next = function() if needRouteMode() then ns.Engine:Next() end end
+COMMANDS.prev = function() if needRouteMode() then UI.Back() end end
 COMMANDS.back = COMMANDS.prev
-COMMANDS.forward = function() if needEngine() then UI.Forward() end end
-COMMANDS.skip = function() if needEngine() then ns.Engine:Skip() end end
+COMMANDS.forward = function() if needRouteMode() then UI.Forward() end end
+COMMANDS.skip = function() if needRouteMode() then ns.Engine:Skip() end end
 -- /aa sync: jump to the segment that fits the level (the engine prints the jump; also in "off"
 -- mode or after "Stay": the player asks for it); /aa sync undo: back to where the jump started
 COMMANDS.sync = function(arg)
-    if not needEngine() then return end
+    if not needRouteMode() then return end
     if not UI.HasSync() then
         out(L.UI_SYNC_UNAVAILABLE)
         return
@@ -959,10 +973,27 @@ COMMANDS.route = function(arg)
     local before = ns.Engine:GetRoute()
     local ok = ns.Engine:SetRoute(route.id)
     Options:Refresh()
-    -- the engine announces a route change itself; confirm only when nothing changed
-    if ok ~= false and ns.Engine:GetRoute() == before then
-        out(format(L.UI_ROUTE_SET_FMT, UI.Text(route.title) or tostring(route.id)))
+    local title = UI.Text(route.title) or tostring(route.id)
+    -- the engine announces a route change itself; confirm only when nothing changed (narrative mode: the
+    -- choice is saved for speedrun mode)
+    if ok ~= false and ns.IsNarrative() then
+        out(format(L.UI_ROUTE_SAVED_FMT, title))
+    elseif ok ~= false and ns.Engine:GetRoute() == before then
+        out(format(L.UI_ROUTE_SET_FMT, title))
     end
+end
+-- /aa mode [speedrun | narrative]: the leveling mode of this character (no argument: the other one);
+-- Narrative:SetMode prints the change (or the unknown mode), the engine announces the route; the current mode
+-- again prints it
+COMMANDS.mode = function(arg)
+    local N = ns.Narrative
+    arg = (arg or ""):lower()
+    if arg == "" then arg = N:GetMode() == "narrative" and "speedrun" or "narrative" end
+    if arg == N:GetMode() then
+        out(arg == "narrative" and L.UI_STATUS_MODE_NARRATIVE or L.UI_STATUS_MODE_SPEEDRUN)
+        return
+    end
+    N:SetMode(arg)
 end
 COMMANDS.config = function() Options:Open() end
 COMMANDS.options = COMMANDS.config

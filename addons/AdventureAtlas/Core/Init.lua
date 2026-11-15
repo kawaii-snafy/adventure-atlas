@@ -34,6 +34,9 @@ ns.ADDON = ADDON or "AdventureAtlas"
 --   2  core 0.4.0: + AddLibraryInsert, route aliases, class reward table
 --      core 0.5.0: renamed FastesBoooy -> AdventureAtlas (globals, folders, slash commands; no route API change);
 --                  + AddKnowledge for the knowledge base data addon (Core/Knowledge.lua; guarded by presence)
+--      core 0.5.1: version only (the guides were reworked step by step)
+--      core 0.6.0: narrative mode (Core/Narrative.lua): goals with aspect bars, "where now", the professions
+--                  aspect, finds and hints (no route API change)
 -- A module guards with `if (AdventureAtlas.API_MINOR or 0) < 1 then ... return end` (an older core
 -- has no API_MINOR at all) or, file by file, with `if not AdventureAtlas.AddLibraryInsert then return end`,
 -- see docs/ROUTE_FORMAT.md "Версия ядра".
@@ -41,7 +44,7 @@ local public = { API_VERSION = 1, API_MINOR = 2 }
 ns.public = public
 AdventureAtlas = public
 
-local DEFAULT_VERSION = "0.5.1"
+local DEFAULT_VERSION = "0.6.0"
 
 local function readVersion()
     if C_AddOns and C_AddOns.GetAddOnMetadata then
@@ -326,11 +329,17 @@ ns.DEFAULTS = {
             atlas = { point = "CENTER", relativePoint = "CENTER", x = 0, y = 40 }, -- UI/Atlas.lua (+ tab = key)
         },
         knowledge = { mine = true, hideDone = false, onlyNew = false }, -- UI/AtlasKnowledge.lua check boxes
+        -- narrative view of the atlas (UI/AtlasNarrative.lua): selected aspect (Core/Narrative.lua ASPECTS)
+        -- and the list filters
+        narrative = { aspect = "story", hideDone = false, onlyNew = false },
         minimap = { angle = 200 }, -- UI/MinimapButton.lua: button position on the minimap rim, degrees
         xpLog = {},        -- [questID] = xp reward observed in game (max seen)
         xpLogLevel = {},   -- [questID] = player level when xpLog[questID] was recorded
     },
     cdb = {
+        mode = "speedrun", -- "speedrun" (route engine) | "narrative" (goals, Core/Narrative.lua; no route)
+        marks = {},        -- [questID] = "done" | "skip": narrative goal check boxes ("did it myself" /
+                           -- "not interested"); the player's choices, kept by /aa reset
         -- route = "<route id>" | nil (nil = automatic selection)
         manual = {},       -- [stepId] = true: step marked done with "Next"
         skipped = {},      -- [stepId] = true: step skipped
@@ -437,10 +446,20 @@ function ns:InitDB()
     -- level sync records (Core/Engine.lua validates their content against the active route)
     if cdb.syncFloor ~= nil and type(cdb.syncFloor) ~= "table" then cdb.syncFloor = nil end
     if cdb.syncDismissed ~= nil and type(cdb.syncDismissed) ~= "table" then cdb.syncDismissed = nil end
+    -- narrative mode (Core/Narrative.lua): fill() resets a non-table marks, not the entries
+    if cdb.mode ~= "narrative" then cdb.mode = "speedrun" end
+    for q, v in pairs(cdb.marks) do
+        if type(q) ~= "number" or (v ~= "done" and v ~= "skip") then cdb.marks[q] = nil end
+    end
     ns.db = AdventureAtlasDB
     ns.cdb = AdventureAtlasCharDB
     ns.dbReady = true
     ns:Fire("DB_READY")
+end
+
+--- Is this character in narrative mode (goals instead of a route, Core/Narrative.lua)?
+function ns.IsNarrative()
+    return ns.cdb.mode == "narrative"
 end
 
 local function onAddonLoaded(event, name)

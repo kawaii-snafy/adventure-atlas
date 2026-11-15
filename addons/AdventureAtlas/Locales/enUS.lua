@@ -56,3 +56,39 @@ L.MSG_SYNC_UNDONE = "Level sync undone: the route continues where it was before.
 -- %d = number of quests, %s = their titles
 L.MSG_SYNC_DROPPED = "%d quest(s) of the skipped part stay in your log (%s): the guide no longer leads to them "
     .. "-- finish them on your own or abandon them."
+-- narrative mode (Core/Narrative.lua: SetMode, Load, Describe, Title; the atlas and the step frame show the rest)
+L.MSG_MODE_NARRATIVE = "Narrative mode: goals and hints are in the atlas (/aa atlas). Automation is off."
+L.MSG_MODE_UNKNOWN_FMT = "Unknown mode: %s (speedrun or narrative)"
+L.MSG_NAR_BAD_GOALS_FMT = "Knowledge base: %d malformed goal(s) ignored (first: %s)."
+-- %s = quest title, then the place (NAR_PLACE_FMT / a zone / NAR_NO_PLACE / NAR_FAR_FMT)
+L.NAR_TAKE_FMT = "Accept \"%s\" -- %s"
+L.NAR_TURNIN_FMT = "Turn in \"%s\" -- %s"
+-- %s = dungeon name, then the zone of its entrance
+L.NAR_ENTER_FMT = "Dungeon \"%s\": entrance -- %s"
+-- %s = NPC / object name, then the zone
+L.NAR_PLACE_FMT = "%s, %s"
+L.NAR_YARDS_FMT = "· %d yd"
+L.NAR_NO_PLACE = "place unknown"
+L.NAR_FAR_FMT = "%s -- another continent"
+L.NAR_WAIT_FMT = "All done nearby: more from level %d"
+L.NAR_INLOG_FMT = "In the log: %d · ready: %d"
+-- %s = the name of the quest giver
+L.NAR_ERRANDS_FMT = "%s: errands"
+-- why a suggestion comes first
+L.NAR_WHY_CHAIN = "continues a chain"
+L.NAR_WHY_PREP_FMT = "leads to \"%s\""
+L.NAR_WHY_HINT = "best moment"
+L.NAR_WHY_GRAYSOON = "turns gray soon"
+L.NAR_WHY_UNVERIFIED = "not checked in game"
+-- hints: %s = quest title, then the item name
+L.NAR_START_FMT = "Start \"%s\": %s is in your bags"
+-- %s = profession, %d = the rank's max skill, %s = the place; book: %s = book, %s = profession, %d, %s = the place
+L.NAR_TRAIN_FMT = "Train %s up to %d -- %s"
+L.NAR_BOOK_FMT = "Buy \"%s\" (%s up to %d) -- %s"
+-- %s = profession, %d = skill rank, %s = herbs / ores / ... found here
+L.NAR_GATHER_FMT = "%s %d: here -- %s"
+L.NAR_GATHER_ZONE_FMT = "%s %d: a zone for your skill"
+-- %s = item, %s = what to do with it, %s = the place (or NAR_IN_BAGS)
+L.NAR_USE_FMT = "%s: %s -- %s"
+L.NAR_IN_BAGS = "in your bags"
+L.NAR_ITEM_FMT = "item %d"

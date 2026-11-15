@@ -187,7 +187,7 @@ describe("locales", function()
             end
         end
         for _, k in ipairs({ "atlas", "minimap", "show", "lock", "resetpos", "next", "sync", "reset", "routes", "route",
-            "config", "delay", "status", "xp", "debug" }) do
+            "mode", "config", "delay", "status", "xp", "debug" }) do
             if L["UI_HELP_" .. k] == nil then missing[#missing + 1] = "UI_HELP_" .. k end
         end
         assert.same({}, missing)

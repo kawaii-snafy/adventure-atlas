@@ -526,10 +526,12 @@ function Engine:BuildDependents(route, acceptAt)
 end
 
 --- Route for this character: the saved choice (cdb.route, a route id or a former id of a
--- route: Registry:Get resolves `aliases`) if registered, else ns.Registry:Select(facts).
+-- route: Registry:Get resolves `aliases`) if registered, else ns.Registry:Select(facts). None in
+-- narrative mode (Core/Narrative.lua): no route, so no route state is written and the automation rests.
 function Engine:SelectRoute()
     local facts = ns.Compat.PlayerFacts()
     self.facts = facts
+    if ns.IsNarrative() then return nil end
     local id = ns.cdb.route
     local route = id and ns.Registry:Get(id) or nil
     if not route then route = ns.Registry:Select(facts) end
@@ -576,7 +578,7 @@ function Engine:ActivateRoute(route, force)
     if self.started then
         if route then
             ns.Print(L().MSG_ROUTE_SELECTED, ns.Schema.Text(route.title, ns.locale) or tostring(route.id))
-        elseif #ns.Registry.order > 0 then
+        elseif #ns.Registry.order > 0 and not ns.IsNarrative() then
             ns.Print(L().MSG_NO_ROUTE)
         end
     end
@@ -2128,6 +2130,12 @@ ns:Listen("DB_READY", function()
     if not Engine.started and IsLoggedIn and IsLoggedIn() then
         Engine:Start()
     end
+end)
+
+-- speedrun <-> narrative (Narrative:SetMode): drop / restore the route; the high-water mark is kept, so the
+-- route resumes where it was
+ns:Listen("MODE_CHANGED", function()
+    if Engine.started then Engine:ActivateRoute(Engine:SelectRoute(), true) end
 end)
 
 ns:Listen("ROUTES_CHANGED", function(_, routeId)

@@ -7,6 +7,39 @@
 -- come from the client cache when it has them (localized), zone names from C_Map / the class name from
 -- C_CreatureInfo, NPC and object names stay enUS.
 --
+-- The same data carries the goals of the narrative mode (Core/Narrative.lua reads data.goals): an array of
+--   { id = "s886" (unique; s/e story chain / errands, c/k class chain / errands, d<areaID> dungeon, n:<key>
+--            curated, p<line> profession), a = "story" | "dungeon" | "class" | "novelty" | "profession",
+--     z = zone key (story / class),
+--     lo, hi = level band, q = { counted slots: questID | { exclusive clique: questIDs } },
+--     opt = { questIDs counted only once done }, ex = { [questID] = { exclusive partners } },
+--     dungeon: d = AreaTable id, en, at = { { uiMap, x, y }, ... } (entrances), lv = "db" | "src" | "derived",
+--              prep = { lead-in questIDs of other goals },
+--     curated: name / note = { en, ru }, src, v, after = { [q] = q2 }, cnt = { [q] = n },
+--              hint = { [q] = { uiMap, level } }, startObj = true }
+-- Quest records of professions carry sk = { skill line id, rank } (db reqSkill), sp = spell id (db reqSpell < 0:
+-- not available once known). Professions and finds (stages 2 and 3), verbatim from tools/gen_knowledge_data.lua:
+--   a = "story" | "dungeon" | "class" | "novelty" | "profession"
+--   id: "p<skillLineID>" = profession goal (generated); "n:finds" = the finds container (curated key "finds", reserved)
+--   line = 182,                      -- profession goals: skill line id (db.enums.professions)
+--   sec = true,                      -- profession goals: secondary (First Aid, Cooking, Fishing): no tier 3 (a quest)
+--   nolv = true,                     -- profession goals: rank-ups need no character level (Cooking, First Aid)
+--   train = { { n = { npcIDs } }, { n = { npcIDs }, i = itemID }, { n = { npcIDs } } },
+--                                    -- profession goals, indexed by tier (Narrative TIERS: 1 = 75->150, 2 = 150->225,
+--                                    --   3 = 225->300): trainers, or with i a book the NPCs sell; a tier may be absent
+--                                    --   (nil hole not allowed: tiers are a prefix, 1..#train)
+--   blueprints = { { i = itemID, need = 140, d = areaID, n = npcID | nil } },
+--                                    -- profession goals: camp blueprint, skill to learn it, dungeon, boss (when in the DB)
+--   brackets = { { lo = 50, hi = 70, i = { itemIDs } | nil, m = { uiMapIDs } | nil } },
+--                                    -- profession goals, ordered by lo: at skill lo..hi-1 gather / make i, found in m
+--                                    --   (at least one of i, m)
+--   use = { { i = { itemIDs }, n = { npcIDs } | nil, t = { en = "", ru = "" } } },
+--                                    -- curated goals: an item of i in the bags -> "<item>: t -- nearest of n"
+--   note = { en, ru }                -- also on dungeon goals now (curated)
+--   q = { }                          -- empty only for a goal with `use` (n:finds): never listed (state "none"), no bar;
+--                                    --   lo = 1, hi = 60
+-- (tools/gen_knowledge_data.lua documents the generated format).
+--
 -- Exposes ns.Knowledge and the public AdventureAtlas.AddKnowledge.
 
 -- luacheck: ignore 212/self (singleton module keeps the colon method style)
@@ -77,16 +110,19 @@ ns.public.AddKnowledge = function(data) return Knowledge:Add(data) end
 function Knowledge:IsLoaded() return self.data ~= nil end
 
 --- Load AdventureAtlas_Knowledge if needed. @return true, or false + the client's reason ("MISSING",
--- "DISABLED", ...)
+-- "DISABLED", ...). A failure is remembered for the session (the addon cannot appear without a reload), so the
+-- step window, which asks every second in narrative mode, does not call LoadAddOn again.
 function Knowledge:Load()
     if self.data then return true end
+    if self.failed then return false, self.failed end
     local reason
     if C_AddOns and C_AddOns.LoadAddOn then
         local ok, loaded, why = pcall(C_AddOns.LoadAddOn, self.ADDON)
         if not ok then reason = "ERROR" elseif not loaded then reason = why end
     end
     if self.data then return true end
-    return false, reason or "MISSING"
+    self.failed = reason or "MISSING"
+    return false, self.failed
 end
 
 function Knowledge:Get(id) return self.data and self.data.quests[id] end
