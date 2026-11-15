@@ -295,7 +295,6 @@ sd01-glide              2.80   2.80  complete 92474
 sd01-rorian             2.80   2.80  turnin 92461, turnin 92474, accept 92464
 sd01-skysight-accept    3.02   3.02  accept 92598
 sd01-dalia              3.02   3.02  accept 93552
-sd01-windstones-bg      3.02   3.02  complete 93552
 sd01-queen              3.02   3.02  complete 92463
 sd01-yala               3.06   3.06  turnin 92464, accept 92465
 sd01-skysight           3.24   3.24  complete 92598
@@ -310,126 +309,116 @@ sd01-level-4            4.35   4.35  level 4
 sd01-rorian-4           4.35   4.35  turnin 92469, accept 92471
 sd01-aetheen            4.52   4.52  turnin 92471, accept 92470
 sd01-thendal-4          4.69   4.69  accept 92473
-sd01-claws-bg           4.69   4.69  complete 92473
-sd01-den                4.90   4.90  complete 92470
-sd01-claws              5.15   5.15  complete 92473
-sd01-aetheen-2          5.15   5.15  turnin 92470, accept 92472, accept 96638
-sd01-valreaa-2          5.26   5.26  turnin 92473
-sd01-hanaa              5.39   5.39  accept 92544
-sd01-thugs              5.39   5.39  complete 92544
-sd01-hanaa-2            5.58   5.58  turnin 92544
-sd01-larder-bg          5.70   5.70  collect 5469, collect 6889
-sd01-aonda              5.70   5.70  turnin 92472, accept 92514
-sd01-illaya             5.82   5.82  turnin 92595, accept 92595, complete 92595, complete 92514
-sd01-illaya-2           6.01   6.01  accept 94411
-sd01-innkeeper          6.01   6.01  complete 92514
-sd01-raan               6.01   6.01  turnin 96638, accept 96101
-sd01-campfire           6.17   6.17  complete 96101
-sd01-raan-2             6.17   6.17  turnin 96101, accept 96646
-sd01-aonda-2            6.32   6.32  turnin 92514, accept 92517
-sd01-teeri              6.47   6.47  accept 93319, accept 92516
-sd01-indari             6.47   6.47  accept 92515
-sd01-taleen             6.47   6.47  accept 93951
-sd01-zerril             6.47   6.47  turnin 96646, accept 92553, complete 96646
-sd01-pelts-bg           6.62   6.62  complete 92515
-sd01-larder-bg-2        6.86   6.86  complete 92553
-sd01-apprentices        7.24   7.24  complete 94411
-sd01-pilfered-bg        7.30   7.30  complete 93319
-sd01-bennic             7.57   7.57  complete 92517
-sd01-bandits            7.59   7.59  complete 92517, complete 93319
-sd01-aonda-3            7.76   7.76  turnin 92517, accept 93036
-sd01-sania              7.90   7.90  turnin 93036, accept 92529
-sd01-mark               8.05   8.05  manual
-sd01-teeri-2            8.05   8.05  turnin 93319
-sd01-illaya-3           8.17   8.17  turnin 94411
-sd01-wanted             8.27   8.27  accept 93318
-sd01-vale-cliff         8.27   8.27  go
-sd01-down-bg            8.27   8.27  complete 93951
-sd01-hippogryphs        8.27   8.27  complete 92516
-sd01-down               8.41   8.41  complete 93951
-sd01-vulgara            8.41   8.41  complete 93318
-sd01-falaath-cliff      8.48   8.48  go
-sd01-jasaan             8.48   8.48  turnin 92529, accept 92528
-sd01-wardrobe           8.61   8.61  complete 92528
-sd01-ramp-1             8.61   8.61  go
-sd01-aonda-4            8.61   8.61  turnin 92528, accept 92550, accept 93926
-sd01-danarii            8.74   8.74  turnin 93318
-sd01-danarii-2          8.88   8.88  accept 92551
-sd01-taleen-2           8.88   8.88  turnin 93951
-sd01-zerril-2           9.00   9.00  turnin 92553
-sd01-shendar-8          9.08   9.08  turnin 92516
-sd01-south-cliff        9.18   9.18  go
-sd01-vaaniel            9.18   9.18  turnin 93926, accept 93927, complete 93926
-sd01-last-request       9.29   9.29  complete 93927
-sd01-caches-bg          9.29   9.29  complete 92551
-sd01-falaath            9.41   9.41  complete 92550
-sd01-caches             9.52   9.52  complete 92551
-sd01-ramp               9.52   9.52  go
-sd01-indari-2           9.52   9.52  turnin 92515, complete 92515
-sd01-danarii-3          9.60   9.60  turnin 92551
-sd01-end                9.71   9.71  turnin 92550, turnin 93927, accept 92579, accept 93948
-sd02-start              9.93   9.93  go
-sd02-nyalah             9.93   9.93  accept 93317
-sd02-crabs-bg           9.93   9.93  complete 93317
-sd02-sethearth         10.02  10.02  sethearth Valanaar
-sd02-alvarion          10.02  10.02  accept 92679
-sd02-lotheluum         10.02  10.02  accept 94484
-sd02-ealaane           10.02  10.02  accept 94896, accept 94897
-sd02-talaanis          10.02  10.02  turnin 93948
-sd02-valennia          10.12  10.12  turnin 92579, accept 92700
-sd02-tower-glide       10.21  10.21  go
-sd02-ayessa            10.21  10.21  turnin 92700, accept 93735
-sd02-endaria           10.32  10.32  accept 93736
-sd02-riaani            10.32  10.32  turnin 93735, accept 93737, complete 93737
-sd02-aamelia           10.42  10.42  turnin 92679, accept 92682, accept 92684, accept 92683, complete 92679
-sd02-tenderloins-bg    10.52  10.52  complete 92684
-sd02-dust-bg           10.61  10.61  complete 92683
-sd02-orchard           10.61  10.61  complete 92682
-sd02-construct         10.65  10.65  accept 92698
-sd02-dust              10.65  10.65  complete 92683, complete 92684
-sd02-aamelia-2         10.65  10.65  turnin 92682, turnin 92684, turnin 92698, turnin 92683, accept 92685
-sd02-bandit-hill       11.05  11.05  complete 92685, complete 93737
-sd02-aamelia-3         11.11  11.11  turnin 92685
-sd02-level-10          11.20  11.20  level 10
-sd02-valanaar-10       11.20  11.20  go
-sd02-parts-lightning   11.20  11.20  complete 93737
-sd02-fendaal           11.20  11.20  accept 98512
-sd02-assassins         11.20  11.20  complete 98512, complete 93317
-sd02-fendaal-2         11.27  11.27  turnin 98512
-sd02-parts-gyrozephyr  11.35  11.35  complete 93737
-sd02-hermit            11.35  11.35  turnin 93159, accept 93159, complete 93159
-sd02-hermit-2          11.43  11.43  accept 93160, accept 93172
-sd02-cones-bg          11.43  11.43  complete 93160
-sd02-hollows-bg        11.43  11.43  complete 93172, complete 93736, complete 94896
-sd02-resaan            11.66  11.66  complete 94897
-sd02-hollows           11.68  11.68  complete 93172, complete 93736, complete 94896
-sd02-elegael           11.68  11.68  turnin 94484, accept 94485, accept 94486, accept 94487
-sd02-vayn              11.75  11.75  accept 93165
-sd02-ears-bg           11.75  11.75  complete 93165
-sd02-den-items         11.83  11.83  complete 94485, complete 94486, complete 94487
-sd02-elegael-2         12.19  12.19  turnin 94485, turnin 94486, turnin 94487, accept 94488, accept 94489
-sd02-haalien           12.37  12.37  complete 94488
-sd02-missive           12.38  12.38  accept 94490
-sd02-wounded           12.38  12.38  complete 94489
-sd02-ears              12.38  12.38  complete 93165
-sd02-vayn-2            12.38  12.38  turnin 93165
-sd02-elegael-3         12.45  12.38  turnin 94489, turnin 94490, turnin 94488, accept 94491
-sd02-hermit-3          12.60  12.54  turnin 93160, turnin 93172, complete 93160
-sd02-hearth            12.74  12.67  hearth Valanaar
-sd02-ealaane-2         12.74  12.67  turnin 94896, turnin 94897
-sd02-lotheluum-2       12.87  12.80  turnin 94491
-sd02-nyalah-2          12.91  12.85  turnin 93317
-sd02-riaani-2          12.99  12.92  turnin 93737, accept 93738
-sd02-endaria-2         13.06  13.00  turnin 93736
-sd02-ayessa-2          13.13  13.07  turnin 93738, accept 92708
-sd02-speech            13.20  13.14  turnin 92708, complete 92708
-sd02-skycutter         13.24  13.18  go
-sd02-plateau           13.24  13.18  go
-sd02-end               13.24  13.18  accept 95350
-sd03-cliff             13.24  13.18  go
-sd03-spirit            13.24  13.18  go
-sd03-fp-tb             13.24  13.18  fp Thunder Bluff
-sd03-fly-org           13.24  13.18  fly Orgrimmar
+sd01-den                4.69   4.69  complete 92470
+sd01-claws              5.00   5.00  complete 92473
+sd01-aetheen-2          5.13   5.13  turnin 92470, accept 92472, accept 96638
+sd01-valreaa-2          5.25   5.25  turnin 92473
+sd01-hanaa              5.37   5.37  accept 92544
+sd01-thugs              5.37   5.37  complete 92544
+sd01-hanaa-2            5.56   5.56  turnin 92544
+sd01-larder             5.68   5.68  collect 5469, collect 6889
+sd01-aonda              5.68   5.68  turnin 92472, accept 92514
+sd01-illaya             5.80   5.80  turnin 92595, accept 92595, complete 92595, complete 92514
+sd01-illaya-2           6.00   6.00  accept 94411
+sd01-innkeeper          6.00   6.00  complete 92514
+sd01-raan               6.00   6.00  turnin 96638, accept 96101
+sd01-campfire           6.15   6.15  complete 96101
+sd01-raan-2             6.15   6.15  turnin 96101, accept 96646
+sd01-aonda-2            6.30   6.30  turnin 92514, accept 92517
+sd01-teeri              6.46   6.46  accept 93319, accept 92516
+sd01-indari             6.46   6.46  accept 92515
+sd01-taleen             6.46   6.46  accept 93951
+sd01-zerril             6.46   6.46  turnin 96646, accept 92553, complete 96646
+sd01-zerril-2           6.61   6.61  turnin 92553, complete 92553
+sd01-apprentices        7.15   7.15  complete 94411
+sd01-bennic             7.21   7.21  complete 92517
+sd01-bandits            7.23   7.23  complete 92517, complete 93319
+sd01-pelts              7.67   7.67  complete 92515
+sd01-aonda-3            7.82   7.82  turnin 92517, accept 93036
+sd01-sania              7.96   7.96  turnin 93036, accept 92529
+sd01-mark               8.09   8.09  manual
+sd01-teeri-2            8.09   8.09  turnin 93319
+sd01-indari-2           8.21   8.21  turnin 92515
+sd01-illaya-3           8.31   8.31  turnin 94411
+sd01-wanted             8.41   8.41  accept 93318
+sd01-vale-cliff         8.41   8.41  go
+sd01-hippogryphs        8.41   8.41  complete 92516
+sd01-down               8.56   8.56  complete 93951
+sd01-vulgara            8.56   8.56  complete 93318
+sd01-falaath-cliff      8.62   8.62  go
+sd01-jasaan             8.62   8.62  turnin 92529, accept 92528
+sd01-wardrobe           8.75   8.75  complete 92528
+sd01-ramp-1             8.75   8.75  go
+sd01-aonda-4            8.75   8.75  turnin 92528, accept 92550, accept 93926
+sd01-danarii            8.88   8.88  turnin 93318
+sd01-danarii-2          9.02   9.02  accept 92551
+sd01-taleen-2           9.02   9.02  turnin 93951
+sd01-shendar-8          9.12   9.12  turnin 92516
+sd01-south-cliff        9.21   9.21  go
+sd01-vaaniel            9.21   9.21  turnin 93926, accept 93927, complete 93926
+sd01-last-request       9.32   9.32  complete 93927
+sd01-falaath            9.32   9.32  complete 92550
+sd01-caches             9.43   9.43  complete 92551
+sd01-ramp               9.56   9.56  go
+sd01-danarii-3          9.56   9.56  turnin 92551
+sd01-end                9.66   9.66  turnin 92550, turnin 93927, accept 92579, accept 93948
+sd02-start              9.88   9.88  go
+sd02-nyalah             9.88   9.88  accept 93317
+sd02-sethearth          9.88   9.88  sethearth Valanaar
+sd02-alvarion           9.88   9.88  accept 92679
+sd02-lotheluum          9.88   9.88  accept 94484
+sd02-ealaane            9.88   9.88  accept 94896, accept 94897
+sd02-talaanis           9.88   9.88  turnin 93948
+sd02-valennia          10.00  10.00  turnin 92579, accept 92700
+sd02-tower-glide       10.09  10.09  go
+sd02-ayessa            10.09  10.09  turnin 92700, accept 93735
+sd02-endaria           10.19  10.19  accept 93736
+sd02-riaani            10.19  10.19  turnin 93735, accept 93737, complete 93737
+sd02-aamelia           10.29  10.29  turnin 92679, accept 92682, accept 92684, accept 92683, complete 92679
+sd02-orchard           10.40  10.40  complete 92682
+sd02-construct         10.44  10.44  accept 92698
+sd02-dust              10.44  10.44  complete 92683, complete 92684
+sd02-aamelia-2         10.53  10.53  turnin 92682, turnin 92684, turnin 92698, turnin 92683, accept 92685
+sd02-bandit-hill       10.93  10.93  complete 92685, complete 93737
+sd02-aamelia-3         11.02  11.02  turnin 92685
+sd02-level-10          11.11  11.11  level 10
+sd02-valanaar-10       11.11  11.11  go
+sd02-parts-lightning   11.11  11.11  complete 93737
+sd02-fendaal           11.11  11.11  accept 98512
+sd02-assassins         11.11  11.11  complete 98512, complete 93317
+sd02-fendaal-2         11.23  11.23  turnin 98512
+sd02-parts-gyrozephyr  11.31  11.31  complete 93737
+sd02-hermit            11.31  11.31  turnin 93159, accept 93159, complete 93159
+sd02-hermit-2          11.38  11.38  accept 93160, accept 93172
+sd02-resaan            11.38  11.38  complete 94897
+sd02-hollows           11.40  11.40  complete 93172, complete 93736, complete 94896
+sd02-cones             11.63  11.63  complete 93160
+sd02-elegael           11.63  11.63  turnin 94484, accept 94485, accept 94486, accept 94487
+sd02-vayn              11.71  11.71  accept 93165
+sd02-den-items         11.71  11.71  complete 94485, complete 94486, complete 94487
+sd02-elegael-2         12.10  12.10  turnin 94485, turnin 94486, turnin 94487, accept 94488, accept 94489
+sd02-haalien           12.28  12.28  complete 94488
+sd02-missive           12.29  12.29  accept 94490
+sd02-wounded           12.29  12.29  complete 94489
+sd02-ears              12.29  12.29  complete 93165
+sd02-vayn-2            12.35  12.29  turnin 93165
+sd02-elegael-3         12.41  12.29  turnin 94489, turnin 94490, turnin 94488, accept 94491
+sd02-hermit-3          12.57  12.45  turnin 93160, turnin 93172
+sd02-hearth            12.70  12.58  hearth Valanaar
+sd02-ealaane-2         12.70  12.58  turnin 94896, turnin 94897
+sd02-lotheluum-2       12.84  12.71  turnin 94491
+sd02-nyalah-2          12.88  12.76  turnin 93317
+sd02-riaani-2          12.96  12.83  turnin 93737, accept 93738
+sd02-endaria-2         13.03  12.91  turnin 93736
+sd02-ayessa-2          13.10  12.99  turnin 93738, accept 92708
+sd02-speech            13.17  13.06  turnin 92708, complete 92708
+sd02-skycutter         13.21  13.10  go
+sd02-plateau           13.21  13.10  go
+sd02-end               13.21  13.10  accept 95350
+sd03-cliff             13.21  13.10  go
+sd03-spirit            13.21  13.10  go
+sd03-fp-tb             13.21  13.10  fp Thunder Bluff
+sd03-fly-org           13.21  13.10  fly Orgrimmar
 ```
 
 ## 11. Что проверить в игре

@@ -1133,10 +1133,11 @@ FastesBoooy.AddLibraryInsert({
     steps = {
         { id = "dru-gorishi-stings", complete = 9052, at = { 1449, 53.68, 76.31 },
           note = {
-              ru = "От озера на запад к краю улья Гориши: осы и рабочие из улья (51-52) - 8 жал Гориши, затем назад на "
-                  .. "восток к озеру и Торве.",
-              en = "From the lake west to the edge of the Gorishi hive: Gorishi Wasps and Workers (51-52) - 8 Gorishi "
-                  .. "Stings, then back east past the lake to Torwa.",
+              ru = "От озера на запад к краю улья Гориши: осы Гориши (51-52; глубже в улье - жалоносцы, 52-53) - 8 жал "
+                  .. "Гориши (рабочие их не роняют), затем назад на восток к озеру и Торве.",
+              en = "From the lake west to the edge of the Gorishi hive: Gorishi Wasps (51-52; Gorishi Stingers, 52-53, "
+                  .. "deeper in the hive) - 8 Gorishi Stings (Workers do not drop them), then back east past the lake "
+                  .. "to Torwa.",
           } },
     },
 })

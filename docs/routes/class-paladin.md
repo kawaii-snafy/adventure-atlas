@@ -112,68 +112,67 @@
 | после `ud01-364` | `pal-tir-letter` | accept 98601 |  | 2.61 |
 | после `ud01-364` | `pal-tir-aramis` | turnin 98601, accept 90902 |  | 2.61 |
 | после `ud01-364` | `pal-tir-train-1` | train |  | 2.65 |
-| после `ud01-364` | `pal-tir-heal-bg` | complete 90902 |  | 2.65 |
-| после `ud01-aramis` | `pal-tir-90902` | turnin 90902 |  | 4.01 |
-| после `ud01-aramis` | `pal-tir-91209` | accept 91208, accept 91209 |  | 4.09 |
-| после `ud01-aramis` | `pal-tir-train-4` | train |  | 4.09 |
-| после `ud01-boxes` | `pal-tir-frightened` | complete 91208 |  | 4.09 |
-| после `ud01-98389` | `pal-tir-91208` | turnin 91208 |  | 4.62 / 4.45 |
-| после `ud02-dillinger-report` | `pal-tir-shari` | turnin 91209, complete 91209 |  | 6.50 / 6.41 |
+| после `ud01-xp-4` | `pal-tir-heal-bg` | complete 90902 |  | 3.73 |
+| после `ud01-aramis` | `pal-tir-90902` | turnin 90902 |  | 4.02 |
+| после `ud01-aramis` | `pal-tir-91209` | accept 91208, accept 91209 |  | 4.10 |
+| после `ud01-aramis` | `pal-tir-train-4` | train |  | 4.10 |
+| после `ud01-cocoons` | `pal-tir-frightened` | complete 91208 |  | 4.46 |
+| после `ud01-98389` | `pal-tir-91208` | turnin 91208 |  | 4.62 / 4.46 |
+| после `ud02-dillinger-report` | `pal-tir-shari` | turnin 91209, complete 91209 |  | 6.51 / 6.42 |
 | после `ud02-dillinger-report` | `pal-tir-train-6` | train |  | 6.60 / 6.51 |
 | после `ud02-dillinger-report` | `pal-tir-mallet` | vendor | необяз. | 6.60 / 6.51 |
-| после `ud02-shari-99144` | `pal-tir-train-8` | train |  | 8.27 / 8.22 |
-| после `ud02-level-10` | `pal-tir-91282` | accept 91282 |  | 10.25 / 10.15 |
-| после `ud02-level-10` | `pal-tir-train-10` | train |  | 10.25 / 10.15 |
-| до `ud02-keep` | `pal-tir-breton` | turnin 91282, accept 91285 |  | 11.75 / 11.68 |
-| после `ud02-leonid-letter` | `pal-tir-murlocs` | complete 91285 |  | 11.93 / 11.86 |
-| после `ud02-leonid-letter` | `pal-tir-smasher` | turnin 91285, accept 91294 |  | 12.05 / 12.00 |
-| после `ud02-leonid-letter` | `pal-tir-hilda` | complete 91294 |  | 12.12 / 12.06 |
-| после `ud02-hilda` | `pal-tir-ander` | complete 91294 |  | 12.12 / 12.06 |
-| после `ud02-hilda` | `pal-tir-jorin` | complete 91294 |  | 12.12 / 12.06 |
-| после `ud02-hilda` | `pal-tir-danitha` | turnin 91294, accept 91317, complete 91294 |  | 12.12 / 12.06 |
-| после `ud02-hilda` | `pal-tir-91316` | accept 91316 |  | 12.18 / 12.13 |
-| после `ud02-ephram` | `pal-tir-tarnished-bg` | complete 91317 |  | 12.18 / 12.13 |
-| после `ud02-ephram` | `pal-tir-lumber-bg` | complete 91316 |  | 12.28 / 12.23 |
-| после `ud02-elixir-bg` | `pal-tir-head` | collect |  | 12.36 / 12.31 |
-| после `ud02-shadowvale` | `pal-tir-shadowvale` | complete 91317, complete 91316 |  | 12.36 / 12.31 |
-| после `ud02-hilda-2` | `pal-tir-91316-turnin` | turnin 91316 |  | 12.45 / 12.40 |
-| после `ud02-hilda-2` | `pal-tir-95803` | turnin 91317, accept 95803 |  | 12.52 / 12.46 |
-| после `ud02-lvl-12` | `pal-tir-94427` | accept 94427 | необяз. | 12.56 / 12.51 |
-| после `ud02-carolai-2` | `pal-tir-train-12` | train |  | 12.61 / 12.55 |
-| после `ud02-fp-uc` | `pal-tir-tanis` | turnin 94427, accept 94434 | необяз. | 12.65 / 12.59 |
-| после `ud02-fp-uc` | `pal-tir-tanis-2` | turnin 94434, complete 94434 | необяз. | 12.70 / 12.59 |
-| после `ud02-fp-uc` | `pal-tir-sylvanas` | turnin 95803 |  | 12.74 / 12.59 |
+| после `ud02-shari-99144` | `pal-tir-train-8` | train |  | 8.27 / 8.21 |
+| после `ud02-level-10` | `pal-tir-91282` | accept 91282 |  | 10.22 / 10.13 |
+| после `ud02-level-10` | `pal-tir-train-10` | train |  | 10.22 / 10.13 |
+| до `ud02-keep` | `pal-tir-breton` | turnin 91282, accept 91285 |  | 11.72 / 11.65 |
+| после `ud02-leonid-letter` | `pal-tir-murlocs` | complete 91285 |  | 11.90 / 11.83 |
+| после `ud02-leonid-letter` | `pal-tir-smasher` | turnin 91285, accept 91294 |  | 12.03 / 11.97 |
+| после `ud02-leonid-letter` | `pal-tir-hilda` | complete 91294 |  | 12.09 / 12.04 |
+| после `ud02-hilda` | `pal-tir-ander` | complete 91294 |  | 12.09 / 12.04 |
+| после `ud02-hilda` | `pal-tir-jorin` | complete 91294 |  | 12.09 / 12.04 |
+| после `ud02-hilda` | `pal-tir-danitha` | turnin 91294, accept 91317, complete 91294 |  | 12.09 / 12.04 |
+| после `ud02-hilda` | `pal-tir-91316` | accept 91316 |  | 12.16 / 12.10 |
+| после `ud02-ephram` | `pal-tir-head` | collect 270435 |  | 12.16 / 12.10 |
+| после `ud02-elixir-bg` | `pal-tir-lumber-bg` | complete 91316 |  | 12.16 / 12.10 |
+| после `ud02-shadowvale` | `pal-tir-shadowvale` | complete 91317 |  | 12.24 / 12.18 |
+| после `ud02-hilda-2` | `pal-tir-91316-turnin` | turnin 91316 |  | 12.43 / 12.37 |
+| после `ud02-hilda-2` | `pal-tir-95803` | turnin 91317, accept 95803 |  | 12.49 / 12.44 |
+| после `ud02-lvl-12` | `pal-tir-94427` | accept 94427 | необяз. | 12.54 / 12.48 |
+| после `ud02-carolai-2` | `pal-tir-train-12` | train |  | 12.58 / 12.52 |
+| после `ud02-fp-uc` | `pal-tir-tanis` | turnin 94427, accept 94434 | необяз. | 12.62 / 12.57 |
+| после `ud02-fp-uc` | `pal-tir-tanis-2` | turnin 94434, complete 94434 | необяз. | 12.67 / 12.57 |
+| после `ud02-fp-uc` | `pal-tir-sylvanas` | turnin 95803 |  | 12.72 / 12.57 |
 
 **Общий путь (12–60)**
 
 | Якорь | Шаг | Действия |  | Уровень перед шагом (обычно / худший) |
 |---|---|---|---|---|
-| после `h13-uc-end` | `pal-train-14` | train |  | 14.56 / 14.46 |
-| после `h18-tb-zamah` | `pal-train-18` | train |  | 18.37 / 18.04 |
-| после `h18-tb-2` | `pal-20-pools` | go |  | 20.60 / 20.26 |
-| после `h18-tb-2` | `pal-train-20` | train |  | 20.60 / 20.26 |
-| после `h-22-tb-start` | `pal-train-22` | train |  | 22.04 |
-| до `h-22-uc-fly` | `pal-22-danitha` | accept 91858 | необяз. | 22.74 / 22.04 |
-| после `h-22-the-sepulcher-apothecary` | `pal-22-trevan` | turnin 91858, accept 91859 | необяз. | 22.74 / 22.04 |
-| после `h-22-the-sepulcher-apothecary` | `pal-22-baldren` | turnin 91859, accept 91860 | необяз. | 22.79 / 22.04 |
-| после `h-22-the-sepulcher-apothecary` | `pal-22-remains` | turnin 91860, accept 91861 | необяз. | 22.84 / 22.04 |
-| после `h-22-the-sepulcher-apothecary` | `pal-22-lumina-keep` | turnin 91861, accept 91862 | необяз. | 22.88 / 22.04 |
-| после `h-22-the-sepulcher-apothecary` | `pal-22-key` | complete 91862 | необяз. | 22.93 / 22.04 |
-| после `h-22-the-sepulcher-apothecary` | `pal-22-escort-start` | turnin 91862, accept 96204 | необяз. | 22.94 / 22.04 |
-| после `h-22-the-sepulcher-apothecary` | `pal-22-escort` | complete 96204 | необяз. | 22.98 / 22.04 |
-| после `h-22-the-sepulcher-apothecary` | `pal-22-lumina` | turnin 96204, accept 95034 | необяз. | 22.98 / 22.04 |
-| после `h-22-the-sepulcher-apothecary` | `pal-22-debt` | turnin 95034 | необяз. | 23.03 / 22.04 |
-| после `h-27-tb-arrive` | `pal-train-26` | train |  | 27.57 / 27.12 |
+| после `h13-uc-end` | `pal-train-14` | train |  | 14.54 / 14.43 |
+| после `h18-tb-zamah` | `pal-train-18` | train |  | 18.40 / 18.08 |
+| после `h18-tb-2` | `pal-20-pools` | go |  | 20.57 / 20.24 |
+| после `h18-tb-2` | `pal-train-20` | train |  | 20.57 / 20.24 |
+| после `h-22-tb-start` | `pal-train-22` | train |  | 22.05 |
+| до `h-22-uc-fly` | `pal-22-danitha` | accept 91858 | необяз. | 22.74 / 22.05 |
+| после `h-22-the-sepulcher-apothecary` | `pal-22-trevan` | turnin 91858, accept 91859 | необяз. | 22.74 / 22.05 |
+| после `h-22-the-sepulcher-apothecary` | `pal-22-baldren` | turnin 91859, accept 91860 | необяз. | 22.79 / 22.05 |
+| после `h-22-the-sepulcher-apothecary` | `pal-22-remains` | turnin 91860, accept 91861 | необяз. | 22.84 / 22.05 |
+| после `h-22-the-sepulcher-apothecary` | `pal-22-lumina-keep` | turnin 91861, accept 91862 | необяз. | 22.88 / 22.05 |
+| после `h-22-the-sepulcher-apothecary` | `pal-22-key` | complete 91862 | необяз. | 22.93 / 22.05 |
+| после `h-22-the-sepulcher-apothecary` | `pal-22-escort-start` | turnin 91862, accept 96204 | необяз. | 22.94 / 22.05 |
+| после `h-22-the-sepulcher-apothecary` | `pal-22-escort` | complete 96204 | необяз. | 22.99 / 22.05 |
+| после `h-22-the-sepulcher-apothecary` | `pal-22-lumina` | turnin 96204, accept 95034 | необяз. | 22.99 / 22.05 |
+| после `h-22-the-sepulcher-apothecary` | `pal-22-debt` | turnin 95034 | необяз. | 23.03 / 22.05 |
+| после `h-27-tb-arrive` | `pal-train-26` | train |  | 27.57 / 27.06 |
 | после `h-31-tb-hearth` | `pal-train-30` | train |  | 30.91 |
 | после `h-34-uc-arrive` | `pal-train-34` | train |  | 34.10 |
-| после `h41-hearth-org` | `pal-axes` | manual | необяз. | 41.02 / 40.88 |
-| после `h-41-uc-arrive` | `pal-train-40` | train |  | 41.02 / 40.88 |
-| после `h-41-uc-arrive` | `pal-40-riding` | manual | необяз. | 41.02 / 40.88 |
-| после `h-41-uc-arrive` | `pal-40-horse` | vendor | необяз. | 41.02 / 40.88 |
-| после `h-41-uc-arrive` | `pal-train-40-garen` | train | необяз. | 41.02 / 40.88 |
-| после `h-44-uc-arrive` | `pal-train-44` | train |  | 44.02 / 44.00 |
-| после `h53-fly-uc` | `pal-train-52` | train |  | 52.57 / 52.54 |
-| после `h59-hearth-uc` | `pal-train-58` | train | необяз. | 57.96 / 57.92 |
+| после `h41-hearth-org` | `pal-axes` | manual | необяз. | 41.01 / 40.88 |
+| после `h-41-uc-arrive` | `pal-train-40` | train |  | 41.01 / 40.88 |
+| после `h-41-uc-arrive` | `pal-40-riding` | manual | необяз. | 41.01 / 40.88 |
+| после `h-41-uc-arrive` | `pal-40-horse` | vendor | необяз. | 41.01 / 40.88 |
+| после `h-41-uc-arrive` | `pal-train-40-garen` | train | необяз. | 41.01 / 40.88 |
+| после `h-44-uc-arrive` | `pal-train-44` | train |  | 44.00 |
+| после `h53-fly-uc` | `pal-train-52` | train |  | 52.57 / 52.53 |
+| после `h59-hearth-uc` | `pal-train-58` | train | необяз. | 57.95 / 57.92 |
 | после `h-60-end` | `pal-60-hearth` | hearth Undercity |  | 60.00 |
 | после `h-60-end` | `pal-train-60` | train |  | 60.00 |
 
@@ -302,7 +301,7 @@ Forever больше не даёт силу атаки), ветка Шока н�
 * Награда 381: Полуторный меч Отрекшихся (двуручный меч), если навык позволяет, иначе Кувалда Отрекшихся.
 * **Плавниковый крушитель** (Driftwood Smasher, 91285, двуручная булава, 8.94 DPS, +2 Вын; не Головолом) —
   основное оружие примерно с 12-го уровня до Молота Каменного леса.
-* **Молот Каменного леса** (Stonewood Hammer, 855, двуручная булава, 9.53 DPS, +3 Вын) — в `h-18` (~19).
+* **Молот Каменного леса** (Stonewood Hammer, 855, двуручная булава, 9.53 DPS, +3 Вын) — в `h-15`, у Регтара (`h15-regthar-3`, ~18).
 * Большой меч Дикозлоба (Wildgore Greatsword, 95508, 11.77 DPS, +5 Сил) — только при навыке двуручных мечей.
 * Короткий меч стража смерти (435) — не нужен, остаётся Плавниковый крушитель.
 * Кольчуга из наград: поножи (3901), жилет (380), Сапоги склепохода (426), Латунные чешуйчатые штаны (398),

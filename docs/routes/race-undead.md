@@ -197,131 +197,122 @@ ud01-start                 1.00   1.00  accept 363
 ud01-363                   1.00   1.00  turnin 363, accept 364
 ud01-zombies               1.10   1.10  complete 364, level 2
 ud01-364                   2.42   2.42  turnin 364, accept 3901, accept 376
-ud01-skeletons-bg          2.61   2.61  complete 3901
-ud01-damned                3.19   3.19  complete 376
-ud01-skeletons             3.61   3.61  complete 3901
-ud01-xp-4                  3.61   3.61  level 3
-ud01-vendor                3.74   3.74  vendor
-ud01-church-4              3.74   3.74  turnin 3901, turnin 376, accept 6395
-ud01-aramis                4.03   4.03  accept 98389
-ud01-arren-4               4.03   4.03  accept 3902, accept 380
-ud01-boxes                 4.03   4.03  complete 3902
-ud01-spiders               4.03   4.03  complete 380
-ud01-cave                  4.19   4.19  complete 380
-ud01-cocoons               4.38   4.38  complete 98389
-ud01-98389                 4.38   4.38  turnin 98389
-ud01-arren-5               4.55   4.38  turnin 3902, turnin 380, accept 381
-ud01-scarlet-camp          4.87   4.70  complete 381
-ud01-fipps                 5.17   5.07  collect 16333
-ud01-marla-grave           5.17   5.07  complete 6395
-ud01-6395                  5.17   5.07  turnin 6395
-ud01-381                   5.33   5.23  turnin 381, accept 382
-ud01-korgal                5.46   5.36  complete 382
-ud01-382                   5.51   5.41  turnin 382, accept 383, accept 96656
-ud01-end                   5.75   5.65  accept 8
-ud02-365                   5.75   5.65  accept 365
-ud02-gordo                 5.75   5.65  accept 5481
-ud02-gloom-weed-bg         5.75   5.65  complete 5481
-ud02-brill-gate            5.75   5.65  accept 86784, accept 404
-ud02-branches              5.75   5.65  complete 86784
-ud02-eleanor               5.75   5.65  turnin 86784, turnin 96656, accept 96607
-ud02-campfire              6.13   6.06  complete 96607
-ud02-eleanor-2             6.13   6.06  turnin 96607, accept 96658
-ud02-lvl-6                 6.29   6.21  level 6
-ud02-zygand-1              6.29   6.21  turnin 383, accept 427, accept 99141, accept 99134
-ud02-motivator-bg          6.38   6.30  complete 99134
-ud02-johaan-1              6.38   6.30  accept 367
-ud02-dillinger-report      6.38   6.30  complete 99141
-ud02-sethearth             6.38   6.30  turnin 8, sethearth Brill
-ud02-pickman               6.41   6.33  turnin 96658, complete 96658
-ud02-rear-guard-1          6.56   6.49  accept 97558, complete 99141
-ud02-skins-bg              6.56   6.49  complete 97558
-ud02-darkhound-blood-bg    7.06   6.99  complete 367
-ud02-putrid-claws          7.14   7.08  complete 404
-ud02-gordo-report          7.24   7.18  complete 99141
-ud02-scarlet-warriors-bg   7.24   7.18  complete 427
-ud02-pumpkins              7.38   7.32  complete 365
-ud02-murloc-skins          7.38   7.32  complete 97558
-ud02-scarlet-warriors      7.38   7.32  complete 427
-ud02-bareth                7.38   7.32  accept 99144
-ud02-escort                7.38   7.32  complete 99144
-ud02-darkhounds            7.38   7.32  complete 367
-ud02-hearth-1              7.38   7.32  hearth Brill
-ud02-johaan-2              7.38   7.32  turnin 367, turnin 365, accept 368, accept 407
-ud02-zygand-2              7.64   7.58  turnin 427, turnin 99141, turnin 99134, accept 370
-ud02-wanted                8.03   7.98  accept 398
-ud02-shari-99144           8.03   7.98  turnin 99144
-ud02-burgess               8.15   8.10  accept 374
-ud02-thread                8.15   8.10  collect 2320
-ud02-sevren-1              8.15   8.10  accept 358
-ud02-zealot                8.15   8.10  turnin 407
-ud02-brill-8               8.18   8.13  accept 354, accept 362, accept 375
-ud02-dillinger-2           8.18   8.13  turnin 404, accept 426
-ud02-holland-2             8.26   8.20  turnin 5481, accept 5482
-ud02-pelts-bg              8.30   8.25  complete 375
-ud02-doom-weed-bg          8.37   8.32  complete 5482
-ud02-gnolls                8.37   8.32  complete 358
-ud02-maggot-eye            8.63   8.58  complete 398
-ud02-coast-murlocs         8.67   8.62  complete 368
-ud02-doom-weed             8.77   8.72  complete 5482
-ud02-agamand-bones-bg      8.77   8.72  complete 426
-ud02-devlin                8.91   8.86  complete 362
-ud02-nissa                 8.94   8.89  complete 354
-ud02-gregor                8.97   8.92  complete 354
-ud02-thurman               9.01   8.96  complete 354
-ud02-agamand-bones         9.04   8.99  complete 426
-ud02-pelts                 9.04   8.99  complete 375
-ud02-holland-3             9.04   8.99  turnin 5482, accept 99142
-ud02-dillinger-3           9.12   9.08  turnin 426
-ud02-johaan-3              9.26   9.21  turnin 368, accept 369
-ud02-zygand-3              9.37   9.33  turnin 398
-ud02-letter                9.51   9.46  accept 361
-ud02-yvette                9.51   9.46  turnin 361
-ud02-coleman               9.58   9.46  turnin 354, turnin 362, accept 355
-ud02-gretchen              9.78   9.66  turnin 375
-ud02-sevren-3              9.89   9.77  turnin 358, turnin 355, accept 359
-ud02-perrine              10.01   9.89  complete 370
-ud02-zygand-4             10.06   9.96  turnin 370, accept 371
-ud02-level-10             10.16  10.07  level 10
-ud02-terrence             10.16  10.07  accept 96895
-ud02-rings-bg             10.16  10.07  complete 374
-ud02-rear-guard-2         10.23  10.14  turnin 97558, turnin 359, accept 360, accept 356
-ud02-hadric               10.34  10.25  turnin 96895, accept 96897, accept 96898
-ud02-cult-camp            10.40  10.31  complete 96897, complete 96898
-ud02-hadric-2             10.84  10.75  turnin 96897, turnin 96898, accept 96899
-ud02-balnir               10.97  10.88  complete 356, complete 99142
-ud02-vachon               11.11  11.04  complete 371
-ud02-venomweb             11.16  11.09  complete 369
-ud02-rings                11.20  11.14  complete 374
-ud02-linnea               11.20  11.14  turnin 356
-ud02-johaan-5             11.28  11.21  turnin 369, accept 492, accept 445
-ud02-carolai              11.30  11.24  accept 95314
-ud02-zygand-5             11.30  11.24  turnin 371
-ud02-burgess-5            11.40  11.33  turnin 374
-ud02-sevren-5             11.47  11.40  turnin 360
-ud02-mountaineer          11.51  11.45  turnin 492
-ud02-holland-5            11.61  11.55  turnin 99142
-ud02-go-simmer            11.69  11.62  go
-ud02-go-solliden          11.69  11.62  go
-ud02-keep                 11.69  11.62  turnin 96899, accept 96896
-ud02-leonid-talk          11.74  11.67  complete 96896
-ud02-leonid-letter        11.74  11.67  turnin 96896, accept 98545
-ud02-hilda                11.79  11.73  accept 99152
-ud02-ephram               11.79  11.73  accept 99153
-ud02-bones-bg             11.79  11.73  complete 99152
-ud02-elixir-bg            11.89  11.83  complete 95314
-ud02-crystal              11.89  11.83  complete 99153
-ud02-shadowvale           11.89  11.83  complete 99152, complete 95314
-ud02-ephram-2             11.89  11.83  turnin 99153
-ud02-hilda-2              11.95  11.88  turnin 99152
-ud02-lvl-12               12.00  11.93  level 12
-ud02-hearth-2             12.01  12.00  hearth Brill
-ud02-carolai-2            12.01  12.00  turnin 95314
-ud02-go-uc                12.05  12.04  go
-ud02-glix                 12.05  12.04  turnin 98545
-ud02-fp-uc                12.10  12.09  fp Undercity
-ud02-uc-exit              12.10  12.09  go
-ud02-silverpine-road      12.10  12.09  go
+ud01-damned                2.61   2.61  complete 376
+ud01-skeletons             3.23   3.23  complete 3901
+ud01-xp-4                  3.62   3.62  level 3
+ud01-vendor                3.71   3.71  vendor
+ud01-church-4              3.71   3.71  turnin 3901, turnin 376, accept 6395
+ud01-aramis                4.01   4.01  accept 98389
+ud01-arren-4               4.01   4.01  accept 3902, accept 380
+ud01-boxes                 4.01   4.01  complete 3902
+ud01-spiders               4.01   4.01  complete 380
+ud01-cave                  4.17   4.17  complete 380
+ud01-cocoons               4.36   4.36  complete 98389
+ud01-98389                 4.36   4.36  turnin 98389
+ud01-arren-5               4.53   4.36  turnin 3902, turnin 380, accept 381
+ud01-scarlet-camp          4.85   4.68  complete 381
+ud01-fipps                 5.16   5.06  collect 16333
+ud01-marla-grave           5.16   5.06  complete 6395
+ud01-6395                  5.16   5.06  turnin 6395
+ud01-381                   5.32   5.22  turnin 381, accept 382
+ud01-korgal                5.45   5.35  complete 382
+ud01-382                   5.50   5.40  turnin 382, accept 383, accept 96656
+ud01-end                   5.74   5.64  accept 8
+ud02-365                   5.74   5.64  accept 365
+ud02-gordo                 5.74   5.64  accept 5481
+ud02-gloom-weed-bg         5.74   5.64  complete 5481
+ud02-brill-gate            5.74   5.64  accept 86784
+ud02-branches              5.74   5.64  complete 86784
+ud02-eleanor               5.74   5.64  turnin 86784, turnin 96656, accept 96607
+ud02-campfire              6.13   6.05  complete 96607
+ud02-eleanor-2             6.13   6.05  turnin 96607, accept 96658
+ud02-lvl-6                 6.28   6.20  level 6
+ud02-zygand-1              6.28   6.20  turnin 383, accept 427, accept 99141, accept 99134
+ud02-motivator-bg          6.37   6.30  complete 99134
+ud02-johaan-1              6.37   6.30  accept 367
+ud02-dillinger-report      6.37   6.30  accept 404, complete 99141
+ud02-sethearth             6.37   6.30  turnin 8, sethearth Brill
+ud02-pickman               6.40   6.33  turnin 96658, complete 96658
+ud02-rear-guard-1          6.56   6.48  accept 97558, complete 99141
+ud02-putrid-claws          6.56   6.48  complete 404
+ud02-gordo-report          6.73   6.65  complete 99141
+ud02-pumpkins              6.73   6.65  complete 365
+ud02-murloc-skins          6.73   6.65  complete 97558
+ud02-scarlet-warriors      6.84   6.77  complete 427
+ud02-bareth                7.04   6.97  accept 99144
+ud02-escort                7.04   6.97  complete 99144
+ud02-darkhounds            7.04   6.97  complete 367, complete 97558
+ud02-hearth-1              7.36   7.31  hearth Brill
+ud02-johaan-2              7.36   7.31  turnin 367, turnin 365, accept 368, accept 407
+ud02-zygand-2              7.63   7.58  turnin 427, turnin 99141, turnin 99134, accept 370
+ud02-wanted                8.02   7.98  accept 398
+ud02-shari-99144           8.02   7.98  turnin 99144
+ud02-burgess               8.14   8.10  accept 374
+ud02-thread                8.14   8.10  collect 2320
+ud02-sevren-1              8.14   8.10  accept 358
+ud02-zealot                8.14   8.10  turnin 407
+ud02-brill-8               8.17   8.13  accept 354, accept 362, accept 375
+ud02-dillinger-2           8.17   8.13  turnin 404, accept 426
+ud02-holland-2             8.24   8.20  turnin 5481, accept 5482
+ud02-doom-weed             8.29   8.24  complete 5482
+ud02-gnolls                8.29   8.24  complete 358
+ud02-maggot-eye            8.54   8.50  complete 398
+ud02-coast-murlocs         8.58   8.54  complete 368
+ud02-nissa                 8.68   8.64  complete 354
+ud02-gregor                8.71   8.67  complete 354
+ud02-thurman               8.75   8.70  complete 354
+ud02-devlin                8.78   8.74  complete 362
+ud02-agamand-bones         8.81   8.77  complete 426
+ud02-pelts                 8.95   8.91  complete 375
+ud02-holland-3             9.02   8.99  turnin 5482, accept 99142
+ud02-dillinger-3           9.10   9.08  turnin 426
+ud02-johaan-3              9.24   9.21  turnin 368, accept 369
+ud02-zygand-3              9.36   9.33  turnin 398
+ud02-letter                9.49   9.46  accept 361
+ud02-yvette                9.49   9.46  turnin 361
+ud02-coleman               9.56   9.46  turnin 354, turnin 362, accept 355
+ud02-gretchen              9.76   9.66  turnin 375
+ud02-sevren-3              9.87   9.77  turnin 358, turnin 355, accept 359
+ud02-perrine               9.99   9.89  complete 370
+ud02-zygand-4             10.05   9.96  turnin 370, accept 371
+ud02-level-10             10.15  10.07  level 10
+ud02-terrence             10.15  10.07  accept 96895
+ud02-rear-guard-2         10.15  10.07  turnin 97558, turnin 359, accept 360, accept 356
+ud02-hadric               10.26  10.18  turnin 96895, accept 96897, accept 96898
+ud02-cult-camp            10.32  10.24  complete 96897, complete 96898
+ud02-hadric-2             10.77  10.68  turnin 96897, turnin 96898, accept 96899
+ud02-balnir               10.89  10.81  complete 356, complete 99142
+ud02-vachon               11.05  10.99  complete 371
+ud02-venomweb             11.10  11.04  complete 369
+ud02-rings                11.14  11.08  complete 374
+ud02-linnea               11.18  11.12  turnin 356
+ud02-johaan-5             11.26  11.19  turnin 369, accept 492, accept 445
+ud02-carolai              11.28  11.22  accept 95314
+ud02-zygand-5             11.28  11.22  turnin 371
+ud02-burgess-5            11.38  11.31  turnin 374
+ud02-sevren-5             11.45  11.39  turnin 360
+ud02-mountaineer          11.49  11.43  turnin 492
+ud02-holland-5            11.59  11.53  turnin 99142
+ud02-go-simmer            11.67  11.60  go
+ud02-go-solliden          11.67  11.60  go
+ud02-keep                 11.67  11.60  turnin 96899, accept 96896
+ud02-leonid-talk          11.72  11.66  complete 96896
+ud02-leonid-letter        11.72  11.66  turnin 96896, accept 98545
+ud02-hilda                11.77  11.71  accept 99152
+ud02-ephram               11.77  11.71  accept 99153
+ud02-elixir-bg            11.77  11.71  complete 95314
+ud02-crystal              11.77  11.71  complete 99153
+ud02-shadowvale           11.77  11.71  complete 99152
+ud02-ephram-2             11.87  11.81  turnin 99153
+ud02-hilda-2              11.93  11.86  turnin 99152
+ud02-lvl-12               11.98  11.92  level 12
+ud02-hearth-2             12.00  12.01  hearth Brill
+ud02-carolai-2            12.00  12.01  turnin 95314
+ud02-go-uc                12.04  12.05  go
+ud02-glix                 12.04  12.05  turnin 98545
+ud02-fp-uc                12.09  12.09  fp Undercity
+ud02-uc-exit              12.09  12.09  go
+ud02-silverpine-road      12.09  12.09  go
 ```
 
 ## 10. Что проверить в игре

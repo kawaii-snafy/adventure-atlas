@@ -35,8 +35,8 @@
 --   M2  : 2987; 2975 + 2978 > 2980 + 2979; 2973 > 2974; 2862 > 2863 (1 h timer).
 --   F2  : Grimtotem Compound (2974), Woodpaw south camp (2863).
 --   M3  : 2863 > 2902; 2974 > 2976.  F3: battle map 2902 > 2903.  M4: 2903 > 7730 + 7731.
---   F4  : Zukk'ash hive (7730, 7731), Gordunni south camp (2980, 2979), screecher spirits (3520), optional
---         OOX-22/FE (2766), Feral Scar Vale (2822).
+--   F4  : Zukk'ash hive (7730, 7731), Gordunni south camp (2980, 2979), screecher spirits (3520), Feral Scar Vale
+--         (2822), optional OOX-22/FE (2766, the cave on the way back).
 --   M5  : 7730 + 7731 > 7732; 2822 > 7734; 2980 + 2979 > 3002.
 --   F5  : Rage Scar Hold (7734), Zorbin (7003, 7721 on the Forgotten Coast), Northspring harpies (3063, level gate;
 --         optional Edana 3062), hearth.  M6: 7734, (3062), 3063.
@@ -471,15 +471,19 @@ FastesBoooy.AddLibrarySegment({
                    en = "North-west towards Feral Scar Vale: Vale Screechers fly between the Gordunni camp and the vale "
                        .. "(57,55 - 60,62). Kill a screecher, use Yeh'kinya's Bramble on the corpse and click the spirit - "
                        .. "3 times." } },
+        { complete = 2822, at = { 1444, 52.96, 58.04 },
+          note = { ru = "Долина Свирепого Утеса: 10 толстых шкур йети (43-46).",
+                   en = "Feral Scar Vale: 10 Thick Yeti Hides (43-46)." } },
+        -- The OOX-22/FE steps after the hides: the yetis stand on the way to the robot's cave, so the hides are
+        -- often done before it, and an optional step before the 2822 step would then be fast-forwarded.
         { accept = 2766, use = 8705, optional = true, at = { 1444, 53.35, 55.70 },
           note = { ru = "По желанию: выпал аварийный маяк OOX-22/FE — кликните его.",
                    en = "Optional: an OOX-22/FE Distress Beacon dropped - right-click it." } },
         { turnin = 2766, npc = 7807, optional = true, at = { 1444, 53.35, 55.70 },
-          note = { ru = "Робот OOX-22/FE в пещере у Долины Свирепого Утеса. Сопровождение не берите.",
-                   en = "Homing Robot OOX-22/FE in the cave by Feral Scar Vale. Skip the escort." } },
-        { complete = 2822, at = { 1444, 52.96, 58.04 },
-          note = { ru = "Долина Свирепого Утеса: 10 толстых шкур йети (43-46).",
-                   en = "Feral Scar Vale: 10 Thick Yeti Hides (43-46)." } },
+          note = { ru = "Робот OOX-22/FE в пещере у Долины Свирепого Утеса, по пути обратно в лагерь. "
+                       .. "Сопровождение не берите.",
+                   en = "Homing Robot OOX-22/FE in the cave by Feral Scar Vale, on the way back to camp. Skip the "
+                       .. "escort." } },
 
         ------------------------------------------------------------------
         -- Camp Mojache, fifth visit (level 49)

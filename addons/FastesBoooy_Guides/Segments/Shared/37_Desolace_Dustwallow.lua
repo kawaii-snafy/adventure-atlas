@@ -331,7 +331,14 @@ FastesBoooy.AddLibrarySegment({
         { accept = 5943, npc = 11626, optional = true, at = { 1443, 45.40, 75.29 },
           note = { ru = "По желанию, если караван здесь: Риггер Гизлтон - «Караван Гизлтона».",
                    en = "Optional, if the caravan is here: Rigger Gizelton - Gizelton Caravan." } },
-        { complete = 5943, optional = true, at = { 1443, 55.70, 67.80 },
+        -- skip-ahead (acknowledged with `ok`): the escort road passes the north portals of the Mannoroc Coven and a
+        -- Mana Eater (the warlock's 4962). 5581 counts "Portals Banished" x6 (Wowhead): a Demon Portal Guardian appears
+        -- only when the Hand of Iruxos is used at a portal (the DB snapshot lists their summon points as spawns, with
+        -- no count), so walking the escort does not finish h39-mannoroc-portals. And a forward from the warlock's
+        -- spirit (or anything else) is harmless here: the escort runs by itself, the player follows the caravan
+        -- whatever the guide shows, and its turn-in at Smeed stays a later step. The escort cannot go after the
+        -- portals: it starts at Rigger, ~300 yd back west (~400 yd more walking).
+        { complete = 5943, optional = true, at = { 1443, 55.70, 67.80 }, ok = "skip-ahead",
           note = { ru = "Проводите караван на восток по дороге (нападут кентавры и демоны). Сдача - у Смида.",
                    en = "Escort the caravan east along the road (centaurs and demons attack). Turned in at Smeed." } },
         { id = "h39-mannoroc-portals", complete = 5581, use = 14547, at = { 1443, 51.99, 76.98 },

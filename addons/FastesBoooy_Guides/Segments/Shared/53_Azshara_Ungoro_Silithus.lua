@@ -22,7 +22,7 @@
 --   ORG : 81 (Dran Droffers), 4494 (Zilzibin), hearth Orgrimmar, fly Splintertree Post.
 --   AZ  : Loh'atu 5535 + 5536 (Highborne, Haldarr satyrs + book 81952 on the way north); Valormok fp, 3504 > 3505, 3517;
 --         Kim'jael 3601; blood elf camp (3505 kills, 3601 equipment); Kim'jael 3601 > 5534; Kaldorei Tome 3505 > 3506,
---         Rimtori; Ruins of Eldarath (3517 tablets, 5534 rune, 3568 tide pools); Kim'jael 5534; Valormok 3517 >
+--         Rimtori; Ruins of Eldarath (5534 rune, 3517 tablets, 3568 tide pools); Kim'jael 5534; Valormok 3517 >
 --         3561 + 3541 + 3542, 3506 > 3507; Sanath -> Xylem 3561 > 3565; Valormok 3565; Loh'atu 5535 + 5536; hearth.
 --   ORG : 3507 (Belgrom), 3541 (Jes'rimon); fly Gadgetzan.
 --   GZ  : hearth Gadgetzan; 2641 > 2661 (Sprinkle), 4494 > 4496 (Pestlezugg), 4504 (Tran'rek), 2661 (Marin);
@@ -183,19 +183,24 @@ FastesBoooy.AddLibrarySegment({
         { complete = 3506, at = { 1447, 59.51, 31.37 },
           note = { ru = "Разбейте кристалл-фокусатор рядом, затем убейте волхва Римтори (55) — голова.",
                    en = "Destroy the arcane focusing crystal next to her, then kill Magus Rimtori (55) - her head." } },
+        -- The rune first: the Spitelash naga stand all over central Azshara (on the way from Rimtori and in the
+        -- ruins), so it often drops before the ruins; an optional class step between the first naga and the 5534
+        -- step would then be fast-forwarded (the hunter / priest Ogtinc visits come before Kim'jael and after the
+        -- field loop).
+        { complete = 5534, at = { 1447, 38.50, 55.76 },
+          note = { ru = "На юго-запад к руинам Эльдарата: наги из клана Бича Злобы (50-52) по пути и на восточном краю "
+                       .. "руин — «Некая руна» (с сирен и мирмидонов).",
+                   en = "South-west to the Ruins of Eldarath: Spitelash naga (50-52) on the way and at the east edge of "
+                       .. "the ruins - Some Rune (from the Sirens and Myrmidons)." } },
         { id = "h-53-azshara-field-loop", complete = 3517, at = { 1447, 37.89, 56.47 },
-          note = { ru = "На юго-запад к руинам Эльдарата: таблички Бет'Амары, Джин'яэль, Маркри и Саэль'хай лежат "
-                       .. "на земле среди руин.",
-                   en = "South-west to the Ruins of Eldarath: the tablets of Beth'Amara, Jin'yael, Markri and "
-                       .. "Sael'hai lie on the ground among the ruins." } },
-        { complete = 5534, at = { 1447, 44.94, 53.67 },
-          note = { ru = "Восточнее, у воды: наги из клана Бича Злобы (50-52) — «Некая руна».",
-                   en = "East of the ruins by the water: Spitelash naga (50-52) - Some Rune." } },
+          note = { ru = "Руины Эльдарата: таблички Бет'Амары, Джин'яэль, Маркри и Саэль'хай лежат на земле среди руин.",
+                   en = "The Ruins of Eldarath: the tablets of Beth'Amara, Jin'yael, Markri and Sael'hai lie on the "
+                       .. "ground among the ruins." } },
         { complete = 3568, at = { 1447, 48.00, 51.80 },
-          note = { ru = "Откройте коробку с флаконами и наберите воду в 4 приливных прудах на берегу: 48.0,61.0; "
-                       .. "47.8,51.4; 48.7,48.5; 47.4,46.2.",
-                   en = "Open the Box of Empty Vials and fill the 4 tide pools on the shore: 48.0,61.0; 47.8,51.4; "
-                       .. "48.7,48.5; 47.4,46.2." } },
+          note = { ru = "На восток к берегу: откройте коробку с флаконами и наберите воду в 4 приливных прудах: "
+                       .. "48.0,61.0; 47.8,51.4; 48.7,48.5; 47.4,46.2.",
+                   en = "East to the shore: open the Box of Empty Vials and fill the 4 tide pools: 48.0,61.0; "
+                       .. "47.8,51.4; 48.7,48.5; 47.4,46.2." } },
         { turnin = 5534, npc = 8420, at = { 1447, 53.45, 21.82 },
           note = { ru = "На север к Ким'джаелю: руна.", en = "North to Kim'jael: the rune." } },
         { turnin = 3517, accept = { 3561, 3541, 3542 }, npc = 8587, at = { 1447, 22.56, 51.42 },

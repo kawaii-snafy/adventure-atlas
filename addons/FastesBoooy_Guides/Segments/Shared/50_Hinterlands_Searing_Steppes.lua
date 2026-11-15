@@ -24,7 +24,7 @@
 --   HW  : Gilveradin 650 > 77; Highvale papers (2995); Rin'ji 2742 (escort out of the lodge); Skulk Rock crates (77).
 --   RV1 : fp, hearth; 7840, 7845 + 7850, 7815 + 7816, 7828 + 7829 + 7830 + 7849, 7861 + 7862, 7841, 7844, 7839.
 --   L1  : Gammerita (7816; snapjaws on the way), Rin'ji's Secret 2742 > 2782, northern shore snapjaws (7815), Lard's
---         lunch (7840), Vilebranch camp (7844, 7839), wilds (7829, 7830; stalkers on the way), howlers + stalkers (7828),
+--         lunch (7840), Vilebranch camp (7844, 7839), wilds (7829, 7830, the 7828 stalkers), howlers (7828),
 --         Violet Tragan (2641), book 81954, Atal'ai Exile 1429 > 1444, Quel'Danil elves (7841), Gilveradin 77 > 81;
 --         hearth.
 --   RV2 : turn-ins; 7841 > 7842.
@@ -35,7 +35,7 @@
 --         7723 / 7724 / 7727),
 --         Kalaran 3441 > 3442, Slag Pit (Maltorius 7701 + plans 7722 on the bottom level, then incendosaurs 7727 and
 --         taskmasters / slavers 7729 in its east part), Cauldron floor (7728; golems / elementals on the way), lava
---         spiders (7724), book 81955, centre of the Cauldron (7723, 3442), 3442 > 3443 (daggers from the dwarves
+--         spiders (7724), centre of the Cauldron (book 81955 + 7723, 3442), 3442 > 3443 (daggers from the dwarves
 --         around Kalaran), 3443 > 3452 (Twilight cultists), Thorium Point turn-ins,
 --         3452 > 3453 > 3454 > 3462 > 3463 (braziers), 3481 hoard. South through Blackrock
 --         Mountain: book 81953 (Franclorn), optional Blackrock Depths block (3906 Pyron, 4081, 4134).
@@ -45,9 +45,10 @@
 --         optional Sunken Temple (1445); Swamp Talkers; Fallen Hero 2623.
 --   BL  : Bloodmages 2581 / 2583 / 2585 / 2601 / 2603 (shared parts: collect totals), jowls + pincers on the road south,
 --         Kum'isha 2521 / 3501 (random drops of any creature there), book 81956, brains in the east, level gate at the
---         helboars (centre), Kum'isha's sphere / fragment there, turn-ins; hearth Kargath (the stone is off its
---         cooldown since the Flame Crest hearth; Kargath -> Undercity skips the ride back to Stonard and the
---         Stonard -> Kargath flight leg; only after the optional 1445 does the player go to Stonard and fly from there).
+--         helboars (centre; it also waits for Kum'isha's sphere / fragment), turn-ins; hearth Kargath (the stone is off
+--         its cooldown since the Flame Crest hearth; Kargath -> Undercity skips the ride back to Stonard and the
+--         Stonard -> Kargath flight leg; only after the optional 1445 does the player go to Stonard and fly from
+--         there).
 -- Deviations from the plan (documented in the handoff):
 --   * 2995 Lines of Communication cannot be turned in on the same Undercity visit (its papers are in the
 --     Hinterlands): it is carried COMPLETE, with 2782 Rin'ji's Secret, to Oran Snakewrithe (Undercity) - the plan's
@@ -247,22 +248,25 @@ FastesBoooy.AddLibrarySegment({
         { complete = { 7839, 7844 }, at = { 1425, 69.26, 46.74 },
           note = { ru = "На запад к лагерям Порочной Ветви у дороги (70,48 и 66,44): 6 охотников за скальпами и 2 "
                        .. "ворожея (в тексте и на Wowhead 30 и 15 - верен счётчик в журнале); инструменты Углежога "
-                       .. "лежат там же. Отсюда на запад бейте по пути среброгривых бродяг (доберёте на юго-западе).",
+                       .. "лежат там же. Отсюда на запад бейте по пути среброгривых бродяг (доберёте в центре зоны, "
+                       .. "следующий шаг).",
                    en = "West to the Vilebranch camps by the road (70,48 and 66,44): 6 Scalpers and 2 Soothsayers (the "
                        .. "quest text and Wowhead say 30 and 15 - trust the quest log counter); Slagtree's Lost Tools "
                        .. "lie there too. From here on west: kill the Silvermane Stalkers on the way (you finish them "
-                       .. "in the south-west)." } },
-        { id = "h-50-the-hinterlands-field", complete = { 7829, 7830 }, at = { 1425, 59.15, 49.93 },
+                       .. "in the centre of the zone, the next step)." } },
+        -- the 7828 Stalkers are finished here: they live only east of x 51 (none by the Howlers in the south-west)
+        { id = "h-50-the-hinterlands-field", complete = { 7829, 7830, [7828] = { 1 } }, at = { 1425, 59.15, 49.93 },
           note = { ru = "Центр зоны: 10 диких совухов (в тексте и на Wowhead 20 - верен счётчик в журнале); перо из "
-                       .. "остроклювов-повелителей небес (46-48). По пути: среброгривые бродяги.",
+                       .. "остроклювов-повелителей небес (46-48). Здесь же добейте 5 среброгривых бродяг (в тексте и на "
+                       .. "Wowhead 15 - верен счётчик в журнале).",
                    en = "Centre of the zone: 10 Savage Owlbeasts (the quest text and Wowhead say 20 - trust the quest "
-                       .. "log counter); the Skylord Plume from the Razorbeak Skylords (46-48). On the way: Silvermane "
-                       .. "Stalkers." } },
+                       .. "log counter); the Skylord Plume from the Razorbeak Skylords (46-48). Finish the 5 Silvermane "
+                       .. "Stalkers here too (the quest text and Wowhead say 15 - trust the quest log counter)." } },
         { complete = 7828, at = { 1425, 44.32, 56.98 },
-          note = { ru = "На юго-запад: 5 среброгривых ревунов (45-46); по дороге туда добейте 5 бродяг (в тексте и на "
-                       .. "Wowhead по 15 - верен счётчик в журнале).",
-                   en = "South-west: 5 Silvermane Howlers (45-46); finish the 5 Stalkers on the way there (the quest text "
-                       .. "and Wowhead say 15 each - trust the quest log counter)." } },
+          note = { ru = "На юго-запад: 5 среброгривых ревунов (45-46; в тексте и на Wowhead 15 - верен счётчик в "
+                       .. "журнале).",
+                   en = "South-west: 5 Silvermane Howlers (45-46; the quest text and Wowhead say 15 - trust the quest log "
+                       .. "counter)." } },
         { complete = 2641, at = { 1425, 40.63, 59.66 },
           note = { ru = "Рядом: сорвите фиалковый траган для «Маленького секрета Поливалки» (Танарис).",
                    en = "Nearby: pick a Violet Tragan for Sprinkle's Secret Ingredient (Tanaris)." } },
@@ -426,16 +430,16 @@ FastesBoooy.AddLibrarySegment({
         { complete = 7724, at = { 1427, 28.06, 59.49 },
           note = { ru = "На запад: 20 опаляющих лавовых пауков (47-49). Здесь же элементали (сердца пламени).",
                    en = "West: 20 Greater Lava Spiders (47-49). Elementals here too (Hearts of Flame)." } },
-        { collect = { [220352] = 1 }, object = 441253, at = { 1427, 37.80, 49.30 },
-          note = { ru = "Дно Котла (37.8,49.3): книга «Разум из металла» — заберите её (контейнер; задание - у Оуэна "
-                       .. "Тэдда в Подгороде).",
-                   en = "Floor of the Cauldron (37.8,49.3): the book A Mind of Metal - loot it (a container; the quest is "
-                       .. "Owen Thadd's, Undercity)." } },
-        { id = "h-50-searing-gorge-field", complete = { 7723, 3442 }, at = { 1427, 40.83, 49.21 },
-          note = { ru = "Центр Котла по пути к Каларану: добейте 20 тяжелых боевых големов (масло) и 4 сердца пламени с "
-                       .. "элементалей, 4 масла големов.",
-                   en = "The centre of the Cauldron on the way to Kalaran: finish the 20 Heavy War Golems (oil) and the "
-                       .. "4 Hearts of Flame from the elementals, 4 Golem Oils." } },
+        -- the book shares the step with 7723 / 3442: golems and elementals killed on the way could finish that step early
+        -- and forward (skip) a separate collect step
+        { id = "h-50-searing-gorge-field", complete = { 7723, 3442 }, collect = { [220352] = 1 }, object = 441253,
+          at = { 1427, 37.80, 49.30 },
+          note = { ru = "Центр Котла по пути к Каларану: на дне (37.8,49.3) книга «Разум из металла» — заберите её "
+                       .. "(контейнер; задание - у Оуэна Тэдда в Подгороде); добейте 20 тяжелых боевых големов (масло) "
+                       .. "и 4 сердца пламени с элементалей, 4 масла големов.",
+                   en = "The centre of the Cauldron on the way to Kalaran: on the floor (37.8,49.3) the book A Mind of "
+                       .. "Metal - loot it (a container; the quest is Owen Thadd's, Undercity); finish the 20 Heavy War "
+                       .. "Golems (oil) and the 4 Hearts of Flame from the elementals, 4 Golem Oils." } },
         { turnin = 3442, accept = 3443, npc = 8479, at = { 1427, 39.06, 38.99 },
           note = { ru = "Каларан: «Древко факела» (8 кинжалов с ториевой обкладкой с дворфов).",
                    en = "Kalaran: Forging the Shaft (8 Thorium Plated Daggers from the dwarves)." } },
@@ -623,23 +627,24 @@ FastesBoooy.AddLibrarySegment({
                        .. "стервятники там же.",
                    en = "East: Redstone Basilisks and Crystalhides - 11 brains; Ashmane Boars (lungs) and vultures there "
                        .. "too." } },
-        { id = "h-50-hinterlands-searing-steppes-level-gate", complete = { 2581, 2583, 2585, 2601, 2603 },
-          ok = { ["level-grind"] = 160 }, -- end-of-segment gate: 156 kills in the normal run
+        -- Kum'isha's sphere / fragment (2521 / 3501) share the gate step: they drop from any creature here, so a separate
+        -- drops step after the book, the brains and the gate would be done early on the way and become the forward
+        -- anchor - the guide would then count those collect steps as done (book never looted, part totals not checked)
+        { id = "h-50-hinterlands-searing-steppes-level-gate", complete = { 2581, 2583, 2585, 2601, 2603, 2521, 3501 },
+          ok = { ["level-grind"] = 160 }, -- end-of-segment gate: 154 kills in the normal run
           collect = { [8391] = 5, [8392] = 6, [8393] = 6, [8394] = 11, [8396] = 14 }, level = { 52, 0.30 },
           at = { 1419, 49.76, 42.23 },
           note = { ru = "На запад, центр: зловепри (52-53, плотно — лучший опыт рядом), стервятники-костегрызы, гиены. "
                        .. "Добейте части (всего 5 челюстей, 6 легких, 6 клешней, 11 мозгов, 14 желудков) и бейте "
-                       .. "зловепрей до 52-го + 30%: сдачи дадут ~52.6 — Азшара (волхв Римтори 55) и Ун'Горо идут с 52-го.",
+                       .. "зловепрей до 52-го + 30%: сдачи дадут ~52.6 — Азшара (волхв Римтори 55) и Ун'Горо идут с 52-го. "
+                       .. "Сфера и осколок дренетиста для Кум'иши ещё не выпали — бейте зловепрей дальше (до 52 + 40%); "
+                       .. "сферы так и нет — бросьте 2521, осколка нет — 3501 (гайд не будет их ждать).",
                    en = "West, the centre: Helboars (52-53, dense: the best XP nearby), Bonepickers, hyenas. Finish the "
                        .. "parts (5 jowls, 6 lungs, 6 pincers, 11 brains, 14 gizzards in all) and keep killing Helboars "
                        .. "up to 52 + 30%: the turn-ins make ~52.6 - Azshara (Magus Rimtori 55) and Un'Goro are fine "
-                       .. "from 52." } },
-        { id = "h52-kum-isha-drops", complete = { 2521, 3501 }, at = { 1419, 50.20, 39.70 },
-          note = { ru = "Там же, по пути к Кум'ише: сфера и осколок дренетиста ещё не выпали — бейте зловепрей дальше (до "
-                       .. "52 + 40%). Сферы так и нет — бросьте 2521, осколка нет — 3501 (гайд пропустит их шаги).",
-                   en = "Same place, on the way to Kum'isha: no Draenethyst Sphere or Fragment yet - keep killing "
-                       .. "Helboars (up to 52 + 40%). Still no sphere - abandon 2521, no fragment - 3501 (the guide "
-                       .. "skips their steps)." } },
+                       .. "from 52. No Draenethyst Sphere or Fragment for Kum'isha yet - keep killing Helboars (up to 52 "
+                       .. "+ 40%); still no sphere - abandon 2521, no fragment - 3501 (the guide stops waiting for "
+                       .. "them)." } },
         { turnin = { 2521, 3501 }, npc = 7363, at = { 1419, 51.98, 35.65 },
           note = { ru = "Кум'иша. Сферы нет — бросьте 2521 (гайд пропустит шаг).",
                    en = "Kum'isha. No sphere - abandon 2521 (the guide skips the step)." } },

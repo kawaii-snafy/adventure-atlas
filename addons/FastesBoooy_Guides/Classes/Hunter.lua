@@ -64,8 +64,8 @@
 --   46+48  after h49-org-2976     49.53 / 49.49: Ormak, on the way from the Valley of Honor to the zeppelin.
 --   50+52  after h52-stonard-1445 52.57 / 52.53: Ogromm, Stonard (no detour; the first Stonard stop at 51.79 is merged).
 --   Hunter's Charm (optional, 5,610 XP): 8151 at Ormak after h-53-org-arrive (52.73), Ogtinc in Azshara before
---                                 h-53-azshara-field-loop, 8153 (2 Perfect Courser Antlers, Mosshoof Coursers south
---                                 of the field loop, drop rate unknown) and the turn-in after h-53-azshara-field-loop:
+--                                 h-53-kim-jael, 8153 (2 Perfect Courser Antlers, Mosshoof Coursers south of the
+--                                 field loop, drop rate unknown) and the turn-in after h-53-azshara-field-loop:
 --                                 ~2.5 min of travel.
 --   54     after h-56-org-arrive  55.07: Ormak (~400 yd more on the way to the inn).
 --   56     after h-58-org-arrive  57.21 / 57.17: Ormak, then out of the main gate to the zeppelin (~1,000 yd more).
@@ -590,8 +590,10 @@ insert({
                    en = "Ogromm, the Stonard hunter trainer, close by: level 50 and 52 training." } },
     },
 })
--- The Hunter's Charm (optional): 8151 at Ormak, Ogtinc in central Azshara on the way to the field loop, the Mosshoof
--- Coursers south of the loop, back to Ogtinc on the way to the next shared step. 8231 / 8232 are not taken.
+-- The Hunter's Charm (optional): 8151 at Ormak, Ogtinc in central Azshara on the way from Valormok to Kim'jael
+-- (before 5534 is in the log: the naga around his hill could drop its rune and fast-forward a later visit), the
+-- Mosshoof Coursers south of the field loop, back to Ogtinc on the way to the next shared step (after the rune).
+-- 8231 / 8232 are not taken.
 insert({
     after = "h-53-org-arrive",
     class = "HUNTER",
@@ -604,12 +606,14 @@ insert({
     },
 })
 insert({
-    before = "h-53-azshara-field-loop",
+    before = "h-53-kim-jael",
     class = "HUNTER",
     steps = {
         { id = "hun-8151-ogtinc", turnin = 8151, accept = 8153, optional = true, npc = 8405, at = OGTINC,
-          note = { ru = "Огтинк на холме в центре Азшары (42,43), по пути на юго-запад: «Рога скакуна».",
-                   en = "Ogtinc on the hill in central Azshara (42,43), on the way south-west: Courser Antlers." } },
+          note = { ru = "Огтинк на холме в центре Азшары (42,43), по пути на северо-восток к Ким'джаелю: «Рога "
+                       .. "скакуна» (скакуны — позже, к югу от руин Эльдарата).",
+                   en = "Ogtinc on the hill in central Azshara (42,43), on the way north-east to Kim'jael: Courser "
+                       .. "Antlers (the coursers come later, south of the Ruins of Eldarath)." } },
     },
 })
 insert({

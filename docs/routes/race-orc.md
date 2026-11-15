@@ -237,14 +237,12 @@
 | `dur01-galgar` | 2.52 | accept 4402 |
 | `dur01-familiars` | 2.52 | accept 792 |
 | `dur01-hanazua` | 2.52 | accept 790 |
-| `dur01-tails-bg` | 2.52 | complete 789, complete 4402 |
-| `dur01-sarkoth` | 3.31 | complete 790 |
-| `dur01-tails` | 3.40 | complete 789, complete 4402 |
+| `dur01-sarkoth` | 2.52 | complete 790 |
+| `dur01-tails` | 2.65 | complete 789, complete 4402 |
 | `dur01-hanazua-2` | 3.40 | turnin 790, accept 804 |
 | `dur01-camp-3` | 3.73 | turnin 789, turnin 804 |
 | `dur01-galgar-2` | 3.98 | turnin 4402 |
 | `dur01-thazzril` | 4.17 | accept 5441 |
-| `dur01-peons-bg` | 4.17 | complete 5441 |
 | `dur01-vile-familiars` | 4.17 | complete 792 |
 | `dur01-peons` | 4.45 | complete 5441 |
 | `dur01-familiars-done` | 4.45 | turnin 792 |
@@ -272,17 +270,15 @@
 | `dur02-orgnil` | 6.44 | turnin 823 |
 | `dur02-rh-1` | 6.53 | accept 96822 |
 | `dur02-quilboar` | 6.53 | complete 96825, complete 837 |
-| `dur02-tiragarde-bg` | 6.70 | complete 791 |
-| `dur02-tiragarde` | 6.95 | complete 784, complete 96822 |
-| `dur02-chest` | 7.20 | accept 830 |
-| `dur02-scraps` | 7.20 | complete 791 |
+| `dur02-tiragarde` | 6.70 | complete 784, complete 96822 |
+| `dur02-chest` | 7.03 | accept 830 |
+| `dur02-scraps` | 7.03 | complete 791 |
 | `dur02-garthok-2` | 7.20 | turnin 784, turnin 830, accept 825, accept 831 |
-| `dur02-torka-2` | 7.47 | turnin 96825 |
+| `dur02-torka-2` | 7.48 | turnin 96825 |
 | `dur02-furl-2` | 7.60 | turnin 791 |
-| `dur02-rh-2` | 7.73 | turnin 96822 |
-| `dur02-coast-bg` | 7.87 | complete 818 |
-| `dur02-toolboxes` | 8.05 | complete 825 |
-| `dur02-coast` | 8.05 | complete 818 |
+| `dur02-rh-2` | 7.74 | turnin 96822 |
+| `dur02-toolboxes` | 7.88 | complete 825 |
+| `dur02-coast` | 7.88 | complete 818 |
 | `dur02-vornal-2` | 8.05 | turnin 818, accept 97225 |
 | `dur02-gadrin-2` | 8.17 | accept 808, accept 826 |
 | `dur02-velrin-2` | 8.17 | accept 817 |
@@ -291,10 +287,9 @@
 | `dur02-kolkar` | 8.17 | complete 786, complete 99123 |
 | `dur02-vornal-3` | 8.17 | turnin 99123 |
 | `dur02-lar` | 8.30 | turnin 786 |
-| `dur02-isles-bg` | 8.43 | complete 817, complete 815 |
+| `dur02-isles-2` | 8.43 | complete 817, complete 815 |
 | `dur02-matriarch` | 8.50 | complete 97223 |
-| `dur02-isles` | 8.53 | complete 808, complete 826, complete 97225 |
-| `dur02-isles-2` | 8.82 | complete 817, complete 815 |
+| `dur02-isles` | 8.54 | complete 808, complete 826, complete 97225 |
 | `dur02-gadrin-3` | 8.82 | turnin 808, turnin 826, turnin 97225 |
 | `dur02-velrin-3` | 9.22 | turnin 817 |
 | `dur02-senjin-3` | 9.33 | turnin 97223 |
@@ -311,15 +306,15 @@
 | `dur02-lvl-10` | 9.90 | level 10 |
 | `dur02-rh-3` | 10.01 | accept 99051, accept 806 |
 | `dur02-dustrunners` | 10.01 | complete 837 |
-| `dur02-misha` | 10.08 | accept 816 |
-| `dur02-rezlak` | 10.08 | accept 834 |
-| `dur02-sacks` | 10.08 | complete 834 |
-| `dur02-rezlak-2` | 10.08 | turnin 834, accept 835 |
+| `dur02-misha` | 10.09 | accept 816 |
+| `dur02-rezlak` | 10.09 | accept 834 |
+| `dur02-sacks` | 10.09 | complete 834 |
+| `dur02-rezlak-2` | 10.09 | turnin 834, accept 835 |
 | `dur02-harpies` | 10.19 | complete 835 |
 | `dur02-orb` | 10.41 | accept 97281 |
 | `dur02-naga` | 10.41 | complete 99051 |
 | `dur02-rezlak-3` | 10.55 | turnin 835, turnin 97281, accept 97282 |
-| `dur02-crocs` | 10.75 | complete 816 |
+| `dur02-crocs` | 10.76 | complete 816 |
 | `dur02-thunder-ridge` | 10.78 | complete 97282, complete 806 |
 | `dur02-misha-2` | 10.89 | turnin 816 |
 | `dur02-rezlak-4` | 11.00 | turnin 97282 |
@@ -329,7 +324,7 @@
 | `dur02-korghan` | 11.22 | turnin 813, complete 812 |
 | `dur02-nazgrel` | 11.66 | turnin 831 |
 | `dur02-rhinag` | 11.85 / 11.73 | turnin 812 |
-| `dur02-rh-return` | 14.13 / 14.08 | turnin 837, turnin 806, turnin 99051 |
+| `dur02-rh-return` | 14.12 / 14.08 | turnin 837, turnin 806, turnin 99051 |
 
 Ветка чернокнижника (`orc-warlock`):
 

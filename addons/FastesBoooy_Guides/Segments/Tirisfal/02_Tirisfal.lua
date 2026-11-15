@@ -11,13 +11,14 @@
 -- Hub plan (Forever DB). Every goal is a step of its own, in the order of play; where the mobs of a goal are
 -- passed earlier, the notes say "on the way" and a later step at the last pass finishes it.
 --   road  : 365 Simmer, 5481 Gordo (gloom weed on the walk to Brill).
---   Brill1: 86784, 404 (the claws west of the camp, before Brill), 96656 > 96607 > 96658 (camping),
---           383 > 427/99141/99134 (the motivator on the Deathguards around Zygand), 367, Dillinger: 404 > 426 +
---           his report, 8 + hearth; Kristof's report + 97558 at the Rear Guard camp.
---   west  : Gordo's report, 365 pumpkins, 97558 murloc skins, 427 Scarlet Warriors, 99144 escort,
---           367 + 97558 hides and membranes (darkhounds and duskbats north-east of the farm); hearth back.
+--   Brill1: 86784, 96656 > 96607 > 96658 (camping), 383 > 427/99141/99134 (the motivator on the Deathguards
+--           around Zygand), 367, Dillinger: 404 + his report, 8 + hearth; Kristof's report + 97558 at the Rear
+--           Guard camp.
+--   west  : 404 claws (Rotting Dead west of Brill), Gordo's report, 365 pumpkins, 97558 murloc skins, 427 Scarlet
+--           Warriors, 99144 escort, 367 + 97558 hides and membranes (darkhounds and duskbats north-east of the
+--           farm); hearth back.
 --   Brill2: 367/365 > 368/407, 427/99141/99134 > 370, 398, 99144, 374, 358, 407, 354/362/375 (inn),
---           5481 > 5482.
+--           404 > 426, 5481 > 5482.
 --   north : 5482 doom weed and 358 gnolls (same fields), 398 Maggot Eye, 368 coast murlocs, Agamand Mills
 --           east > north > west > south (354, 362, 426, 361), 375 pelts on the way back.
 --   Brill3: 5482 > 99142, 426, 368 > 369, 398, 361, 354/362 > 355, 375, 358/355 > 359.
@@ -38,18 +39,19 @@
 -- Anchors for class files (docs/dev/PLAN.md C.2; level of the base profile before the step, normal run / worst
 -- case where it differs). The trainers of five classes (warrior, rogue, priest, mage, warlock) stand in the
 -- Brill inn, so the Brill anchors are the steps in the inn:
---   ud02-sethearth        6.66 / 6.58  bind in the inn (level 6: gate ud02-lvl-6): training at 6
---   ud02-brill-8          8.23 / 8.19  the level-8 visit, in the inn (Coleman, Gretchen): training at 8. One generic
---                               step of the visit follows on the way out of Brill (Holland), not at a trainer
---   ud02-level-10        10.14 / 10.06  generic gate in Brill, between Zygand and Terrence: training at 10,
+--   ud02-sethearth        6.37 / 6.30  bind in the inn (level 6: gate ud02-lvl-6): training at 6
+--   ud02-brill-8          8.17 / 8.13  the level-8 visit, in the inn (Coleman, Gretchen): training at 8. Two generic
+--                               steps of the visit follow on the way out of Brill (Dillinger, Holland); neither
+--                               is at a trainer
+--   ud02-level-10        10.15 / 10.07  generic gate in Brill, between Zygand and Terrence: training at 10,
 --                               level-10 class quests
---   ud02-keep            11.66 / 11.60  first generic step at Bandarion Keep (Leonid, upstairs)
---   ud02-lvl-12          11.97 / 11.91  generic gate at the keep, before the hearth
---   ud02-hearth-2        12.01 / 12.01  back in the Brill inn: training at 12. ud02-carolai-2 (100 yd west of
+--   ud02-keep            11.67 / 11.60  first generic step at Bandarion Keep (Leonid, upstairs)
+--   ud02-lvl-12          11.98 / 11.92  generic gate at the keep, before the hearth
+--   ud02-hearth-2        12.00 / 12.01  back in the Brill inn: training at 12. ud02-carolai-2 (100 yd west of
 --                               the inn) is the last generic quest step of this visit
---   ud02-fp-uc           12.09 / 12.10  Undercity, Trade Quarter, after the generic quest step of the city:
+--   ud02-fp-uc           12.09  Undercity, Trade Quarter, after the generic quest step of the city:
 --                               trainers, weapon master, class quests
---   ud02-silverpine-road 12.09 / 12.10  last step
+--   ud02-silverpine-road 12.09  last step
 -- The paladin trainer Shari Stilwell stands outside the inn, next to the stables: 99144 (a quest for everyone)
 -- is turned in to her at ud02-shari-99144, and 99152 is a quest of Hilda the Breaker, a paladin trainer at the
 -- keep. The training inserts of the paladin file therefore follow these steps (and ud02-dillinger-report,
@@ -58,7 +60,7 @@
 -- Level gates (docs/dev/PLAN.md B.8), all plain and class-neutral (kills of the base profile, normal / worst):
 --   ud02-lvl-6     0 / 0  367 and 97558 need level 6; every class trains at 6 in Brill.
 --   ud02-level-10  0 / 0  96895 needs level 10; every class trains at 10 in Brill.
---   ud02-lvl-12    3 / 9  trainer-hub gate before the hearth to Brill: the trainers in Brill and in the
+--   ud02-lvl-12    2 / 8  trainer-hub gate before the hearth to Brill: the trainers in Brill and in the
 --                         Undercity have new ranks at 12, and the first Silverpine quests need 12 (421, gate
 --                         h13-lvl-12: 0 kills after this one).
 if not FastesBoooy.AddLibraryInsert then return end
@@ -83,9 +85,9 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "По дороге на восток к Бриллу соберите 3 Мрачной травы: кусты растут по обе стороны дороги.",
                    en = "On the road east to Brill, pick 3 Gloom Weed: the plants grow on both sides of the "
                        .. "road." } },
-        { id = "ud02-brill-gate", accept = { 86784, 404 }, npc = { 1742, 1496 }, at = { 1420, 58.35, 51.42 },
-          note = { ru = "Вход в Брилл: стражники смерти Бартоломью и Диллинджер.",
-                   en = "Brill entrance: Deathguards Bartholomew and Dillinger." } },
+        { id = "ud02-brill-gate", accept = 86784, npc = 1742, at = { 1420, 58.35, 51.42 },
+          note = { ru = "Вход в Брилл: стражник смерти Бартоломью.",
+                   en = "Brill entrance: Deathguard Bartholomew." } },
         { id = "ud02-branches", complete = 86784, at = { 1420, 56.9, 52.0 },
           note = { ru = "6 Сухих веток на земле у входа в Брилл.",
                    en = "6 Dry Branches on the ground around the Brill entrance." } },
@@ -98,22 +100,18 @@ FastesBoooy.AddLibrarySegment({
         { id = "ud02-eleanor-2", turnin = 96607, accept = 96658, npc = 265812, at = { 1420, 57.28, 55.49 },
           note = { ru = "Элинор Шеклтон: следующее задание сдаётся у таверны Брилла.",
                    en = "Eleanor Shackleton: her next quest is turned in by the Brill inn." } },
-        -- 404 right here, before Brill: the Rotting Dead and Ravaged Corpses stand 180 yd west of the camp, and
-        -- the claws are turned in to Dillinger on the first visit (ud02-dillinger-report), not on a later trip.
-        { id = "ud02-putrid-claws", complete = 404, at = { 1420, 53.3, 54.4 },
-          note = { ru = "Гниющие мертвецы и растерзанные трупы к западу от лагеря: 7 гнилых когтей "
-                       .. "(сдаются Диллинджеру у входа в Брилл).",
-                   en = "Rotting Dead and Ravaged Corpses west of the camp: 7 Putrid Claws (turned in to Dillinger "
-                       .. "at the Brill entrance)." } },
         -- Requirement and trainer-hub gate: 367 (Johaan) and 97558 (Rear Guard camp) need level 6, and every
-        -- class trains at 6 in Brill. Part of the XP of the way to it are the estimated XP of the three camp
-        -- quests (86784, 96656, 96607): the gate is the guarantee. `at`: the same Rotting Dead (5-6) and Ravaged
-        -- Corpses (6-7) as 404.
-        { id = "ud02-lvl-6", level = 6, at = { 1420, 53.5, 54.2 },
+        -- class trains at 6 in Brill. The base profile is at 6.28 here (6.20 in the worst case, 0 kills), but
+        -- about 1,700 XP of the way to it are the estimated XP of the three camp quests (86784, 96656, 96607):
+        -- the gate is the guarantee. `at`: the Rotting Dead (5-6) and Ravaged Corpses (6-7) 120 yd west of the
+        -- camp. They drop the claws of 404 only with the quest in the log, and Dillinger hands it out after this
+        -- gate (ud02-dillinger-report): a grind here cannot finish ud02-putrid-claws early and make it the forward
+        -- anchor that would count the training of the first Brill visit as done (validator: skip-ahead).
+        { id = "ud02-lvl-6", level = 6, at = { 1420, 54.6, 55.6 },
           note = { ru = "6-й уровень перед Бриллом: он нужен для задания аптекаря Йохана, и у тренеров в Брилле "
-                       .. "новые умения. Не хватает — бейте тех же гниющих мертвецов и растерзанные трупы.",
+                       .. "новые умения. Не хватает — гниющие мертвецы и растерзанные трупы к западу от лагеря.",
                    en = "Level 6 before Brill: Apothecary Johaan's quest needs it, and the trainers in Brill have "
-                       .. "new ranks. Short: more of the same Rotting Dead and Ravaged Corpses." } },
+                       .. "new ranks. Short: the Rotting Dead and Ravaged Corpses west of the camp." } },
 
         ------------------------------------------------------------------
         -- Brill, first visit (level 6)
@@ -129,12 +127,12 @@ FastesBoooy.AddLibrarySegment({
                        .. "to Zygand, at the stables and by the inn." } },
         { id = "ud02-johaan-1", accept = 367, npc = 1518, at = { 1420, 59.45, 52.40 },
           note = { ru = "Аптекарь Йохан (нужен 6-й уровень).", en = "Apothecary Johaan (needs level 6)." } },
-        { id = "ud02-dillinger-report", complete = { [99141] = { 1 } }, turnin = 404, accept = 426, npc = 1496,
+        { id = "ud02-dillinger-report", complete = { [99141] = { 1 } }, accept = 404, npc = 1496,
           at = { 1420, 58.2, 51.45 },
-          note = { ru = "Диллинджер у входа: сдайте когти, возьмите его следующее задание (Мельницы Агамандов — "
-                       .. "позже, на северном круге) и попросите отчёт для палача Зиганда (вариант диалога).",
-                   en = "Dillinger at the entrance: turn in the claws, take his next quest (Agamand Mills - later, "
-                       .. "on the north loop) and ask for the report for Executor Zygand (gossip option)." } },
+          note = { ru = "Диллинджер у входа: возьмите его задание (гнилые когти — на западном круге) и попросите "
+                       .. "отчёт для палача Зиганда (вариант диалога).",
+                   en = "Dillinger at the entrance: take his quest (the Putrid Claws come on the west loop) and ask "
+                       .. "for the report for Executor Zygand (gossip option)." } },
         { id = "ud02-sethearth", turnin = 8, sethearth = "Brill", npc = 5688, at = { 1420, 61.72, 52.05 },
           note = { ru = "Трактирщица Рене: сдайте письмо и сделайте таверну домом. В этой таверне стоят тренеры "
                        .. "большинства классов.",
@@ -160,6 +158,13 @@ FastesBoooy.AddLibrarySegment({
         -- The darkhounds and duskbats of 367 and 97558 (objectives 1, 2) live all along this loop; the step that
         -- finishes them is ud02-darkhounds, the last field step before the hearth. 97558 objective 3 (murloc
         -- skins) is ud02-murloc-skins.
+        -- 404: the Rotting Dead and Ravaged Corpses stand on the way from the Rear Guard camp west to Gordo. The
+        -- `at` of the gate ud02-lvl-6 lies 70 yd from here, but the gate is met at the camp already (6.13 / 6.05
+        -- before ud02-campfire), so the player does not walk there, and 404 is taken after the gate on purpose
+        -- (see there): this is the first pass (travel-revisit).
+        { id = "ud02-putrid-claws", complete = 404, at = { 1420, 53.3, 57.0 }, ok = "travel-revisit",
+          note = { ru = "Гниющие мертвецы и растерзанные трупы на пути на запад: 7 гнилых когтей.",
+                   en = "Rotting Dead and Ravaged Corpses on the way west: 7 Putrid Claws." } },
         { id = "ud02-gordo-report", complete = { [99141] = { 3 } }, npc = 10666, at = { 1420, 43.06, 54.69 },
           note = { ru = "Гордо на дороге на запад: отчёт для Зиганда (вариант диалога). По пути: гончие и ночные "
                        .. "мыши — кровь гончих (5) для Йохана, шкуры гончих (6) и перепонки ночных мышей (8) для "
@@ -223,6 +228,8 @@ FastesBoooy.AddLibrarySegment({
                        .. "тренеры большинства классов.",
                    en = "Coleman Farthing and Gretchen Dedmar in the inn (need level 7). The trainers "
                        .. "of most classes stand here." } },
+        { id = "ud02-dillinger-2", turnin = 404, accept = 426, npc = 1496, at = { 1420, 58.2, 51.45 },
+          note = { ru = "Диллинджер у входа в Брилл.", en = "Dillinger at the Brill entrance." } },
         { id = "ud02-holland-2", turnin = 5481, accept = 5482, npc = 10665, at = { 1420, 57.44, 48.85 },
           note = { ru = "Младший аптекарь Холланд на северо-западной окраине Брилла.",
                    en = "Junior Apothecary Holland on the north-west edge of Brill." } },

@@ -58,11 +58,13 @@ FastesBoooy.AddLibrarySegment({
         { id = "sd02-nyalah", accept = 93317, npc = 257006, at = { 2521, 60.64, 72.66 },
           note = {
               ru = "Бегите на восток в Валанаар (медведицу Ur'endra, 10 ур., у 54,65 обойдите). "
-                  .. "Nyalah Brightfire на западном краю деревни: мясо Windsong Crawler (крабы по всем низинам) - "
-                  .. "бейте их по пути, доберёте у Fendaal.",
+                  .. "Nyalah Brightfire на западном краю деревни: задание на мясо Windsong Crawler (крабы по всем "
+                  .. "низинам). Мясо падает только с заданием - бейте крабов после того, как возьмёте его (по пути "
+                  .. "к саду), доберёте у Fendaal.",
               en = "Run east to Valanaar (go around the level-10 bear Ur'endra at 54,65). "
-                  .. "Nyalah Brightfire on the west side of the village: Windsong Crawler meat (crabs all over the "
-                  .. "lowlands) - kill them on the way, you finish them at Fendaal.",
+                  .. "Nyalah Brightfire on the west side of the village: a quest for Windsong Crawler meat (crabs "
+                  .. "all over the lowlands). The meat only drops once you have the quest - kill crabs after taking "
+                  .. "it (on the way to the orchard); you finish them at Fendaal.",
           } },
         { id = "sd02-sethearth", sethearth = "Valanaar", npc = 255940, at = { 2521, 62.19, 72.61 },
           note = {

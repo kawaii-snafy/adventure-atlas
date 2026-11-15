@@ -62,8 +62,9 @@
 --   42+44  after h-44-uc-arrive   44.02 / 44.00: the War Quarter (~70 s; Orgrimmar at 41.0 is before 42).
 --   46+48  after h-50-org-arrive  49.41 / 49.37: Ur'kyo, 50 yd from the step (Uthel'nay).
 --   50+52  after h52-uc-81954     52.70 / 52.67: the War Quarter, ~250 yd from Owen Thadd (~60 s).
---   8254   after h-53-org-arrive  optional, 52.73: Cenarion Aid at Ur'kyo, Ogtinc in Azshara, 8255 (4 Healthy Courser
---                                 Glands from the Mosshoof Coursers south of the field loop): 5,610 XP for ~2.5 min.
+--   8254   after h-53-org-arrive  optional, 52.73: Cenarion Aid at Ur'kyo, Ogtinc in Azshara (before h-53-kim-jael),
+--                                 8255 (4 Healthy Courser Glands from the Mosshoof Coursers south of the field loop,
+--                                 turned in after h-53-azshara-field-loop): 5,610 XP for ~2.5 min.
 --   54     after h56-sethearth-org 55.07: the Valley of Spirits between the inn and the flight master (~50 s).
 --   56     after h-58-org-arrive  57.21 / 57.17: the Valley of Spirits between the inn and the gate (~30 s).
 --   58+60  after h-60-end         optional: hearth to the Undercity (bound there by the path), the War Quarter.
@@ -580,8 +581,10 @@ insert({
                        .. "zeppelin." } },
     },
 })
--- Cenarion Aid (optional): 8254 at Ur'kyo, Ogtinc in central Azshara on the way to the field loop, the Mosshoof
--- Coursers south of the loop, back to Ogtinc on the way to the next shared step. 8256 / 8257 are not taken.
+-- Cenarion Aid (optional): 8254 at Ur'kyo, Ogtinc in central Azshara on the way from Valormok to Kim'jael (before
+-- 5534 is in the log: the naga around his hill could drop its rune and fast-forward a later visit), the Mosshoof
+-- Coursers south of the field loop, back to Ogtinc on the way to the next shared step (after the rune). 8256 / 8257
+-- are not taken.
 insert({
     after = "h-53-org-arrive",
     class = "PRIEST",
@@ -594,13 +597,14 @@ insert({
     },
 })
 insert({
-    before = "h-53-azshara-field-loop",
+    before = "h-53-kim-jael",
     class = "PRIEST",
     steps = {
         { id = "pri-8254-ogtinc", turnin = 8254, accept = 8255, optional = true, npc = 8405, at = OGTINC,
-          note = { ru = "Огтинк на холме в центре Азшары (42,43), по пути на юго-запад: «Железы скакунов».",
-                   en = "Ogtinc on the hill in central Azshara (42,43), on the way south-west: Of Coursers We "
-                       .. "Know." } },
+          note = { ru = "Огтинк на холме в центре Азшары (42,43), по пути на северо-восток к Ким'джаелю: «Железы "
+                       .. "скакунов» (скакуны — позже, к югу от руин Эльдарата).",
+                   en = "Ogtinc on the hill in central Azshara (42,43), on the way north-east to Kim'jael: Of Coursers "
+                       .. "We Know (the coursers come later, south of the Ruins of Eldarath)." } },
     },
 })
 insert({

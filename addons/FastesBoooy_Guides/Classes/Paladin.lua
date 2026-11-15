@@ -19,7 +19,7 @@
 --     after ud01-cocoons          91208 (Frightened Paladin, west of the church, on the way back from the cave)
 --     after ud01-98389            91208 turned in (Aramis; the generic 98389 is turned in to him right before)
 --   Brill, Shari Stilwell by the stables (outside the inn, between the entrance and the inn)
---     after ud02-dillinger-report  6.8   91209 turned in, training at 6, Wooden Mallet (optional): Shari stands on
+--     after ud02-dillinger-report  6.5   91209 turned in, training at 6, Wooden Mallet (optional): Shari stands on
 --                                 the way from Dillinger to the inn, so the visit comes before ud02-sethearth
 --     after ud02-shari-99144  8.3  training at 8 (99144, a quest of every class, is turned in to her first)
 --     after ud02-level-10    10.2  91282 "A Second Home", training at 10
@@ -295,9 +295,9 @@ insert({
                    en = "Murloc camp on the lake shore just east of the keep: 8 Vile Fin Attackers and 8 Seers." } },
         { id = "pal-tir-smasher", turnin = 91285, accept = 91294, npc = 246349, at = { 1420, 21.85, 45.23 },
           note = { ru = "Бретон Сэмюэлс. Награда: Плавниковый крушитель (двуручная булава; не Головолом) — главное "
-                       .. "оружие до Молота Каменного леса (855, ~19 ур.).",
+                       .. "оружие до Молота Каменного леса (855, ~18 ур.).",
                    en = "Breton Samuels. Reward: Driftwood Smasher (two-handed mace; not Skullthumper) - your main "
-                       .. "weapon until the Stonewood Hammer from 855 (~level 19)." } },
+                       .. "weapon until the Stonewood Hammer from 855 (~level 18)." } },
         { id = "pal-tir-hilda", complete = { [91294] = { 1 } }, npc = 246389, at = { 1420, 21.96, 47.25 },
           note = { ru = "Хильда Сокрушительница у южной стены крепости: поговорите с ней (обход крепости).",
                    en = "Hilda the Breaker by the south wall of the keep: talk to her (the tour of the grounds)." } },

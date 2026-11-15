@@ -121,7 +121,13 @@ FastesBoooy.AddLibrarySegment({
               ru = "Harken Windtotem. Тренеры классов стоят вокруг Mull Thunderhorn.",
               en = "Harken Windtotem. The class trainers stand around Mull Thunderhorn.",
           } },
-        { id = "mul02-zarlman", turnin = 767, accept = 771, npc = 3054, at = { 1412, 46.90, 61.20 } },
+        { id = "mul02-zarlman", turnin = 767, accept = 771, npc = 3054, at = { 1412, 46.90, 61.20 },
+          note = {
+              ru = "Zarlman Two-Moons. Янтарные жёлуди (Ambercorn) лежат под деревьями по всему Мулгору: увидите - "
+                  .. "подберите 2; камни - у колодца Winterhoof.",
+              en = "Zarlman Two-Moons. Ambercorns lie under the trees all over Mulgore: pick 2 when you see them; the "
+                  .. "stones are at the Winterhoof well.",
+          } },
         { id = "mul02-yaw", accept = 96130, npc = 3065, at = { 1412, 46.90, 59.60 } },
         { id = "mul02-ahab", accept = 99411, npc = 277182, at = { 1412, 47.28, 57.63 },
           note = {
@@ -203,22 +209,21 @@ FastesBoooy.AddLibrarySegment({
         ------------------------------------------------------------------
         -- South-east: Winterhoof Water Well, harpies, Malah Longwind (level 8-9)
         ------------------------------------------------------------------
-        { id = "mul02-ambercorn", complete = { [771] = { 2 } }, object = 2912, at = { 1412, 50.10, 66.10 },
-          note = {
-              ru = "На юго-восток к колодцу Winterhoof: по дороге 2 янтарных жёлудя (Ambercorn) под деревьями - "
-                  .. "у 50.4, 64.2 и 50.1, 66.1 (ещё один у 49.0, 68.7).",
-              en = "South-east towards the Winterhoof Water Well: 2 Ambercorns under the trees on the way - at "
-                  .. "50.4, 64.2 and 50.1, 66.1 (one more at 49.0, 68.7).",
-          } },
+        -- The Ambercorns of 771 have no step of their own: they lie all over Mulgore (the walk to Chakuyak passes
+        -- enough of them), so a step for them alone would be done early, become the forward anchor and skip the
+        -- Tender Strider Meat (collect) of mul02-west. mul02-wellstones finishes all of 771 (the Well Stones are only
+        -- at the wells).
         { id = "mul02-winterhoof", complete = 754, use = 5411, at = { 1412, 51.76, 68.43 },
           note = {
-              ru = "Колодец Winterhoof: используйте тотем у колодца.",
-              en = "The Winterhoof Water Well: use the totem at the well.",
+              ru = "На юго-восток к колодцу Winterhoof: используйте тотем у колодца. По пути, если ещё нет, подберите 2 "
+                  .. "янтарных жёлудя (Ambercorn) под деревьями - у 50.4, 64.2 и 50.1, 66.1 (ещё один у 49.0, 68.7).",
+              en = "South-east to the Winterhoof Water Well: use the totem at the well. On the way, if you do not have "
+                  .. "them yet, pick 2 Ambercorns under the trees - at 50.4, 64.2 and 50.1, 66.1 (one more at 49.0, 68.7).",
           } },
         { id = "mul02-wellstones", complete = 771, object = { 2910, 2912 }, at = { 1412, 51.80, 68.60 },
           note = {
-              ru = "Там же 2 камня колодца (Well Stone).",
-              en = "Two Well Stones at the same well.",
+              ru = "Там же 2 камня колодца (Well Stone). Жёлудей не хватает - деревья у 49.0, 68.7 и 50.1, 66.1.",
+              en = "Two Well Stones at the same well. Ambercorns missing: the trees at 49.0, 68.7 and 50.1, 66.1.",
           } },
         { id = "mul02-harpies", complete = 743, at = { 1412, 62.0, 71.8 },
           note = {

@@ -224,96 +224,90 @@
 | Шаг | Уровень до шага | Действия |
 |---|---|---|
 | `mul01-start` | 1.00 | accept 747, accept 752 |
-| `mul01-striders-bg` | 1.00 | complete 747 |
-| `mul01-greatmother` | 2.65 | turnin 752, accept 753 |
-| `mul01-pitcher` | 2.75 | complete 753 |
-| `mul01-striders` | 2.75 | complete 747 |
-| `mul01-chief-1` | 2.75 | turnin 753, accept 755 |
-| `mul01-hunt` | 3.02 | turnin 747, accept 750 |
-| `mul01-cougars` | 3.14 | complete 750 |
-| `mul01-graytongue` | 3.78 | turnin 755, accept 757, accept 95805 |
-| `mul01-antur` | 3.96 | accept 1656 |
-| `mul01-lvl-4` | 3.96 | level 4 |
-| `mul01-ravine` | 4.00 | turnin 750, accept 780, accept 3376 |
-| `mul01-boars-bg` | 4.12 | complete 780 |
-| `mul01-belts` | 4.86 | complete 757 |
-| `mul01-sharptusk` | 5.17 | complete 3376 |
-| `mul01-map` | 5.22 | accept 781 |
-| `mul01-boars` | 5.22 | complete 780 |
-| `mul01-fire` | 5.22 | turnin 95805 |
-| `mul01-grull-3` | 5.34 | turnin 780 |
-| `mul01-windfeather` | 5.50 | turnin 3376 |
-| `mul01-leave` | 5.74 | turnin 757, turnin 781, accept 763, accept 96659 |
-| `mul02-kaga` | 6.03 | turnin 96659, accept 96605 |
-| `mul02-campfire` | 6.18 | complete 96605 |
-| `mul02-kaga-2` | 6.18 | turnin 96605, accept 96661 |
-| `mul02-lvl-6` | 6.33 | level 6 |
-| `mul02-inn` | 6.33 | turnin 1656, sethearth Bloodhoof Village |
-| `mul02-ruul` | 6.36 | accept 743 |
-| `mul02-baine-1` | 6.36 | turnin 763, accept 767, accept 745, accept 746 |
-| `mul02-wildrunner` | 6.46 | accept 99079 |
-| `mul02-mull-1` | 6.46 | accept 748 |
-| `mul02-krang` | 6.46 | turnin 99108, accept 99108, complete 99108 |
-| `mul02-bh-1` | 6.61 | accept 761 |
-| `mul02-zarlman` | 6.61 | turnin 767, accept 771 |
-| `mul02-maur` | 6.62 | accept 766 |
-| `mul02-pyall` | 6.62 | turnin 96661, complete 96661 |
-| `mul02-yaw` | 6.78 | accept 96130 |
-| `mul02-ahab` | 6.78 | accept 99411 |
-| `mul02-west-bg` | 6.78 | complete 748, complete 761 |
-| `mul02-mazz-bg` | 7.11 | complete 766 |
-| `mul02-chakuyak` | 7.19 | complete 96130 |
-| `mul02-palemane` | 7.21 | complete 745 |
-| `mul02-perith` | 7.51 | accept 98430 |
-| `mul02-escort` | 7.51 | complete 98430 |
-| `mul02-west` | 7.51 | complete 748, complete 761 |
-| `mul02-kyle` | 7.51 | complete 99411 |
-| `mul02-yaw-2` | 7.51 | turnin 96130 |
-| `mul02-ahab-2` | 7.58 | turnin 99411 |
-| `mul02-baine-2` | 7.72 | turnin 745 |
-| `mul02-mull-2` | 7.84 | turnin 748, accept 754 |
-| `mul02-bh-2` | 7.94 | turnin 761 |
-| `mul02-winterhoof` | 8.08 | complete 754 |
-| `mul02-wellstones` | 8.08 | complete 771 |
-| `mul02-harpies` | 8.08 | complete 743 |
-| `mul02-malah` | 8.23 | turnin 99079, accept 99081 |
-| `mul02-morin` | 8.37 | accept 749 |
-| `mul02-ruul-2` | 8.37 | turnin 743 |
-| `mul02-wildrunner-2` | 8.50 | turnin 99081, accept 99101 |
+| `mul01-greatmother` | 1.00 | turnin 752, accept 753 |
+| `mul01-pitcher` | 1.21 | complete 753 |
+| `mul01-striders` | 1.21 | complete 747 |
+| `mul01-chief-1` | 2.74 | turnin 753, accept 755 |
+| `mul01-hunt` | 3.01 | turnin 747, accept 750 |
+| `mul01-cougars` | 3.13 | complete 750 |
+| `mul01-graytongue` | 3.77 | turnin 755, accept 757, accept 95805 |
+| `mul01-antur` | 3.95 | accept 1656 |
+| `mul01-lvl-4` | 3.95 | level 4 |
+| `mul01-ravine` | 4.03 | turnin 750, accept 780, accept 3376 |
+| `mul01-belts` | 4.15 | complete 757 |
+| `mul01-sharptusk` | 4.57 | complete 3376 |
+| `mul01-map` | 4.63 | accept 781 |
+| `mul01-boars` | 4.63 | complete 780 |
+| `mul01-fire` | 5.23 | turnin 95805 |
+| `mul01-grull-3` | 5.36 | turnin 780 |
+| `mul01-windfeather` | 5.52 | turnin 3376 |
+| `mul01-leave` | 5.76 | turnin 757, turnin 781, accept 763, accept 96659 |
+| `mul02-kaga` | 6.04 | turnin 96659, accept 96605 |
+| `mul02-campfire` | 6.19 | complete 96605 |
+| `mul02-kaga-2` | 6.19 | turnin 96605, accept 96661 |
+| `mul02-lvl-6` | 6.34 | level 6 |
+| `mul02-inn` | 6.34 | turnin 1656, sethearth Bloodhoof Village |
+| `mul02-ruul` | 6.37 | accept 743 |
+| `mul02-baine-1` | 6.37 | turnin 763, accept 767, accept 745, accept 746 |
+| `mul02-wildrunner` | 6.47 | accept 99079 |
+| `mul02-mull-1` | 6.47 | accept 748 |
+| `mul02-krang` | 6.47 | turnin 99108, accept 99108, complete 99108 |
+| `mul02-bh-1` | 6.62 | accept 761 |
+| `mul02-zarlman` | 6.62 | turnin 767, accept 771 |
+| `mul02-yaw` | 6.63 | accept 96130 |
+| `mul02-ahab` | 6.63 | accept 99411 |
+| `mul02-maur` | 6.63 | accept 766 |
+| `mul02-pyall` | 6.63 | turnin 96661, complete 96661 |
+| `mul02-chakuyak` | 6.79 | complete 96130 |
+| `mul02-palemane` | 6.82 | complete 745 |
+| `mul02-perith` | 7.19 | accept 98430 |
+| `mul02-escort` | 7.19 | complete 98430 |
+| `mul02-west` | 7.19 | complete 748, complete 761, complete 766, collect 287505 |
+| `mul02-kyle` | 7.52 | complete 99411 |
+| `mul02-yaw-2` | 7.52 | turnin 96130 |
+| `mul02-ahab-2` | 7.59 | turnin 99411 |
+| `mul02-baine-2` | 7.73 | turnin 745 |
+| `mul02-mull-2` | 7.85 | turnin 748, accept 754 |
+| `mul02-bh-2` | 7.95 | turnin 761 |
+| `mul02-winterhoof` | 8.09 | complete 754 |
+| `mul02-wellstones` | 8.09 | complete 771 |
+| `mul02-harpies` | 8.09 | complete 743 |
+| `mul02-malah` | 8.24 | turnin 99079, accept 99081 |
+| `mul02-morin` | 8.38 | accept 749 |
+| `mul02-ruul-2` | 8.38 | turnin 743 |
+| `mul02-wildrunner-2` | 8.51 | turnin 99081, accept 99101 |
 | `mul02-baine-3` | 8.65 | turnin 99101, accept 99080 |
-| `mul02-bh-3` | 8.79 | turnin 754, accept 756 |
-| `mul02-zarlman-2` | 8.89 | turnin 771, accept 772 |
-| `mul02-claws-bg` | 9.01 | complete 756, complete 766 |
-| `mul02-crate` | 9.17 | turnin 749, accept 751 |
-| `mul02-claws` | 9.26 | complete 756, complete 766 |
+| `mul02-bh-3` | 8.80 | turnin 754, accept 756 |
+| `mul02-zarlman-2` | 8.90 | turnin 771, accept 772 |
+| `mul02-claws` | 9.01 | complete 756, complete 766 |
+| `mul02-crate` | 9.18 | turnin 749, accept 751 |
 | `mul02-morin-2` | 9.26 | turnin 751, accept 764, accept 765 |
 | `mul02-venture` | 9.34 | complete 764 |
-| `mul02-fizsprocket` | 9.57 | complete 765 |
+| `mul02-fizsprocket` | 9.58 | complete 765 |
 | `mul02-plans` | 9.61 | accept 98424 |
 | `mul02-notes` | 9.61 | complete 98424 |
 | `mul02-notes-2` | 9.61 | complete 98424 |
 | `mul02-galak` | 9.61 | complete 99080 |
-| `mul02-morin-3` | 9.76 | turnin 764, turnin 765, turnin 98424 |
-| `mul02-lvl-10` | 10.05 | level 10 |
-| `mul02-baine-4` | 10.05 | turnin 99080, accept 99082 |
+| `mul02-morin-3` | 9.77 | turnin 764, turnin 765, turnin 98424 |
+| `mul02-lvl-10` | 10.06 | level 10 |
+| `mul02-baine-4` | 10.06 | turnin 99080, accept 99082 |
 | `mul02-bh-4` | 10.14 | turnin 756, accept 758 |
 | `mul02-maur-2` | 10.22 | turnin 766 |
-| `mul02-thunderhorn` | 10.31 | complete 758 |
-| `mul02-forge` | 10.31 | complete 746 |
-| `mul02-wiserunner` | 10.31 | turnin 772, accept 773 |
-| `mul02-baine-5` | 10.37 | turnin 746 |
+| `mul02-forge` | 10.32 | complete 746 |
+| `mul02-wiserunner` | 10.32 | turnin 772, accept 773 |
+| `mul02-thunderhorn` | 10.38 | complete 758 |
+| `mul02-baine-5` | 10.38 | turnin 746 |
 | `mul02-mull-5` | 10.47 | turnin 758, accept 759 |
 | `mul02-bh-5` | 10.56 | accept 861 |
-| `mul02-north-bg` | 10.56 | complete 759, complete 861 |
-| `mul02-raintotem` | 10.74 | accept 833 |
-| `mul02-interlopers` | 10.74 | complete 833 |
-| `mul02-spirit` | 10.82 | turnin 773, accept 775 |
-| `mul02-raintotem-2` | 10.94 | turnin 833 |
-| `mul02-north` | 11.02 | complete 759, complete 861 |
+| `mul02-raintotem` | 10.56 | accept 833 |
+| `mul02-interlopers` | 10.56 | complete 833 |
+| `mul02-spirit` | 10.65 | turnin 773, accept 775 |
+| `mul02-raintotem-2` | 10.76 | turnin 833 |
+| `mul02-north` | 10.84 | complete 759, complete 861 |
 | `mul02-hearth` | 11.02 | hearth Bloodhoof Village |
 | `mul02-bh-6` | 11.02 | turnin 759, accept 760 |
-| `mul02-tb-lift` | 11.11 | go |
-| `mul02-tb` | 11.11 | turnin 775, turnin 98430, turnin 99082, accept 776 |
+| `mul02-tb-lift` | 11.12 | go |
+| `mul02-tb` | 11.12 | turnin 775, turnin 98430, turnin 99082, accept 776 |
 | `mul02-fp-tb` | 11.32 | fp Thunder Bluff |
 | `mul02-wildmane` | 11.32 | complete 760 |
 | `mul02-arrachea` | 11.32 | complete 776 |
@@ -322,19 +316,19 @@
 | `mul03-taurajo` | 11.46 | fp Camp Taurajo |
 | `mul03-kirge` | 11.46 | accept 854 |
 | `mul03-thork` | 11.46 | turnin 854 |
-| `mul03-jahan` | 11.48 | accept 6361 |
-| `mul03-fp-xroads` | 11.48 | turnin 6361, accept 6362, fp The Crossroads |
+| `mul03-jahan` | 11.49 | accept 6361 |
+| `mul03-fp-xroads` | 11.49 | turnin 6361, accept 6362, fp The Crossroads |
 | `mul03-fly-tb` | 11.51 | fly Thunder Bluff |
 | `mul03-ahanu` | 11.51 | turnin 6362, accept 6363 |
-| `mul03-cairne` | 11.55 | turnin 776 |
+| `mul03-cairne` | 11.56 | turnin 776 |
 | `mul03-melor` | 11.70 | turnin 861, accept 860 |
-| `mul03-hamuul` | 11.79 | turnin 98435, accept 886 |
+| `mul03-hamuul` | 11.80 | turnin 98435, accept 886 |
 | `mul03-tal` | 11.84 | turnin 6363, accept 6364 |
 | `mul03-fly-xroads` | 11.87 | fly The Crossroads |
 | `mul03-jahan-2` | 11.87 | turnin 6364 |
-| `mul03-xroads` | 11.98 | turnin 860, turnin 886 |
-| `mul03-far-watch` | 12.00 | go |
-| `mul03-org-gate` | 12.00 | go |
+| `mul03-xroads` | 11.99 | turnin 860, turnin 886 |
+| `mul03-far-watch` | 12.01 | go |
+| `mul03-org-gate` | 12.01 | go |
 
 ## 10. Как перепроверить
 

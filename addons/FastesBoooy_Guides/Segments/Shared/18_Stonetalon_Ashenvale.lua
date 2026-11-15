@@ -21,13 +21,13 @@
 --           Tauren: they know the point) or on foot (Orc, Scourge, Troll); 853 (Zamah) first, then Tal: the
 --           walkers learn the flight point there (h18-fp-tb), everybody flies to Ratchet.
 --   east  : Ratchet 865 (Mebok), 888 (Gazlowe); zhevra carcass -> Ishamuhale 882; 821 (optional keg quest:
---           matriarch tusks + plainstrider kidneys around the same tree); Stagnant Oasis 880 shells (+ Kolkar
---           bracers 855); hearth.
+--           matriarch tusks + plainstrider kidneys around the same tree); Stagnant Oasis 880 shells; hearth.
 --   CT    : 882 > 907 (Jorn); main Bristleback camp NE of the camp: 878 + 899 tusks, Stormsnout blood 907 (+ the
 --           821 horn, optional); 878 > 5052; 907 > 913, a Thunderhawk Cloudscraper for 913, Owatanka 884 (optional,
 --           he roams the same slope); fly to the Crossroads.
---   XR/W  : 899 + 880 > 1489 (Mankrik, Tonga); Lushwater: Hezrul 852 + bracers 855; Regthar; Witchwing Slayers
---           875 on the way to the border.
+--   XR/W  : 899 + 880 > 1489 (Mankrik, Tonga); Lushwater: Hezrul 852; Regthar; Witchwing Slayers 875 on the way
+--           to the border. (The Kolkar bracers 855 are finished at Verog and turned in in h-15: the Kolkar here,
+--           12-16, are mostly grey at 19-20, and finishing 855 here breaks the grind-baseline gate.)
 --   ST 1  : Seereth 1062 + Makaba 6548; Grimtotems; 6548 > 6629; Grundig 6629 + Kaya escort 6523; 6629/6523 >
 --           6401; Xen'Zilla 6461; the 6461 creepers along the path north-west to Ziz; Ziz 1483 > 1093; Windshear
 --           Crag: loggers 1062, operators 1093 (venomspitters and eggs on the way); gate h18-lvl-20 (still at the
@@ -78,8 +78,7 @@
 -- Automation notes: transient steps (fp, fly, hearth, sethearth) come after the quest steps at the same place; a
 -- `complete` whose goal the player may finish early on the way (6461 creepers, 821) has no transient step between
 -- the place where those mobs start and its own step, otherwise the engine's anchor could fast-forward a flight or
--- the hearth. Bracers 855 only appear in a combined step here ({852, 855} at Lushwater): the h-15 goal may already
--- be done. 899 (accepted in h-15, tusks may drop early) is only completed together with 878 and turned in
+-- the hearth. 899 (accepted in h-15, tusks may drop early) is only completed together with 878 and turned in
 -- together with 880 (finished at the Stagnant Oasis here), never in a step of its own. 821 (optional keg quest,
 -- taken in h-15 only if the keg was found) has optional steps only: its tusks and kidneys right after Ishamuhale,
 -- its horn right after the Stormsnouts (objectives 1 + 2 and 3, so neither forwards the other), the turn-in at
@@ -178,10 +177,8 @@ FastesBoooy.AddLibrarySegment({
                        .. "Savannah Matriarchs (17-18) and 5 Plainstrider Kidneys from the Ornery Plainstriders. The Thunder "
                        .. "Lizard Horn comes later, from the Stormsnouts near Camp Taurajo. No such quest: press Forward." } },
         { id = "h18-shells", complete = 880, at = { 1413, 55.0, 42.4 },
-          note = { ru = "На юго-запад к Застойному оазису: 8 изменённых панцирей с черепах в воде. По пути бейте колкаров вокруг "
-                       .. "(наручи для 855 - доберёте у Цветущего оазиса).",
-                   en = "South-west to the Stagnant Oasis: 8 Altered Snapjaw Shells from the snapjaws in the water. Kill the Kolkar "
-                       .. "around it on the way (bracers for 855 - you finish them at the Lushwater Oasis)." } },
+          note = { ru = "На юго-запад к Застойному оазису: 8 изменённых панцирей с черепах в воде.",
+                   en = "South-west to the Stagnant Oasis: 8 Altered Snapjaw Shells from the snapjaws in the water." } },
         { id = "h18-hearth-taurajo", hearth = "Camp Taurajo", at = { 1413, 45.58, 59.04 },
           note = { ru = "Камень возвращения в Лагерь Таурахо. Ещё на откате — бегите на север к Перекрёстку "
                        .. "и летите.",
@@ -252,12 +249,11 @@ FastesBoooy.AddLibrarySegment({
           note = { ru = "Сначала Манкрик (899, клыки), потом Тонга Рунный Тотем рядом (880). 1489 сдаётся в Громовом Утёсе на 20-м.",
                    en = "Mankrik first (899, the tusks), then Tonga Runetotem next to him (880). 1489 is turned in at Thunder Bluff "
                        .. "at 20." } },
-        { id = "h18-lushwater", complete = { 852, 855 }, npc = 3396, at = { 1413, 46.04, 41.14 },
-          note = { ru = "На юго-запад к Цветущему оазису: Хезрул Кровавая Метка (19) с охраной ходит вокруг воды. "
-                       .. "Доберите 15 наручей с колкаров тут же.",
+        { id = "h18-lushwater", complete = 852, npc = 3396, at = { 1413, 46.04, 41.14 },
+          note = { ru = "На юго-запад к Цветущему оазису: Хезрул Кровавая Метка (19) с охраной ходит вокруг воды.",
                    en = "South-west to the Lushwater Oasis: Hezrul Bloodmark (19) with guards walks around the "
-                       .. "water. Finish the 15 Centaur Bracers on the Kolkar here." } },
-        { id = "h18-regthar", turnin = { 852, 855 }, npc = 3389, at = { 1413, 45.34, 28.41 },
+                       .. "water." } },
+        { id = "h18-regthar", turnin = 852, npc = 3389, at = { 1413, 45.34, 28.41 },
           note = { ru = "На север к Регтару Вратам Смерти. «Контратаку!» (элитный) не берите.",
                    en = "North to Regthar Deathgate. Skip Counterattack! (elite)." } },
         { id = "h18-harpy-lieutenants", complete = 875, at = { 1413, 38.62, 14.69 },

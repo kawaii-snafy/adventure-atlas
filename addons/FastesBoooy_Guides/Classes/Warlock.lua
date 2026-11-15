@@ -610,7 +610,12 @@ insert({
     class = "WARLOCK",
     steps = {
         -- CONFIRM: the Felhas Ruby is used on a slain Mana Eater (original game)
-        { id = "wlk-38-spirit", complete = 4962, optional = true, use = 12647, at = MANA_EATERS,
+        -- skip-ahead (acknowledged with `ok`): the walk here passes the north portals of the coven, but 5581 counts
+        -- "Portals Banished" x6 (Wowhead): a Demon Portal Guardian appears only when the Hand of Iruxos is used at a
+        -- portal (the DB snapshot lists their summon points as spawns, with no count), so the walk does not finish
+        -- h39-mannoroc-portals and this step is not forwarded. The spirit after the portals would walk the ~270 yd
+        -- between the north edge and the portals twice.
+        { id = "wlk-38-spirit", complete = 4962, optional = true, use = 12647, at = MANA_EATERS, ok = "skip-ahead",
           note = { ru = "Северный край Поля Маннорок: пожиратели маны — дух гончей (рубин Фелхаса на убитого).",
                    en = "The north edge of the Mannoroc Coven: Mana Eaters - the felhound spirit (the Felhas Ruby on "
                        .. "a slain one)." } },

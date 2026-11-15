@@ -67,14 +67,14 @@ FastesBoooy.AddLibrarySegment({
         ------------------------------------------------------------------
         { id = "ud01-damned", complete = 376, at = { 1420, 30.5, 61.0 },
           note = { ru = "Молодые падальщики и сумеречные мыши к западу и северу от церкви: "
-                       .. "6 лап падальщика и 6 крыльев сумеречной мыши. По пути: скелеты из Гремучей Клетки "
+                       .. "6 лап падальщика и 6 крыльев сумеречной мыши. По пути: скелеты из Гремучей Клетки (12) "
                        .. "на кладбище к северу — доберёте их шагом ниже.",
                    en = "Young Scavengers and Duskbats west and north of the church: "
-                       .. "6 Scavenger Paws and 6 Duskbat Wings. On the way: the Rattlecage Skeletons in the "
+                       .. "6 Scavenger Paws and 6 Duskbat Wings. On the way: the Rattlecage Skeletons (12) in the "
                        .. "graveyard to the north - you finish them in the next step." } },
         { id = "ud01-skeletons", complete = 3901, at = { 1420, 33.0, 61.7 },
-          note = { ru = "Добейте 8 скелетов на кладбище к северу от церкви.",
-                   en = "Finish the 8 Rattlecage Skeletons in the graveyard north of the church." } },
+          note = { ru = "Добейте скелетов из Гремучей Клетки на кладбище к северу от церкви: всего 12.",
+                   en = "Finish the Rattlecage Skeletons in the graveyard north of the church: 12 in all." } },
         -- Trainer-hub gate (docs/dev/PLAN.md B.8): level 3 + 70%. The two turn-ins of ud01-church-4 are known
         -- XP (3901: 250, 376: 170 = 30% of level 3), so every class is level 4.0 at its trainer. Class quest
         -- XP is not counted on purpose.
