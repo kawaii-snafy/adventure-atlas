@@ -228,8 +228,9 @@ make check      # lint + test + validate + simulate
 | `make simulate` | прогон каждого маршрута через настоящий движок на моке: каждый шаг должен завершаться ровно тем действием, которое он требует, включая автопринятие и автосдачу |
 | `make report` | перегенерировать `docs/VALIDATION.md` |
 
-CI (`.github/workflows/ci.yml`) запускает `make check` на каждый push и проверяет, что `Data.lua` модуля гайдов
-и `docs/VALIDATION.md` актуальны (после изменения маршрутов: `make routedata` и `make report`).
+CI (`.github/workflows/ci.yml`) запускается вручную — GitHub → Actions → CI → Run workflow: прогоняет `make check`
+и проверяет, что `Data.lua` модуля гайдов и `docs/VALIDATION.md` актуальны (после изменения маршрутов: `make routedata`
+и `make report`). На каждый push он не запускается; локально то же самое делает `make check`.
 
 ## Чем Forever отличается от Classic (и почему понадобилась валидация)
 

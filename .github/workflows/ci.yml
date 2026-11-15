@@ -13,9 +13,10 @@
 # sync runs in .github/workflows/nightly.yml.
 name: CI
 
+# Only on demand (GitHub: Actions -> CI -> Run workflow): it is not needed on every push; locally
+# `make check` runs the same stages.
 on:
-  push:
-  pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read

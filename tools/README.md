@@ -1124,7 +1124,8 @@ lua5.1 tools/simulate_routes.lua --skip 'Classes/*' --keep Classes/Warrior.lua -
 
 ## 10. CI
 
-`.github/workflows/ci.yml` — одна задача с пределом 25 минут. Стадии `make check` запускаются по
+`.github/workflows/ci.yml` запускается только вручную (`workflow_dispatch`: GitHub → Actions → CI → Run workflow),
+не на каждый push. Одна задача с пределом 25 минут. Стадии `make check` запускаются по
 одной, чтобы в журнале было видно время каждой (`tests/spec/build_spec.lua` следит, что ни одна
 не пропущена):
 

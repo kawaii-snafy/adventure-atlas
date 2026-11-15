@@ -9,7 +9,7 @@
 --   * `make route`, `make check-fast`;
 --   * `make report` replaces the report only by a new one and fails when the validator wrote none;
 --   * the values of the Makefile name routes and segments that exist;
---   * .github/workflows: ci.yml runs every stage of `make check` within 25 minutes and the two
+--   * .github/workflows: ci.yml (on demand) runs every stage of `make check` within 25 minutes and the two
 --     freshness checks; nightly.yml runs simulate-sync-full on a schedule.
 -- The recipes are run with a FAKE simulator (SIM=...): a shell script that answers --list-routes
 -- from a file and records every other call, so no route is simulated here.
@@ -497,8 +497,9 @@ end' "$@" --no-overrides tests/fixtures/validator/AdventureAtlas_FxClean
     end)
 
     describe("CI workflows", function()
-        it("ci.yml: one job with a 25 minute limit that runs every stage of `make check`", function()
+        it("ci.yml: on demand only, one job with a 25 minute limit that runs every stage of `make check`", function()
             local ci = assert(readFile(".github/workflows/ci.yml"))
+            assert.matches("\non:\n  workflow_dispatch:\n\n", ci)
             assert.matches("\n    timeout%-minutes: 25\n", ci)
             local _, jobs = ci:gsub("\n    runs%-on: ", "")
             assert.equal(1, jobs)
