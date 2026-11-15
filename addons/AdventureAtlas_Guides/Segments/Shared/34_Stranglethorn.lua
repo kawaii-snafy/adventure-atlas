@@ -41,9 +41,11 @@
 -- Place names: "Grom'gol Base Camp" (AreaTable 117 = the bind location name) for the flight point, the hearth and
 --   later flights; "Booty Bay" (area 35).
 -- Automation notes: at each hub the transient steps (fp, sethearth, hearth, fly) follow its quest steps; the
---   background goal (581 / 189 / 596) is followed by its stateful steps with no transient step in between; the
 --   hearth / fly steps come right after turn-ins that cannot be done before them. Kill objectives shared by two
 --   quests (lashtails 568 / 195, Shadowmaw panthers 192 / 570) are completed in one combined step.
+-- No background steps: the Bloodscalp trolls of 581 / 189 / 596 are a "kill them on the way" hint in the note of
+--   the first step north of Grom'gol (the ruins) and are finished by their own steps in the outer village (581 /
+--   189) and the inner village (596, with 582).
 -- XP (validator, Classic quest XP + objective kills, ~46 k + ~51 k): the questing alone ends near 35.6. Every
 --   quest of Stranglethorn that fits 34-37 and needs no elite is already taken (the rest are pages, elite, dungeon or
 --   start/end far away), so the segment does not add quests; the densification is the grind: the optional gate
@@ -134,16 +136,14 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- North: Nesingwary's Expedition and its loops (34-35)
         ------------------------------------------------------------------
-        { complete = { 581, 189, 596 }, bg = true, at = { 1434, 31.03, 18.41 },
-          note = { ru = "Попутно бейте троллей Кровавого Скальпа (развалины к северу от Гром'гола, деревня на "
-                       .. "северо-западе): клыки (581), уши (189), ожерелья (596).",
-                   en = "Kill Bloodscalp trolls on the way (the ruins north of Grom'gol, the village in the "
-                       .. "north-west): tusks (581), ears (189), necklaces (596)." } },
         { id = "h-34-nesingwary-s-expedition", accept = 583, complete = 201, npc = 716, at = { 1434, 35.66, 10.53 },
-          note = { ru = "На север к лагерю Хеминга Эрнестуэя (Хемет Несингвари), 2 минуты. Лагерь найден - «Поиск "
-                       .. "лагеря» выполнено. Барнил Каменный Кубок.",
-                   en = "North to Hemet Nesingwary's camp, 2 minutes. The camp is found - Investigate the Camp is "
-                       .. "done. Barnil Stonepot." } },
+          note = { ru = "На север к лагерю Хеминга Эрнестуэя (Хемет Несингвари), 2 минуты. По пути, в развалинах к северу "
+                       .. "от Гром'гола, бейте троллей Кровавого Скальпа: клыки (581), уши (189), ожерелья (596) — "
+                       .. "доберёте в их деревне на северо-западе. Лагерь найден - «Поиск лагеря» выполнено. Барнил "
+                       .. "Каменный Кубок.",
+                   en = "North to Hemet Nesingwary's camp, 2 minutes. On the way, in the ruins north of Grom'gol, kill "
+                       .. "Bloodscalp trolls: tusks (581), ears (189), necklaces (596) - you finish them in their village "
+                       .. "in the north-west. The camp is found - Investigate the Camp is done. Barnil Stonepot." } },
         { turnin = { 5762, 583 }, accept = 194, npc = 715, at = { 1434, 35.66, 10.81 },
           note = { ru = "Хеминг Эрнестуэй (Хемет Несингвари).", en = "Hemet Nesingwary." } },
         { accept = 185, npc = 717, at = { 1434, 35.62, 10.62 },
@@ -168,10 +168,10 @@ AdventureAtlas.AddLibrarySegment({
                    en = "South-west of them: 10 Stranglethorn Raptors and Crystal Spine Basilisks (10 Singing "
                        .. "Crystal Shards)." } },
         { complete = { 581, 189 }, at = { 1434, 25.03, 11.38 },
-          note = { ru = "Внешняя часть деревни Кровавого Скальпа (разведчики, мистики, охотники 34-35): 9 клыков, "
-                       .. "15 ушей; ожерелья (596) копите. Вглубь, к вождям, не ходите.",
-                   en = "The outer Bloodscalp village (scouts, mystics, hunters 34-35): 9 tusks, 15 ears; keep the "
-                       .. "necklaces (596). Do not go deep, to the chiefs." } },
+          note = { ru = "Внешняя часть деревни Кровавого Скальпа (разведчики, мистики, охотники 34-35): доберите 9 "
+                       .. "клыков и 15 ушей; ожерелья (596) копите. Вглубь, к вождям, не ходите.",
+                   en = "The outer Bloodscalp village (scouts, mystics, hunters 34-35): finish the 9 tusks and 15 ears; "
+                       .. "keep the necklaces (596). Do not go deep, to the chiefs." } },
         { turnin = 194, accept = 195, npc = 715, at = { 1434, 35.66, 10.81 },
           note = { ru = "Обратно в лагерь.", en = "Back to the camp." } },
         { turnin = 186, accept = 187, npc = 717, at = { 1434, 35.62, 10.62 },
@@ -245,9 +245,9 @@ AdventureAtlas.AddLibrarySegment({
         -- level-grind of the next step (acknowledged with `ok`): the minimum for Desolace (its first quests are 37-39 with mobs 34-40):
         -- 35 + 75% plus the remaining turn-ins = 36.06; the rest of the deficit is ground later, in Desolace.
         { id = "h-34-stranglethorn-level-gate", level = { 35, 0.75 }, at = { 1434, 22.52, 10.62 },
-          ok = { ["level-grind"] = 160 }, -- 152 / 151 kills in the normal run (reason above)
+          ok = { ["level-grind"] = 160 }, -- 155 / 154 kills in the normal run (reason above)
           note = { ru = "Цель: 35 + 75% (с оставшимися сдачами будет 36 - хватит для первых заданий Пустошей). Не "
-                       .. "хватает - бейте троллей здесь же: плотные лагеря 36-37, быстрый респаун, попутно падают "
+                       .. "хватает - бейте троллей здесь же: плотные лагеря 36-37, быстрый респаун, заодно падают "
                        .. "головы и ожерелья. Альтернатива - Монастырь Алого ордена (Кладбище) в группе.",
                    en = "Target: 35 + 75% (the remaining turn-ins then make 36, enough for the first Desolace "
                        .. "quests). Short: keep killing trolls right here - dense 36-37 camps, quick respawns, heads "

@@ -13,6 +13,7 @@
 --     anchor on them);
 --   * scope and id prefix of every shared insert: class files, race files, start-zone files;
 --   * no `reward` on a shared base step (class reward choices live in the class reward table);
+--   * no background (`bg`) step anywhere: every goal is a step of its own, in the order of play;
 --   * the faction word (docs/dev/PLAN.md 0.1 item 2): none in the TOC texts, route titles and descriptions and
 --     segment titles; in step notes only where it names something of the game world;
 --   * the level gates of 12-22 point at mobs of the player's level and stand where those mobs are; the races that
@@ -427,7 +428,7 @@ local function assertRoutes(mod, expected)
         assert.equal("Horde", r.faction, want.id)
         assert.same({ 1, 60 }, r.levels, want.id)
         assert.is_true(r.default, want.id)
-        assert.equal("0.4.0", r.version, want.id)
+        assert.equal("0.5.1", r.version, want.id)
         assert.same(want.chain, ids(r.uses), want.id .. ": segment chain")
         assert.same(want.chain, ids(r.segments), want.id .. ": composed segments")
         assert.equal(0, #r.own, want.id .. ": a route owns nothing")
@@ -971,6 +972,23 @@ describe("addons/AdventureAtlas_Guides", function()
                 end
             end
         end
+        assert.is_true(checked > 0 or PARTIAL)
+    end)
+
+    -- every goal is a step of its own, in the order of play: a background goal ("along the way") is easy to miss
+    -- and then costs a trip back (docs/ROUTE_FORMAT.md, `bg`)
+    it("has no background (`bg`) step: segments and inserts", function()
+        local checked = 0
+        local function check(file, steps)
+            if own(file) then
+                checked = checked + 1
+                for _, step in ipairs(steps) do
+                    assert.is_falsy(step.bg, tostring(step.id) .. " (" .. file .. ") is a bg step")
+                end
+            end
+        end
+        for _, seg in ipairs(mod.librarySegments) do check(seg.file, seg.steps) end
+        for _, ins in ipairs(mod.libraryInserts) do check(ins.file, ins.steps) end
         assert.is_true(checked > 0 or PARTIAL)
     end)
 

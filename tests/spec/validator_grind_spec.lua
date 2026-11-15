@@ -332,7 +332,9 @@ describe("validator grind report and skip-ahead", function()
             assert.are.same({}, skipAhead(plain(zombies({ complete = 364, turnin = 364, npc = 1569, at = AT_SARVIS }))))
             local partial = zombies({ complete = 364, at = AT_ZOMBIES })
             partial[4] = { complete = { [364] = { 1 } }, bg = true, at = AT_ZOMBIES }
-            assert.are.same({}, skipAhead(plain(partial)))
+            -- (walking through the zombies is off here: it would finish objective 2 on the way, see
+            -- validator_checks_spec "skip-ahead by objectives killed on the way")
+            assert.are.same({}, skipAhead(plain(partial, { skipPassYards = 0 })))
             local same = zombies({ complete = { [364] = { 1 } }, at = AT_ZOMBIES })
             same[4] = { complete = { [364] = { 1 } }, bg = true, at = AT_ZOMBIES }
             assert.are.same({ 5, 6, 7 }, skipAhead(plain(same)))

@@ -41,9 +41,10 @@
 --   Org 2 : hearth bound in Orgrimmar (the next segment can hearth out of Brackenwall), 1436 (Keldran); fly Camp
 --           Taurajo; optional Razorfen Downs block (6626 at the entrance, south Barrens), run east into Dustwallow.
 --   DW    : Shady Rest 1251 / 1268 / 1269; Mudcrush 1177; Brackenwall: fp, 1251 + 1268 + 1269 > 1321 (Krog),
---           1321 > 1322 (Do'gol), 1201, 1166, 1168, 1169.  East: Theramore Infiltrators (1201), Ogron 1273 + Reethe,
---           Darkfang spiders (1322), Jarl 1218 > 1206, Loose Dirt 1238, Mirefin murlocs (1177).  Brackenwall:
---           1201 + 1238 > 1202, 1322 > 1323, 1323 + 1273.  Darkmist spiders (1206), Jarl 1206, Loose Dirt 1239;
+--           1321 > 1322 (Do'gol), 1201, 1166, 1168, 1169.  East: Ogron 1273 + Reethe (Theramore Infiltrators 1201
+--           on the way), Darkfang spiders (1322), Jarl 1218 > 1206, Loose Dirt 1238, Mirefin murlocs (1177), on the
+--           way back the rest of the infiltrators north-east of the village (1201).  Brackenwall: 1201 + 1238 > 1202,
+--           1322 > 1323, 1323 + 1273.  Darkmist spiders (1206), Jarl 1206, Loose Dirt 1239;
 --           Theramore docks (1202 footlocker).  Wyrmbog 1: 1166 (snuff, grog, strongbox), 1168, 1169.  Mudcrush 1177;
 --           Brackenwall 1239 + 1202, 1168, 1169 > 1170 > 1171 > 1172.  Wyrmbog 2: eggs (1172), checkpoint; Brackenwall
 --           1172.
@@ -82,8 +83,11 @@
 --   (worst case), was ~835 from 37.02 (+~460 h-34 kills moved here, minus the new quests). Group alternative:
 --   Razorfen Downs (optional block at Camp Taurajo).
 -- Automation notes: accepts at one NPC sit in one step (except 1218 > 1206, which needs the turn-in in between);
---   transient steps (fp, sethearth, vendor) come before the quest steps of the same place; the optional 93225
---   complete step is bg, its optional accept / turn-in are passed by the next quest step.
+--   transient steps (fp, sethearth, vendor) come before the quest steps of the same place; the optional 93225 steps
+--   (accept, complete, turn-in) are passed by the next quest step when the quest is not taken.
+-- No background steps: every goal is a step in the order of play; "kill X on the way" hints sit in the notes of the
+--   steps that pass the mobs first, the finishing step comes where the route passes them the last time (the
+--   Theramore Infiltrators of 1201: on the way back from Jarl to Brackenwall).
 if not AdventureAtlas.AddLibraryInsert then return end
 AdventureAtlas.AddLibrarySegment({
     id = "h-37-desolace-dustwallow",
@@ -185,7 +189,7 @@ AdventureAtlas.AddLibrarySegment({
           note = { ru = "На север по дороге к хижине Кормека: Биббли.", en = "North along the road to Kormek's Hut: Bibbly." } },
         { id = "h37-thunder-axe", complete = 1435, use = 6436, at = { 1443, 54.98, 27.70 },
           note = { ru = "Крепость Громового Топора: используйте пылающий самоцвет на почти убитых бойцах Пылающего "
-                       .. "Клинка - 15 одушевлённых самоцветов. Попутно падает рваная демонская кожа.",
+                       .. "Клинка - 15 одушевлённых самоцветов. Заодно падает рваная демонская кожа.",
                    en = "Thunder Axe Fortress: use the Burning Gem on Burning Blade members that are about to die - "
                        .. "15 Infused Burning Gems. The Flayed Demon Skin drops here too." } },
         { accept = 1480, use = 20310, at = { 1443, 54.98, 27.70 },
@@ -228,16 +232,18 @@ AdventureAtlas.AddLibrarySegment({
                        .. "не спускайтесь: там элитные осколочники (40-42).",
                    en = "West to the Valley of Spears: Maraudine centaurs (36-40) - 15 ears. Stay out of the Maraudon "
                        .. "canyon: elite Shadowshards (40-42)." } },
-        { complete = 93225, bg = true, optional = true, at = { 1443, 32.20, 58.20 },
-          note = { ru = "По желанию: 5 резных тотемов кентавров с тех же кентавров.",
-                   en = "Optional: 5 Carved Centaur Totems from the same centaurs." } },
+        { id = "h38-centaur-totems", complete = 93225, optional = true, at = { 1443, 32.20, 58.20 },
+          note = { ru = "Если брали у Гурды: 5 резных тотемов кентавров — с тех же кентавров Мародин. Не брали — шаг "
+                       .. "пропустится сам.",
+                   en = "If you took it from Gurda: 5 Carved Centaur Totems - from the same Maraudine centaurs. Not taken: "
+                       .. "the step skips itself." } },
         -- level-grind of the next step (acknowledged with `ok`): about a third of the Desolace deficit, in the densest 36-40 camp of the
         -- zone, where the ears (1366) and totems (93225) drop anyway; the quests ahead are 38-40 (Slitherblade naga,
         -- Lord Kragaru 38, the Burning Blade Seer). The rest waits for the Mannoroc gate (higher level, fewer kills).
         { id = "h38-level-maraudine", level = { 37, 0.50 }, at = { 1443, 32.20, 58.20 },
           ok = { ["level-grind"] = 330 }, -- 325 kills in the normal run (reason above)
           note = { ru = "Цель: 37 + 50%. Не хватает - кентавры племени Мародин (36-40) здесь же: плотные лагеря, уши "
-                       .. "(1366) и тотемы (93225) падают попутно. Дальше задания 38-40 (наги, лорд Крагару, "
+                       .. "(1366) и тотемы (93225) падают заодно. Дальше задания 38-40 (наги, лорд Крагару, "
                        .. "ясновидец). Отложите 15 отрезов шелка (не продавайте) для «Попался!» (Тлеющее ущелье, 43).",
                    en = "Target: 37 + 50%. Short: the Maraudine centaurs (36-40) right here - dense camps, the ears "
                        .. "(1366) and totems (93225) drop on the side. The quests ahead are 38-40 (naga, Lord Kragaru, "
@@ -325,10 +331,17 @@ AdventureAtlas.AddLibrarySegment({
         { accept = 5943, npc = 11626, optional = true, at = { 1443, 45.40, 75.29 },
           note = { ru = "По желанию, если караван здесь: Риггер Гизлтон - «Караван Гизлтона».",
                    en = "Optional, if the caravan is here: Rigger Gizelton - Gizelton Caravan." } },
-        { complete = 5943, optional = true, at = { 1443, 55.70, 67.80 },
+        -- skip-ahead (acknowledged with `ok`): the escort road passes the north portals of the Mannoroc Coven and a
+        -- Mana Eater (the warlock's 4962). 5581 counts "Portals Banished" x6 (Wowhead): a Demon Portal Guardian appears
+        -- only when the Hand of Iruxos is used at a portal (the DB snapshot lists their summon points as spawns, with
+        -- no count), so walking the escort does not finish h39-mannoroc-portals. And a forward from the warlock's
+        -- spirit (or anything else) is harmless here: the escort runs by itself, the player follows the caravan
+        -- whatever the guide shows, and its turn-in at Smeed stays a later step. The escort cannot go after the
+        -- portals: it starts at Rigger, ~300 yd back west (~400 yd more walking).
+        { complete = 5943, optional = true, at = { 1443, 55.70, 67.80 }, ok = "skip-ahead",
           note = { ru = "Проводите караван на восток по дороге (нападут кентавры и демоны). Сдача - у Смида.",
                    en = "Escort the caravan east along the road (centaurs and demons attack). Turned in at Smeed." } },
-        { complete = 5581, use = 14547, at = { 1443, 51.99, 76.98 },
+        { id = "h39-mannoroc-portals", complete = 5581, use = 14547, at = { 1443, 51.99, 76.98 },
           note = { ru = "Поле Маннорок: рукой Ируксоса закройте 6 порталов, стражи порталов (38-39) нападают. "
                        .. "Лорд Азреток - элита, обходите.",
                    en = "Mannoroc Coven: banish 6 portals with the Hand of Iruxos, the Demon Portal Guardians (38-39) "
@@ -432,7 +445,10 @@ AdventureAtlas.AddLibrarySegment({
         { turnin = 1321, accept = 1322, npc = 5087, at = { 1445, 36.53, 30.79 },
           note = { ru = "До'гол.", en = "Do'gol." } },
         { accept = 1201, npc = 4791, at = { 1445, 35.21, 30.66 },
-          note = { ru = "Назир Кровавое Копье: шпионы - по дороге на восток.", en = "Nazeer Bloodpike: the spies are on the way east." } },
+          note = { ru = "Назир Кровавое Копье: 9 тераморских шпионов (в незаметности) - к юго-востоку у Огрона и к "
+                       .. "северо-востоку от деревни. Бейте их по пути, доберёте на обратном пути от Ярла.",
+                   en = "Nazeer Bloodpike: 9 Theramore Infiltrators (stealthed) - south-east around Ogron and north-east "
+                       .. "of the village. Kill them on the way, you finish them on the way back from Jarl." } },
         { accept = 1166, npc = 4500, at = { 1445, 36.29, 31.41 },
           note = { ru = "Властитель Мок'Морокк.", en = "Overlord Mok'Morokk." } },
         { accept = 1168, npc = 4502, at = { 1445, 37.37, 31.39 },
@@ -443,12 +459,11 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- East: spies, Reethe, Darkfang spiders, Swamplight Manor, murlocs (40)
         ------------------------------------------------------------------
-        { complete = 1201, bg = true, at = { 1445, 39.87, 27.58 },
-          note = { ru = "Попутно: 9 тераморских шпионов (в незаметности) к востоку от деревни и у Огрона.",
-                   en = "On the way: 9 Theramore Infiltrators (stealthed) east of the village and around Ogron." } },
         { id = "h-38-ogron", accept = 1273, npc = 4983, at = { 1445, 40.96, 36.69 },
-          note = { ru = "Огрон к юго-востоку от деревни: «Допрос Рита».",
-                   en = "Ogron south-east of the village: Questioning Reethe." } },
+          note = { ru = "Огрон к юго-востоку от деревни: «Допрос Рита». По пути и вокруг него — тераморские шпионы "
+                       .. "(1201).",
+                   en = "Ogron south-east of the village: Questioning Reethe. Theramore Infiltrators (1201) on the way "
+                       .. "and around him." } },
         { complete = 1273, at = { 1445, 42.65, 38.07 },
           note = { ru = "Идите с Огроном к Павалу Риту и защищайте Огрона, когда нападут люди Рита.",
                    en = "Go with Ogron to Paval Reethe and protect Ogron when Reethe's men attack." } },
@@ -469,15 +484,18 @@ AdventureAtlas.AddLibrarySegment({
         { complete = 1177, at = { 1445, 57.20, 21.30 },
           note = { ru = "К северу у воды: мурлоки Болотного Плавника - 12 голов.",
                    en = "North by the water: Mirefin murlocs - 12 Mirefin Heads." } },
+        { id = "h40-theramore-spies", complete = 1201, at = { 1445, 40.03, 25.10 },
+          note = { ru = "На запад к деревне: к северо-востоку от неё доберите 9 тераморских шпионов (в незаметности).",
+                   en = "West towards the village: north-east of it, finish the 9 Theramore Infiltrators (stealthed)." } },
 
         ------------------------------------------------------------------
         -- Brackenwall 2, Darkmist spiders, Jarl 2 (40)
         ------------------------------------------------------------------
         { turnin = { 1201, 1238 }, accept = 1202, npc = 4791, at = { 1445, 35.21, 30.66 },
-          note = { ru = "Обратно на запад в деревню: Назир. Возьмите «Доки Терамора» (сундучок капитана - по пути "
-                       .. "от Ярла в Драконью топь).",
-                   en = "Back west to the village: Nazeer. Take The Theramore Docks (the Captain's Footlocker is on the "
-                       .. "way from Jarl to the Wyrmbog)." } },
+          note = { ru = "В деревню: Назир. Возьмите «Доки Терамора» (сундучок капитана - по пути от Ярла в Драконью "
+                       .. "топь).",
+                   en = "Into the village: Nazeer. Take The Theramore Docks (the Captain's Footlocker is on the way from "
+                       .. "Jarl to the Wyrmbog)." } },
         { turnin = 1322, accept = 1323, npc = 5087, at = { 1445, 36.53, 30.79 },
           note = { ru = "До'гол.", en = "Do'gol." } },
         { turnin = { 1323, 1273 }, npc = 4926, at = { 1445, 36.42, 31.88 },

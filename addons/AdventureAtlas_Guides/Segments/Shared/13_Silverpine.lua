@@ -15,13 +15,16 @@
 -- tirisfal through the Sewers); 445 in the log; hearth Brill (Undead) or Orgrimmar (the others); flight point
 -- Undercity.
 -- Hub plan (Sepulcher NPCs all within ~60 yd of 44,41):
---   T1 Ivar Patch: 435 escort > 449 + 429 (Rane Yorick), worg hearts, 3 Murloc Eyes in advance for 91920.
---      Gate h13-lvl-12 (421 needs 12).
+--   T1 Ivar Patch: 435 escort > 449 + 429 (Rane Yorick), worg hearts, then 3 Murloc Eyes in advance for 91920
+--      (Vile Fin murlocs south-east of the farm, on the way south). Gate h13-lvl-12 (421 needs 12).
 --   V1 Sepulcher: 421 (Dalar), 477 (Allister), 449 > 3221 + 437 (Hadrec), 445/3221/429 > 1359/447/430
 --      (Renferrel), flight point.
---   L1 whitescalps (421) east of the Sepulcher, bears (447) all segment. V2: 421 > 422.
---   T2 north: Dusty Spellbooks (422) > Quinn 430 > 91920 > Rane 425 > Ivar the Foul > Rane > Dead Field (437
---      Nightlash) > spiders (447 blood) > bears > back. V3: 422 > 423, 437 > 438, 91920.
+--   L1 whitescalps (421) east of the Sepulcher. V2: 421 > 422.
+--   T2 north: Dusty Spellbooks (422) > Quinn 430 > 91920 (complete at once: the eyes) > Rane 425 > Ivar the Foul >
+--      Rane > Dead Field (437 Nightlash) > spiders (447 blood) > bears (447 hearts finished) > back.
+--      V3: 422 > 423, 437 > 438, 91920.
+--   No background steps: the bear hearts (447) are hinted in the notes from the whitescalps on ("По пути" / "On
+--      the way") and finished by their own step h13-bears; the murloc eyes are a step of their own.
 --   T3 west: Moonrage Glutton / Darksoul shackles (423). V4: 423 > 424.
 --   L4 east / south: ferry boat (438 > 439), Grimson the Pale (424), Dalaran Crate (477 > 478), back.
 --   V5: 478 > 481 > 482, 424, 439. Gate h13-lvl-14 (13 + 92 %: level 14 after the Undercity turn-ins, for the
@@ -68,20 +71,23 @@ AdventureAtlas.AddLibrarySegment({
         { id = "h13-rane", turnin = 435, accept = { 429, 449 }, npc = 1950, at = { 1421, 53.46, 13.43 },
           note = { ru = "Рейн Йорик.",
                    en = "Rane Yorick." } },
-        { id = "h13-murloc-eyes", collect = { [730] = 3 }, bg = true, at = { 1421, 60.0, 15.5 },
-          note = { ru = "Попутно: 3 глаза мурлока с мурлоков Гиблого Плавника к востоку от фермы. Они нужны "
-                       .. "для задания Куинна позже — не продавайте.",
-                   en = "Along the way: 3 Murloc Eyes from the Vile Fin murlocs east of the farm. Quinn's later "
-                       .. "quest needs them: do not sell." } },
         { id = "h13-worg-hearts", complete = 429, at = { 1421, 58.0, 11.5 },
           note = { ru = "Пятнистые ворги и ворги вокруг фермы: 3 бесцветных сердца. Редкий Кровавый Клык "
-                       .. "бродит к северо-востоку.",
+                       .. "бродит к северо-востоку. Следующий шаг - мурлоки чуть южнее.",
                    en = "Mottled Worgs and Worgs around the farm: 3 Discolored Worg Hearts. Gorefang (rare) "
-                       .. "roams to the north-east." } },
+                       .. "roams to the north-east. Next step: the murlocs just to the south." } },
+        -- Collected in advance for 91920 (Quinn, second visit): a 70 yd detour here against ~450 yd from Rane in
+        -- the north loop. 91920 is turned in at the third Sepulcher visit.
+        { id = "h13-murloc-eyes", collect = { [730] = 3 }, at = { 1421, 59.0, 18.0 },
+          note = { ru = "Мурлоки Гиблого Плавника к юго-востоку от фермы: 3 глаза мурлока. Они нужны для задания "
+                       .. "Куинна позже — не продавайте.",
+                   en = "Vile Fin murlocs south-east of the farm: 3 Murloc Eyes. Quinn's later quest needs them: "
+                       .. "do not sell." } },
         -- Requirement gate: 421 Prove Your Worth (Dalar, the next quest hub) needs level 12.
-        { id = "h13-lvl-12", level = 12, at = { 1421, 58.0, 11.5 },
-          note = { ru = "Заданию Далара в Гробнице нужен 12-й уровень. Не хватает - добейте воргов у фермы и по дороге на юг.",
-                   en = "Dalar's quest at the Sepulcher needs level 12. Short of it: kill more worgs around the farm and along the "
+        { id = "h13-lvl-12", level = 12, at = { 1421, 59.0, 18.0 },
+          note = { ru = "Заданию Далара в Гробнице нужен 12-й уровень. Не хватает - добейте мурлоков здесь и воргов по дороге "
+                       .. "на юг.",
+                   en = "Dalar's quest at the Sepulcher needs level 12. Short of it: kill more murlocs here and worgs along the "
                        .. "road south." } },
         { id = "h13-go-sepulcher", go = true, at = { 1421, 49.8, 31.0 },
           note = { ru = "По дороге на юг к Гробнице, убивая воргов по пути.",
@@ -109,22 +115,23 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- East of the Sepulcher: whitescalps (level 13)
         ------------------------------------------------------------------
-        { id = "h13-bear-hearts", complete = 447, bg = true, at = { 1421, 49.2, 33.0 },
-          note = { ru = "Весь сегмент попутно: сердца серых медведей (6) — медведи повсюду вдоль дороги.",
-                   en = "All segment along the way: Grizzled Bear Hearts (6) - bears are all along the road." } },
         { id = "h13-whitescalps", complete = 421, at = { 1421, 50.5, 39.0 },
           note = { ru = "Белогривые воргены Лунной Ярости (5) к востоку от Гробницы. Сын Аругала (элита, 24) "
-                       .. "иногда бродит здесь — уходите от него.",
+                       .. "иногда бродит здесь — уходите от него. По пути: свирепые серые медведи - 6 сердец для "
+                       .. "Ренферрела (доберёте на севере, шаг после пауков).",
                    en = "Moonrage Whitescalps (5) east of the Sepulcher. Son of Arugal (elite, 24) sometimes "
-                       .. "roams here: stay away." } },
+                       .. "roams here: stay away. On the way: Ferocious Grizzled Bears - 6 hearts for Renferrel "
+                       .. "(finished in the north, the step after the spiders)." } },
         { id = "h13-dalar-2", turnin = 421, accept = 422, npc = 1938, at = { 1421, 44.20, 39.81 } },
 
         ------------------------------------------------------------------
         -- North loop: spellbooks, Ivar Patch, Dead Field, spiders (level 13-14)
         ------------------------------------------------------------------
         { id = "h13-spellbooks", complete = 422, object = 1571, at = { 1421, 52.83, 28.58 },
-          note = { ru = "Дом у дороги на север: на втором этаже Пыльные книги заклинаний (Снадобье Аругала).",
-                   en = "House by the north road: the Dusty Spellbooks on the second floor (Remedy of Arugal)." } },
+          note = { ru = "Дом у дороги на север: на втором этаже Пыльные книги заклинаний (Снадобье Аругала). По пути бейте "
+                       .. "медведей у дороги - сердца.",
+                   en = "House by the north road: the Dusty Spellbooks on the second floor (Remedy of Arugal). On the way: "
+                       .. "the bears by the road for the hearts." } },
         { id = "h13-quinn", turnin = 430, accept = 91920, npc = 1951, at = { 1421, 53.43, 12.59 },
           note = { ru = "Куинн Йорик на втором этаже дома на ферме Ивара. Глаза мурлока уже в сумке — задание "
                        .. "сразу выполнено.",
@@ -137,9 +144,14 @@ AdventureAtlas.AddLibrarySegment({
                        .. "at a time." } },
         { id = "h13-rane-425-done", turnin = 425, npc = 1950, at = { 1421, 53.46, 13.43 },
           note = { ru = "Награда: Потёртый пояс (кожа).", en = "Reward: Weathered Belt (leather)." } },
-        { id = "h13-wild-eyes", complete = 91920, at = { 1421, 60.0, 15.5 },
-          note = { ru = "Меньше 3 глаз мурлока? Мурлоки Гиблого Плавника к востоку от фермы.",
-                   en = "Fewer than 3 Murloc Eyes? Vile Fin murlocs east of the farm." } },
+        -- Only a fallback: the eyes are in the bags since h13-murloc-eyes, so 91920 is complete when accepted. The
+        -- DB snapshot gives 91920 no prerequisite, so the validator thinks it could be taken at the first Ivar Patch
+        -- visit; the route takes it after 430 (Return to Quinn), as ud-03 did (the chain 430 > 91920 > 91921
+        -- "Return to Quinn (Again)").
+        { id = "h13-wild-eyes", complete = 91920, at = { 1421, 59.0, 18.0 },
+          ok = "travel-revisit", -- fallback only: the eyes were collected on the first visit (h13-murloc-eyes)
+          note = { ru = "Меньше 3 глаз мурлока (продали)? Мурлоки Гиблого Плавника к юго-востоку от фермы.",
+                   en = "Fewer than 3 Murloc Eyes (sold them)? Vile Fin murlocs south-east of the farm." } },
         { id = "h13-dead-field", complete = 437, npc = 1983, at = { 1421, 44.67, 20.67 },
           note = { ru = "Мёртвое поле: убивайте гноллов Гнилошкуры, пока не появится Ночная Плеть (14). Убейте "
                        .. "её и заберите сущность. Медведи рядом — для сердец.",

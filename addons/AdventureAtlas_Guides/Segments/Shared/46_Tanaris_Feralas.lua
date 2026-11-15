@@ -18,26 +18,28 @@
 --   G1  : fp, hearth; 5863 (Andi Lynn); 243 > 379 + 1690 (Bilgewhizzle); 1707 (Luglunket); 2605 (Noggenfogger);
 --         2781 + 2875 (Wanted Poster); 3362 (Tran'rek); 992 (Fizzledowser).
 --   W   : Sandsorrow Watch water hole (992) > Fizzledowser 992 > 82.
---   E   : Wastewander north camp (1690, pouches 379/1707); Steamwheedle Port: 2872 > 2873 (Stoley), 8366, 3520,
---         8365; Lost Rigger Cove (8366, 8365, 2873, 2875; the book 81949; optional 2876 from a Pirate's Footlocker); Waterspring
---         Field (2781 Caliph, rest of the pouches); Steamwheedle Port turn-ins.
---   G2  : 1690 + 379 + 2781 > 1691; 1707; 654 from the power source (379 reward, 2 h timer).
---   S   : Waterspring Field (1691) -> Marvon (3161) -> Gahz'ridian -> Dunemaul (5863) -> Thistleshrub Valley (2605,
---         3362) -> Noxious Lair (82); 654 samples on the way; hearth.
---   G3  : 1691 + 654 > 864; 5863; 2605 > 2606; 3362; 2606 > 2641 (Sprinkle); 82 (Pestlezugg); 10 (Fizzledowser).
+--   E   : Wastewander north camp (1690 and all 10 pouches of 379/1707); Steamwheedle Port: 2872 > 2873 (Stoley),
+--         8366, 3520, 8365; Lost Rigger Cove (8366, 8365, 2873, 2875; the book 81949; optional 2876 from a Pirate's
+--         Footlocker); back north along the coast: Steamwheedle Port turn-ins.
+--   G2  : 1690 + 379 > 1691; 1707; 654 from the power source (379 reward, 2 h timer).
+--   S   : Waterspring Field (1691 + 2781 Caliph, one visit of the southern camp) -> Marvon (3161) -> Gahz'ridian ->
+--         Dunemaul (5863) -> Thistleshrub Valley (2605, 3362) -> 654 samples finished on the way north -> Noxious
+--         Lair (82); hearth.
+--   G3  : 1691 + 654 + 2781 > 864; 5863; 2605 > 2606; 3362; 2606 > 2641 (Sprinkle); 82 (Pestlezugg); 10 (Fizzledowser).
 --   SE  : Marvon 3161; Hazzali hive (10; optional level 47 top-up); optional OOX-17/TN (351, beacon drop).
 --   G4  : 10 > 110 > 113, optional Zul'Farrak block (2768, 3042, 2865; skipped by the next turn-in), 113 > 32.
 --         Fly Freewind Post.
---   M1  : fp, hearth; 2987, 2975, 2973, 2862, 2822.
+--   M1  : fp, hearth; 2987, 2975, 3063 (+ optional 3062, elite; Talo), 2973, 2862, 2822, 3121 (Uzer'i, for
+--         Orgrimmar): every quest of the camp that is open on arrival.
 --   F1  : sprite darters (2973), Woodpaw north camp (2862), Gordunni Outpost (scroll 2978, 2975, 2987).
 --   M2  : 2987; 2975 + 2978 > 2980 + 2979; 2973 > 2974; 2862 > 2863 (1 h timer).
 --   F2  : Grimtotem Compound (2974), Woodpaw south camp (2863).
 --   M3  : 2863 > 2902; 2974 > 2976.  F3: battle map 2902 > 2903.  M4: 2903 > 7730 + 7731.
---   F4  : Zukk'ash hive (7730, 7731), Gordunni south camp (2980, 2979), screecher spirits (3520), optional
---         OOX-22/FE (2766), Feral Scar Vale (2822).
---   M5  : 7730 + 7731 > 7732; 2822 > 7734; 2980 + 2979 > 3002; 3063 (+ optional 3062, elite).
+--   F4  : Zukk'ash hive (7730, 7731), Gordunni south camp (2980, 2979), screecher spirits (3520), Feral Scar Vale
+--         (2822), optional OOX-22/FE (2766, the cave on the way back).
+--   M5  : 7730 + 7731 > 7732; 2822 > 7734; 2980 + 2979 > 3002.
 --   F5  : Rage Scar Hold (7734), Zorbin (7003, 7721 on the Forgotten Coast), Northspring harpies (3063, level gate;
---         optional Edana 3062), hearth.  M6: 7734, (3062), 3121 (Uzer'i, for Orgrimmar), 3063.
+--         optional Edana 3062), hearth.  M6: 7734, (3062), 3063.
 -- Deviations from the plan (documented in the handoff):
 --   * 654 Tanaris Field Sampling is a 2-hour timed quest: the plan carried it for the rest of the route (it would
 --     fail); here it is done during the Tanaris loop S and turned in (+ 864 Return to Apothecary Zinge, carried to
@@ -74,10 +76,11 @@
 --   30%, ~590 same-level kills; ~730 without the optional steps, without incidental kills / rested XP). The optional
 --   Zul'Farrak block replaces part of the grind for grouped players.
 -- Automation notes: transient steps (fp, sethearth) come before the quest steps of their hub; accepts at one NPC are
---   merged into one step; optional steps never sit before a non-bg step that a bg goal can finish early (the forward
---   limit would skip them). Water pouches (379 / 1707 count the same 10 pouches: collect 10), the 654 samples and the
---   screecher spirits are bg goals; pouches and spirits get a later non-bg finishing step, 654 only its turn-in (a
---   finishing step after the hearth would let the bg goal skip the hearth step).
+--   merged into one step. No background goals: every goal is a step where it is done, and earlier notes say where its
+--   mobs start. Water pouches (379 / 1707 count the same 10 pouches: collect 10): finished in the north Wastewander
+--   camp, before the Lost Rigger Cove book (a pouch step after that collect step, done early, would fast-forward
+--   it); the 654 samples: finished north of Thistleshrub Valley, before the hearth; the screecher spirits: between
+--   the Gordunni camp and Feral Scar Vale.
 if not AdventureAtlas.AddLibraryInsert then return end
 AdventureAtlas.AddLibrarySegment({
     id = "h-46-tanaris-feralas",
@@ -157,14 +160,16 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Wastewander camps, Steamwheedle Port, Lost Rigger Cove (level 46)
         ------------------------------------------------------------------
-        { complete = { 379, 1707 }, collect = { [8483] = 10 }, bg = true, at = { 1446, 62.49, 28.35 },
-          note = { ru = "Попутно: 10 бурдюков с водой с любых Скитальцев Пустыни (оба задания считают одни и те же "
-                       .. "бурдюки: нужно 5 + 5).",
-                   en = "On the way: 10 Wastewander Water Pouches from any Wastewander (both quests count the same "
-                       .. "pouches: you need 5 + 5)." } },
         { id = "h-46-tanaris-field-loop", complete = 1690, at = { 1446, 62.49, 28.35 },
-          note = { ru = "Лагерь Скитальцев Пустыни к востоку от города: по 10 бандитов и воров (40-42).",
-                   en = "Wastewander camp east of town: 10 Bandits and 10 Thieves (40-42)." } },
+          note = { ru = "Лагерь Скитальцев Пустыни к востоку от города: по 10 бандитов и воров (40-42). С них же падают "
+                       .. "бурдюки с водой - собирайте (шаг ниже).",
+                   en = "Wastewander camp east of town: 10 Bandits and 10 Thieves (40-42). They also drop the Wastewander "
+                       .. "Water Pouches - loot them (next step)." } },
+        { id = "h46-water-pouches", complete = { 379, 1707 }, collect = { [8483] = 10 }, at = { 1446, 63.00, 30.00 },
+          note = { ru = "Здесь же доберите 10 бурдюков с водой (оба задания считают одни и те же бурдюки: нужно 5 + 5). "
+                       .. "Дальше по маршруту Скитальцев нет до самой сдачи.",
+                   en = "Right here, finish the 10 Wastewander Water Pouches (both quests count the same pouches: you "
+                       .. "need 5 + 5). The route meets no more Wastewanders before the turn-in." } },
         { id = "h-46-steamwheedle-port", turnin = 2872, accept = 2873, npc = 7881, at = { 1446, 67.11, 23.98 },
           note = { ru = "На северо-восток в Порт Картеля: Столи — «Долг Столи», «Посылка Столи».",
                    en = "North-east to Steamwheedle Port: Stoley - Stoley's Debt, Stoley's Shipment." } },
@@ -190,17 +195,11 @@ AdventureAtlas.AddLibrarySegment({
                    en = "In the cove (72.6,47.8) lies the book Legends of the Tidesages - loot it (a container: the quest "
                        .. "is not offered at the book). Owen Thadd in Undercity offers and takes the quest when the book "
                        .. "is in your bags (next segment; a Forever-new quest, XP unknown)." } },
-        { complete = 2781, at = { 1446, 61.77, 38.17 },
-          note = { ru = "На запад в южный лагерь Скитальцев: Калиф Жало Скорпида (46) в центре лагеря.",
-                   en = "West to the southern Wastewander camp: Caliph Scorpidsting (46) in its middle." } },
-        { complete = { 379, 1707 }, collect = { [8483] = 10 }, at = { 1446, 62.09, 37.89 },
-          note = { ru = "Добейте 10 бурдюков здесь (разбойники, тёмные маги, убийцы). Сюда же вернётесь с «Ещё одной "
-                       .. "расправой».",
-                   en = "Finish the 10 pouches here (rogues, shadow mages, assassins). You return to this camp for More "
-                       .. "Wastewander Justice." } },
         { turnin = 2873, npc = 7881, at = { 1446, 67.11, 23.98 },
-          note = { ru = "Обратно в Порт Картеля: Столи. «Доставку МакКинли» не берите (ведёт в Пиратскую Бухту).",
-                   en = "Back to Steamwheedle Port: Stoley. Skip Deliver to MacKinley (it leads to Booty Bay)." } },
+          note = { ru = "Вдоль берега обратно на север в Порт Картеля: Столи. «Доставку МакКинли» не берите (ведёт в "
+                       .. "Пиратскую Бухту).",
+                   en = "Back north along the coast to Steamwheedle Port: Stoley. Skip Deliver to MacKinley (it leads "
+                       .. "to Booty Bay)." } },
         { accept = 2876, use = 9250, optional = true, at = { 1446, 67.06, 23.89 },
           note = { ru = "По желанию: с пиратов выпал «Пиратский сундучок» с «Корабельным расписанием» — кликните "
                        .. "расписание.",
@@ -217,30 +216,32 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Gadgetzan, second visit (level 47)
         ------------------------------------------------------------------
-        { turnin = { 1690, 379, 2781 }, accept = 1691, npc = 7407, at = { 1446, 52.46, 28.51 },
-          note = { ru = "Прибамбасск, Чепухастер: «Ещё одна расправа над Скитальцами Пустыни».",
-                   en = "Gadgetzan, Bilgewhizzle: More Wastewander Justice." } },
+        { turnin = { 1690, 379 }, accept = 1691, npc = 7407, at = { 1446, 52.46, 28.51 },
+          note = { ru = "Прибамбасск, Чепухастер: «Ещё одна расправа над Скитальцами Пустыни» (южный лагерь, там же "
+                       .. "Калиф).",
+                   en = "Gadgetzan, Bilgewhizzle: More Wastewander Justice (the southern camp, where Caliph is too)." } },
         { turnin = 1707, npc = 7408, at = { 1446, 52.49, 28.45 },
           note = { ru = "Тормозиллер.", en = "Luglunket." } },
         { accept = 654, use = 8524, at = { 1446, 52.46, 28.51 },
           note = { ru = "Кликните «Источник питания, модель 4711-ФТЗ» (награда «Утолить жажду»): «Полевые испытания в "
-                       .. "Танарисе». Таймер 2 ч — хватит на западную петлю.",
+                       .. "Танарисе». Таймер 2 ч — хватит на западную петлю. Уже за воротами василиски, гиены и скорпиды "
+                       .. "роняют непроверенные препараты — кликайте каждый (нужно по 8 приемлемых), доберёте к северу "
+                       .. "от долины Кактусов.",
                    en = "Right-click the Model 4711-FTZ Power Source (Slake That Thirst reward): Tanaris Field Sampling. "
-                       .. "2 h timer - enough for the western loop." } },
+                       .. "2 h timer - enough for the western loop. Right outside the gates basilisks, hyenas and "
+                       .. "scorpids drop Untested samples - right-click each one (8 acceptable of each kind), finish them "
+                       .. "north of Thistleshrub Valley." } },
 
         ------------------------------------------------------------------
         -- Big loop: Waterspring Field -> Gahz'ridian -> Dunemaul -> Thistleshrub -> Noxious Lair (level 47)
         ------------------------------------------------------------------
-        { complete = 654, bg = true, at = { 1446, 50.35, 47.79 },
-          note = { ru = "Попутно: василиски, гиены и скорпиды роняют непроверенные препараты — кликайте их (нужно по 8 "
-                       .. "приемлемых). Не хватит к возвращению — голодные гиены и скорпиды-охотники сразу за воротами "
-                       .. "Прибамбасска.",
-                   en = "On the way: basilisks, hyenas and scorpids drop Untested samples - right-click each one (8 "
-                       .. "acceptable of each kind). Still short back in town: Starving Blisterpaws and Scorpid Hunters "
-                       .. "are right outside the Gadgetzan gates." } },
-        { complete = 1691, at = { 1446, 62.09, 37.89 },
-          note = { ru = "Южный лагерь Скитальцев: 8 разбойников, 6 убийц, 10 тёмных магов (41-45).",
-                   en = "Southern Wastewander camp: 8 Rogues, 6 Assassins, 10 Shadow Mages (41-45)." } },
+        { complete = { 1691, 2781 }, at = { 1446, 62.09, 37.89 },
+          note = { ru = "Южный лагерь Скитальцев: 8 разбойников, 6 убийц, 10 тёмных магов (41-45) и Калиф Жало Скорпида "
+                       .. "(46) в центре лагеря. По пути и дальше по петле бейте василисков, гиен и скорпидов на "
+                       .. "препараты.",
+                   en = "Southern Wastewander camp: 8 Rogues, 6 Assassins, 10 Shadow Mages (41-45) and Caliph "
+                       .. "Scorpidsting (46) in its middle. On the way and all along the loop, kill basilisks, hyenas and "
+                       .. "scorpids for the samples." } },
         { id = "h-46-marvon-rivetseeker", accept = 3161, npc = 7771, at = { 1446, 52.71, 45.92 },
           note = { ru = "На юго-запад к Марвону Клепальщику: «Газ'ридианские украшения». Наденьте выданный шлем "
                        .. "«Обнаружитель газ'риллия».",
@@ -261,6 +262,13 @@ AdventureAtlas.AddLibrarySegment({
                        .. "насыщенная влагой железа — с собирателей росы (47-48).",
                    en = "Far south-west, Thistleshrub Valley: 8 Gnarled Thistleshrubs and 8 Rootshapers (48-50); the "
                        .. "Laden Dew Gland drops from the Dew Collectors (47-48)." } },
+        { id = "h47-field-samples", complete = 654, at = { 1446, 33.00, 56.50 },
+          note = { ru = "На север от долины Кактусов: окаменители, бешеные гиены и скорпиды-дюноходы (46-49) - последние "
+                       .. "по пути до камня возвращения. Доберите по 8 приемлемых препаратов каждого вида (кликайте "
+                       .. "непроверенные).",
+                   en = "North of Thistleshrub Valley: Glasshide Petrifiers, Rabid Blisterpaws and Scorpid Dunestalkers "
+                       .. "(46-49) - the last ones before the hearth. Finish 8 acceptable samples of each kind "
+                       .. "(right-click the untested ones)." } },
         { complete = 82, at = { 1446, 33.58, 44.23 },
           note = { ru = "На север к Ядовитому улью: 5 частей тел насекомых с силитидов Сентипаар у входа (47-50).",
                    en = "North to the Noxious Lair: 5 Centipaar Insect Parts from the silithids outside the hive "
@@ -271,9 +279,9 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Gadgetzan, third visit (level 47-48)
         ------------------------------------------------------------------
-        { turnin = { 1691, 654 }, accept = 864, npc = 7407, at = { 1446, 52.46, 28.51 },
-          note = { ru = "Чепухастер: «Возвращение к аптекарю Зинг» (Подгород, следующий сегмент).",
-                   en = "Bilgewhizzle: Return to Apothecary Zinge (Undercity, next segment)." } },
+        { turnin = { 1691, 654, 2781 }, accept = 864, npc = 7407, at = { 1446, 52.46, 28.51 },
+          note = { ru = "Чепухастер (и голова Калифа): «Возвращение к аптекарю Зинг» (Подгород, следующий сегмент).",
+                   en = "Bilgewhizzle (and Caliph's head): Return to Apothecary Zinge (Undercity, next segment)." } },
         { turnin = 5863, npc = 11758, at = { 1446, 52.82, 27.40 },
           note = { ru = "Анди Линн.", en = "Andi Lynn." } },
         { turnin = 2605, accept = 2606, npc = 7564, at = { 1446, 51.81, 28.66 },
@@ -367,6 +375,14 @@ AdventureAtlas.AddLibrarySegment({
           note = { ru = "Орвин Гиззмик: «Кобальт Гордунни».", en = "Orwin Gizzmick: Gordunni Cobalt." } },
         { accept = 2975, npc = 7777, at = { 1444, 75.80, 43.58 },
           note = { ru = "Рока Орхан: «Огры Фераласа».", en = "Rok Orhan: The Ogres of Feralas." } },
+        { id = "h48-mojache-3063", accept = 3063, npc = 7776, at = { 1444, 76.18, 43.83 },
+          note = { ru = "Тало Терновое Копыто рядом: «Месть стае Студеных Ключей» (гарпии на северо-западе - в конце "
+                       .. "Фераласа).",
+                   en = "Talo Thornhoof next to him: Vengeance on the Northspring (the harpies in the north-west - at the "
+                       .. "end of Feralas)." } },
+        { accept = 3062, npc = 7776, optional = true, at = { 1444, 76.18, 43.83 },
+          note = { ru = "По желанию: «Тёмное сердце» — Эдана Коготь Ненависти элитная (50), соло только уверенно.",
+                   en = "Optional: Dark Heart - Edana Hatetalon is an ELITE 50: solo only if you are confident." } },
         { accept = 2973, npc = 4544, at = { 1444, 75.94, 42.74 },
           note = { ru = "Криг Головоруб: «Новый сверкающий плащ».", en = "Krueg Skullsplitter: A New Cloak's Sheen." } },
         { accept = 2862, npc = 7875, at = { 1444, 74.91, 42.46 },
@@ -375,6 +391,11 @@ AdventureAtlas.AddLibrarySegment({
         { accept = 2822, npc = 7854, at = { 1444, 74.43, 42.91 },
           note = { ru = "Джангор Быстрый Странник: «Знак качества» (шкуры — позже, в Долине Свирепого Утеса).",
                    en = "Jangdor Swiftstrider: The Mark of Quality (the hides come later, Feral Scar Vale)." } },
+        { id = "h48-mojache-3121", accept = 3121, npc = 8115, at = { 1444, 74.42, 43.36 },
+          note = { ru = "Рядом, знахарь Узер'и: «Странная просьба» (сушеная голова — Нииру Огненному Клинку в Оргриммаре, "
+                       .. "следующий сегмент). Продолжение у Нииру не берите.",
+                   en = "Next to him, Witch Doctor Uzer'i: A Strange Request (the shrunken head goes to Neeru Fireblade in "
+                       .. "Orgrimmar, next segment). Do not take Neeru's follow-up." } },
 
         ------------------------------------------------------------------
         -- Feralas loop 1: sprite darters, Woodpaw north, Gordunni Outpost (level 48)
@@ -436,30 +457,33 @@ AdventureAtlas.AddLibrarySegment({
                        .. "(75.6,60.9).",
                    en = "South to the Zukk'ash hive: 20 Zukk'ash Carapaces (44-46); Stinglasher (47) is by the north "
                        .. "entrance (75.6,60.9)." } },
-        { complete = 3520, bg = true, use = 10699, at = { 1444, 56.74, 51.54 },
-          note = { ru = "Попутно: убейте дольного крикуна, используйте колючку Йе'кинья на трупе и кликните духа — 3 "
-                       .. "раза.",
-                   en = "On the way: kill a Vale Screecher, use Yeh'kinya's Bramble on the corpse and click the spirit - "
-                       .. "3 times." } },
         { complete = { 2980, 2979 }, at = { 1444, 60.32, 65.51 },
           note = { ru = "На запад к лагерю Гордунни: 10 шаманов и 10 чернокнижников (юг лагеря), 5 извергов (север); "
-                       .. "сфера — с магов-лордов (45-46, юг).",
+                       .. "сфера — с магов-лордов (45-46, юг). Над лагерем уже летают дольные крикуны (для «Духов "
+                       .. "крикунов», шаг ниже) - можно начать здесь.",
                    en = "West to the Gordunni camp: 10 Shamans and 10 Warlocks (south end), 5 Maulers (north end); the "
-                       .. "Gordunni Orb drops from the Mage-Lords (45-46, south)." } },
-        { complete = 3520, use = 10699, at = { 1444, 57.50, 57.00 },
-          note = { ru = "Духов крикунов меньше трёх? Дольные крикуны летают между лагерем Гордунни и Долиной Свирепого "
-                       .. "Утеса (57,55 - 60,62).",
-                   en = "Fewer than 3 spirits? Vale Screechers fly between the Gordunni camp and Feral Scar Vale (57,55 - "
-                       .. "60,62)." } },
+                       .. "Gordunni Orb drops from the Mage-Lords (45-46, south). Vale Screechers already fly over the "
+                       .. "camp (Screecher Spirits, next step) - you can start here." } },
+        { id = "h48-screecher-spirits", complete = 3520, use = 10699, at = { 1444, 57.50, 57.00 },
+          note = { ru = "На северо-запад к Долине Свирепого Утеса: дольные крикуны летают между лагерем Гордунни и "
+                       .. "долиной (57,55 - 60,62). Убейте крикуна, используйте колючку Йе'кинья на трупе и кликните "
+                       .. "духа — 3 раза.",
+                   en = "North-west towards Feral Scar Vale: Vale Screechers fly between the Gordunni camp and the vale "
+                       .. "(57,55 - 60,62). Kill a screecher, use Yeh'kinya's Bramble on the corpse and click the spirit - "
+                       .. "3 times." } },
+        { complete = 2822, at = { 1444, 52.96, 58.04 },
+          note = { ru = "Долина Свирепого Утеса: 10 толстых шкур йети (43-46).",
+                   en = "Feral Scar Vale: 10 Thick Yeti Hides (43-46)." } },
+        -- The OOX-22/FE steps after the hides: the yetis stand on the way to the robot's cave, so the hides are
+        -- often done before it, and an optional step before the 2822 step would then be fast-forwarded.
         { accept = 2766, use = 8705, optional = true, at = { 1444, 53.35, 55.70 },
           note = { ru = "По желанию: выпал аварийный маяк OOX-22/FE — кликните его.",
                    en = "Optional: an OOX-22/FE Distress Beacon dropped - right-click it." } },
         { turnin = 2766, npc = 7807, optional = true, at = { 1444, 53.35, 55.70 },
-          note = { ru = "Робот OOX-22/FE в пещере у Долины Свирепого Утеса. Сопровождение не берите.",
-                   en = "Homing Robot OOX-22/FE in the cave by Feral Scar Vale. Skip the escort." } },
-        { complete = 2822, at = { 1444, 52.96, 58.04 },
-          note = { ru = "Долина Свирепого Утеса: 10 толстых шкур йети (43-46).",
-                   en = "Feral Scar Vale: 10 Thick Yeti Hides (43-46)." } },
+          note = { ru = "Робот OOX-22/FE в пещере у Долины Свирепого Утеса, по пути обратно в лагерь. "
+                       .. "Сопровождение не берите.",
+                   en = "Homing Robot OOX-22/FE in the cave by Feral Scar Vale, on the way back to camp. Skip the "
+                       .. "escort." } },
 
         ------------------------------------------------------------------
         -- Camp Mojache, fifth visit (level 49)
@@ -471,12 +495,6 @@ AdventureAtlas.AddLibrarySegment({
           note = { ru = "Джангор: «Борьба за качество».", en = "Jangdor: Improved Quality." } },
         { id = "h47-mojache-2980", turnin = { 2980, 2979 }, accept = 3002, npc = 7777, at = { 1444, 75.80, 43.58 },
           note = { ru = "Рока Орхан: «Сфера Гордунни» (Оргриммар).", en = "Rok Orhan: The Gordunni Orb (Orgrimmar)." } },
-        { accept = 3063, npc = 7776, at = { 1444, 76.18, 43.83 },
-          note = { ru = "Тало Терновое Копыто: «Месть стае Студеных Ключей».",
-                   en = "Talo Thornhoof: Vengeance on the Northspring." } },
-        { accept = 3062, npc = 7776, optional = true, at = { 1444, 76.18, 43.83 },
-          note = { ru = "По желанию: «Тёмное сердце» — Эдана Коготь Ненависти элитная (50), соло только уверенно.",
-                   en = "Optional: Dark Heart - Edana Hatetalon is an ELITE 50: solo only if you are confident." } },
 
         ------------------------------------------------------------------
         -- Feralas loop 5: Rage Scar Hold, Zorbin, Northspring harpies (level 49-50)
@@ -521,11 +539,6 @@ AdventureAtlas.AddLibrarySegment({
           note = { ru = "Джангор.", en = "Jangdor." } },
         { id = "h49-mojache-3062", turnin = 3062, npc = 7776, optional = true, at = { 1444, 76.18, 43.83 },
           note = { ru = "По желанию: «Тёмное сердце».", en = "Optional: Dark Heart." } },
-        { accept = 3121, npc = 8115, at = { 1444, 74.42, 43.36 },
-          note = { ru = "Рядом, знахарь Узер'и: «Странная просьба» (сушеная голова — Нииру Огненному Клинку в Оргриммаре, "
-                       .. "следующий сегмент). Продолжение у Нииру не берите.",
-                   en = "Next to him, Witch Doctor Uzer'i: A Strange Request (the shrunken head goes to Neeru Fireblade in "
-                       .. "Orgrimmar, next segment). Do not take Neeru's follow-up." } },
         { id = "h-50-mojache-end", turnin = 3063, npc = 7776, at = { 1444, 76.18, 43.83 },
           note = { ru = "Тало. Дальше — полёт в Оргриммар (следующий сегмент).",
                    en = "Talo. Next: fly to Orgrimmar (next segment)." } },

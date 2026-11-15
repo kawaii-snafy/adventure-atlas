@@ -7,16 +7,19 @@
 -- level-10 class quests) -> Construct Parts, Fendaal's assassins and crabs -> north past Windsong Lake into
 -- Shadowwind Forest (Strange Hermit, refugees, Nightclaw druids) -> hearth to Valanaar, turn-ins -> skycutter to
 -- Skywatcher Plateau (Mulgore) and the arrival quest 95350 (Thrall, Orgrimmar).
+-- No background (bg) steps: every objective is a step at the place where it is finished (crab meat at Fendaal,
+-- tenderloins and dust east of the orchard, Wind Hollows after Resaan, cones on the way to Elegael), with "kill X
+-- on the way" hints in the notes of the steps where the player starts passing those mobs.
 --
 -- Anchors for the class files (docs/dev/PLAN.md C.2; level = validator level of the base profile before the step):
---   sd02-level-10      11.2  generic trainer-hub gate `level = 10` after the last orchard turn-in (the estimate is
+--   sd02-level-10      11.1  generic trainer-hub gate `level = 10` after the last orchard turn-in (the estimate is
 --                            a level above it; the gate is the guarantee, every Zephras quest XP is estimated).
---   sd02-valanaar-10   11.2  arrival in Valanaar after the gate: training at 10 and the level-10 class quests
+--   sd02-valanaar-10   11.1  arrival in Valanaar after the gate: training at 10 and the level-10 class quests
 --                            (hunter, rogue and warrior trainers at the west entrance, shaman at the Skydocks,
 --                            druid in the east of the village). The path leaves north-west, towards Ur'endra.
---   sd02-fendaal-2     11.3  Fendaal, turn-in of 98512: the last step before the path turns north (the falls
+--   sd02-fendaal-2     11.2  Fendaal, turn-in of 98512: the last step before the path turns north (the falls
 --                            basin of Urs'endris is 13 map units east of here).
---   sd02-hearth        12.7  the hearth to Valanaar; sd02-lotheluum-2 (12.9) is the turn-in at the druid trainer
+--   sd02-hearth        12.7  the hearth to Valanaar; sd02-lotheluum-2 (12.8) is the turn-in at the druid trainer
 --                            (a `train` step at him must come after it), sd02-nyalah-2 the last step in the
 --                            village before the Skydocks.
 --   sd02-plateau       13.2  arrival on Skywatcher Plateau (druid and shaman trainers of the plateau).
@@ -55,14 +58,13 @@ AdventureAtlas.AddLibrarySegment({
         { id = "sd02-nyalah", accept = 93317, npc = 257006, at = { 2521, 60.64, 72.66 },
           note = {
               ru = "Бегите на восток в Валанаар (медведицу Ur'endra, 10 ур., у 54,65 обойдите). "
-                  .. "Nyalah Brightfire на западном краю деревни.",
+                  .. "Nyalah Brightfire на западном краю деревни: задание на мясо Windsong Crawler (крабы по всем "
+                  .. "низинам). Мясо падает только с заданием - бейте крабов после того, как возьмёте его (по пути "
+                  .. "к саду), доберёте у Fendaal.",
               en = "Run east to Valanaar (go around the level-10 bear Ur'endra at 54,65). "
-                  .. "Nyalah Brightfire on the west side of the village.",
-          } },
-        { id = "sd02-crabs-bg", complete = 93317, bg = true,
-          note = {
-              ru = "Windsong Crawler (крабы) по всем низинам: мясо краба.",
-              en = "Windsong Crawlers (crabs) all over the lowlands: crawler meat.",
+                  .. "Nyalah Brightfire on the west side of the village: a quest for Windsong Crawler meat (crabs "
+                  .. "all over the lowlands). The meat only drops once you have the quest - kill crabs after taking "
+                  .. "it (on the way to the orchard); you finish them at Fendaal.",
           } },
         { id = "sd02-sethearth", sethearth = "Valanaar", npc = 255940, at = { 2521, 62.19, 72.61 },
           note = {
@@ -109,33 +111,29 @@ AdventureAtlas.AddLibrarySegment({
         { id = "sd02-aamelia", complete = 92679, turnin = 92679, accept = { 92682, 92684, 92683 }, npc = 252800,
           at = { 2521, 46.70, 81.95 },
           note = {
-              ru = "Прямо на юго-запад в сад Виндфилдов: Aamelia Windfield.",
-              en = "Straight south-west to the Windfield orchard: Aamelia Windfield.",
-          } },
-        { id = "sd02-tenderloins-bg", complete = 92684, bg = true,
-          note = {
-              ru = "Ornery Galestrider повсюду в низинах: 7 вырезок.",
-              en = "Ornery Galestriders all over the lowlands: 7 tenderloins.",
-          } },
-        { id = "sd02-dust-bg", complete = 92683, bg = true, use = 253666,
-          note = {
-              ru = "Прихлопните Flutterfly «Мухобойкой» (сумка) и подберите пыльцу.",
-              en = "Swat Flutterflies with the Flutterfly Swatter (bags) and pick up the dust.",
+              ru = "Прямо на юго-запад в сад Виндфилдов (по пути бейте крабов): Aamelia Windfield.",
+              en = "Straight south-west to the Windfield orchard (kill crabs on the way): Aamelia Windfield.",
           } },
         { id = "sd02-orchard", complete = 92682, at = { 2521, 47.3, 81.0 },
           note = {
-              ru = "Вокруг Aamelia: 5 Hungry Bandit и 10 Ripe Stormapple под деревьями.",
-              en = "Around Aamelia: 5 Hungry Bandits and 10 Ripe Stormapples under the trees.",
+              ru = "Вокруг Aamelia: 5 Hungry Bandit и 10 Ripe Stormapple под деревьями. По пути бейте Ornery "
+                  .. "Galestrider (7 вырезок) и прихлопывайте Flutterfly «Мухобойкой» из сумки (пыльца) - доберёте "
+                  .. "к востоку от сада.",
+              en = "Around Aamelia: 5 Hungry Bandits and 10 Ripe Stormapples under the trees. On the way: kill "
+                  .. "Ornery Galestriders (7 tenderloins) and swat Flutterflies with the Flutterfly Swatter from your "
+                  .. "bags (dust) - you finish them east of the orchard.",
           } },
         { id = "sd02-construct", accept = 92698, npc = 250929, at = { 2521, 48.87, 78.25 },
           note = {
               ru = "Malfunctioning Cyclone Construct к северо-востоку от сада.",
               en = "Malfunctioning Cyclone Construct north-east of the orchard.",
           } },
-        { id = "sd02-dust", complete = { 92683, 92684 }, at = { 2521, 50.3, 78.7 },
+        { id = "sd02-dust", complete = { 92683, 92684 }, use = 253666, at = { 2521, 50.3, 78.7 },
           note = {
-              ru = "Доберите пыльцу и вырезки к востоку от сада.",
-              en = "Finish the dust and tenderloins east of the orchard.",
+              ru = "К востоку от сада доберите 5 пыльцы (прихлопните Flutterfly «Мухобойкой» и подберите её) и "
+                  .. "7 вырезок с Ornery Galestrider.",
+              en = "East of the orchard finish 5 Flutterfly Dust (swat Flutterflies with the Swatter and pick it up) "
+                  .. "and 7 tenderloins from Ornery Galestriders.",
           } },
         { id = "sd02-aamelia-2", turnin = { 92682, 92684, 92698, 92683 }, accept = 92685, npc = 252800,
           at = { 2521, 46.70, 81.95 } },
@@ -191,9 +189,10 @@ AdventureAtlas.AddLibrarySegment({
           } },
         { id = "sd02-assassins", complete = { 98512, 93317 }, at = { 2521, 55.5, 59.5 },
           note = {
-              ru = "10 Al'Aketh Assassin вокруг (могут быть в невидимости) и крабы "
+              ru = "10 Al'Aketh Assassin вокруг (могут быть в невидимости); доберите мясо Windsong Crawler (6) "
                   .. "на берегу к западу.",
-              en = "10 Al'Aketh Assassins around (they can be stealthed) and the crabs on the shore to the west.",
+              en = "10 Al'Aketh Assassins around (they can be stealthed); finish the Windsong Crawler meat (6) on the "
+                  .. "shore to the west.",
           } },
         { id = "sd02-fendaal-2", turnin = 98512, npc = 273017, at = { 2521, 56.81, 61.11 } },
         ---------------------------------------------------------------------
@@ -212,16 +211,13 @@ AdventureAtlas.AddLibrarySegment({
               ru = "Strange Hermit на севере: пройдите все варианты его диалога.",
               en = "Strange Hermit to the north: go through all of his dialogue options.",
           } },
-        { id = "sd02-hermit-2", accept = { 93160, 93172 }, npc = 251684, at = { 2521, 53.96, 38.90 } },
-        { id = "sd02-cones-bg", complete = 93160, bg = true,
+        { id = "sd02-hermit-2", accept = { 93160, 93172 }, npc = 251684, at = { 2521, 53.96, 38.90 },
           note = {
-              ru = "Zephyrseed Cone (шишки) на земле между отшельником и Elegael.",
-              en = "Zephyrseed Cones on the ground between the Hermit and Elegael.",
-          } },
-        { id = "sd02-hollows-bg", complete = { 93172, 93736, 94896 }, bg = true,
-          note = {
-              ru = "На севере: 10 Wind Hollow (их эссенции) и 8 Abandoned Belongings на земле.",
-              en = "To the north: 10 Wind Hollows (and their essences) and 8 Abandoned Belongings on the ground.",
+              ru = "Отшельник: шишки и Wind Hollow. По пути на север бейте Wind Hollow (10, с них и эссенции для "
+                  .. "Endaria) и подбирайте Abandoned Belongings (8) с земли - доберёте после Resaan.",
+              en = "The Hermit: the cones and the Wind Hollows. On the way north kill Wind Hollows (10, they also drop "
+                  .. "the essences for Endaria) and pick up Abandoned Belongings (8) from the ground - you finish them "
+                  .. "after Resaan.",
           } },
         { id = "sd02-resaan", complete = 94897, npc = 259013, at = { 2521, 57.05, 29.35 },
           note = {
@@ -230,8 +226,17 @@ AdventureAtlas.AddLibrarySegment({
           } },
         { id = "sd02-hollows", complete = { 93172, 93736, 94896 }, at = { 2521, 58.2, 32.1 },
           note = {
-              ru = "Доберите Wind Hollow, эссенции (не хватает - бейте ещё) и вещи беженцев.",
-              en = "Finish the Wind Hollows, the essences (kill more if short) and the refugees' belongings.",
+              ru = "На обратном пути к югу доберите 10 Wind Hollow, 10 эссенций (не хватает - бейте ещё) и 8 вещей "
+                  .. "беженцев.",
+              en = "On the way back south finish 10 Wind Hollows, 10 essences (kill more if short) and the 8 "
+                  .. "refugees' belongings.",
+          } },
+        -- Before Elegael, not on the way back to the Hermit: a finished cones step after the optional 93165 steps
+        -- would become the forward anchor and fast-forward them. `at`: 10 cone spawns within 2.5 map units.
+        { id = "sd02-cones", complete = 93160, at = { 2521, 59.5, 38.5 },
+          note = {
+              ru = "По дороге к Elegael (юго-восток) соберите 8 Zephyrseed Cone (шишки) на земле.",
+              en = "On the way to Elegael (south-east) pick up 8 Zephyrseed Cones from the ground.",
           } },
         { id = "sd02-elegael", turnin = 94484, accept = { 94485, 94486, 94487 }, npc = 257944,
           at = { 2521, 61.70, 39.22 },
@@ -240,17 +245,12 @@ AdventureAtlas.AddLibrarySegment({
               en = "Elegael Thornpaw to the south-east.",
           } },
         { id = "sd02-vayn", accept = 93165, npc = 254151, at = { 2521, 63.81, 36.01 } },
-        { id = "sd02-ears-bg", complete = 93165, bg = true,
-          note = {
-              ru = "Уши с Al'Aketh Footsoldier и Stormchaser (5).",
-              en = "Ears from Al'Aketh Footsoldiers and Stormchasers (5).",
-          } },
         { id = "sd02-den-items", complete = { 94485, 94486, 94487 }, at = { 2521, 62.2, 37.8 },
           note = {
               ru = "Вокруг Elegael: 8 Lady's Tear Moss на земле, 20 перьев с Shadowgale "
-                  .. "Shriekling, 10 Bloody Heirloom с Footsoldier/Stormchaser.",
+                  .. "Shriekling, 10 Bloody Heirloom с Footsoldier/Stormchaser. С них же падают уши для Vayn (5).",
               en = "Around Elegael: 8 Lady's Tear Moss on the ground, 20 feathers from Shadowgale Shrieklings, "
-                  .. "10 Bloody Heirlooms from Footsoldiers / Stormchasers.",
+                  .. "10 Bloody Heirlooms from Footsoldiers / Stormchasers. They also drop the ears for Vayn (5).",
           } },
         { id = "sd02-elegael-2", turnin = { 94485, 94486, 94487 }, accept = { 94488, 94489 }, npc = 257944,
           at = { 2521, 61.70, 39.22 } },
@@ -286,12 +286,10 @@ AdventureAtlas.AddLibrarySegment({
         { id = "sd02-vayn-2", turnin = 93165, optional = true, npc = 254151, at = { 2521, 63.81, 36.01 } },
         { id = "sd02-elegael-3", turnin = { 94489, 94490, 94488 }, accept = 94491, npc = 257944,
           at = { 2521, 61.70, 39.22 } },
-        -- the cone finish is merged into the turn-in: a separate "complete 93160" step (usually done
-        -- early by the bg step) would become the forward anchor and skip the optional 93165 steps
-        { id = "sd02-hermit-3", complete = 93160, turnin = { 93160, 93172 }, npc = 251684, at = { 2521, 53.96, 38.90 },
+        { id = "sd02-hermit-3", turnin = { 93160, 93172 }, npc = 251684, at = { 2521, 53.96, 38.90 },
           note = {
-              ru = "На запад к отшельнику, по пути доберите шишки.",
-              en = "West to the Hermit, finish the cones on the way.",
+              ru = "На запад к отшельнику: шишки и Wind Hollow.",
+              en = "West to the Hermit: the cones and the Wind Hollows.",
           } },
         { id = "sd02-hearth", hearth = "Valanaar", at = { 2521, 62.19, 72.61 }, radius = 100,
           note = {
@@ -307,7 +305,9 @@ AdventureAtlas.AddLibrarySegment({
         { id = "sd02-riaani-2", turnin = 93737, accept = 93738, npc = 256083, at = { 2521, 59.06, 72.98 } },
         { id = "sd02-endaria-2", turnin = 93736, npc = 254344, at = { 2521, 58.13, 78.32 } },
         { id = "sd02-ayessa-2", turnin = 93738, accept = 92708, npc = 251968, at = { 2521, 59.15, 79.78 } },
+        -- Ayessa's speech is the send-off before boarding: the reference takes 92708 here, not on the first docks visit
         { id = "sd02-speech", complete = 92708, turnin = 92708, npc = 251968, at = { 2521, 59.15, 79.78 },
+          ok = "travel-revisit", -- no extra trip: the docks are visited here anyway (93738, the skycutter berth)
           note = {
               ru = "Выслушайте речь Ayessa (~75 с; не началась - заговорите с ней) и "
                   .. "сдайте, пока ждёте корабль. Не выходит - бросьте задание (гайд сам пропустит шаг).",

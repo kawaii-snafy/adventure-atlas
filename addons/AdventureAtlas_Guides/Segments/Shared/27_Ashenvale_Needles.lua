@@ -30,9 +30,10 @@
 --   TB2 : 1131 (Melor Stonehoof); 1195 > 1196 (Zangen) = h-28-tb-arrive (druid training insert after it).
 --   SW  : Forever-new (XP unknown, ~20 min next to Thunder Bluff: ~20 quest mobs 27-29 plus three turn-ins beat
 --         grinding the same time): Skywatcher Plateau 96259 (Muln), 96241 (Mazu'kon), 96260 (Yorn); Gloomrise:
---         spinners, toxin samples, hatchlings + soldiers; optional 96261 Broodmother Valraxx (elite 30) ->
---         item-started 96294; turn-ins; back to Thunder Bluff; fly Camp Taurajo: 1153 (Tatternack, next to the flight
---         master; the ore drops from the Gravelsnout kobolds by Dorn; turned in at the start of h-31).
+--         hatchlings + soldiers (the near part), then spinners + toxin samples (deeper); optional 96261 Broodmother
+--         Valraxx (elite 30) -> item-started 96294; turn-ins; back to Thunder Bluff; fly Camp Taurajo: 1153
+--         (Tatternack, next to the flight master; the ore drops from the Gravelsnout kobolds by Dorn; turned in at the
+--         start of h-31).
 --   RFK : optional, group: Razorfen Kraul (29-38; entrance on the road south): 1144 Willix the Importer (escort
 --         inside, 7250 XP). 1102 needs level 29 at Thunder Bluff before the run (the simulation is at ~28.4) and
 --         1109 / 1221 are turned in at the Undercity / Ratchet much later: not used.
@@ -40,18 +41,23 @@
 --   FW1 : fp; 4767 (Elu), 4821 (Hagar), 4542 > 4841 (Longhorn), 5147 (poster), 1196 > 1197 (Rau), 98069 + 98070
 --         (Jandia, Forever-new, need 27).
 --   GH  : Galak Hold: 4841 centaurs + 1197 brazier (end of the cave); optional 4881 from the Galak Messenger.
---   DO  : Gravelsnout kobolds 1153 (bg); Dorn 1149 (RP teleport to a platform at 26.4,32.9, leap) > 1150; Alien Egg
---         4821 (three spawn points).
+--   DO  : Gravelsnout kobolds 1153 by the path up (first pass, before Dorn: his quest teleports at once); Dorn 1149
+--         (RP teleport to a platform at 26.4,32.9, leap) > 1150; Alien Egg 4821 (three spawn points).
 --   FW2 : 4841 > 5064 (Longhorn), 1197 (Rau), 4821 > 4865 (Hagar).
---   HC  : harpy cave: 98069 + 98070 in the bg, Grenka 1150.
---   HP  : Highperch: Pao'ka 4770 escort + 4767 wyvern eggs; Steelsnap 1131.
+--   HC  : harpy cave: 98069 + 98070 on the way in (harpies and crates around and inside the cave), Grenka 1150 at
+--         the end.
+--   HP  : Highperch: 3 wyvern eggs (4767) next to Pao'ka, his 4770 escort north through the nests, the other eggs
+--         in the western nests where the escort ends; Steelsnap 1131.
 --   WR  : Whitereach: 4770 + 4865 > 5062 (Motega); optional 4881 > 4966 (Kanati, centaur attack); optional 5151
 --         (Wizlo; the Enraged Panther is elite 30).
---   DC  : Darkcloud Pinnacle: 5062 agave (bg), 5064 notes, 5147 Arnak, Lakota 4904 escort.
+--   DC  : Darkcloud Pinnacle: 5064 notes (chests 1-3), 5062 agave (picked up on the way, finished in the middle of
+--         the pinnacle between chest 3 and Arnak), 5147 Arnak, Lakota 4904 escort.
 --   FW3 : 4904 (Thalia), 5064 + 5147 (Longhorn), 4767 (Elu), 98069 + 98070 (Jandia); Dorn 1150.
---   SF  : Mirage Raceway: 1110 + 5762 (Kravel), 1104 (Fizzle), 1105 (Wizzle), 1176 (Pozzik), 1175 (Zherin); north
---         Flats loop (tortoises, reavers, basilisks, scavengers, rocket car rubble); crystalhides + gazers; level
---         gate; turn-ins; hearth Thunder Bluff.
+--   SF  : Mirage Raceway: 1110 + 5762 (Kravel), 1104 (Fizzle), 1105 (Wizzle), 1175 (Zherin); north Flats
+--         (tortoises + basilisks, reavers) and the level gate there (the grind mobs are the north ones, so the
+--         player does not walk north again after the south); 1176 (Pozzik, needs 29: after the north); vultures,
+--         gazers + the rest of the crystalhides, the rocket car rubble of the south loop (picked up all the time,
+--         finished there); turn-ins; hearth Thunder Bluff.
 --   TB3 : 1131 (Melor), 5062 (Magatha) = end.
 -- Carried out: 1106 (Martek, Badlands, h-41), 532 + 567 (from h-22, for h-31), 5762 (Hemet Nesingwary, Stranglethorn,
 --   h-34), 1153 (Tatternack,
@@ -71,6 +77,11 @@
 --   quest steps of the same place. The class inserts of the plan go after h-27-tb-arrive (Zamah; next step is Tah
 --   on the central mesa), h-28-tb-arrive (Zangen; next step is the Mulgore path) and h-31-tb-hearth (next step is
 --   Melor on Hunter Rise): no same-NPC accept follows any of them.
+-- No background steps: every goal is a step in the order of play; "kill X / loot X on the way" hints sit in the notes
+--   of the steps that pass the mobs / objects first, the finishing step comes where the route passes them the last
+--   time before the turn-in (Gloomrise silk + toxins, Highperch eggs, Darkcloud agave, the Shimmering Flats
+--   crystalhides and rocket car parts; the Flats basilisks, only in the north, are an objective of the north step)
+--   or, for a drop that is needed once (1153 ore), at the first pass.
 -- Hearthstone: Thunder Bluff all segment (bound by the 1-22 routes). Used three times: Sun Rock -> TB at the start,
 --   Sun Rock -> TB again after the Ashenvale loop (or fly, if the hour is not up yet), Shimmering Flats -> TB at the
 --   end.
@@ -239,14 +250,16 @@ AdventureAtlas.AddLibrarySegment({
                    en = "Mazu'kon: toxin samples (the extractor comes with the quest)." } },
         { accept = 96260, npc = 264072, at = { 1412, 32.47, 19.98 },
           note = { ru = "Йорн Зловещий Тотем: 3 кристаллических шёлка.", en = "Yorn Grimtotem: 3 Crystalline Silk." } },
-        { complete = 96260, bg = true, at = { 1412, 33.41, 10.26 },
-          note = { ru = "Попутно: ткачи с Мрачной вершины (28) — шёлк.", en = "On the way: Gloomrise Spinners (28) - silk." } },
-        { complete = 96241, bg = true, use = 273015, at = { 1412, 33.79, 10.22 },
-          note = { ru = "Попутно: экстрактор на обглоданные трупы — 5 проб.",
-                   en = "On the way: use the extractor on Gnawed Corpses - 5 samples." } },
         { id = "h-28-mulgore-skywatcher-plateau", complete = 96259, at = { 1412, 33.59, 11.71 },
-          note = { ru = "К северу от лагеря: 10 паучков (27-28) и 5 солдат (28-29) с Мрачной вершины.",
-                   en = "Gloomrise north of the camp: 10 Hatchlings (27-28) and 5 Soldiers (28-29)." } },
+          note = { ru = "К северу от лагеря, Мрачная вершина: 10 паучков (27-28) и 5 солдат (28-29). По пути бейте и "
+                       .. "ткачей, и используйте экстрактор на обглоданных трупах — доберёте на следующем шаге.",
+                   en = "Gloomrise north of the camp: 10 Hatchlings (27-28) and 5 Soldiers (28-29). Kill Spinners and use "
+                       .. "the extractor on Gnawed Corpses on the way too - you finish them on the next step." } },
+        { id = "h28-gloomrise-silk-toxin", complete = { 96260, 96241 }, use = 273015, at = { 1412, 33.60, 10.24 },
+          note = { ru = "Глубже на вершине: ткачи (28) — 3 кристаллических шёлка; экстрактор на обглоданные трупы — "
+                       .. "5 проб яда.",
+                   en = "Deeper in Gloomrise: Spinners (28) - 3 Crystalline Silk; the extractor on Gnawed Corpses - 5 "
+                       .. "toxin samples." } },
         { complete = 96261, at = { 1412, 33.23, 8.78 }, optional = true,
           note = { ru = "Если брали: в глубине матриарх Валракс — ЭЛИТНАЯ 30-го. Соло рискованно: зелья или помощь; иначе "
                        .. "пропустите (и два следующих её шага).",
@@ -349,10 +362,14 @@ AdventureAtlas.AddLibrarySegment({
                        .. "Not found in a few minutes: skip it (and the 4881/4966 steps)." } },
         { go = true, radius = 25, at = { 1441, 54.60, 44.30 },
           note = { ru = "На восток: тропа наверх к пещере Дорна.", en = "East: the path up to Dorn's cave." } },
-        { complete = 1153, bg = true, at = { 1441, 53.10, 45.60 },
-          note = { ru = "Попутно: землекопы и геодезисты-Камнерылы (28-30) у тропы к Дорну — неочищенный образец руды.",
-                   en = "On the way: Gravelsnout Diggers and Surveyors (28-30) by the path to Dorn - an Unrefined Ore "
-                       .. "Sample." } },
+        { id = "h28-gravelsnout-ore", complete = 1153, at = { 1441, 53.10, 45.60 },
+          note = { ru = "До Дорна (его задание сразу телепортирует): землекопы и геодезисты-Камнерылы (28-30) у тропы — "
+                       .. "неочищенный образец руды (1). Долго не падает — «Вперёд» и бейте их, когда пройдёте здесь "
+                       .. "снова (после испытания Дорна и в конце, у Дорна); без руды 1153 бросите у Таттернака.",
+                   en = "Before Dorn (his quest teleports you at once): Gravelsnout Diggers and Surveyors (28-30) by the "
+                       .. "path - an Unrefined Ore Sample (1). No luck for a long time: press Forward and kill them when "
+                       .. "you pass here again (after Dorn's test and at the end, at Dorn); without the ore you abandon "
+                       .. "1153 at Tatternack." } },
         { id = "h-28-dorn-plainstalker", accept = 1149, npc = 2986, at = { 1441, 53.95, 41.49 },
           note = { ru = "Дорн Странник Равнин: «Испытание веры».", en = "Dorn Plainstalker: Test of Faith." } },
         { complete = 1149, at = { 1441, 26.43, 32.93 },
@@ -384,32 +401,36 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Harpy cave (level 29)
         ------------------------------------------------------------------
-        { complete = { 98069, 98070 }, bg = true, at = { 1441, 27.03, 52.04 },
-          note = { ru = "Попутно: визгливые гарпии (28-30) и ящики украденных припасов у пещеры и внутри.",
-                   en = "On the way: Screeching harpies (28-30) and Stolen Freewind Supplies around and inside the "
-                       .. "cave." } },
+        { id = "h29-harpy-cave", complete = { 98069, 98070 }, at = { 1441, 27.03, 52.04 },
+          note = { ru = "Вниз, на запад, тропой наверх (27.7, 50.0) к пещере гарпий (вход 27.3, 51.2): у пещеры и "
+                       .. "внутри — по 5 визгливых гарпий трёх видов (28-30) и 8 ящиков украденных припасов. Гарпии "
+                       .. "накладывают безмолвие.",
+                   en = "Down, west, up the path (27.7, 50.0) to the harpy cave (entrance 27.3, 51.2): around and "
+                       .. "inside it - 5 Screeching harpies of each of the three kinds (28-30) and 8 Stolen Freewind "
+                       .. "Supplies. The harpies silence." } },
         { complete = 1150, at = { 1441, 26.35, 55.55 },
-          note = { ru = "Вниз, на запад, тропой наверх (27.7, 50.0) в пещеру (27.3, 51.2): в конце откройте ящик — "
-                       .. "Гренка (31). Гарпии накладывают безмолвие.",
-                   en = "Down, west, up the path (27.7, 50.0) into the cave (27.3, 51.2): open the crate at the end - "
-                       .. "Grenka (31). The harpies silence." } },
+          note = { ru = "В конце пещеры откройте ящик — Гренка (31): её коготь.",
+                   en = "Open the crate at the end of the cave - Grenka (31): her claw." } },
 
         ------------------------------------------------------------------
         -- Highperch, Steelsnap, Whitereach Post (level 29)
         ------------------------------------------------------------------
         { go = true, radius = 25, at = { 1441, 13.20, 39.70 },
-          note = { ru = "На запад к Скальному гнездовью: тропа наверх.", en = "West to Highperch: the path up." } },
+          note = { ru = "На запад к Скальному гнездовью: тропа наверх. Яйца виверны (4767) — в гнёздах у Пао'ки и на "
+                       .. "западе, где кончится его сопровождение.",
+                   en = "West to Highperch: the path up. The wyvern eggs (4767) are in the nests next to Pao'ka and in "
+                       .. "the west, where his escort ends." } },
         { id = "h-28-pao-ka-swiftmountain", accept = 4770, npc = 10427, at = { 1441, 17.89, 40.57 },
-          note = { ru = "Пао'ка Быстрая Гора: «Домой» — сопровождение.",
-                   en = "Pao'ka Swiftmountain: Homeward Bound - an escort." } },
-        { complete = 4767, bg = true, object = 175384, at = { 1441, 13.39, 37.31 },
-          note = { ru = "Попутно: 10 яиц виверны в гнёздах Скального гнездовья.",
-                   en = "On the way: 10 Highperch Wyvern Eggs in the nests." } },
+          note = { ru = "Сначала 3 яйца виверны в гнёздах рядом с Пао'кой Быстрой Горой, потом его «Домой» — "
+                       .. "сопровождение (он сразу идёт).",
+                   en = "First the 3 wyvern eggs in the nests next to Pao'ka Swiftmountain, then his Homeward Bound - an "
+                       .. "escort (he sets off at once)." } },
         { complete = 4770, at = { 1441, 14.60, 32.70 },
           note = { ru = "Ведите Пао'ку на север через гнёзда — нападают виверны.",
                    en = "Lead Pao'ka north through the nests - wyverns attack." } },
         { complete = 4767, object = 175384, at = { 1441, 11.40, 35.00 },
-          note = { ru = "Доберите яйца в западных гнёздах.", en = "Finish the eggs in the western nests." } },
+          note = { ru = "Рядом на западе: доберите яйца в западных гнёздах (всего 10).",
+                   en = "Just west: finish the eggs in the western nests (10 in all)." } },
         { complete = 1131, at = { 1441, 17.79, 19.79 },
           note = { ru = "Вниз и на север: Стальная Пасть (30, гиена) ходит по каньону — ребро.",
                    en = "Down and north: Steelsnap (30, hyena) roams the canyon - his Rib." } },
@@ -437,11 +458,10 @@ AdventureAtlas.AddLibrarySegment({
         -- Darkcloud Pinnacle (level 29)
         ------------------------------------------------------------------
         { go = true, radius = 20, at = { 1441, 31.20, 36.90 },
-          note = { ru = "На восток: тропа наверх на Вершину Темной Тучи (Зловещий Тотем 27-30).",
-                   en = "East: the path up to Darkcloud Pinnacle (Grimtotem 27-30)." } },
-        { complete = 5062, bg = true, object = 175928, at = { 1441, 35.45, 35.45 },
-          note = { ru = "Попутно: 10 листов огненной агавы по всей вершине.",
-                   en = "On the way: 10 Incendia Agave all over the pinnacle." } },
+          note = { ru = "На восток: тропа наверх на Вершину Темной Тучи (Зловещий Тотем 27-30). Между сундуками "
+                       .. "собирайте огненную агаву (5062) — доберёте в центре вершины перед Арнаком.",
+                   en = "East: the path up to Darkcloud Pinnacle (Grimtotem 27-30). Pick Incendia Agave (5062) between "
+                       .. "the chests - you finish it in the middle of the pinnacle before Arnak." } },
         { complete = { [5064] = { 1 } }, object = 176344, at = { 1441, 31.79, 32.58 },
           note = { ru = "Сундук с документами №1 на северном уступе — записка 1.",
                    en = "Document Chest #1 on the northern ledge - Secret Note #1." } },
@@ -450,6 +470,9 @@ AdventureAtlas.AddLibrarySegment({
                    en = "Over the rope bridges south: chest #2 - Secret Note #2." } },
         { complete = 5064, object = 190484, at = { 1441, 39.34, 41.53 },
           note = { ru = "На восток: сундук №3 — записка 3.", en = "East: chest #3 - Secret Note #3." } },
+        { id = "h29-incendia-agave", complete = 5062, object = 175928, at = { 1441, 35.45, 35.45 },
+          note = { ru = "На северо-запад в центр вершины: доберите 10 листов огненной агавы.",
+                   en = "North-west into the middle of the pinnacle: finish the 10 Incendia Agave." } },
         { complete = 5147, at = { 1441, 38.11, 26.87 },
           note = { ru = "На север: Арнак Зловещий Тотем (29) — копыто.",
                    en = "North: Arnak Grimtotem (29) - his Hoof." } },
@@ -491,41 +514,43 @@ AdventureAtlas.AddLibrarySegment({
           note = { ru = "Виззл Латуньболт: панцири черепах.", en = "Wizzle Brassbolts: Hardened Shells." } },
         { accept = 1175, npc = 4629, at = { 1441, 81.63, 77.95 },
           note = { ru = "Распорядитель Жерин: «Кочка на дороге» — 10 василисков, 10 кристаллошкурых, 6 созерцателей. "
-                       .. "Поззика (кости, нужен 29-й) возьмёте на обратном пути.",
+                       .. "Поззика (кости, нужен 29-й) возьмёте после севера.",
                    en = "Trackmaster Zherin: A Bump in the Road - 10 Basilisks, 10 Crystalhides, 6 Gazers. Pozzik "
-                       .. "(bones, needs 29) comes on the way back." } },
-        { complete = 1110, bg = true, object = { 19868, 19869, 19870, 19871, 19872, 19873 }, at = { 1441, 74.00, 61.20 },
-          note = { ru = "Всё время: обломки ракетомобиля вдоль трассы — 30 запчастей.",
-                   en = "All the time: Rocket Car Rubble along the track - 30 parts." } },
-        { complete = 1175, bg = true, at = { 1441, 74.74, 60.18 },
-          note = { ru = "Попутно: василиски Соляного Камня (30-31) на севере и кристаллошкурые (32-33) повсюду.",
-                   en = "On the way: Saltstone Basilisks (30-31) in the north and Crystalhides (32-33) everywhere." } },
-        { complete = 1105, at = { 1441, 76.45, 58.20 },
-          note = { ru = "Север равнины: черепахи Искристого Панциря (30-31) — 9 панцирей.",
-                   en = "North of the Flats: Sparkleshell Tortoises (30-31) - 9 shells." } },
-        { complete = 1104, level = 29, at = { 1441, 76.60, 62.16 },
-          note = { ru = "Там же: скорпиды-разорители (31-32) — 6 ядов. Задание Поззика требует 29-й: не дотянули — "
-                       .. "ещё пара мобов здесь.",
-                   en = "Same area: Scorpid Reavers (31-32) - 6 venoms. Pozzik's quest needs level 29: not there yet - "
-                       .. "a few more mobs here." } },
+                       .. "(bones, needs 29) comes after the north." } },
+        { id = "h29-flats-north", complete = { 1105, [1175] = { 1 } }, at = { 1441, 75.20, 58.90 },
+          note = { ru = "На север равнины: черепахи Искристого Панциря (30-31) — 9 панцирей; василиски Соляного Камня "
+                       .. "(30-31) — 10. Всю дорогу собирайте обломки ракетомобиля вдоль трассы (1110, 30 запчастей) и "
+                       .. "бейте кристаллошкурых (1175) — доберёте на юге.",
+                   en = "North of the Flats: Sparkleshell Tortoises (30-31) - 9 shells; Saltstone Basilisks (30-31) - "
+                       .. "10. Loot the Rocket Car Rubble along the track all the time (1110, 30 parts) and kill "
+                       .. "Crystalhides (1175) - you finish them in the south." } },
+        { complete = 1104, at = { 1441, 76.60, 62.16 },
+          note = { ru = "Там же: скорпиды-разорители (31-32) — 6 ядов.",
+                   en = "Same area: Scorpid Reavers (31-32) - 6 venoms." } },
+        { id = "h-27-ashenvale-needles-level-gate", level = { 30, 0.53 },
+          ok = { ["level-grind"] = 130 }, -- end-of-segment gate: 122 kills in the normal run of a base profile
+          -- (no class quests; paladin 84, druid 82)
+          at = { 1441, 75.50, 60.00 },
+          note = { ru = "Бейте мобов севера здесь же (черепахи, скорпиды, василиски 30-32 — плотно, лучший опыт рядом) "
+                       .. "до 30-го + 53%: остальные задания равнины и сдачи на трассе и в Громовом Утёсе дадут 31-й. "
+                       .. "Без подземелий (Пучина, Лабиринты) и Валракс это до ~300 убийств: еда с «Сытостью» (+5%).",
+                   en = "Kill the north Flats mobs right here (tortoises, scorpids, basilisks 30-32: dense, the best XP "
+                       .. "nearby) up to level 30 + 53%: the rest of the Flats quests and the raceway and Thunder Bluff "
+                       .. "turn-ins make 31. Without the dungeons (Blackfathom, Razorfen Kraul) and Valraxx this is up to "
+                       .. "~300 kills: Well Fed food (+5%)." } },
         { accept = 1176, npc = 4630, at = { 1441, 80.18, 75.88 },
           note = { ru = "Обратно к трассе: Поззик — 10 полых костей стервятников.",
                    en = "Back to the raceway: Pozzik - Load Lightening, 10 Hollow Vulture Bones." } },
         { complete = 1176, at = { 1441, 77.78, 79.17 },
-          note = { ru = "Стервятники (32-34) кружат южнее трассы; падальщики (30-32) — на севере.",
-                   en = "Salt Flats Vultures (32-34) circle south of the raceway; Scavengers (30-32) are in the north." } },
-        { id = "h-27-ashenvale-needles-level-gate", complete = 1175, level = { 30, 0.67 },
-          ok = { ["level-grind"] = 130 }, -- end-of-segment gate: 122 kills in the normal run of a base profile
-          -- (no class quests; paladin 84, druid 82)
-          at = { 1441, 77.76, 87.73 },
-          note = { ru = "Юг: 6 созерцателей (34-35), доберите кристаллошкурых. Затем бейте мобов севера (черепахи, "
-                       .. "скорпиды, василиски 30-32 — плотно, лучший опыт рядом) до 30-го + 67%: сдачи на трассе и в "
-                       .. "Громовом Утёсе дадут 31-й. Без подземелий (Пучина, Лабиринты) и Валракс это до ~300 убийств: "
-                       .. "еда с «Сытостью» (+5%).",
-                   en = "South: 6 Gazers (34-35), finish the Crystalhides. Then kill the north Flats mobs (tortoises, "
-                       .. "scorpids, basilisks 30-32: dense, the best XP nearby) up to level 30 + 67%: the raceway and "
-                       .. "Thunder Bluff turn-ins make 31. Without the dungeons (Blackfathom, Razorfen Kraul) and Valraxx "
-                       .. "this is up to ~300 kills: Well Fed food (+5%)." } },
+          note = { ru = "Стервятники (32-34) кружат южнее трассы.",
+                   en = "Salt Flats Vultures (32-34) circle south of the raceway." } },
+        { complete = 1175, at = { 1441, 77.76, 87.73 },
+          note = { ru = "Дальше на юг: 6 созерцателей (34-35), доберите кристаллошкурых (10).",
+                   en = "On south: 6 Gazers (34-35), finish the Crystalhides (10)." } },
+        { id = "h30-rocket-car-parts", complete = 1110, object = { 19868, 19869, 19870, 19871, 19872, 19873 },
+          at = { 1441, 79.40, 87.60 },
+          note = { ru = "Там же, на южной петле трассы: доберите обломки ракетомобиля — всего 30 запчастей.",
+                   en = "Right there, on the south loop of the track: finish the Rocket Car Rubble - 30 parts in all." } },
         { turnin = 1110, npc = 4452, at = { 1441, 77.79, 77.27 },
           note = { ru = "Кравел. «Начальник порта Диззивиг» (36) не берите.", en = "Kravel. Skip Wharfmaster Dizzywig (36)." } },
         { turnin = 1105, npc = 4453, at = { 1441, 78.14, 77.12 },

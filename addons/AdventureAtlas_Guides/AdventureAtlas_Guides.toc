@@ -3,7 +3,7 @@
 ## Notes: Speed leveling guides 1-60 for Adventure Atlas: one guide per race and class, picked automatically for your character.
 ## Notes-ruRU: Скоростные гайды прокачки 1-60 для Adventure Atlas: по одному на каждую расу и класс, выбирается автоматически под персонажа.
 ## Dependencies: AdventureAtlas
-## Version: 0.5.0
+## Version: 0.5.1
 
 Data.lua
 Segments\Tirisfal\01_Deathknell.lua

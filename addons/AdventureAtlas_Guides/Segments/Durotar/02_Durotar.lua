@@ -7,17 +7,21 @@
 -- Coordinates: Forever uiMap 1411 (Durotar) / 1454 (Orgrimmar), map percent, from tools/data/forever_db.lua
 -- (NPC / object spawns; centroids of the objective mob / object spawns of the chosen area for complete steps).
 --
--- Hub plan (Forever DB; docs/dev/research/startzones.md 5.1 steps 2-9, docs/dev/PLAN.md B.2):
+-- Hub plan (Forever DB; docs/dev/research/startzones.md 5.1 steps 2-9, docs/dev/PLAN.md B.2). Every goal is a step
+-- of its own, in the order of play; what the player can also kill on the way is a hint in the notes ("По пути: ..."),
+-- and the step that finishes it comes where the route passes those mobs for the last time:
 --   Sen'jin 1 : 2161 Ukor on the way; 805 > 823 (Gadrin), 818 (Vornal), 96821 (Vel'rin Fang), 786 (Lar).
 --   road      : 96821 spiders. Brakk's camp: 96652 > 96604 (campfire) > 96655.
 --   Razor H. 1: 2161 + bind (Grosk), 96655 > 96825 + 815 (Torka), 791 (Furl), 96821 > 784 + 837 (Gar'Thok),
 --               823 (Orgnil), 96822 (Turroc).
---   west/TK   : 96825 pears + 837 quilboar and scouts; Tiragarde Keep: 784, 791 scraps, 96822, chest 830.
+--   west/TK   : 96825 pears + 837 quilboar and scouts; Tiragarde Keep: 784 + 96822, chest 830, then the rest of the
+--               791 scraps (the same sailors and marines).
 --   Razor H. 2: 784 > 825, 830 > 831, 791, 96822, 96825.
---   coast     : 825 toolboxes and 818 makrura / crawlers along the east coast, south to Sen'jin.
+--   coast     : 825 toolboxes (818 makrura / crawlers on the way), then the rest of 818 south to Sen'jin.
 --   Sen'jin 2 : 818; accept 808, 826 (Gadrin), 97225 (Vornal), 817 (Vel'rin Fang), 97223 (Xar'Ti).
 --   Kolkar    : 786 attack plans, 99123 escort (Pal'juh). Sen'jin 3: 786, 99123.
---   Echo Isles: 808, 826 + Zalazane, 97225 idols, 817 tigers, 815 eggs, 97223 Bloodtalon Matriarch.
+--   Echo Isles: the northern isle: 817 tigers + 815 eggs, 97223 Bloodtalon Matriarch; the main isle: 808, 826 +
+--               Zalazane, 97225 idols.
 --   Sen'jin 4 : 808, 826, 97225, 817, 97223; hearth.
 --   Razor H. 3: 815, 825, 99048 (Orgnil) > Heglan Shadeeye > 99049 (three objects) > 99051 + 806; level 10.
 --   north     : 837 dustrunners and battleguards, 816 (Misha), Rezlak 834 > 835 + orb 97281 > 97282, 99051 naga,
@@ -141,19 +145,19 @@ AdventureAtlas.AddLibrarySegment({
                        .. "разведчика Иглогривых.",
                    en = "South-west of Razor Hill: 8 Prickly Pear Fruits on the bushes and 4 Razormane Quilboar and "
                        .. "4 Razormane Scouts." } },
-        { id = "dur02-tiragarde-bg", complete = 791, bg = true, at = { 1411, 57.7, 56.1 },
-          note = { ru = "Попутно: обрывки парусины с матросов Кул-Тираса.",
-                   en = "On the way: Canvas Scraps from the Kul Tiras Sailors." } },
         { id = "dur02-tiragarde", complete = { 784, 96822 }, at = { 1411, 58.6, 56.3 },
           note = { ru = "Крепость Тирагард: 10 матросов, 8 морпехов и лейтенант Бенедикт. Лук, топор и щит "
-                       .. "налётчиков лежат на земле в крепости.",
+                       .. "налётчиков лежат на земле в крепости. По пути: с матросов и морпехов падают обрывки "
+                       .. "парусины для Фурла - доберёте после сундука.",
                    en = "Tiragarde Keep: 10 sailors, 8 marines and Lieutenant Benedict. The Raider's Bow, Battleaxe "
-                       .. "and Shield lie on the ground in the keep." } },
+                       .. "and Shield lie on the ground in the keep. On the way: the sailors and marines drop Furl's "
+                       .. "Canvas Scraps - you finish them after the chest." } },
         { id = "dur02-chest", accept = 830, use = 4881, object = 3239, at = { 1411, 59.3, 57.6 },
           note = { ru = "Сундук Бенедикта в крепости: в нём старый конверт - начните задание.",
                    en = "Benedict's Chest in the keep: the Aged Envelope inside starts a quest." } },
         { id = "dur02-scraps", complete = 791, at = { 1411, 57.7, 56.1 },
-          note = { ru = "Добейте 8 обрывков парусины.", en = "Finish the 8 Canvas Scraps." } },
+          note = { ru = "Там же в крепости: добейте 8 обрывков парусины с матросов и морпехов.",
+                   en = "In the keep: finish the 8 Canvas Scraps from the sailors and marines." } },
 
         ------------------------------------------------------------------
         -- Razor Hill, second visit (level 8)
@@ -170,15 +174,15 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- The east coast south to Sen'jin (level 8)
         ------------------------------------------------------------------
-        { id = "dur02-coast-bg", complete = 818, bg = true, at = { 1411, 63.0, 52.0 },
-          note = { ru = "Попутно вдоль берега: глаза макруры и слизь крабов.",
-                   en = "On the way along the coast: Intact Makrura Eyes and Crawler Mucus." } },
         { id = "dur02-toolboxes", complete = 825, at = { 1411, 63.0, 52.0 },
-          note = { ru = "Восточный берег за Тирагардом: 3 ящика с гномьими инструментами у воды.",
-                   en = "The east coast past Tiragarde: 3 Gnomish Toolboxes by the water." } },
+          note = { ru = "Восточный берег за Тирагардом: 3 ящика с гномьими инструментами у воды. По пути: бейте "
+                       .. "макрур (глаза) и крабов (слизь) для Ворнала - доберёте дальше на юг по берегу.",
+                   en = "The east coast past Tiragarde: 3 Gnomish Toolboxes by the water. On the way: kill makrura "
+                       .. "(eyes) and crawlers (mucus) for Vornal - you finish them further south along the "
+                       .. "coast." } },
         { id = "dur02-coast", complete = 818, at = { 1411, 62.0, 66.0 },
-          note = { ru = "Дальше на юг вдоль берега: 4 глаза макруры и 8 слизи крабов.",
-                   en = "On south along the coast: 4 Intact Makrura Eyes and 8 Crawler Mucus." } },
+          note = { ru = "Дальше на юг вдоль берега: добейте 4 глаза макруры и 8 слизи крабов.",
+                   en = "On south along the coast: finish 4 Intact Makrura Eyes and 8 Crawler Mucus." } },
 
         ------------------------------------------------------------------
         -- Sen'jin, Kolkar Crag (level 8-9)
@@ -204,21 +208,21 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- The Echo Isles (level 9)
         ------------------------------------------------------------------
-        { id = "dur02-isles-bg", complete = { 817, 815 }, bg = true, at = { 1411, 65.1, 80.0 },
-          note = { ru = "Попутно на островах: шкуры дуротарских тигров и яйца хлестохвостов (кладки на земле).",
-                   en = "On the way on the isles: Durotar Tiger Furs and Taillasher Eggs (clutches on the "
+        -- The northern isle has the tigers, the egg clutches and the matriarch together: 817 and 815 are done
+        -- there in one go; the main isle is for the trolls, the idols and Zalazane.
+        { id = "dur02-isles-2", complete = { 817, 815 }, at = { 1411, 68.8, 72.0 },
+          note = { ru = "Вплавь на северный остров: 4 шкуры дуротарских тигров и 3 яйца хлестохвостов (кладки на "
+                       .. "земле).",
+                   en = "Swim to the northern isle: 4 Durotar Tiger Furs and 3 Taillasher Eggs (clutches on the "
                        .. "ground)." } },
         { id = "dur02-matriarch", complete = 97223, at = { 1411, 68.8, 71.8 },
-          note = { ru = "Северный остров: матриарх кровавых когтей.",
-                   en = "The northern isle: the Bloodtalon Matriarch." } },
+          note = { ru = "Там же на северном острове: матриарх кровавых когтей.",
+                   en = "On the same northern isle: the Bloodtalon Matriarch." } },
         { id = "dur02-isles", complete = { 808, 826, 97225 }, at = { 1411, 67.2, 85.2 },
           note = { ru = "Главный остров Эха: по 8 околдованных троллей и троллей-вудуистов, 8 забытых идолов лоа, "
                        .. "череп Миншины (у пленника) и голова Залазана (рядом с ним).",
                    en = "The main Echo Isle: 8 Hexed Trolls, 8 Voodoo Trolls, 8 Forgotten Loa Idols, Minshina's "
                        .. "Skull (at the prisoner) and Zalazane's Head (next to it)." } },
-        { id = "dur02-isles-2", complete = { 817, 815 }, at = { 1411, 64.5, 84.0 },
-          note = { ru = "Добейте 4 шкуры тигров и 3 яйца хлестохвостов.",
-                   en = "Finish 4 Durotar Tiger Furs and 3 Taillasher Eggs." } },
 
         ------------------------------------------------------------------
         -- Sen'jin, then hearth (level 9-10)
@@ -237,11 +241,14 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         { id = "dur02-torka-3", turnin = 815, npc = 3191, at = { 1411, 51.11, 42.45 } },
         { id = "dur02-garthok-3", turnin = 825, npc = 3139, at = { 1411, 51.95, 43.50 } },
-        -- Requirement gate (docs/dev/PLAN.md B.8): 99048 needs level 9 (base profile 9.66 here, 0 kills).
-        { id = "dur02-lvl-9", level = 9, at = { 1411, 47.3, 49.0 },
+        -- Requirement gate (docs/dev/PLAN.md B.8): 99048 needs level 9 (base profile 9.66 here, 0 kills). The
+        -- waypoint stays at Orgnil, as at dur02-lvl-10: the player normally has the level and walks on to him; the
+        -- note names the grind spot for the short case.
+        { id = "dur02-lvl-9", level = 9, at = { 1411, 52.24, 43.15 },
           note = { ru = "9-й уровень: он нужен для задания Огрнила. Не хватает - Иглогривые к юго-западу от Колючего "
-                       .. "Холма.",
-                   en = "Level 9: Orgnil's quest needs it. Short: the Razormane south-west of Razor Hill." } },
+                       .. "Холма, потом обратно к Огрнилу.",
+                   en = "Level 9: Orgnil's quest needs it. Short: the Razormane south-west of Razor Hill, then back "
+                       .. "to Orgnil." } },
         { id = "dur02-orgnil-2", accept = 99048, npc = 3142, at = { 1411, 52.24, 43.15 },
           note = { ru = "Огрнил: задание нужно 9-й уровень.", en = "Orgnil: the quest needs level 9." } },
         { id = "dur02-heglan", turnin = 99048, accept = 99049, npc = 275657, at = { 1411, 58.60, 45.60 },

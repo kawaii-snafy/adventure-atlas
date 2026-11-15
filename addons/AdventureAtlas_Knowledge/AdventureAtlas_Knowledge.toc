@@ -5,6 +5,6 @@
 ## Dependencies: AdventureAtlas
 ## LoadOnDemand: 1
 ## X-AdventureAtlas-Module: data
-## Version: 0.5.0
+## Version: 0.5.1
 
 Quests.lua

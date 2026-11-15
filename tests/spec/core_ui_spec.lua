@@ -754,7 +754,7 @@ describe("slash commands", function()
         assert.same({ "Unknown route 'nope'. Type /aa routes." }, slash("/aa route nope"))
         out = slash("/atlas status")
         assert.same({
-            "Adventure Atlas 0.5.0 (route API 1.2)",
+            "Adventure Atlas 0.5.1 (route API 1.2)",
             "Route: Test route (test-route)",
             "Step 1/26: Accept: Rude Awakening",
             "Automation: on",

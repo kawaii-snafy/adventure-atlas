@@ -18,23 +18,27 @@
 --   arrival : 840 Takrin (Razor Hill) > 842 Kargal (Far Watch Post).
 --   XR1     : 842 > 844 (Sergra), 870 (Tonga), 871 + 5041 + 867 (Thork, Darsok), 1358 > 1492 + 848 (Helbrim),
 --             869 (Gazrog), flight path, hearth.
---   east 1  : 871 camp (54.8,26), plainstrider beaks 844, raptor heads 869 (all segment).
+--   east 1  : 871 camp (54.8,26), plainstrider beaks 844 (finished on the way back, h15-beaks); raptor heads 869
+--             are killed on the way from here on and finished at Echeyakee.
 --   XR2     : 844 > 845, 871 > 872.
---   east 2  : Chen's Empty Keg spot (55.7,27.3, optional), 872 + 5041 + Kreenig (58.5,25.5), zhevra 845 on the
---             way to Ratchet.
+--   east 2  : Chen's Empty Keg spot (55.7,27.3, optional), 872 + 5041 + Kreenig (58.5,25.5), zhevra 845 (finished
+--             north-east of the camp, h15-hooves) on the way to Ratchet.
 --   RA1     : 97253, 887, 895 (poster), 894, 1492 (896 optional), flight path.
---   pirates : 97253 parts, 887 Southsea, 895 Baron Longshore. RA2: 887/895 > 890 > 892 > 888, 97253.
---   XR3     : fly; 872/5041, 845 > 903.  west: Regthar 850/855, Barak 850, Forgotten Pools 870 + 848 spores,
---             prowlers 903; Regthar 850 > 851.  XR3b: 870 > 877, 903 > 881.
---   north   : Echeyakee 881, Boulder Lode Mine 896 (optional), Sludge Fen 858 > 863 escort, Samophlange
---             894 > 900 > 901 > 902, Vrang 95494/95507 > 95495 > Walton 95621 > 95508, harpies 867.
+--   pirates : 97253 parts, 895 Baron Longshore, 887 Southsea (finished at the shore camps, h15-pirates).
+--             RA2: 887/895 > 890 > 892 > 888, 97253.
+--   XR3     : fly; 872/5041, 845 > 903.  west: Regthar 850/855, Barak 850, Forgotten Pools 870 + prowlers 903
+--             (+ 848 spores of the pool), Kolkar bracers 855 on the way (finished at Verog's camp in the south,
+--             h15-verog); Regthar 850 > 851.  XR3b: 870 > 877, 903 > 881.
+--   north   : Echeyakee 881, the rest of the raptor heads 869 around it (h15-raptor-heads), Boulder Lode Mine 896
+--             (optional), Sludge Fen 858 > 863 escort, Samophlange 894 > 900 > 901 > 902, Vrang 95494/95507 > 95495 >
+--             Walton 95621 > 95508, harpies 867.
 --   XR4     : hearth; 869 > 3281, 867 > 875, 881 > 905, 4921 + 95774 + 899 (Mankrik).
 --   RA3     : fly; 902 + 863 > 1483, 865 + 1069 (Mebok), 896 (optional), 819 > 821 if the keg was found.
---   south   : 888 crates, 3281 silver, Stagnant Oasis 877 + 848, Verog 851, nests 905 (+ 865 horns), Lakota'mani
---             883 (optional, bg), Razormane Raiders 95774, Beaten Corpse 4921, Camp Taurajo: flight path, hearth,
---             878.
---   XR5     : fly; 4921 + 95774, 877 > 880, 905 > 3261, 3281; Regthar 851 > 852; 848 > 853 (timed, accepted
---             last).
+--   south   : 888 crates, 3281 silver, Stagnant Oasis 877 + 848, Verog 851 + the rest of the Kolkar bracers 855,
+--             nests 905, 865 horns (finished by the nests, h15-horns), Beaten Corpse 4921, Razormane Raiders 95774,
+--             Lakota'mani 883 (optional), Camp Taurajo: flight path, hearth, 878.
+--   XR5     : fly; 4921 + 95774, 877 > 880, 905 > 3261, 3281; Regthar 851 + 855 > 852; 848 > 853 (timed,
+--             accepted last).
 -- Race-filtered steps: h15-org-gate, h15-org-fp (Scourge); h15-fp-xroads and h15-fp-taurajo (every race but the
 --   Tauren: the walk variant of mul-03-barrens-crossing learns both points, docs/dev/PLAN.md B.5, E.1). An insert
 --   on one of these two needs the same race scope.
@@ -52,8 +56,8 @@
 --   Sludge Fen 57.2,9.0; Vrang 43.8,12.2; Stagnant Oasis 56.5,43.7). 819 is turned in and 821 taken at RA3 (one
 --   place only: a second 819 step would be a duplicate accept); 821's items are all on the next segment's path
 --   and it is turned in at the Ratchet visit after Thunder Bluff 2.
--- Carried into the next segment: 852 Hezrul, 855 Centaur Bracers, 865 Raptor Horns (Mebok, Ratchet), 888 Stolen
---   Booty (Gazlowe, Ratchet), 880 Altered Beings, 3261 Jorn Skyseer (Camp Taurajo), 853 Apothecary Zamah
+-- Carried into the next segment: 852 Hezrul, 865 Raptor Horns (Mebok, Ratchet), 888 Stolen Booty (Gazlowe,
+--   Ratchet), 880 Altered Beings, 3261 Jorn Skyseer (Camp Taurajo), 853 Apothecary Zamah
 --   (Thunder Bluff, TIMED 45 min), 899 Consumed by Hatred and 878 Tribes at War (Bristlebacks at Camp Taurajo),
 --   875 Harpy Lieutenants, 1483 Ziz Fizziks, 1069 Deepmoss Spider Eggs, 821 Chen's Empty Keg (if the keg was
 --   found; Drohn, Ratchet).
@@ -63,10 +67,13 @@
 --   Bluff at the start of h-18 (level 18, forced trip for the timed 853).
 --
 -- Automation notes: transient steps (fp, sethearth, fly) come after the quest steps of that hub; no step accepts
--- a quest from an NPC on both sides of a transient step. A background goal is never repeated as a stateful
--- `complete` step far behind it (869 raptor heads only has its bg step): once such a step is done early, the
--- engine's anchor jumps to it and fast-forwards every transient / optional step before it (flight paths, flights,
--- hearth). For the same reason the event-only 870 dive shares a step with 903.
+-- a quest from an NPC on both sides of a transient step. No background steps: mobs killed on the way are named in
+-- the notes ("По пути" / "On the way") and finished by a step of their own where the route passes them last before
+-- the turn-in. Such a finishing step that the player may complete long before reaching it (869 raptor heads, 845
+-- hooves) repeats an objective of the step just before it that can only be done there (881 Echeyakee, 872 the far
+-- camp; already credited, no extra XP): done early on its own it would become the forward anchor and fast-forward
+-- every transient / optional step before it (flight points, flights, hearth). For the same reason the event-only
+-- 870 dive shares a step with 903.
 if not AdventureAtlas.AddLibraryInsert then return end
 AdventureAtlas.AddLibrarySegment({
     id = "h-15-barrens",
@@ -141,15 +148,13 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- East 1: Razormane camp next to the Crossroads (level 15)
         ------------------------------------------------------------------
-        { id = "h15-raptor-heads", complete = 869, bg = true, at = { 1413, 52.9, 28.8 },
-          note = { ru = "Весь сегмент попутно: 12 голов ящеров с любых Солнечночешуйчатых ящеров.",
-                   en = "All segment along the way: 12 Raptor Heads from any Sunscale raptor." } },
-        { id = "h15-beaks-bg", complete = 844, bg = true, at = { 1413, 53.5, 28.5 },
-          note = { ru = "Попутно: 7 клювов с долгоногов вокруг Перекрёстка.",
-                   en = "Along the way: 7 Plainstrider Beaks from plainstriders around the Crossroads." } },
         { id = "h15-thorn-hill", complete = 871, at = { 1413, 54.8, 26.0 },
-          note = { ru = "Лагерь Иглогривых к северо-востоку: 8 искателей воды, 8 колючников, 3 охотника.",
-                   en = "Razormane camp to the north-east: 8 Water Seekers, 8 Thornweavers, 3 Hunters." } },
+          note = { ru = "Лагерь Иглогривых к северо-востоку: 8 искателей воды, 8 колючников, 3 охотника. По пути: долгоноги "
+                       .. "вокруг Перекрёстка - 7 клювов для Сергры (доберёте на обратном пути) и Солнечночешуйчатые ящеры - "
+                       .. "12 голов для Газрога (их доберёте на севере, у Эчеяки).",
+                   en = "Razormane camp to the north-east: 8 Water Seekers, 8 Thornweavers, 3 Hunters. On the way: the "
+                       .. "plainstriders around the Crossroads - 7 beaks for Sergra (finished on the way back) - and Sunscale "
+                       .. "raptors - 12 heads for Gazrog (finished in the north, at Echeyakee)." } },
         { id = "h15-beaks", complete = 844, at = { 1413, 53.5, 29.5 },
           note = { ru = "Доберите клювы долгоногов по дороге назад.",
                    en = "Finish the plainstrider beaks on the way back." } },
@@ -163,26 +168,28 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- East 2: Razormane camp, then to Ratchet (level 15-16)
         ------------------------------------------------------------------
-        { id = "h15-hooves-bg", complete = 845, bg = true, at = { 1413, 59.5, 21.0 },
-          note = { ru = "Попутно: 4 копыта зебр (бегуны-зебры повсюду к востоку).",
-                   en = "Along the way: 4 Zhevra Hooves (Zhevra Runners all over the east)." } },
         { id = "h15-keg", collect = { [4926] = 1 }, object = 3238, optional = true, at = { 1413, 55.70, 27.30 },
           note = { ru = "По пути на северо-восток: здесь может лежать Пустой бочонок Чэня (задание пивовару Дрону в "
                        .. "Кабестане, 1050 + 1350 опыта). Есть — подберите. Нет — «Вперёд»: бочонок бывает и в "
-                       .. "других местах маршрута (подсказки в заметках).",
+                       .. "других местах маршрута (подсказки в заметках). Дальше по пути бейте зебр-бегунов: 4 копыта "
+                       .. "для Сергры (доберёте за лагерем).",
                    en = "On the way north-east: Chen's Empty Keg may lie here (a quest for Brewmaster Drohn in "
                        .. "Ratchet, 1050 + 1350 XP). There: loot it. Not there: press Forward, the keg can also lie "
-                       .. "at other spots on the route (see the notes)." } },
+                       .. "at other spots on the route (see the notes). From here on kill the Zhevra Runners on the "
+                       .. "way: 4 hooves for Sergra (finished past the camp)." } },
         { id = "h15-far-camp", complete = { 872, 5041 }, at = { 1413, 58.6, 25.4 },
           note = { ru = "Дальний лагерь Иглогривых: 8 геомантов, 8 защитников, Кринег Злобное Рыло (15) на юге "
-                       .. "лагеря (58.5, 27.0) — его клык. Ящики снабжения Перекрёстка — по краям лагеря.",
+                       .. "лагеря (58.5, 27.0) — его клык. Ящики снабжения Перекрёстка — по краям лагеря. Зебры "
+                       .. "вокруг - для копыт.",
                    en = "The far Razormane camp: 8 Geomancers, 8 Defenders, Kreenig Snarlsnout (15) on the south "
-                       .. "side (58.5, 27.0) for his tusk. The Crossroads' Supply Crates are around the camp." } },
-        -- 872 again (already credited, no extra XP): with 845 alone this step would be done as soon as the bg
-        -- hooves are, become the forward anchor and fast-forward the optional keg check before it.
+                       .. "side (58.5, 27.0) for his tusk. The Crossroads' Supply Crates are around the camp. Zhevra "
+                       .. "around it: for the hooves." } },
+        -- 872 again (already credited, no extra XP): with 845 alone this step would be done as soon as the hooves
+        -- are (the zhevra are killed on the way from the Crossroads), become the forward anchor and fast-forward the
+        -- optional keg check before it.
         { id = "h15-hooves", complete = { 845, 872 }, at = { 1413, 60.5, 21.5 },
-          note = { ru = "Не хватает копыт — зебры сразу к северо-востоку от лагеря. Потом на юго-восток в Кабестан.",
-                   en = "Missing hooves? Zhevra right north-east of the camp. Then south-east to Ratchet." } },
+          note = { ru = "Доберите копыта: зебры-бегуны сразу к северо-востоку от лагеря. Потом на юго-восток в Кабестан.",
+                   en = "Finish the hooves: Zhevra Runners right north-east of the camp. Then south-east to Ratchet." } },
 
         ------------------------------------------------------------------
         -- Ratchet, first visit (level 16)
@@ -208,18 +215,18 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Southsea pirate camps south of Ratchet (level 16)
         ------------------------------------------------------------------
-        { id = "h15-pirates-bg", complete = 887, bg = true, at = { 1413, 63.7, 46.9 },
-          note = { ru = "Попутно: 12 разбойников и 6 канониров Южноморских пиратов.",
-                   en = "Along the way: 12 Southsea Brigands and 6 Southsea Cannoneers." } },
         { id = "h15-parts", complete = 97253, object = 660930, at = { 1413, 61.9, 46.3 },
-          note = { ru = "Верхний пиратский лагерь (дальше от берега): 5 горстей сложных деталей на земле.",
+          note = { ru = "Верхний пиратский лагерь (дальше от берега): 5 горстей сложных деталей на земле. По пути бейте "
+                       .. "Южноморских пиратов: 12 разбойников и 6 канониров для Газлоу (доберёте у берега).",
                    en = "The upper pirate camp (away from the shore): 5 Handfuls of Complicated Parts on the "
-                       .. "ground." } },
+                       .. "ground. On the way kill Southsea pirates: 12 Brigands and 6 Cannoneers for Gazlowe "
+                       .. "(finished at the shore)." } },
         { id = "h15-longshore", complete = 895, npc = 3467, at = { 1413, 63.3, 49.0 },
           note = { ru = "Барон Лонгшор (16) стоит в одном из лагерей у берега. Не трогайте ящики пока — они для "
-                       .. "следующего задания Газлоу, заберёте их позже.",
+                       .. "следующего задания Газлоу, заберёте их позже. Пиратов вокруг бейте для Газлоу.",
                    en = "Baron Longshore (16) stands in one of the shore camps. Leave the crates for now: they "
-                       .. "are for Gazlowe's later quest, you pick them up later." } },
+                       .. "are for Gazlowe's later quest, you pick them up later. Kill the pirates around for "
+                       .. "Gazlowe." } },
         { id = "h15-pirates", complete = 887, at = { 1413, 63.8, 45.5 },
           note = { ru = "Доберите пиратов в лагерях у берега и возвращайтесь на север в Кабестан.",
                    en = "Finish the pirates in the shore camps and go back north to Ratchet." } },
@@ -248,29 +255,27 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- West: Regthar, the Forgotten Pools, Barak Kodobane (level 16)
         ------------------------------------------------------------------
-        -- 855 is carried: Regthar, h-18
+        -- 855: killed on the way from here on, finished at Verog's camp (h15-verog), turned in at h15-regthar-3
         { id = "h15-regthar", accept = { 850, 855 }, npc = 3389, at = { 1413, 45.34, 28.41 },
-          note = { ru = "Регтар Врата Смерти в форте на западе. 855 (15 наручей) - попутно; сдаётся в следующем сегменте.",
-                   en = "Regthar Deathgate at the fort to the west. 855 (15 bracers) runs along the way; it is turned in next "
-                       .. "segment." } },
-        { id = "h15-claws-bg", complete = 903, bg = true, at = { 1413, 42.5, 26.0 },
-          note = { ru = "Попутно: 7 когтей с саванных хищников.", en = "Along the way: 7 Prowler Claws." } },
-        { id = "h15-bracers-bg", complete = 855, bg = true, at = { 1413, 44.5, 23.5 },
-          note = { ru = "Попутно, до конца следующего сегмента: 15 наручей с любых колкаров.",
-                   en = "Along the way, until the end of the next segment: 15 Centaur Bracers from any Kolkar." } },
-        { id = "h15-spores-bg", complete = 848, bg = true, object = 3640, at = { 1413, 44.6, 23.8 },
-          note = { ru = "Попутно: споры с налитых грибов у Забытых прудов (4 шт.).",
-                   en = "Along the way: spores from the Laden Mushrooms around the Forgotten Pools (4)." } },
+          note = { ru = "Регтар Врата Смерти в форте на западе. 855 - 15 наручей с любых колкаров: бейте их по пути (лагерь "
+                       .. "Барака, пруды, позже Застойный оазис), доберёте в лагере Верога у оазиса, сдача Регтару в конце "
+                       .. "сегмента. И бейте саванных хищников: 7 когтей для Сергры (доберёте у прудов).",
+                   en = "Regthar Deathgate at the fort to the west. 855 - 15 bracers from any Kolkar: kill them on the way "
+                       .. "(Barak's camp, the pools, later the Stagnant Oasis); finished at Verog's camp by the oasis and "
+                       .. "turned in to Regthar at the end of the segment. Kill Savannah Prowlers too: 7 claws for Sergra "
+                       .. "(finished at the pools)." } },
         { id = "h15-barak", complete = 850, npc = 3394, at = { 1413, 42.80, 23.52 },
           note = { ru = "Барак Гроза Кодо (16) в лагере колкаров к северо-западу: сильно бьёт — начинайте с полным "
-                       .. "здоровьем, рядом колкары-заклинатели.",
+                       .. "здоровьем, рядом колкары-заклинатели. Колкары лагеря - для наручей.",
                    en = "Barak Kodobane (16) in the Kolkar camp to the north-west: he hits hard, start at full "
-                       .. "health; Kolkar casters nearby." } },
+                       .. "health; Kolkar casters nearby. The camp's Kolkar: for the bracers." } },
         { id = "h15-forgotten-pools", complete = { 870, 903 }, at = { 1413, 45.06, 22.54 },
           note = { ru = "Забытые пруды к востоку: нырните к бурлящей расщелине на дне пруда. Когти доберите с "
-                       .. "хищников между прудом и лагерем Барака.",
+                       .. "хищников между прудом и лагерем Барака. Налитые грибы вокруг пруда: соберите споры для "
+                       .. "Хелбрима (4; чего не хватит - у Застойного оазиса).",
                    en = "The Forgotten Pools to the east: dive to the Bubbling Fissure at the bottom of the pool. "
-                       .. "Finish the claws on the prowlers between the pool and Barak's camp." } },
+                       .. "Finish the claws on the prowlers between the pool and Barak's camp. Laden Mushrooms around "
+                       .. "the pool: pick the spores for Helbrim (4; what is missing at the Stagnant Oasis)." } },
         { id = "h15-regthar-2", turnin = 850, accept = 851, npc = 3389, at = { 1413, 45.34, 28.41 },
           note = { ru = "851 (Верог) — позже, в Застойном оазисе.", en = "851 (Verog) is for later, at the Stagnant Oasis." } },
 
@@ -279,7 +284,8 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         { id = "h15-xr-tonga-877", turnin = 870, accept = 877, npc = 3448, at = { 1413, 52.26, 31.93 } },
         { id = "h15-xr-sergra-881", turnin = 903, accept = 881, npc = 3338, at = { 1413, 52.23, 31.01 },
-          note = { ru = "Получите Рог Эчеяки.", en = "You get the Horn of Echeyakee." } },
+          note = { ru = "Получите Рог Эчеяки. По дороге на север бейте ящеров - головы для Газрога.",
+                   en = "You get the Horn of Echeyakee. On the way north kill raptors: the heads for Gazrog." } },
 
         ------------------------------------------------------------------
         -- North-east: Echeyakee, Boulder Lode Mine, the Sludge Fen (level 16-17)
@@ -289,6 +295,14 @@ AdventureAtlas.AddLibrarySegment({
                        .. "Нет ещё бочонка Чэня — гляньте к югу (55.8, 20.0).",
                    en = "Blow the Horn of Echeyakee at this spot: the white lion Echeyakee (16) appears; loot "
                        .. "his hide. No Chen's Empty Keg yet: look just south (55.8, 20.0)." } },
+        -- 869 (raptor heads, killed on the way since the first Crossroads visit) is finished here: the densest
+        -- Sunscale Screecher ground on the route (13-15) before the turn-in. 881 again (already credited, no extra
+        -- XP): with 869 alone this step would be done as soon as the twelfth head drops - possibly long before -,
+        -- become the forward anchor and fast-forward the flight point of Ratchet, the flights and the optional steps
+        -- before it.
+        { id = "h15-raptor-heads", complete = { 869, 881 }, at = { 1413, 55.1, 16.2 },
+          note = { ru = "Доберите 12 голов ящеров для Газрога: Солнечночешуйчатые визгуны вокруг этого места.",
+                   en = "Finish the 12 Raptor Heads for Gazrog: Sunscale Screechers all around this spot." } },
         { id = "h15-mine", complete = 896, optional = true, at = { 1413, 60.8, 4.0 },
           note = { ru = "Только если взяли 896: рудник Валунов - громилы и надсмотрщики Торговой компании до изумруда «Кошачий глаз» "
                        .. "(редкая добыча). Босса Копперплага (19) обходите. Нет камня после ~20 убийств - идите дальше, шаг "
@@ -351,7 +365,11 @@ AdventureAtlas.AddLibrarySegment({
                    en = "The wrecked caravan to the south: Corporal Adamore (17-18) for his orders. Mobs stand "
                        .. "in groups of 2-3: pull them one at a time." } },
         { id = "h15-walton-2", turnin = 95621, accept = 95508, npc = 261366, at = { 1413, 42.02, 11.45 } },
+        -- The DB snapshot has no chain for Walton's Forever quests, so the validator thinks 95508 could be taken on the
+        -- first visit; it follows 95621 (the scene comes after Benedict's Orders), and the player is back at Walton
+        -- for 95621 anyway: no extra walk.
         { id = "h15-walton-scene", complete = 95508, at = { 1413, 41.96, 11.50 },
+          ok = "travel-revisit", -- 95508 follows 95621; the return to Walton is the 95621 turn-in
           note = { ru = "Сценка около минуты: встаньте за домом и ждите, Уолтон справится сам.",
                    en = "About a one-minute scene: stand behind the house and wait, Walton handles it." } },
         { id = "h15-walton-3", turnin = 95508, npc = 261366, at = { 1413, 42.02, 11.45 },
@@ -373,8 +391,8 @@ AdventureAtlas.AddLibrarySegment({
         -- The Crossroads, fourth visit (level 17)
         ------------------------------------------------------------------
         { id = "h15-xr-4-gazrog", turnin = 869, accept = 3281, npc = 3464, at = { 1413, 51.93, 30.32 },
-          note = { ru = "Меньше 12 голов? Визгуны бегают прямо вокруг Перекрёстка.",
-                   en = "Fewer than 12 heads? Screechers roam right around the Crossroads." } },
+          note = { ru = "Газрог: головы ящеров. Украденное серебро (3281) - на юге, после Кабестана.",
+                   en = "Gazrog: the raptor heads. The Stolen Silver (3281) is in the south, after Ratchet." } },
         -- 875 is carried: the Witchwing Slayers are killed on the way to Stonetalon (h-18)
         { id = "h15-xr-4-darsok", turnin = 867, accept = 875, npc = 3449, at = { 1413, 51.62, 30.90 },
           note = { ru = "Дарсок Быстрый Кинжал: сдайте когти и возьмите «Гарпий-лейтенантов» (6 колец с истребительниц Ведьмокрылых - "
@@ -435,29 +453,35 @@ AdventureAtlas.AddLibrarySegment({
           note = { ru = "Второй ящик «Хрупкое - не ронять» рядом. 888 сдаётся в следующем сегменте.",
                    en = "The second crate, \"Fragile - Do Not Drop\", nearby. 888 is turned in next segment." } },
         { id = "h15-silver", complete = 3281, object = 147557, at = { 1413, 58.04, 53.87 },
-          note = { ru = "Украденное серебро лежит на земле к юго-западу.",
-                   en = "The Stolen Silver lies on the ground to the south-west." } },
-        { id = "h15-horns-bg", complete = 865, bg = true, at = { 1413, 53.5, 49.5 },
-          note = { ru = "Попутно: 5 целых рогов с серпокоготных ящеров.",
-                   en = "Along the way: 5 Intact Raptor Horns from Sunscale Scytheclaws." } },
+          note = { ru = "Украденное серебро лежит на земле к юго-западу. По пути и дальше на юге бейте серпокоготных ящеров: "
+                       .. "5 целых рогов для Мебока (доберёте у гнёзд).",
+                   en = "The Stolen Silver lies on the ground to the south-west. On the way and further south kill Sunscale "
+                       .. "Scytheclaws: 5 Intact Raptor Horns for Mebok (finished by the nests)." } },
         { id = "h15-stagnant-oasis", complete = { 877, 848 }, object = 3737, at = { 1413, 55.61, 42.75 },
           note = { ru = "Застойный оазис: нырните к бурлящей расщелине (сухие семена). Доберите споры с грибов "
-                       .. "вокруг оазиса. Колкары — для наручей. Бочонок Чэня бывает к востоку (56.5, 43.7) — "
-                       .. "его возьмёт Дрон в начале следующего сегмента.",
+                       .. "вокруг оазиса (4 для Хелбрима). Колкары — для наручей. Бочонок Чэня бывает к востоку "
+                       .. "(56.5, 43.7) — его возьмёт Дрон в начале следующего сегмента.",
                    en = "The Stagnant Oasis: dive to the Bubbling Fissure (Dried Seeds). Finish the spores from "
-                       .. "the mushrooms around the oasis. Kolkar for the bracers. Chen's Empty Keg can lie to the "
-                       .. "east (56.5, 43.7): Drohn takes it early next segment." } },
-        { id = "h15-verog", complete = 851, npc = 3395, at = { 1413, 53.06, 41.74 },
+                       .. "the mushrooms around the oasis (4 for Helbrim). Kolkar for the bracers. Chen's Empty Keg "
+                       .. "can lie to the east (56.5, 43.7): Drohn takes it early next segment." } },
+        -- 855 (bracers, killed on the way since Regthar) is finished here: the oasis and Verog's camp are the densest
+        -- Kolkar ground of the route (17 bracer-dropping Kolkar of 13-16 within 300 yd of the oasis in the DB, plus
+        -- the Bloodchargers), killed anyway until Verog shows up, at 17. The later passes come after h-18's level-18
+        -- gate that these kills help to reach (the oasis again, h18-shells, at 18.2) or on Kolkar that are grey or
+        -- nearly so (Lushwater, 12-16, at 19.7): finished at either, the route breaks the grind-baseline gate by
+        -- up to 9 kills. Turned in at h15-regthar-3, the next Regthar visit.
+        { id = "h15-verog", complete = { 851, 855 }, npc = 3395, at = { 1413, 53.06, 41.74 },
           note = {
-              ru = "Верог Дервиш (18) в лагере колкаров западнее оазиса: бейте кентавров, пока он "
-                  .. "не появится.",
-              en = "Verog the Dervish (18) in the Kolkar camp west of the oasis: kill centaurs until he shows up.",
+              ru = "Верог Дервиш (18) в лагере колкаров западнее оазиса: бейте кентавров, пока он не появится, и "
+                  .. "доберите с них 15 наручей для 855 (здесь колкаров больше всего на маршруте).",
+              en = "Verog the Dervish (18) in the Kolkar camp west of the oasis: kill centaurs until he shows up and "
+                  .. "finish the 15 bracers for 855 on them (the densest Kolkar ground of the route).",
           } },
         { id = "h15-nests", complete = 905, object = { 6907, 6908, 6906 }, at = { 1413, 52.36, 46.38 },
           note = { ru = "Убивайте серпокоготных ящеров ради 3 перьев и положите их в синее, жёлтое и красное "
-                       .. "гнёзда.",
+                       .. "гнёзда. С них же рога для Мебока.",
                    en = "Kill Sunscale Scytheclaws for 3 feathers and put them into the blue, yellow and red "
-                       .. "nests." } },
+                       .. "nests. They drop Mebok's horns too." } },
         { id = "h15-horns", complete = 865, at = { 1413, 51.5, 48.5 },
           note = { ru = "Доберите рога серпокоготных ящеров вокруг гнёзд.",
                    en = "Finish the scytheclaw horns around the nests." } },
@@ -465,23 +489,31 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Mankrik's wife, Razormane raiders, Camp Taurajo (level 18)
         ------------------------------------------------------------------
-        -- 883 (optional): the hoof of the grey kodo Lakota'mani starts it; turned in at Jorn in Camp Taurajo below.
-        { id = "h15-lakota", accept = 883, bg = true, use = 5099, at = { 1413, 47.19, 51.63 },
-          note = {
-              ru = "Только на 18+: Лакота'мани (22, серый кодо) бродит у 45-50, 49-53 - копыто начинает "
-                  .. "задание. Не встретили - не ищите.",
-              en = "Only at 18+: Lakota'mani (22, grey kodo) roams at 45-50, 49-53 - his hoof starts a quest. Not "
-                  .. "seen - do not search.",
-          } },
-        { id = "h15-raiders", complete = 95774, at = { 1413, 49.6, 51.3 },
-          note = { ru = "Налётчики Иглогривых к юго-западу: украшения Ольгры. С налётчиков могут падать и клыки "
-                       .. "дыбогривых свинобразов для 899 — подбирайте.",
-                   en = "Razormane Raiders to the south-west: Olgra's Adornments. The Raiders may also drop "
-                       .. "Bristleback Quilboar Tusks for 899: loot them." } },
+        -- The Beaten Corpse and the raiders before the optional kodo: the corpse lies on the walk from the nests
+        -- to the kodo's ground (4921 is done on the way), so as a later step it would become the forward anchor and
+        -- skip h15-lakota unseen; the raiders share the corpse's ground (one visit, no return after the kodo).
         { id = "h15-corpse", complete = 4921, npc = 10668, at = { 1413, 49.33, 50.32 },
-          note = { ru = "Избитый труп в траве: поговорите с ним. Грозорылы (18-19) западнее — обходите.",
-                   en = "The Beaten Corpse in the grass: talk to it. Stormsnouts (18-19) to the west: go "
-                       .. "around." } },
+          note = { ru = "Избитый труп в траве к юго-западу от гнёзд: поговорите с ним. Грозорылы (18-19) западнее — "
+                       .. "обходите. Налётчики Иглогривых вокруг - уже для украшений Ольгры (следующий шаг).",
+                   en = "The Beaten Corpse in the grass south-west of the nests: talk to it. Stormsnouts (18-19) to the "
+                       .. "west: go around. The Razormane Raiders around: already for Olgra's Adornments (next step)." } },
+        { id = "h15-raiders", complete = 95774, at = { 1413, 49.6, 51.3 },
+          note = { ru = "Налётчики Иглогривых бродят по всей округе, гуще всего у 49.6, 51.3: украшения Ольгры. С "
+                       .. "налётчиков могут падать и клыки дыбогривых свинобразов для 899 — подбирайте.",
+                   en = "Razormane Raiders roam all over this area, thickest around 49.6, 51.3: Olgra's Adornments. "
+                       .. "The Raiders may also drop Bristleback Quilboar Tusks for 899: loot them." } },
+        -- 883 (optional): the hoof of the grey kodo Lakota'mani starts it; turned in at Jorn in Camp Taurajo below.
+        -- The kodo's search point lies west of the raiders, on the way to Camp Taurajo (about 80 yd longer than the
+        -- straight walk). No quest step follows before Camp Taurajo, so without the hoof the player presses Forward.
+        { id = "h15-lakota", accept = 883, optional = true, use = 5099, at = { 1413, 47.19, 51.63 },
+          note = {
+              ru = "По желанию, только на 18+: к западу бродит Лакота'мани (22, серый кодо; 45-50, 49-53) - его копыто "
+                  .. "начинает задание (сдача Йорну в Лагере Таурахо, по пути). Не видно - не ищите: «Вперёд» и на "
+                  .. "юго-запад в Лагерь Таурахо.",
+              en = "Optional, only at 18+: Lakota'mani (22, grey kodo; 45-50, 49-53) roams to the west - his hoof starts "
+                  .. "a quest (turned in to Jorn in Camp Taurajo, on the way). Not in sight: do not search, press Forward "
+                  .. "and go south-west to Camp Taurajo.",
+          } },
         -- Race filter (B.5, E.1): the Tauren learned this point at mul03-taurajo.
         { id = "h15-fp-taurajo", race = { "Orc", "Scourge", "Skyborne", "Troll" }, fp = "Camp Taurajo", npc = 10378,
           at = { 1413, 44.45, 59.15 },
@@ -521,10 +553,11 @@ AdventureAtlas.AddLibrarySegment({
           note = { ru = "Газрог.",
                    en = "Gazrog." } },
         -- 852 is carried: Hezrul at the Lushwater Oasis, h-18
-        { id = "h15-regthar-3", turnin = 851, accept = 852, npc = 3389, at = { 1413, 45.34, 28.41 },
-          note = { ru = "На запад к Регтару Вратам Смерти: голова Верога. 852 (Хезрул) - в следующем сегменте. Потом обратно на "
-                       .. "Перекрёсток.",
-                   en = "West to Regthar Deathgate: Verog's head. 852 (Hezrul) is for the next segment. Then back to the Crossroads." } },
+        { id = "h15-regthar-3", turnin = { 851, 855 }, accept = 852, npc = 3389, at = { 1413, 45.34, 28.41 },
+          note = { ru = "На запад к Регтару Вратам Смерти: голова Верога и 15 наручей кентавров. 852 (Хезрул) - в следующем "
+                       .. "сегменте. Потом обратно на Перекрёсток.",
+                   en = "West to Regthar Deathgate: Verog's head and the 15 Centaur Bracers. 852 (Hezrul) is for the next "
+                       .. "segment. Then back to the Crossroads." } },
         -- 853 is carried: Zamah, Thunder Bluff (h-18), timed
         { id = "h15-end", turnin = 848, accept = 853, npc = 3390, at = { 1413, 51.44, 30.15 },
           note = { ru = "Хелбрим рядом с вышкой. ТАЙМЕР: на «Аптекаря Заму» (853) 45 минут - следующий сегмент начинается с полёта в "

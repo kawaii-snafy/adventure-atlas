@@ -6,6 +6,11 @@
 --     step, or completing / turning in such a quest in a required step after an optional accept;
 --   * WARN complete-far-from-trigger: the `complete` step of an area-trigger quest (exploration) does
 --     not lead to the trigger (escorts and an earlier step at the trigger are fine);
+--   * WARN skip-ahead by objectives passed on the way: the walk passes enough spawns of a later
+--     `complete` step's objectives (quest in the log) to finish it early; the visits / collects between
+--     would be fast-forwarded;
+--   * WARN travel-trip / travel-revisit: a trip back to a place whose work could have been done at an
+--     earlier step there, and coming back to an objective area passed with the quest in the log;
 --   * the snapshot data they use: Wowhead Forever objective counts, triggers, escorts, professions.
 
 local DB = require("lib.fbdb")
@@ -126,6 +131,80 @@ describe("validator checks", function()
                 { turnin = 364, npc = 1569, at = { 1420, 30.8, 66.2 } },
                 { accept = 90902, npc = 244808, at = AT_ARAMIS },
             }, state), "lookahead-skip"))
+        end)
+    end)
+
+    describe("travel", function()
+        -- Tirisfal is 4519 yards wide: the spiders at 28.5, 57.6 are ~290 yards from Aramis
+        local AWAY = { 1420, 28.5, 57.6 }
+        -- 6395 Marla's Last Wish: Novice Elreth 1661 (needs 376), Marla's grave (object 178090) ~30 yards away
+        local AT_ELRETH, AT_GRAVE = { 1420, 30.86, 66.05 }, { 1420, 31.17, 65.08 }
+        local AFTER_376 = { level = 4, xpFrac = 0, done = { 363, 364, 376 }, log = {}, flightPaths = {} }
+
+        it("travel-trip: coming back only for what could be done at the earlier visit", function()
+            local r = run({
+                { train = true, npc = 244808, at = AT_ARAMIS },
+                { go = true, at = AWAY },
+                { accept = 90902, npc = 244808, at = AT_ARAMIS },
+            }, DEATHKNELL)
+            assert.are.same({ 3 }, codeSteps(r, "travel-trip", "WARN"))
+            assert.matches("accept 90902 \"Rediscovering the Light\" (at step s:1)", firstMsg(r, "travel-trip").msg, 1, true)
+        end)
+
+        it("no travel-trip when the visit has its own work (training) or the quest was not offered yet", function()
+            assert.are.same({}, codeSteps(run({
+                { train = true, npc = 244808, at = AT_ARAMIS },
+                { go = true, at = AWAY },
+                { accept = 90902, train = true, npc = 244808, at = AT_ARAMIS },
+            }, DEATHKNELL), "travel-trip"))
+            local before364 = { level = 3, xpFrac = 0, done = { 363 }, log = { 364 }, complete = { 364 }, flightPaths = {} }
+            assert.are.same({}, codeSteps(run({
+                { train = true, npc = 244808, at = AT_ARAMIS },
+                { go = true, at = AWAY },
+                { turnin = 364, npc = 1569, at = { 1420, 30.8, 66.2 } },
+                { accept = 90902, npc = 244808, at = AT_ARAMIS },
+            }, before364), "travel-trip"))
+        end)
+
+        it("travel-revisit: the objective area was passed with the quest in the log", function()
+            local r = run({
+                { accept = 6395, npc = 1661, at = AT_ELRETH },
+                { go = true, at = AWAY },
+                { complete = 6395, object = 178090, at = AT_GRAVE },
+                { turnin = 6395, npc = 1661, at = AT_ELRETH },
+            }, AFTER_376)
+            assert.are.same({ 3 }, codeSteps(r, "travel-revisit", "WARN"))
+            assert.are.same({}, codeSteps(run({
+                { accept = 6395, npc = 1661, at = AT_ELRETH },
+                { complete = 6395, object = 178090, at = AT_GRAVE },
+                { go = true, at = AWAY },
+                { turnin = 6395, npc = 1661, at = AT_ELRETH },
+            }, AFTER_376), "travel-revisit"))
+        end)
+    end)
+
+    describe("skip-ahead by objectives killed on the way", function()
+        -- 90902 needs 5 Injured Deathguards (15 spawns around 31.6, 63.7). The walk Aramis -> 29.5, 60.0
+        -- passes 6 of them within 50 yards, the walk Aramis -> 31.1, 72.0 only 2.
+        local function route(away)
+            return {
+                { accept = 90902, npc = 244808, at = AT_ARAMIS },
+                { go = true, at = away },
+                { train = true, npc = 244808, at = AT_ARAMIS },
+                { collect = { [2875] = 1 }, at = AT_ARAMIS },
+                { complete = 90902, at = { 1420, 31.6, 63.7 } },
+            }
+        end
+
+        it("the later complete, done on the way, fast-forwards the visit and the collect before it", function()
+            local r = run(route({ 1420, 29.5, 60.0 }), DEATHKNELL)
+            -- the go step itself is no loss: the player walked past it
+            assert.are.same({ 3, 4 }, codeSteps(r, "skip-ahead", "WARN"))
+            assert.matches("killed / looted on the way", firstMsg(r, "skip-ahead").msg, 1, true)
+        end)
+
+        it("passing fewer spawns than the objective needs does not finish it early", function()
+            assert.are.same({}, codeSteps(run(route({ 1420, 31.1, 72.0 }), DEATHKNELL), "skip-ahead"))
         end)
     end)
 

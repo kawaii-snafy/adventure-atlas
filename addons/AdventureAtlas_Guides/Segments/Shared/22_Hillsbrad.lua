@@ -27,19 +27,21 @@
 --         (Hadrec; Vincent inside) + 1014 (Dalar: back to the Sepulcher) + 1013 (Book of Ur, turned in at the
 --         Undercity in h-31); Forever-new 95883 -> 95885 at the Offering Stone of Beren's Peril (XP unknown, 150 yd
 --         off the road: on the path, so not optional any more); 494 (Lesh, Hillsbrad west).
+--   Every goal is a step of its own, in the order of play: what the player can also kill on the way is a hint in
+--   the notes ("По пути: ..."), and the step that finishes it comes where the route passes those mobs for the last
+--   time before the turn-in.
 --   TM1 : fp; 1065 + 493 > 496, 501, 1066 (Lydon); 494 > 527 (Darthalia); 549 + 567 (posters); 498
 --         (Krusk).
---   F1  : Hillsbrad Fields: 527 (farmers, farmhands, Ray, Getz). bg all the time: 496 (bears + 1 creeper ichor),
---         501 (Starving Mountain Lions), 567 Wilkes + Kalaba.
---   TM2 : 527 > 528 (Darthalia); 546 (Samsa).
+--   F1  : Hillsbrad Fields: 527 (farmers, farmhands, Ray, Getz); 496 (bears + 1 creeper ichor) and 501 (Starving
+--         Mountain Lions) on the way there, finished on the way back north-east (the creepers are near Tarren Mill).
+--   TM2 : 496 > 499 (> Umpi), 501 > 502 (Lydon); 527 > 528 (Darthalia); 546 (Samsa).
 --   D   : Durnholde Keep: 549 + 1066 (Syndicate), 498 (jailor keys, Drull, Tog'thar); the Syndicate also drop
 --         546 skulls (that is why Durnholde comes after TM2, not before F1: same distance, ~20 fewer skull kills).
---   F2  : 528 (15 peasants) + skulls.
---   TM3 : 496 > 499 (> Umpi), 501 > 502, 1066 > 1067 (Lydon); 528 + 549 > 529 + 98094 (Darthalia, 98094
---         needs 528); 498 (Krusk).
---   F3  : 502 Stanley (kill Enraged Stanley), 529 (smithy), rest of the skulls, level gate;
---         then east to Deathstalker Masoj (98094, optional) and north to Tarren Mill.
---   TM4 : 546 (Samsa); 529 > 532 (Darthalia); hearth Thunder Bluff.
+--   F2  : 528 (15 peasants), then the rest of the 546 skulls on the same humans, 567 Wilkes + Kalaba (town roads,
+--         southern plots), 502 Stanley at the north end (kill Enraged Stanley), north-east to Tarren Mill.
+--   TM3 : 1066 > 1067 (Lydon); 546 (Samsa); 528 + 549 > 529 + 98094 (Darthalia, 98094 needs 528); 498 (Krusk).
+--   F3  : 529 (smithy), level gate; then east to Deathstalker Masoj (98094, optional) and north to Tarren Mill.
+--   TM4 : 529 > 532 (Darthalia); hearth Thunder Bluff.
 -- Carried out: 1067 (h-24, Zamah), 532 (h-31, Magistrate Burnside L30), 567 with objectives 2+4 done
 --   (h-31: Clerk Horrace stands next to Burnside in the town hall, Miner Hackett L29 is in Azurelode Mine next
 --   to the 539 miners; both are too dangerous at 23-24).
@@ -50,10 +52,12 @@
 -- Optional dungeon blocks: nothing later depends on them (the 1013 turn-in in h-31 is optional as well). The
 --   validator counts optional steps as done; its worst case (tools/README.md section 5) leaves them out.
 -- Automation notes: accepts at one NPC sit in one step; transient steps (fp, fly, go) come before the quest steps
---   of the same place. 496 / 501 (bears, lions) and 567 (Wilkes, Kalaba) are bg-only until their turn-in steps:
---   they can finish on any loop, and a non-bg `complete` that is done early would make the engine fast-forward
---   the transient steps behind it. The 546 skulls are a bg goal until the level gate, which shares its step
---   with them (an anchor only when both are done).
+--   of the same place. 496 / 501 (bears, lions), 546 (skulls) and 567 (Wilkes, Kalaba) can be finished early, on
+--   any walk through their area: a `complete` done early becomes the engine's anchor and fast-forwards the
+--   transient / optional steps before it. Their steps stand where that costs nothing: 501 / 496 right after F1
+--   (nothing transient or optional between Tarren Mill 1 and them), 546 / 567 right after the peasants of F2
+--   (between the place where those mobs start and them lies only h22-go-fields, a waypoint to the fields the
+--   player has passed by then). The level gate lists 529 again, so it never anchors before the smithy.
 -- Hearthstone: Thunder Bluff (bound in h-18), used from Tarren Mill at the end.
 -- Every step has an explicit id (docs/dev/PLAN.md B.7): no step of this segment may be an anchor by position.
 if not AdventureAtlas.AddLibraryInsert then return end
@@ -207,46 +211,54 @@ AdventureAtlas.AddLibrarySegment({
                    en = "The two posters by the road: WANTED: Syndicate Personnel and Dangerous!" } },
         { id = "h22-krusk", accept = 498, npc = 2229, at = { 1424, 63.24, 20.66 },
           note = { ru = "Круск: «Спасение».", en = "Krusk: The Rescue." } },
-        { id = "h22-bears-bg", complete = 496, bg = true, at = { 1424, 52.78, 36.73 },
-          note = { ru = "Попутно: 10 языков серых медведей (обычные и свирепые, 21-23; старых 25-26 не бейте) и 1 "
-                       .. "слизь мохового ползуна.",
-                   en = "On the way: 10 Gray Bear Tongues (Gray and Vicious Gray Bears 21-23; skip the Elder ones "
-                       .. "25-26) and 1 Creeper Ichor from any Moss Creeper." } },
-        { id = "h22-lions-bg", complete = 501, bg = true, at = { 1424, 49.18, 38.19 },
-          note = { ru = "Попутно: 10 крови голодных горных львов (23-24) — между Мельницей и полями.",
-                   en = "On the way: 10 Mountain Lion Blood from Starving Mountain Lions (23-24) between Tarren Mill "
-                       .. "and the fields." } },
-        { id = "h22-dangerous-bg", complete = { [567] = { 2, 4 } }, bg = true, at = { 1424, 35.88, 46.57 },
-          note = { ru = "Попутно на полях: фермер Калаба (25, у южных грядок) и горожанин Уилкс (25, ходит по дорогам "
-                       .. "городка). Писаря Хораса (рядом с судьёй 30-го) и шахтёра Хэкетта (29, рудник) — позже, на 31+.",
-                   en = "In the fields: Farmer Kalaba (25, southern plots) and Citizen Wilkes (25, walks the town roads). "
-                       .. "Clerk Horrace (next to the level-30 Magistrate) and Miner Hackett (29, mine) wait for 31+." } },
 
         ------------------------------------------------------------------
         -- Hillsbrad Fields, loop 1 (level 22-23)
         ------------------------------------------------------------------
         { id = "h-22-hillsbrad-foothills-field", complete = 527, at = { 1424, 33.67, 39.03 },
-          note = { ru = "Поля Хилсбрада: по 6 фермеров и батраков, фермер Рэй (дом и виноградник на севере) и фермер "
-                       .. "Гетц (дом, поле или амбар).",
-                   en = "Hillsbrad Fields: 6 Farmers and 6 Farmhands, Farmer Ray (house and vineyard to the north) and "
-                       .. "Farmer Getz (house, field or barn)." } },
+          note = { ru = "На юго-запад к полям Хилсбрада: по 6 фермеров и батраков, фермер Рэй (дом и виноградник на севере) и "
+                       .. "фермер Гетц (дом, поле или амбар). По пути сюда бейте серых медведей (языки; обычные и свирепые "
+                       .. "21-23, старых 25-26 не бейте), моховых ползунов (слизь) и голодных горных львов (кровь, 23-24) "
+                       .. "для Лидона - доберёте на обратном пути. Горожанин Уилкс (25) из «Опасно!» ходит по дорогам "
+                       .. "городка: можно убить уже сейчас, его шаг - на втором заходе.",
+                   en = "South-west to Hillsbrad Fields: 6 Farmers and 6 Farmhands, Farmer Ray (house and vineyard to the "
+                       .. "north) and Farmer Getz (house, field or barn). On the way here kill Gray Bears (tongues; Gray and "
+                       .. "Vicious 21-23, skip the Elder ones 25-26), Moss Creepers (ichor) and Starving Mountain Lions "
+                       .. "(blood, 23-24) for Lydon - you finish them on the way back. Citizen Wilkes (25) of Dangerous! "
+                       .. "walks the town roads: you may kill him now already, his step comes on the second loop." } },
+        -- 501 / 496 are finished on the way back from this loop and turned in at Tarren Mill 2: the road between the
+        -- fields and Tarren Mill has the lions and bears all along it, the Forest Moss Creepers (ichor) near Tarren Mill.
+        { id = "h22-lions-bg", complete = 501, at = { 1424, 52.9, 40.1 },
+          note = { ru = "Обратно на северо-восток к Мельнице: добейте 10 крови голодных горных львов (23-24) - их больше всего "
+                       .. "здесь, у дороги. По пути бейте и серых медведей (шаг ниже).",
+                   en = "Back north-east to Tarren Mill: finish the 10 Mountain Lion Blood from the Starving Mountain Lions "
+                       .. "(23-24) - most of them are here by the road. Kill the Gray Bears on the way too (next step)." } },
+        { id = "h22-bears-bg", complete = 496, at = { 1424, 60.0, 35.5 },
+          note = { ru = "Дальше на север к Мельнице: добейте 10 языков серых медведей (старых 25-26 не бейте) и слизь с лесного "
+                       .. "мохового ползуна (20-21) - и те, и другие здесь, южнее Мельницы.",
+                   en = "On north to Tarren Mill: finish the 10 Gray Bear Tongues (skip the Elder ones 25-26) and the Creeper "
+                       .. "Ichor from a Forest Moss Creeper (20-21) - both are here, south of Tarren Mill." } },
 
         ------------------------------------------------------------------
         -- Tarren Mill, second visit -> Durnholde Keep (level 23)
         ------------------------------------------------------------------
+        { id = "h22-lydon-2", turnin = { 496, 501 }, accept = { 499, 502 }, npc = 2216, at = { 1424, 61.44, 19.06 },
+          note = { ru = "Обратно в Мельницу: аптекарь Лидон. «Эликсир боли» (502) - для Стэнли на полях (второй заход).",
+                   en = "Back to Tarren Mill: Apothecary Lydon. Elixir of Pain (502) goes to Stanley in the fields (second "
+                       .. "loop)." } },
+        { id = "h22-umpi", turnin = 499, npc = 2230, at = { 1424, 61.55, 19.14 },
+          note = { ru = "Умпи рядом с Лидоном.", en = "Umpi next to Lydon." } },
         { id = "h22-darthalia-2", turnin = 527, accept = 528, npc = 2215, at = { 1424, 62.33, 20.45 },
-          note = { ru = "Обратно в Мельницу: Дарталия.", en = "Back to Tarren Mill: Darthalia." } },
+          note = { ru = "Дарталия.", en = "Darthalia." } },
         { id = "h22-samsa", accept = 546, npc = 2418, at = { 1424, 62.11, 19.70 },
           note = { ru = "Стражник смерти Самса: «Сувениры смерти» — 30 черепов с любых людей Хилсбрада и Синдиката.",
                    en = "Deathguard Samsa: Souvenirs of Death - 30 skulls from any Hillsbrad human or Syndicate member." } },
-        { id = "h22-skulls-bg", complete = 546, bg = true, at = { 1424, 33.20, 41.51 },
-          note = { ru = "Попутно: черепа падают с Синдиката в Дарнхольде и с людей на полях.",
-                   en = "On the way: skulls drop from the Syndicate in Durnholde and the humans in the fields." } },
         { id = "h22-durnholde", complete = { 549, 1066 }, at = { 1424, 76.68, 43.81 },
           note = { ru = "На юго-восток в крепость Дарнхольд: по 10 разбойников и дозорных Синдиката (20-22), 5 флаконов "
-                       .. "крови с магов тени.",
+                       .. "крови с магов тени. С них же падают черепа для Самсы - доберёте на полях.",
                    en = "South-east to Durnholde Keep: 10 Syndicate Rogues and 10 Watchmen (20-22), 5 Vials of "
-                       .. "Innocent Blood from the Shadow Mages." } },
+                       .. "Innocent Blood from the Shadow Mages. They drop Samsa's skulls too - you finish those in the "
+                       .. "fields." } },
         { id = "h22-togthar", complete = { [498] = { 2 } }, object = 1722, at = { 1424, 79.79, 39.65 },
           note = { ru = "Восточный двор: тюремщики Эстон и Марлген (24) ходят у бараков — ключи с обоих. Освободите "
                        .. "Тог'тара (кликните цепь).",
@@ -264,18 +276,38 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         { id = "h22-peasants", complete = 528, at = { 1424, 33.43, 44.53 },
           note = { ru = "15 крестьян (24-25) в южной части полей. Осторожно: пехотинцы Хилсбрада (25-26) патрулируют "
-                       .. "городок.",
+                       .. "городок. С крестьян и фермеров падают и черепа для Самсы.",
                    en = "15 Hillsbrad Peasants (24-25) in the southern fields. Careful: Hillsbrad Footmen (25-26) patrol "
-                       .. "the town." } },
+                       .. "the town. The peasants and farmers drop Samsa's skulls too." } },
+        -- 546 is finished on this loop and turned in at Tarren Mill 3 (the humans of the fields drop the skulls; the
+        -- third loop is for 529 and the level gate).
+        { id = "h22-skulls-bg", complete = 546, at = { 1424, 33.43, 44.53 },
+          note = { ru = "Здесь же добейте 30 черепов: крестьяне, фермеры и батраки полей (22-25). Сдадите Самсе в Мельнице.",
+                   en = "Right here, finish the 30 skulls: the peasants, farmers and farmhands of the fields (22-25). You hand "
+                       .. "them to Samsa in Tarren Mill." } },
+        -- 567 objectives 2 + 4 (h-31 finishes 1 + 3 and turns it in): Kalaba stands just east of the peasants, Wilkes
+        -- walks the town roads; the third loop comes back here only for 529.
+        { id = "h22-dangerous-bg", complete = { [567] = { 2, 4 } }, at = { 1424, 35.88, 46.57 },
+          note = { ru = "«Опасно!»: фермер Калаба (25) - у южных грядок, восточнее крестьян; горожанин Уилкс (25) ходит по "
+                       .. "дорогам городка. Писаря Хораса (рядом с судьёй 30-го) и шахтёра Хэкетта (29, рудник) - позже, на "
+                       .. "31+.",
+                   en = "Dangerous!: Farmer Kalaba (25) stands at the southern plots, east of the peasants; Citizen Wilkes "
+                       .. "(25) walks the town roads. Clerk Horrace (next to the level-30 Magistrate) and Miner Hackett (29, "
+                       .. "mine) wait for 31+." } },
+        { id = "h-22-stanley", turnin = 502, npc = 2274, at = { 1424, 32.66, 35.32 },
+          note = { ru = "На север полей к Стэнли: после сценки он становится Разъярённым Стэнли — убейте (опыта как за "
+                       .. "задание). Потом на северо-восток в Мельницу.",
+                   en = "North through the fields to Stanley: after the scene he turns into Enraged Stanley - kill him "
+                       .. "(about a quest's worth of XP). Then north-east to Tarren Mill." } },
 
         ------------------------------------------------------------------
         -- Tarren Mill, third visit (level 23)
         ------------------------------------------------------------------
-        { id = "h22-lydon-2", turnin = { 496, 501, 1066 }, accept = { 499, 502, 1067 }, npc = 2216, at = { 1424, 61.44, 19.06 },
-          note = { ru = "Лидон. Не хватает языков или крови — добейте медведей и львов по пути назад.",
-                   en = "Lydon. Short of tongues or blood: finish the bears and lions on the way back." } },
-        { id = "h22-umpi", turnin = 499, npc = 2230, at = { 1424, 61.55, 19.14 },
-          note = { ru = "Умпи рядом с Лидоном.", en = "Umpi next to Lydon." } },
+        { id = "h22-lydon-3", turnin = 1066, accept = 1067, npc = 2216, at = { 1424, 61.44, 19.06 },
+          note = { ru = "Лидон: флаконы крови невинных. «Возвращение в Громовой Утёс» (1067) - Заме.",
+                   en = "Lydon: the vials of innocent blood. Return to Thunder Bluff (1067) goes to Zamah." } },
+        { id = "h22-samsa-2", turnin = 546, npc = 2418, at = { 1424, 62.11, 19.70 },
+          note = { ru = "Самса: 30 черепов.", en = "Samsa: the 30 skulls." } },
         { id = "h22-darthalia-3", turnin = { 528, 549 }, accept = 529, npc = 2215, at = { 1424, 62.33, 20.45 },
           note = { ru = "Дарталия.", en = "Darthalia." } },
         -- 98094 is offered only after 528 (Wowhead Forever comments + live report); optional: XP unknown, small detour.
@@ -290,23 +322,19 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Hillsbrad Fields, loop 3 (level 23-24)
         ------------------------------------------------------------------
-        { id = "h-22-stanley", turnin = 502, npc = 2274, at = { 1424, 32.66, 35.32 },
-          note = { ru = "Стэнли на севере полей: после сценки он становится Разъярённым Стэнли — убейте (опыта как за "
-                       .. "задание).",
-                   en = "Stanley at the north end of the fields: after the scene he turns into Enraged Stanley - kill "
-                       .. "him (about a quest's worth of XP)." } },
         { id = "h22-smithy", complete = 529, object = 1736, at = { 1424, 31.79, 45.32 },
-          note = { ru = "Кузница: кузнец Веррингтан (26), 4 подмастерья (24-25) и ящик «Партия железа» внутри.",
-                   en = "The smithy: Blacksmith Verringtan (26), 4 Apprentice Blacksmiths (24-25) and the Shipment of "
-                       .. "Iron crate inside." } },
-        -- 529 is listed again so this step cannot become a forward anchor before Tarren Mill 3 (the 546 skulls can
-        -- be finished early; with the level reached, the travel steps before it would be skipped)
-        { id = "h-22-hillsbrad-level-gate", complete = { 529, 546 }, level = { 23, 0.85 }, -- level-grind: worst case only (no `ok`)
+          note = { ru = "На юго-запад в городок на полях: кузница - кузнец Веррингтан (26), 4 подмастерья (24-25) и ящик "
+                       .. "«Партия железа» внутри.",
+                   en = "South-west to the town in the fields: the smithy - Blacksmith Verringtan (26), 4 Apprentice "
+                       .. "Blacksmiths (24-25) and the Shipment of Iron crate inside." } },
+        -- 529 is listed again so this step cannot become a forward anchor before the smithy (with the level reached
+        -- early, the steps before it would be forwarded)
+        { id = "h-22-hillsbrad-level-gate", complete = 529, level = { 23, 0.93 }, -- level-grind: worst case only (no `ok`)
           at = { 1424, 33.20, 41.51 },
-          note = { ru = "Добейте черепа на полях (крестьяне, фермеры, батраки 22-25 — лучший опыт рядом) до 23-го + 85%: "
-                       .. "сдача 546 и 529 даст ещё ~16% — это 24-й к Громовому Утёсу.",
-                   en = "Finish the skulls in the fields (peasants, farmers, farmhands 22-25: the best XP nearby) up to "
-                       .. "level 23 + 85%: the 546 and 529 turn-ins add ~16%, which makes 24 for Thunder Bluff." } },
+          note = { ru = "Опыт до 23-го + 93% на людях полей (крестьяне, фермеры, батраки 22-25 — лучший опыт рядом): сдача 529 "
+                       .. "даст ещё ~7% — это 24-й к Громовому Утёсу.",
+                   en = "XP up to level 23 + 93% on the humans of the fields (peasants, farmers, farmhands 22-25: the best XP "
+                       .. "nearby): the 529 turn-in adds ~7%, which makes 24 for Thunder Bluff." } },
 
         { id = "h-22-deathstalker-masoj", turnin = 98094, npc = 270438,
           at = { 1424, 63.58, 53.11 }, optional = true,
@@ -318,11 +346,10 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Tarren Mill, last visit -> hearth (level 24)
         ------------------------------------------------------------------
-        { id = "h22-samsa-2", turnin = 546, npc = 2418, at = { 1424, 62.11, 19.70 },
-          note = { ru = "Обратно в Мельницу: Самса.", en = "Back to Tarren Mill: Samsa." } },
         { id = "h-24-tarrenmill-end", turnin = 529, accept = 532, npc = 2215, at = { 1424, 62.33, 20.45 },
-          note = { ru = "Дарталия. 532 (судья Бернсайд, 30) держите на 31-й — вернётесь сюда позже.",
-                   en = "Darthalia. Keep 532 (Magistrate Burnside, 30) for level 31: you come back here later." } },
+          note = { ru = "Обратно в Мельницу: Дарталия. 532 (судья Бернсайд, 30) держите на 31-й — вернётесь сюда позже.",
+                   en = "Back to Tarren Mill: Darthalia. Keep 532 (Magistrate Burnside, 30) for level 31: you come back here "
+                       .. "later." } },
         { id = "h-24-tb-hearth", hearth = "Thunder Bluff", at = { 1456, 45.81, 64.71 },
           note = { ru = "Камень возвращения в Громовой Утёс. На откате — летите от Зарисы через Подгород/Оргриммар.",
                    en = "Hearth to Thunder Bluff. On cooldown: fly from Zarise via the Undercity / Orgrimmar." } },

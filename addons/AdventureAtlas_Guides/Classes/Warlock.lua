@@ -58,8 +58,9 @@
 --   36     after h-37-org-arrive  36.06: the Cleft of Shadow next to the quest giver; optional 4967 at Zevrost.
 --   Orb    after h-37-orgrimmar-keldran  optional, 36.07: fly to Ratchet instead of Sun Rock: Menara (4967 > 1799),
 --                                 Acolyte Wytula (4962); the shared flight to Sun Rock leaves from Ratchet.
---   Orb    before h39-level-mannoroc   optional, 37.82: the orb (1799) and the felhound spirit (4962) at the Mannoroc
---                                 Coven, where the path grinds to 39.8 anyway.
+--   Orb    before h39-mannoroc-portals / h39-level-mannoroc  optional, 37.8: the felhound spirit (4962) at the north
+--                                 edge of the Mannoroc Coven, then the orb (1799) by the portals, where the path
+--                                 grinds to 39.8 anyway.
 --   38+40  after h-40-org-arrive  40.06 / 40.01: Zevrost (training, 3631), fly to Ratchet, Strahad (3631 > 4490 >
 --                                 Summon Felsteed), optional Menara (4962); the shared flight to Camp Taurajo leaves
 --                                 from Ratchet (+~3 min for the free mount).
@@ -602,6 +603,24 @@ insert({
                        .. "fly to Sun Rock Retreat (the next step)." } },
     },
 })
+-- The spirit first, at the north edge of the Mannoroc Coven where the path comes in, then the orb next to the
+-- portals and the level gate (no walk back north).
+insert({
+    before = "h39-mannoroc-portals",
+    class = "WARLOCK",
+    steps = {
+        -- CONFIRM: the Felhas Ruby is used on a slain Mana Eater (original game)
+        -- skip-ahead (acknowledged with `ok`): the walk here passes the north portals of the coven, but 5581 counts
+        -- "Portals Banished" x6 (Wowhead): a Demon Portal Guardian appears only when the Hand of Iruxos is used at a
+        -- portal (the DB snapshot lists their summon points as spawns, with no count), so the walk does not finish
+        -- h39-mannoroc-portals and this step is not forwarded. The spirit after the portals would walk the ~270 yd
+        -- between the north edge and the portals twice.
+        { id = "wlk-38-spirit", complete = 4962, optional = true, use = 12647, at = MANA_EATERS, ok = "skip-ahead",
+          note = { ru = "Северный край Поля Маннорок: пожиратели маны — дух гончей (рубин Фелхаса на убитого).",
+                   en = "The north edge of the Mannoroc Coven: Mana Eaters - the felhound spirit (the Felhas Ruby on "
+                       .. "a slain one)." } },
+    },
+})
 insert({
     before = "h39-level-mannoroc",
     class = "WARLOCK",
@@ -609,11 +628,6 @@ insert({
         { id = "wlk-38-orb", complete = 1799, optional = true, at = SUMMONERS,
           note = { ru = "Поле Маннорок: Инфернальная сфера с призывателей Пылающего Клинка.",
                    en = "The Mannoroc Coven: the Infernal Orb from the Burning Blade Summoners." } },
-        -- CONFIRM: the Felhas Ruby is used on a slain Mana Eater (original game)
-        { id = "wlk-38-spirit", complete = 4962, optional = true, use = 12647, at = MANA_EATERS,
-          note = { ru = "Северный край Поля Маннорок: пожиратели маны — дух гончей (рубин Фелхаса на убитого).",
-                   en = "The north edge of the Mannoroc Coven: Mana Eaters - the felhound spirit (the Felhas Ruby on "
-                       .. "a slain one)." } },
     },
 })
 -- 38 + 40 and the Felsteed (key ability): Zevrost, then fly to Ratchet for Strahad; the path's next flight to Camp

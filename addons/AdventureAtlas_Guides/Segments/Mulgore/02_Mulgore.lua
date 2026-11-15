@@ -6,21 +6,23 @@
 -- Hub plan (Forever DB). Bloodhoof Village is visited seven times: the Thunderhorn chain of Mull Thunderhorn
 -- (748 > 754 > 756 > 758 > 759 > 760) returns to him after every step, so each loop ends at his tent.
 --   camp  : Kaga Wildhoof south of the village: 96659 > 96605 (campfire) > 96661 (Pyall).
---   BH1   : 763 > 767 > 771, 745, 746, 99079, 743, 1656 + bind, 748, 761, 99108 (duel on the spot), 96661, 766,
---           96130, 99411.
---   west  : 748, 761, 766 (heart, scale, gizzard), ambercorn for 771, Tender Strider Meat for 99411, Chakuyak
---           96130, Palemane camp 745, Perith Stormhoof's escort 98430 (turned in at Cairne).
+--   BH1   : 1656 + bind, 743, 763 > 767 + 745 + 746, 99079, 748, 99108 (duel on the spot), 761, 767 > 771, 96130,
+--           99411 (north end), then Maur 766 and Pyall 96661 on the way out west.
+--   west  : Chakuyak 96130, Palemane camp 745, Perith Stormhoof's escort 98430 (turned in at Cairne); the wolves,
+--           plainstriders and swoops of 748, 761 and 766 (heart, scale, gizzard) and the Tender Strider Meat of
+--           99411 are killed on the way and finished at mul02-west on the way back.
 --   BH2   : 99411 (Kyle in the village), 96130, 745, 748 > 754, 761.
---   SE    : Winterhoof Water Well 754 + the well stones of 771, Windfury harpies 743, Malah Longwind 99079 >
---           99081, Morin Cloudstalker 749.
+--   SE    : the Ambercorns of 771 on the way, Winterhoof Water Well 754 + the well stones of 771, Windfury harpies
+--           743, Malah Longwind 99079 > 99081, Morin Cloudstalker 749.
 --   BH3   : 99081 > 99101 > 99080, 743, 771 > 772, 754 > 756.
---   centre: 756 claws, 766 femur, the caravan crate 749 > 751, Morin 751 > 764 + 765, Venture Co. mine 764, 765
---           (Fizsprocket drops the plans that start 98424), the three documents of 98424, Galak centaurs + Herak
---           99080, Morin; gate mul02-lvl-10.
+--   centre: 756 claws and the 766 femur north of the village, the caravan crate 749 > 751 on the way south-east,
+--           Morin 751 > 764 + 765, Venture Co. mine 764, 765 (Fizsprocket drops the plans that start 98424), the
+--           three documents of 98424, Galak centaurs + Herak 99080, Morin; gate mul02-lvl-10.
 --   BH4   : 99080 > 99082, 766, 756 > 758.
---   west 2: Thunderhorn Water Well 758, the dig site forge 746, Seer Wiserunner 772 > 773.
+--   west 2: the dig site forge 746, Seer Wiserunner 772 > 773, Thunderhorn Water Well 758 on the way back.
 --   BH5   : 746, 758 > 759, 861 (level 10).
---   north : 759 alpha teeth, 861 prowler claws, Red Rocks: 833 and the Ancestral Spirit 773 > 775; hearth.
+--   north : Red Rocks: 833 and the Ancestral Spirit 773 > 775; 759 alpha teeth and 861 prowler claws on the way,
+--           finished west of Red Rocks; hearth.
 --   BH6   : 759 > 760.
 --   TB    : Cairne 775, 98430, 99082 > 776; flight point. Down again: Wildmane Water Well 760, Arra'chea 776.
 --   BH7   : 760 > 98435 (on the way out: the road from Thunder Bluff to the Barrens passes the village).
@@ -31,6 +33,8 @@
 -- Level gates (class-neutral, docs/dev/PLAN.md B.8), 0 kills each for the base profile: mul02-lvl-6 before the
 --   first village visit (746 needs 6, training at 6), mul02-lvl-10 before the fourth (861 needs 10, training at 10).
 -- Hearthstone: bound in Bloodhoof Village on the first visit; used once, from Red Rocks back to the village.
+-- No background (`bg`) steps: mobs met on the way are named in the note of the step where they start ("По пути:"),
+-- and a regular step finishes them (mul02-west, mul02-claws, mul02-north).
 --
 -- Anchors for the class files (docs/dev/PLAN.md C.2; level = validator level of the base profile before the step,
 -- read with --levels; the measured list is in docs/dev/handover/p1-mulgore.md). The trainers of Bloodhoof stand
@@ -117,12 +121,12 @@ AdventureAtlas.AddLibrarySegment({
               ru = "Harken Windtotem. Тренеры классов стоят вокруг Mull Thunderhorn.",
               en = "Harken Windtotem. The class trainers stand around Mull Thunderhorn.",
           } },
-        { id = "mul02-zarlman", turnin = 767, accept = 771, npc = 3054, at = { 1412, 46.90, 61.20 } },
-        { id = "mul02-maur", accept = 766, npc = 3055, at = { 1412, 46.20, 60.80 } },
-        { id = "mul02-pyall", complete = 96661, turnin = 96661, npc = 3067, at = { 1412, 44.90, 61.70 },
+        { id = "mul02-zarlman", turnin = 767, accept = 771, npc = 3054, at = { 1412, 46.90, 61.20 },
           note = {
-              ru = "Pyall Silentstride у западного края деревни.",
-              en = "Pyall Silentstride at the west edge of the village.",
+              ru = "Zarlman Two-Moons. Янтарные жёлуди (Ambercorn) лежат под деревьями по всему Мулгору: увидите - "
+                  .. "подберите 2; камни - у колодца Winterhoof.",
+              en = "Zarlman Two-Moons. Ambercorns lie under the trees all over Mulgore: pick 2 when you see them; the "
+                  .. "stones are at the Winterhoof well.",
           } },
         { id = "mul02-yaw", accept = 96130, npc = 3065, at = { 1412, 46.90, 59.60 } },
         { id = "mul02-ahab", accept = 99411, npc = 277182, at = { 1412, 47.28, 57.63 },
@@ -130,28 +134,29 @@ AdventureAtlas.AddLibrarySegment({
               ru = "Ahab Wheathoof у северного края деревни.",
               en = "Ahab Wheathoof at the north end of the village.",
           } },
+        -- Maur and Pyall lie on the way from the north end to the west loop.
+        { id = "mul02-maur", accept = 766, npc = 3055, at = { 1412, 46.20, 60.80 },
+          note = {
+              ru = "Maur Raincaller, по пути к западному краю деревни.",
+              en = "Maur Raincaller, on the way to the west edge of the village.",
+          } },
+        { id = "mul02-pyall", complete = 96661, turnin = 96661, npc = 3067, at = { 1412, 44.90, 61.70 },
+          note = {
+              ru = "Pyall Silentstride у западного края деревни, по пути на запад.",
+              en = "Pyall Silentstride at the west edge of the village, on the way west.",
+          } },
 
         ------------------------------------------------------------------
         -- West: Palemane, Chakuyak, Perith Stormhoof (level 7-8)
         ------------------------------------------------------------------
-        { id = "mul02-west-bg", complete = { 748, 761 }, bg = true, at = { 1412, 39.0, 66.0 },
-          note = {
-              ru = "Всю петлю на запад бейте степных волков (6 лап), взрослых долгоногов (4 когтя) и "
-                  .. "стервятников (8 перьев). С долгоногов же - Tender Strider Meat для Kyle (99411); собирайте "
-                  .. "янтарные жёлуди (Ambercorn, 2) под деревьями.",
-              en = "All along the west loop kill Prairie Wolves (6 paws), Adult Plainstriders (4 talons) and swoops "
-                  .. "(8 quills). The plainstriders also drop the Tender Strider Meat for Kyle (99411); pick 2 "
-                  .. "Ambercorns under the trees.",
-          } },
-        { id = "mul02-mazz-bg", complete = { [766] = { 1, 3, 4 } }, bg = true, at = { 1412, 39.0, 66.0 },
-          note = {
-              ru = "Для Maur Raincaller: сердце степного волка, чешуя долгонога, зоб стервятника.",
-              en = "For Maur Raincaller: a Prairie Wolf Heart, a Plainstrider Scale, a Swoop Gizzard.",
-          } },
         { id = "mul02-chakuyak", complete = 96130, at = { 1412, 39.50, 66.20 },
           note = {
-              ru = "Chakuyak (редкий волк) бродит у 39.5, 66.",
-              en = "Chakuyak (a lone wolf) roams around 39.5, 66.",
+              ru = "На запад: Chakuyak (редкий волк) бродит у 39.5, 66. По пути: бейте степных волков (6 лап и "
+                  .. "сердце), взрослых долгоногов (4 когтя, чешуя и Tender Strider Meat для Kyle) и стервятников "
+                  .. "(8 перьев и зоб), доберёте на обратном пути.",
+              en = "West: Chakuyak (a lone wolf) roams around 39.5, 66. On the way: kill Prairie Wolves (6 paws and "
+                  .. "a heart), Adult Plainstriders (4 talons, a scale and the Tender Strider Meat for Kyle) and Wiry "
+                  .. "Swoops (8 quills and a gizzard); finish them on the way back.",
           } },
         { id = "mul02-palemane", complete = 745, at = { 1412, 34.2, 64.3 },
           note = {
@@ -168,17 +173,24 @@ AdventureAtlas.AddLibrarySegment({
               ru = "Сопровождение короткое, на восток до 37.2, 64.6. Сдаётся у Cairne в Громовом Утёсе.",
               en = "A short escort east to 37.2, 64.6. It is turned in to Cairne in Thunder Bluff.",
           } },
-        { id = "mul02-west", complete = { 748, 761 }, at = { 1412, 41.0, 64.0 },
+        -- CONFIRM: Tender Strider Meat (287505, needed by 99411) drops from Adult Plainstriders (DB: 2956, 2957, 3068).
+        { id = "mul02-west", complete = { 748, 761, [766] = { 1, 3, 4 } }, collect = { [287505] = 1 },
+          at = { 1412, 40.6, 64.4 },
           note = {
-              ru = "Добейте лапы, когти и перья по пути назад в деревню.",
-              en = "Finish the paws, talons and quills on the way back to the village.",
+              ru = "Перед деревней добейте волков, долгоногов и стервятников: 6 лап, 4 когтя, 8 перьев; для Maur "
+                  .. "Raincaller - сердце волка, чешуя долгонога, зоб стервятника; для Kyle - Tender Strider Meat с "
+                  .. "долгонога.",
+              en = "Before the village finish the wolves, plainstriders and swoops: 6 paws, 4 talons, 8 quills; for "
+                  .. "Maur Raincaller a wolf heart, a plainstrider scale, a swoop gizzard; for Kyle the Tender Strider "
+                  .. "Meat from a plainstrider.",
           } },
 
         ------------------------------------------------------------------
         -- Bloodhoof Village, visit 2 (level 8)
         ------------------------------------------------------------------
-        -- CONFIRM: Tender Strider Meat (item of 99411) drops from Adult Plainstriders (DB), Kyle at 46.3, 62.3.
+        -- CONFIRM: Kyle the Frenzied at 46.3, 62.3 (DB) takes the Tender Strider Meat of mul02-west.
         { id = "mul02-kyle", complete = 99411, use = 287505, at = { 1412, 46.28, 62.34 },
+          ok = "travel-revisit", -- the first village visit passes Kyle, but the meat comes from mul02-west
           note = {
               ru = "Kyle the Frenzied бегает по деревне: используйте на нём Tender Strider Meat.",
               en = "Kyle the Frenzied runs around the village: use the Tender Strider Meat on him.",
@@ -197,15 +209,21 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- South-east: Winterhoof Water Well, harpies, Malah Longwind (level 8-9)
         ------------------------------------------------------------------
+        -- The Ambercorns of 771 have no step of their own: they lie all over Mulgore (the walk to Chakuyak passes
+        -- enough of them), so a step for them alone would be done early, become the forward anchor and skip the
+        -- Tender Strider Meat (collect) of mul02-west. mul02-wellstones finishes all of 771 (the Well Stones are only
+        -- at the wells).
         { id = "mul02-winterhoof", complete = 754, use = 5411, at = { 1412, 51.76, 68.43 },
           note = {
-              ru = "Колодец Winterhoof к юго-востоку: используйте тотем у колодца.",
-              en = "The Winterhoof Water Well to the south-east: use the totem at the well.",
+              ru = "На юго-восток к колодцу Winterhoof: используйте тотем у колодца. По пути, если ещё нет, подберите 2 "
+                  .. "янтарных жёлудя (Ambercorn) под деревьями - у 50.4, 64.2 и 50.1, 66.1 (ещё один у 49.0, 68.7).",
+              en = "South-east to the Winterhoof Water Well: use the totem at the well. On the way, if you do not have "
+                  .. "them yet, pick 2 Ambercorns under the trees - at 50.4, 64.2 and 50.1, 66.1 (one more at 49.0, 68.7).",
           } },
         { id = "mul02-wellstones", complete = 771, object = { 2910, 2912 }, at = { 1412, 51.80, 68.60 },
           note = {
-              ru = "Там же 2 камня колодца (Well Stone); янтарные жёлуди под деревьями вокруг, если ещё нет.",
-              en = "Two Well Stones at the same well; Ambercorns under the trees around if you still need them.",
+              ru = "Там же 2 камня колодца (Well Stone). Жёлудей не хватает - деревья у 49.0, 68.7 и 50.1, 66.1.",
+              en = "Two Well Stones at the same well. Ambercorns missing: the trees at 49.0, 68.7 and 50.1, 66.1.",
           } },
         { id = "mul02-harpies", complete = 743, at = { 1412, 62.0, 71.8 },
           note = {
@@ -236,21 +254,16 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- Centre and east: claws, the caravan, the Venture Co. mine, the Galak centaurs (level 9-10)
         ------------------------------------------------------------------
-        { id = "mul02-claws-bg", complete = { [756] = { 1, 2 }, [766] = { 2 } }, bg = true, at = { 1412, 48.0, 50.0 },
+        { id = "mul02-claws", complete = { 756, 766 }, at = { 1412, 49.2, 50.5 },
           note = {
-              ru = "На север: степные охотники (Prairie Stalker) и равнинные пумы - 6 и 6 когтей, с пумы ещё "
-                  .. "бедренная кость для Maur.",
+              ru = "На север: степные охотники (Prairie Stalker) и равнинные пумы (Flatland Cougar) - 6 и 6 "
+                  .. "когтей, с пумы ещё бедренная кость для Maur.",
               en = "North: Prairie Stalkers and Flatland Cougars - 6 and 6 claws; one cougar femur for Maur.",
           } },
         { id = "mul02-crate", turnin = 749, accept = 751, object = 2908, at = { 1412, 51.90, 53.40 },
           note = {
-              ru = "Разграбленный караван: запечатанный ящик у повозки.",
-              en = "The ravaged caravan: the Sealed Supply Crate by the wagon.",
-          } },
-        { id = "mul02-claws", complete = { 756, 766 }, at = { 1412, 50.0, 48.0 },
-          note = {
-              ru = "Добейте когти и части для Maur вокруг каравана.",
-              en = "Finish the claws and Maur's parts around the caravan.",
+              ru = "На юго-восток к разграбленному каравану: запечатанный ящик у повозки.",
+              en = "South-east to the ravaged caravan: the Sealed Supply Crate by the wagon.",
           } },
         { id = "mul02-morin-2", turnin = 751, accept = { 764, 765 }, npc = 2988, at = { 1412, 54.80, 64.30 },
           note = {
@@ -296,7 +309,7 @@ AdventureAtlas.AddLibrarySegment({
         -- Requirement and trainer-hub gate: 861 (Skorn, visit 5) needs level 10, and every class trains at 10 in
         -- the village. The base profile is at 10.05 here (0 kills), but a third of the XP of the way is the
         -- estimated XP of Forever-new quests: the gate is the guarantee. `at`: Prairie Stalkers (7-8) and
-        -- Prairie Wolf Alphas (9-10) along the road west of Morin.
+        -- Prairie Wolf Alphas (9-10) along the road between the Galak camp and Morin.
         { id = "mul02-lvl-10", level = 10, at = { 1412, 57.0, 62.8 },
           note = {
               ru = "10-й уровень перед деревней: он нужен для задания Skorn Whitecloud, и у тренеров новые умения. "
@@ -314,22 +327,22 @@ AdventureAtlas.AddLibrarySegment({
         { id = "mul02-maur-2", turnin = 766, npc = 3055, at = { 1412, 46.20, 60.80 } },
 
         ------------------------------------------------------------------
-        -- North-west: Thunderhorn Water Well, the dig site, Seer Wiserunner (level 10)
+        -- West and north-west: the dig site, Seer Wiserunner, Thunderhorn Water Well (level 10)
         ------------------------------------------------------------------
-        { id = "mul02-thunderhorn", complete = 758, at = { 1412, 44.20, 51.10 },
-          note = {
-              ru = "Колодец Thunderhorn к северу: используйте тотем у колодца.",
-              en = "The Thunderhorn Water Well to the north: use the totem at the well.",
-          } },
         { id = "mul02-forge", complete = 746, object = 17190, at = { 1412, 33.10, 54.80 },
           note = {
-              ru = "Раскопки дворфов на западе: 5 сломанных инструментов из кузни.",
-              en = "The dwarven dig site in the west: 5 Broken Tools from the forge.",
+              ru = "На запад к раскопкам дворфов: 5 сломанных инструментов из кузни.",
+              en = "West to the dwarven dig site: 5 Broken Tools from the forge.",
           } },
         { id = "mul02-wiserunner", turnin = 772, accept = 773, npc = 2984, at = { 1412, 34.30, 43.30 },
           note = {
-              ru = "Seer Wiserunner на севере, у подножия Громового Утёса.",
+              ru = "Seer Wiserunner к северу, у подножия Громового Утёса.",
               en = "Seer Wiserunner to the north, at the foot of Thunder Bluff.",
+          } },
+        { id = "mul02-thunderhorn", complete = 758, at = { 1412, 44.20, 51.10 },
+          note = {
+              ru = "На обратном пути в деревню - колодец Thunderhorn: используйте тотем у колодца.",
+              en = "On the way back to the village, the Thunderhorn Water Well: use the totem at the well.",
           } },
 
         ------------------------------------------------------------------
@@ -347,17 +360,12 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         -- North: alphas, prowlers, Red Rocks (level 10-11)
         ------------------------------------------------------------------
-        { id = "mul02-north-bg", complete = { 759, 861 }, bg = true, at = { 1412, 51.0, 35.0 },
-          note = {
-              ru = "На север: вожаки степных волков (8 клыков) и равнинные бродяги (4 когтя) по пути и вокруг "
-                  .. "Красных Скал.",
-              en = "North: Prairie Wolf Alphas (8 teeth) and Flatland Prowlers (4 claws) on the way and around Red "
-                  .. "Rocks.",
-          } },
         { id = "mul02-raintotem", accept = 833, npc = 3233, at = { 1412, 57.00, 34.50 },
           note = {
-              ru = "Lorekeeper Raintotem у подножия Красных Скал.",
-              en = "Lorekeeper Raintotem at the foot of Red Rocks.",
+              ru = "На север к Lorekeeper Raintotem у подножия Красных Скал. По пути: бейте вожаков степных волков "
+                  .. "(8 клыков) и равнинных бродяг (4 когтя), доберёте после Красных Скал, к западу от них.",
+              en = "North to Lorekeeper Raintotem at the foot of Red Rocks. On the way: kill Prairie Wolf Alphas "
+                  .. "(8 teeth) and Flatland Prowlers (4 claws); finish them after Red Rocks, west of them.",
           } },
         { id = "mul02-interlopers", complete = 833, at = { 1412, 58.20, 31.20 },
           note = {
@@ -372,8 +380,8 @@ AdventureAtlas.AddLibrarySegment({
         { id = "mul02-raintotem-2", turnin = 833, npc = 3233, at = { 1412, 57.00, 34.50 } },
         { id = "mul02-north", complete = { 759, 861 }, at = { 1412, 52.0, 34.0 },
           note = {
-              ru = "Добейте клыки и когти к западу от Красных Скал.",
-              en = "Finish the teeth and claws west of Red Rocks.",
+              ru = "Добейте вожаков волков и равнинных бродяг к западу от Красных Скал: 8 клыков и 4 когтя.",
+              en = "Finish the Prairie Wolf Alphas and Flatland Prowlers west of Red Rocks: 8 teeth and 4 claws.",
           } },
         { id = "mul02-hearth", hearth = "Bloodhoof Village", at = { 1412, 45.93, 64.16 },
           note = {

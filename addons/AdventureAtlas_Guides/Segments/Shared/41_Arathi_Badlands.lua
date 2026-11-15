@@ -6,8 +6,8 @@
 -- the Arathi binding stones (651) -> Faldir's Cove (663, 662, 664, 665 > 666 > 668 > 669) -> Thandol Span -> Wetlands
 -- (Dun Modr, Dun Algaz) -> Loch Modan (west of Thelsamar) -> Badlands: Rigglefuzz (703), Lotwil (710 > 711 > 712),
 -- Kargath (flight point, hearth, 782, 2258, 1419, 1420), the south-west loop (coyotes, buzzards, Dustbelcher ogres,
--- Greater Rock Elementals, level gate) -> Rigglefuzz -> Lotwil -> Kargath -> Searing Gorge next door (4449) ->
--- Kargath.
+-- Greater Rock Elementals, level gate) -> Rigglefuzz -> Lotwil -> Kargath (1419, 782, 2258) -> Searing Gorge next
+-- door (4449; back to the Kargath flight master, where h-44 starts).
 -- Plan: research plan60.md section 4.7 / plan60.json segments[7] (anchors used with the plan's ids).
 -- Coordinates: Forever uiMap 1454 (Orgrimmar) / 1411 (Durotar) / 1420 (Tirisfal Glades) / 1458 (Undercity) / 1424
 -- (Hillsbrad Foothills) / 1416 (Alterac Mountains) / 1417 (Arathi Highlands) / 1437 (Wetlands) / 1432 (Loch Modan) /
@@ -29,17 +29,20 @@
 --          Crushridge Maulers (518, elite); Tarren Mill: 566, optional 508 / 518; fly Hammerfall.
 --   AR   : Hammerfall (pass through) -> Iridescent Shards 651, the East / Outer / West binding stones (keys), the Stone
 --          of Inner Binding (651) -> Faldir's Cove: 663 (Lolo > Shakes), 662 (Nilzlix), 664 (Steelgut), 665
---          (Phizzlethorpe escort) > 666 (Draxlegauge); wrecks (662), Daggerspine naga (664), Elven Gems (666);
---          662, 664, 666 > 668 > 669 (Shakes; carried to Booty Bay, h-44).
---   BL 1 : Rigglefuzz 703 (+ optional 2418 and an Uldaman run); Martek 1106 > 1108 (Stonevault troggs 300 yards
---          south-east) > 1137 (carried to Fizzle, h-46); Lotwil 710, Lesser Rock Elementals, Lotwil 710 > 711,
+--          (Phizzlethorpe escort) > 666 (Draxlegauge); wrecks (662), Elven Gems (666), Daggerspine naga (664: killed
+--          around the wrecks, finished after the gems); 662, 664, 666 > 668 > 669 (Shakes; carried to Booty Bay, h-44).
+--   BL 1 : Rigglefuzz 703; Martek 1106 > 1108 (+ optional: Rigglefuzz 2418, an Uldaman run, Rigglefuzz 2418);
+--          Stonevault troggs 300 yards south-east (1108) > Martek 1137 (carried to Fizzle, h-46); Lotwil 710, Lesser
+--          Rock Elementals, Lotwil 710 > 711,
 --          Rock Elementals (north-west);
 --          Kargath: fp, hearth, 782 (Gorn), 2258 (Jarkal), 1419 + 1420 (Neeka; 1420 carried to Stonard, h-44).
 --   BL 2 : Lotwil 711 > 712; south-west loop: Elder Crag Coyotes + Giant Buzzards (1419, 2258 gizzards / fangs, 703),
 --          Greater Rock Elementals (712, 2258 shards), Boss Tho'grun (782: patrols a ~3,000-yard loop through the
---          southern Badlands - a bg reminder after Lotwil, the blocking step next to the gate camp), level gate; Rigglefuzz 703 (+ optional
---          2418), Lotwil 712, Kargath 1419, 782; Searing Gorge (550 yards west through the canyon): 4449 Caught! (8 Dark
---          Iron Geologists + 15 Silk Cloth); Kargath 2258.
+--          southern Badlands - the field-loop notes say to kill him on sight, the step of his own is next to the gate
+--          camp), level gate; Rigglefuzz 703, Lotwil 712, Kargath 1419, 782, 2258; Searing Gorge
+--          (550 yards west through the canyon): 4449 Caught! (8 Dark Iron Geologists + 15 Silk Cloth), the segment ends
+--          at the outhouse (h-44 starts with the flight from Kargath: 2258 is turned in before the Searing Gorge, not
+--          on a separate visit after it).
 -- Deviations from the plan (documented in the handoff):
 --   * The Arathi quests of the plan that need elite kills are not taken (Wowhead Forever tooltips: Elite; DB rank 1):
 --     639 Sigil of Strom (Syndicate 35-38) and with it 640 / 641 / 643 / 644 / 645 / 646 (Stromgarde guards 37-40,
@@ -74,7 +77,7 @@
 -- XP (validator, Classic quest XP + objective kills with the DB counts; a route that enters at 40.85): required quests
 --   ~56 k (was ~38 k; + ~11 k optional), objective kills ~31 k. The level gate in the south-west (Dustbelcher ogres
 --   40-43 and Greater Rock Elementals 42-44, the best non-elite camp for 42-44 near Kargath) covers the rest: 43 + 80%
---   (~855 same-level kills normal, ~970 worst case; was ~965 from 41.00), set so the required turn-ins after it
+--   (~750 same-level kills normal, ~920 worst case, from 41.0), set so the required turn-ins after it
 --   (Caught! needs 43) make 44.0 at h-44-uc-arrive (paladin and druid training at 44) even with every optional step
 --   skipped. Group alternatives: the Scarlet Monastery and Uldaman blocks.
 -- Automation notes: accepts at one NPC sit in one step; transient steps (fp, sethearth) come before the quest steps of
@@ -238,15 +241,14 @@ AdventureAtlas.AddLibrarySegment({
         { turnin = 665, accept = 666, npc = 2774, at = { 1417, 33.86, 80.45 },
           note = { ru = "Доктор Драксельмер: следующее «Утонувшее сокровище» - очки Ловца сокровищ.",
                    en = "Doctor Draxlegauge: the next Sunken Treasure - the Goggles of Gem Hunting." } },
-        { complete = 664, bg = true, at = { 1417, 21.67, 87.05 },
-          note = { ru = "Попутно: наги Пронзающего Гребня (38-40) вокруг затонувших кораблей к западу. Нет ещё 15 "
-                       .. "отрезов шелка для «Попался!» (Тлеющее ущелье, 43) - собирайте с этих наг.",
-                   en = "On the way: Daggerspine naga (38-40) around the wrecks to the west. Still short of 15 Silk "
-                       .. "Cloth for Caught! (Searing Gorge, 43): loot it from these naga." } },
         { id = "h-41-arathi-highlands-field", complete = { [662] = { 1, 2 } }, object = { 2707, 2709 },
           at = { 1417, 23.22, 84.80 },
-          note = { ru = "На запад, под воду: восточный корабль («Девичья Блажь») - карты и судовой журнал.",
-                   en = "West, underwater: the eastern wreck (Maiden's Folly) - the charts and the log." } },
+          note = { ru = "На запад, под воду: восточный корабль («Девичья Блажь») - карты и судовой журнал. Вокруг "
+                       .. "кораблей наги Пронзающего Гребня (38-40): по пути бейте их для «Затонувших печалей», доберёте "
+                       .. "после самоцветов.",
+                   en = "West, underwater: the eastern wreck (Maiden's Folly) - the charts and the log. Daggerspine naga "
+                       .. "(38-40) swim around the wrecks: kill them on the way for Drowned Sorrows, finish them after "
+                       .. "the gems." } },
         { complete = { [662] = { 3, 4 } }, object = { 2708, 2710 }, at = { 1417, 20.56, 85.36 },
           note = { ru = "Западный корабль («Дух Серебряного бора») - карты и судовой журнал.",
                    en = "The western wreck (Spirit of Silverpine) - the charts and the log." } },
@@ -255,6 +257,13 @@ AdventureAtlas.AddLibrarySegment({
                        .. "10 самоцветов на дне. Потом снова наденьте свой шлем.",
                    en = "Put on the Goggles of Gem Hunting (button): the Calcified Elven Gems show on the minimap - 10 "
                        .. "gems on the sea floor. Put your own helm back on afterwards." } },
+        { id = "h41-daggerspine-naga", complete = 664, at = { 1417, 21.80, 86.80 },
+          note = { ru = "Прежде чем плыть обратно: наги Пронзающего Гребня вокруг кораблей - добейте 10 налетчиков и 3 "
+                       .. "колдуньи (38-40). Нет ещё 15 отрезов шелка для «Попался!» (Тлеющее ущелье, 43) - собирайте с "
+                       .. "этих наг.",
+                   en = "Before you swim back: the Daggerspine naga around the wrecks - finish 10 Raiders and 3 "
+                       .. "Sorceresses (38-40). Still short of 15 Silk Cloth for Caught! (Searing Gorge, 43): loot it "
+                       .. "from these naga." } },
         { turnin = 662, npc = 2767, at = { 1417, 32.80, 81.48 },
           note = { ru = "Обратно в бухту: Нилзликс.", en = "Back to the cove: Nilzlix." } },
         { turnin = 664, npc = 2769, at = { 1417, 34.00, 80.80 },
@@ -299,8 +308,13 @@ AdventureAtlas.AddLibrarySegment({
                    en = "Badlands: south along the road past the dig sites (elite Shadowforge dwarves around Uldaman - "
                        .. "stay on the road) to the goblin camp at the crossroads: Rigglefuzz - Barbecued Buzzard "
                        .. "Wings." } },
+        { turnin = 1106, accept = 1108, npc = 4618, at = { 1418, 42.22, 52.69 },
+          note = { ru = "Мартек Изгнанник в 5 ярдах от Ригглфазза: письмо Физзла (из Тысячи Игл); возьмите «Индурий» - "
+                       .. "10 чешуек индурия.",
+                   en = "Martek the Exiled, 5 yards from Rigglefuzz: Fizzle's letter (from Thousand Needles); take "
+                       .. "Indurium - 10 Indurium Flakes." } },
         -- Optional group content: Uldaman (41-51), entrance 680 yards north of Rigglefuzz, by the road the route came
-        -- down.
+        -- down; back at Rigglefuzz the Power Stones are turned in on the way to the troggs.
         { accept = 2418, npc = 2817, optional = true, at = { 1418, 42.39, 52.93 },
           note = { ru = "По желанию, если собрали группу в Ульдаман: у Ригглфазза же - «Камни Силы». Без группы - дальше "
                        .. "(шаги пропустятся сами).",
@@ -311,11 +325,9 @@ AdventureAtlas.AddLibrarySegment({
                        .. "(элита) у входа и внутри.",
                    en = "Uldaman (north along the road, entrance 44.6, 12.1): the Power Stones drop from the Shadowforge "
                        .. "dwarves (elite) at the entrance and inside." } },
-        { turnin = 1106, accept = 1108, npc = 4618, at = { 1418, 42.22, 52.69 },
-          note = { ru = "Мартек Изгнанник в 5 ярдах от Ригглфазза: письмо Физзла (из Тысячи Игл); возьмите «Индурий» - "
-                       .. "10 чешуек индурия.",
-                   en = "Martek the Exiled, 5 yards from Rigglefuzz: Fizzle's letter (from Thousand Needles); take "
-                       .. "Indurium - 10 Indurium Flakes." } },
+        { turnin = 2418, npc = 2817, optional = true, at = { 1418, 42.39, 52.93 },
+          note = { ru = "Если были в Ульдамане: обратно к Ригглфаззу - камни Силы.",
+                   en = "If you ran Uldaman: back to Rigglefuzz - the Power Stones." } },
         { complete = 1108, at = { 1418, 50.08, 68.32 },
           note = { ru = "На юго-восток (~300 ярдов): костоломы (39-40) и шаманы (40-41) Каменного Свода у скал - 10 "
                        .. "чешуек индурия.",
@@ -366,22 +378,23 @@ AdventureAtlas.AddLibrarySegment({
         ------------------------------------------------------------------
         { turnin = 711, accept = 712, npc = 2921, at = { 1418, 25.95, 44.87 },
           note = { ru = "Обратно на восток к Лотвилю.", en = "Back east to Lotwil." } },
-        { complete = 782, bg = true, at = { 1418, 12.62, 75.49 },
-          note = { ru = "Попутно: главарь То'грун (41-42) ходит по югу зоны (лагерь огров, южная дорога до ~61,70, "
-                       .. "мимо Ригглфазза, назад по y≈57) - встретили, убейте: Знак Земли.",
-                   en = "On the way: Boss Tho'grun (41-42) walks the southern Badlands (the ogre camp, the south road "
-                       .. "to ~61,70, past Rigglefuzz, back along y≈57) - met him, kill him: the Sign of the Earth." } },
         { id = "h-41-badlands-field-loop", complete = { [1419] = { 1 }, [703] = { 1 }, [2258] = { 1, 2 } },
           at = { 1418, 23.88, 63.47 },
           note = { ru = "На юг: старые скальные койоты (38-40) и гигантские канюки (39-41) - 30 челюстей, 10 клыков, "
-                       .. "5 желудков и 4 крыла канюка.",
+                       .. "5 желудков и 4 крыла канюка. По пути: главарь То'грун (41-42) ходит по югу зоны (лагерь огров, "
+                       .. "южная дорога до ~61,70, мимо Ригглфазза, назад по y≈57) - встретите, убейте сразу (Знак Земли; "
+                       .. "иначе - у лагеря огров ниже).",
                    en = "South: Elder Crag Coyotes (38-40) and Giant Buzzards (39-41) - 30 jawbones, 10 fangs, 5 "
-                       .. "gizzards and 4 buzzard wings." } },
+                       .. "gizzards and 4 buzzard wings. On the way: Boss Tho'grun (41-42) walks the southern Badlands "
+                       .. "(the ogre camp, the south road to ~61,70, past Rigglefuzz, back along y≈57) - meet him, kill "
+                       .. "him there (the Sign of the Earth; otherwise at the ogre camp below)." } },
         { complete = { [712] = { 1 }, [2258] = { 3 } }, at = { 1418, 3.98, 79.90 },
           note = { ru = "На юго-запад мимо лагеря огров Гнилобрюхов к западному краю: большие каменные элементали "
-                       .. "(42-44) - 5 наручей Камня и 5 осколков каменного элементаля.",
+                       .. "(42-44) - 5 наручей Камня и 5 осколков каменного элементаля. Главарь То'грун в лагере - "
+                       .. "убейте его по пути.",
                    en = "South-west past the Dustbelcher ogre camp to the west edge: Greater Rock Elementals (42-44) - "
-                       .. "5 Bracers of Rock Binding and 5 Rock Elemental Shards." } },
+                       .. "5 Bracers of Rock Binding and 5 Rock Elemental Shards. Boss Tho'grun in the camp: kill him "
+                       .. "on the way." } },
         { complete = 782, at = { 1418, 12.62, 75.49 },
           note = { ru = "Лагерь огров Гнилобрюхов (40-43): главарь То'грун - Знак Земли. Он не стоит на месте: ходит по "
                        .. "кругу (~3000 ярдов, ~20 мин) - из лагеря на восток вдоль южной дороги (y 72-78) до ~61,70, на "
@@ -395,7 +408,7 @@ AdventureAtlas.AddLibrarySegment({
         -- level-grind of the next step (acknowledged with `ok`): the end-of-segment gate (south-west Badlands, ogres 40-43 and Greater Rock
         -- Elementals 42-44): 43 for Caught!, and the required turn-ins below make 44.0 at h-44-uc-arrive (training).
         { id = "h-41-arathi-badlands-level-gate", level = { 43, 0.80 }, at = { 1418, 8.35, 78.85 },
-          ok = { ["level-grind"] = 770 }, -- 765 / 764 kills in the normal run (reason above)
+          ok = { ["level-grind"] = 770 }, -- 751 / 750 kills in the normal run (reason above)
           note = { ru = "Цель: 43 + 80% (сдачи ниже и «Попался!» дадут 44 - обучение, Болото Печали и Тернистая "
                        .. "долина). Не хватает - огры Гнилобрюхов (40-43) и большие каменные элементали (42-44) здесь же: "
                        .. "плотно, быстрый респаун, лучшее место на 42-44 у Каргата. В группе быстрее: Ульдаман (вход на "
@@ -406,8 +419,6 @@ AdventureAtlas.AddLibrarySegment({
                        .. "Uldaman (entrance in the north of the zone)." } },
         { id = "h-41-theldurin-the-lost", turnin = 703, npc = 2817, at = { 1418, 42.39, 52.93 },
           note = { ru = "На восток к Ригглфаззу.", en = "East to Rigglefuzz." } },
-        { turnin = 2418, npc = 2817, optional = true, at = { 1418, 42.39, 52.93 },
-          note = { ru = "Если были в Ульдамане: камни Силы.", en = "If you ran Uldaman: the Power Stones." } },
         { turnin = 712, npc = 2921, at = { 1418, 25.95, 44.87 },
           note = { ru = "Лотвиль. «Это будет непросто» не откроется (нужен «Гиро...чего?»).",
                    en = "Lotwil. This Is Going to Be Hard does not open (it needs Gyro... What?)." } },
@@ -416,9 +427,12 @@ AdventureAtlas.AddLibrarySegment({
         { turnin = 782, npc = 1068, at = { 1418, 2.91, 45.60 },
           note = { ru = "Горн. Следующие «Разорванные союзы» (50, элитные) не берите.",
                    en = "Gorn. Skip the next Broken Alliances (50, elites)." } },
+        { id = "h-44-kargath-end", turnin = 2258, npc = 6868, at = { 1418, 2.42, 46.06 },
+          note = { ru = "Джаркал рядом. «В Ульдаман за реактивом» - только для группы в Ульдаман.",
+                   en = "Jarkal next to him. Uldaman Reagent Run - only for an Uldaman group." } },
 
         ------------------------------------------------------------------
-        -- Searing Gorge next door: Caught! (43-44)
+        -- Searing Gorge next door: Caught! (43-44), then back to Kargath for the flight (next segment)
         ------------------------------------------------------------------
         { id = "h43-caught", accept = 4449, object = 173265, at = { 1427, 65.59, 62.17 },
           note = { ru = "Из Каргата на запад по каньону в Тлеющее ущелье (550 ярдов): деревянная уборная у раскопок - "
@@ -430,11 +444,8 @@ AdventureAtlas.AddLibrarySegment({
                    en = "Around the dig site: 8 Dark Iron Geologists (43-44)." } },
         { turnin = 4449, object = 173265, at = { 1427, 65.59, 62.17 },
           note = { ru = "Уборная: сдайте шелк. «Учетную книгу из Танариса» не берите (её вещи в трёх зонах). Обратно "
-                       .. "по каньону в Каргат.",
+                       .. "по каньону в Каргат - к распорядителю полётов.",
                    en = "The outhouse: hand in the silk. Skip Ledger from Tanaris (its items are spread over three "
-                       .. "zones). Back through the canyon to Kargath." } },
-        { id = "h-44-kargath-end", turnin = 2258, npc = 6868, at = { 1418, 2.42, 46.06 },
-          note = { ru = "Джаркал. «В Ульдаман за реактивом» - только для группы в Ульдаман.",
-                   en = "Jarkal. Uldaman Reagent Run - only for an Uldaman group." } },
+                       .. "zones). Back through the canyon to Kargath - to the flight master." } },
     },
 })
