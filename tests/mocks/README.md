@@ -9,8 +9,8 @@ local Mock = require("mocks.wow")          -- busted: .busted lpath has ./tests/
 -- tools: package.path = "./tests/?.lua;" .. package.path
 
 local m = Mock.new({ locale = "ruRU", player = { race = "Scourge", class = "PALADIN", mapID = 1420, x = 30, y = 71 } })
-local ns = Mock.loadAddon(m, "addons/FastesBoooy/FastesBoooy.toc")   -- runs the files, returns the addon ns
-Mock.boot(m, { "FastesBoooy" })            -- ADDON_LOADED, PLAYER_LOGIN, PLAYER_ENTERING_WORLD(true, false)
+local ns = Mock.loadAddon(m, "addons/AdventureAtlas/AdventureAtlas.toc")  -- runs the files, returns the addon ns
+Mock.boot(m, { "AdventureAtlas" })         -- ADDON_LOADED, PLAYER_LOGIN, PLAYER_ENTERING_WORLD(true, false)
 m:DefineQuest(363, { title = "Rude Awakening", level = 1, xp = 80 })
 m:DefineNPC(1568, { name = "Undertaker Mordo", starts = { 363 } })
 m:TalkTo(1568)                             -- QUEST_DETAIL; the addon's automation may call AcceptQuest()
@@ -23,7 +23,7 @@ m:AssertClean()                            -- no script errors, no contract viol
 | File | Content |
 |---|---|
 | `wow.lua` | `Mock.new`, global environment, strictness, diagnostics, `Provide*` |
-| `wow/allowlist.lua` | loads `tools/data/forever_api.lua`; widget method / handler sets (with inheritance) |
+| `wow/allowlist.lua` | loads `tools/data/forever_api.lua` (+ the globals confirmed in game, `tools/data/forever_api_confirmed.lua`); widget method / handler sets (with inheritance) |
 | `wow/signatures.lua` | GENERATED argument / event payload specs (`gen_signatures.py` from `research/apidocs.json`) |
 | `wow/luaenv.lua` | Lua 5.1 base + `string/table/math/bit/coroutine` restricted to client members + WoW extensions |
 | `wow/system.lua` | clock, `C_Timer`, events, error handler, TOC / SavedVariables, slash, popups, `Settings`, `C_AddOns` |
@@ -91,6 +91,8 @@ shift, ctrl, alt, guid` } (raceID / classID / faction derived; Skyborne = 95 All
   backslashes, `[AllowLoadGameType ...]` / `[ExcludeLoadGameType ...]`, `[Family]`/`[Game]`).
 * `Mock.loadAddon(m, tocPath [, addonName [, opts]])` runs every file with `loadfile` + `setfenv(m.env)` and
   `(addonName, ns)` varargs; returns `ns`. XML files raise. `## LoadSavedVariablesFirst: 1` honoured.
+  `opts.deferred = true` registers a `## LoadOnDemand: 1` addon without running it: `C_AddOns.LoadAddOn` runs
+  its files, then applies its SavedVariables and fires `ADDON_LOADED`.
   `opts.skip = { ["Classes/Mage.lua"] = true }` leaves TOC files out (the file filter of the offline tools,
   `--skip` / `--keep`); `m.addons[name].skipped` lists them.
 * `Mock.boot(m, addons [, { reload = true }])`: per addon (name of a loaded addon, or
@@ -98,7 +100,7 @@ shift, ctrl, alt, guid` } (raceID / classID / faction derived; Skyborne = 95 All
   `PLAYER_LOGIN`, `PLAYER_ENTERING_WORLD(not reload, reload)`, `QUEST_LOG_UPDATE`, `BAG_UPDATE_DELAYED`.
 * `m:ExportSavedVariables()` → pass as `Mock.new{ savedVariables = ... }` to simulate `/reload`
   (a cold restart on Forever may lose SavedVariables: test with no `savedVariables`).
-* `m:RunSlash("/fb xp")`, `m:RegisterAddOn(name, meta)`, `C_AddOns.GetAddOnMetadata/IsAddOnLoaded/...`.
+* `m:RunSlash("/aa xp")`, `m:RegisterAddOn(name, meta)`, `C_AddOns.GetAddOnMetadata/IsAddOnLoaded/...`.
 
 ## Simulation helpers (methods of `m`)
 
@@ -146,6 +148,7 @@ shift, ctrl, alt, guid` } (raceID / classID / faction derived; Skyborne = 95 All
   objective gets one placeholder `"event"` objective; other objective-less quests are complete
   on accept (deliveries). `tools/simulate_routes.lua` passes the route's `complete` quests.
 * **UI**: `Click(button)`, `Enter(region)` / `Leave`, `TypeText(editBox, s)`, `DragSlider(s, v)`,
+  `PressEscape()` (hides the shown frames named in `UISpecialFrames`, like `CloseSpecialWindows`),
   `TooltipLines()`, `VisibleTexts([root])`, `FindWidgets(pred)`, `WidgetState(w)`,
   `IsWidgetVisible(w)`, `PopupClick(which, "button1")`, `PopupVisible(which)`, `m.chat`,
   `m.settingsOpened`, `m.userWaypoint`.

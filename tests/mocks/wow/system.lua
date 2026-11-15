@@ -342,7 +342,8 @@ function Mock.loadAddon(m, tocPath, addonName, opts)
     for _, n in ipairs(addon.savedVariables) do m._svNames[n] = true end
     m.addons[addonName] = addon
     m.addonOrder[#m.addonOrder + 1] = addonName
-    m:_top(function()
+    -- the files in TOC order (SavedVariables first only with LoadSavedVariablesFirst, like the client)
+    local function runFiles()
         if toc.metaLower.loadsavedvariablesfirst == "1" then m:_applySavedVariables(addon); addon.svApplied = true end
         for _, file in ipairs(toc.files) do
             if file:match("%.xml$") then
@@ -354,7 +355,22 @@ function Mock.loadAddon(m, tocPath, addonName, opts)
                 m:_runFile(toc.dir .. file, addonName, addon.ns)
             end
         end
-    end)
+    end
+    -- opts.deferred (a "## LoadOnDemand: 1" addon): registered only; C_AddOns.LoadAddOn runs the files, then
+    -- applies its SavedVariables and fires ADDON_LOADED
+    if opts and opts.deferred then
+        if toc.metaLower.loadondemand ~= "1" then
+            error("mock: " .. addonName .. ": deferred load needs ## LoadOnDemand: 1", 0)
+        end
+        addon.load = function()
+            runFiles()
+            if not addon.svApplied then m:_applySavedVariables(addon); addon.svApplied = true end
+            addon.loaded = true
+            m:Fire("ADDON_LOADED", addonName, false)
+        end
+        return addon.ns
+    end
+    m:_top(runFiles)
     addon.loaded = true
     return addon.ns
 end
@@ -411,7 +427,7 @@ end
 -- slash commands
 ---------------------------------------------------------------------------
 
---- Run a chat slash command ("/fb xp"). Returns true when a handler ran.
+--- Run a chat slash command ("/aa xp"). Returns true when a handler ran.
 function M:RunSlash(text)
     local cmd, rest = tostring(text):match("^(/%S+)%s*(.-)%s*$")
     if not cmd then return false end
@@ -639,6 +655,7 @@ ctx.register(function(m)
         LoadAddOn = function(name)
             local a = addonOf(name)
             if not a then return false, "MISSING" end
+            if not a.loaded and a.load then a.load() end
             return true, nil
         end,
     })
