@@ -74,6 +74,11 @@ local function aspectLabel(a)
     return L.UI_NAR_ASPECT_STORY
 end
 
+-- Level band "lo-hi", or one level when both are the same.
+local function levelsText(lo, hi)
+    return lo == hi and tostring(lo) or format(L.UI_NAR_LEVELS_FMT, lo, hi)
+end
+
 -- "done/total" of a { done, open } sum (missed slots are not in the total).
 local function countText(s)
     return format(L.UI_NAR_BAR_FMT, s.done, s.done + s.open)
@@ -585,7 +590,7 @@ local function renderGoal(row, goal, gs)
         local _, _, can = N:NextRank(goal)
         row.level:SetText(format(can and L.UI_NAR_RANK_UP_FMT or L.UI_NAR_RANK_FMT, rank, maxRank))
     else
-        row.level:SetText(format(L.UI_NAR_LEVELS_FMT, goal.lo, goal.hi))
+        row.level:SetText(levelsText(goal.lo, goal.hi))
     end
     local count
     if gs.state == "missed" and gs.done == 0 then
@@ -621,7 +626,7 @@ function AN.renderList(page)
         elseif item.kind == "zone" then
             setRowKind(row, false)
             local s = item.sum or { done = 0, open = 0, lo = 0, hi = 0 }
-            row.zone:SetText(format(L.UI_NAR_ZONE_FMT, K:ZoneName(item.z), s.lo, s.hi, s.done, s.done + s.open))
+            row.zone:SetText(format(L.UI_NAR_ZONE_FMT, K:ZoneName(item.z), levelsText(s.lo, s.hi), s.done, s.done + s.open))
             row:Show()
         else
             setRowKind(row, true)

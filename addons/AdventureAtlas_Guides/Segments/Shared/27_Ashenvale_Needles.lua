@@ -383,7 +383,7 @@ AdventureAtlas.AddLibrarySegment({
           note = { ru = "Дорн: «Испытание стойкости» — коготь Гренки (пещера гарпий).",
                    en = "Dorn: Test of Endurance - Grenka's Claw (the harpy cave)." } },
         { complete = 4821, object = 175565, at = { 1441, 56.40, 50.40 },
-          note = { ru = "Странное яйцо — в одном из трёх мест: 56.4, 50.4 → 52.3, 55.2 → 37.6, 56.1.",
+          note = { ru = "Странное яйцо — в одном из трёх мест: 56.4, 50.4 -> 52.3, 55.2 -> 37.6, 56.1.",
                    en = "The Alien Egg is at one of three spots: 56.4, 50.4 -> 52.3, 55.2 -> 37.6, 56.1." } },
 
         ------------------------------------------------------------------
@@ -463,13 +463,13 @@ AdventureAtlas.AddLibrarySegment({
                    en = "East: the path up to Darkcloud Pinnacle (Grimtotem 27-30). Pick Incendia Agave (5062) between "
                        .. "the chests - you finish it in the middle of the pinnacle before Arnak." } },
         { complete = { [5064] = { 1 } }, object = 176344, at = { 1441, 31.79, 32.58 },
-          note = { ru = "Сундук с документами №1 на северном уступе — записка 1.",
+          note = { ru = "Сундук с документами 1 на северном уступе — записка 1.",
                    en = "Document Chest #1 on the northern ledge - Secret Note #1." } },
         { complete = { [5064] = { 2 } }, object = 190483, at = { 1441, 33.76, 39.99 },
-          note = { ru = "По мостикам на юг: сундук №2 — записка 2.",
+          note = { ru = "По мостикам на юг: сундук 2 — записка 2.",
                    en = "Over the rope bridges south: chest #2 - Secret Note #2." } },
         { complete = 5064, object = 190484, at = { 1441, 39.34, 41.53 },
-          note = { ru = "На восток: сундук №3 — записка 3.", en = "East: chest #3 - Secret Note #3." } },
+          note = { ru = "На восток: сундук 3 — записка 3.", en = "East: chest #3 - Secret Note #3." } },
         { id = "h29-incendia-agave", complete = 5062, object = 175928, at = { 1441, 35.45, 35.45 },
           note = { ru = "На северо-запад в центр вершины: доберите 10 листов огненной агавы.",
                    en = "North-west into the middle of the pinnacle: finish the 10 Incendia Agave." } },

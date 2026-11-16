@@ -1017,14 +1017,16 @@ local function localized(t)
 end
 
 --- One localized line for a candidate: what to do, where, how far, and why it comes first (short: what and
--- where only, the waypoint label: the arrow shows the live distance).
+-- where only, the waypoint label: the arrow shows the live distance). The zone is left out when the target is
+-- on the player's map (the line has to fit one row of the atlas).
 function Narrative:Describe(cand, short)
     local place
     if not cand.map then
         place = cand.place or L.NAR_NO_PLACE
     else
         local zone = ns.Compat.GetMapName(cand.map) or ""
-        place = cand.place and format(L.NAR_PLACE_FMT, cand.place, zone) or zone
+        if cand.place and cand.map == ns.Compat.GetPlayerMapPosition() then zone = nil end
+        place = cand.place and (zone and format(L.NAR_PLACE_FMT, cand.place, zone) or cand.place) or zone
         if cand.far then place = format(L.NAR_FAR_FMT, place) end
     end
     local kind, text = cand.kind
@@ -1056,14 +1058,14 @@ function Narrative:Describe(cand, short)
         text = format(kind == "turnin" and L.NAR_TURNIN_FMT or L.NAR_TAKE_FMT, ns.Knowledge:Title(cand.q), place)
     end
     if short then return text end
-    if cand.yards then text = text .. " " .. format(L.NAR_YARDS_FMT, floor(cand.yards + 0.5)) end
+    if cand.yards then text = text .. ", " .. format(L.NAR_YARDS_FMT, floor(cand.yards + 0.5)) end
     local why
     if cand.reason == "hint" then why = L.NAR_WHY_HINT
     elseif cand.dungeon then why = format(L.NAR_WHY_PREP_FMT, self:Title(cand.dungeon))
     elseif cand.reason == "chain" then why = L.NAR_WHY_CHAIN
     elseif cand.graySoon then why = L.NAR_WHY_GRAYSOON
     elseif cand.unverified then why = L.NAR_WHY_UNVERIFIED end
-    if why then text = text .. " · " .. why end
+    if why then text = text .. " (" .. why .. ")" end
     return text
 end
 

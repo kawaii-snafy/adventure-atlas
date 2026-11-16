@@ -338,7 +338,7 @@ AdventureAtlas.AddLibrarySegment({
                    en = "Back to Martek: take News for Fizzle (Shimmering Flats, on the way to Tanaris, h-46)." } },
         { id = "h-41-lotwil-veriatus-lucien", accept = 710, npc = 2921, at = { 1418, 25.95, 44.87 },
           note = { ru = "На запад по дороге: Лотвиль Вериатус - «Изучение стихий: Камень». «Охлаждение горячих голов», "
-                       .. "«Гиро...чего?» и «Камень – лучшая одежка!» не берите (нужны изделия алхимика, инженера и "
+                       .. "«Гиро...чего?» и «Камень — лучшая одежка!» не берите (нужны изделия алхимика, инженера и "
                        .. "кузнеца).",
                    en = "West along the road: Lotwil Veriatus - Study of the Elements: Rock. Skip Coolant Heads "
                        .. "Prevail, Gyro... What? and Stone Is Better than Cloth (they need alchemy, engineering and "
@@ -382,11 +382,11 @@ AdventureAtlas.AddLibrarySegment({
           at = { 1418, 23.88, 63.47 },
           note = { ru = "На юг: старые скальные койоты (38-40) и гигантские канюки (39-41) - 30 челюстей, 10 клыков, "
                        .. "5 желудков и 4 крыла канюка. По пути: главарь То'грун (41-42) ходит по югу зоны (лагерь огров, "
-                       .. "южная дорога до ~61,70, мимо Ригглфазза, назад по y≈57) - встретите, убейте сразу (Знак Земли; "
+                       .. "южная дорога до ~61,70, мимо Ригглфазза, назад по y~57) - встретите, убейте сразу (Знак Земли; "
                        .. "иначе - у лагеря огров ниже).",
                    en = "South: Elder Crag Coyotes (38-40) and Giant Buzzards (39-41) - 30 jawbones, 10 fangs, 5 "
                        .. "gizzards and 4 buzzard wings. On the way: Boss Tho'grun (41-42) walks the southern Badlands "
-                       .. "(the ogre camp, the south road to ~61,70, past Rigglefuzz, back along y≈57) - meet him, kill "
+                       .. "(the ogre camp, the south road to ~61,70, past Rigglefuzz, back along y~57) - meet him, kill "
                        .. "him there (the Sign of the Earth; otherwise at the ogre camp below)." } },
         { complete = { [712] = { 1 }, [2258] = { 3 } }, at = { 1418, 3.98, 79.90 },
           note = { ru = "На юго-запад мимо лагеря огров Гнилобрюхов к западному краю: большие каменные элементали "
@@ -398,11 +398,11 @@ AdventureAtlas.AddLibrarySegment({
         { complete = 782, at = { 1418, 12.62, 75.49 },
           note = { ru = "Лагерь огров Гнилобрюхов (40-43): главарь То'грун - Знак Земли. Он не стоит на месте: ходит по "
                        .. "кругу (~3000 ярдов, ~20 мин) - из лагеря на восток вдоль южной дороги (y 72-78) до ~61,70, на "
-                       .. "северо-запад мимо Ригглфазза (42,53), на запад по y≈57 и обратно в лагерь с севера (11.5,69). "
+                       .. "северо-запад мимо Ригглфазза (42,53), на запад по y~57 и обратно в лагерь с севера (11.5,69). "
                        .. "Нет в лагере - не ждите на месте: бейте огров и элементалей для гейта ниже, он вернётся.",
                    en = "The Dustbelcher ogre camp (40-43): Boss Tho'grun - the Sign of the Earth. He does not stand "
                        .. "still: he walks a ~3,000-yard loop (~20 min) - from the camp east along the southern road (y "
-                       .. "72-78) to ~61,70, north-west past Rigglefuzz (42,53), west along y≈57 and back into the camp "
+                       .. "72-78) to ~61,70, north-west past Rigglefuzz (42,53), west along y~57 and back into the camp "
                        .. "from the north (11.5,69). Not in the camp: do not stand and wait - grind the ogres and "
                        .. "elementals for the gate below, he comes back." } },
         -- level-grind of the next step (acknowledged with `ok`): the end-of-segment gate (south-west Badlands, ogres 40-43 and Greater Rock

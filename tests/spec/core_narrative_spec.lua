@@ -624,10 +624,10 @@ describe("narrative hints", function()
         H.settle(m)
         local cand = N().candOf
         assert.equal("Start \"Tirisfal Errand\": Tirisfal Token is in your bags", N():Describe(cand["1051"]))
-        assert.equal("Train Herbalism up to 150 -- Herb Trainer, The Barrens · 40 yd · not checked in game",
+        assert.equal("Train Herbalism up to 150 -- Herb Trainer, 40 yd (not checked in game)",
             N():Describe(cand.t182))
-        assert.equal("Herbalism 60: here -- Mageroyal · not checked in game", N():Describe(cand.g182))
-        assert.equal("Sealed Test Crate: turn it in -- Crate Clerk, The Barrens · 100 yd · not checked in game",
+        assert.equal("Herbalism 60: here -- Mageroyal (not checked in game)", N():Describe(cand.g182))
+        assert.equal("Sealed Test Crate: turn it in -- Crate Clerk, 100 yd (not checked in game)",
             N():Describe(cand.u2004))
     end)
 end)

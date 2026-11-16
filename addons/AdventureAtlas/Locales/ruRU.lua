@@ -30,8 +30,8 @@ L.STEP_OBJECTIVE = "%s"
 -- Core/Waypoint.lua: прибытие к цели, выбранной в базе знаний
 L.WAYPOINT_ARRIVED_FMT = "Вы на месте: %s."
 L.STEP_OBJECTIVE_PENDING = "Цель %d"
-L.QUEST_FALLBACK = "Задание №%d"
-L.ITEM_FALLBACK = "Предмет №%d"
+L.QUEST_FALLBACK = "Задание %d"
+L.ITEM_FALLBACK = "Предмет %d"
 L.UNKNOWN_PLACE = "?"
 
 -- сообщения в чат
@@ -65,11 +65,11 @@ L.NAR_TURNIN_FMT = "Сдать «%s» — %s"
 L.NAR_ENTER_FMT = "Подземелье «%s»: вход — %s"
 -- %s = имя NPC / название предмета, затем зона
 L.NAR_PLACE_FMT = "%s, %s"
-L.NAR_YARDS_FMT = "· %d ярд."
+L.NAR_YARDS_FMT = "%d ярд."
 L.NAR_NO_PLACE = "место неизвестно"
 L.NAR_FAR_FMT = "%s — другой материк"
 L.NAR_WAIT_FMT = "Рядом всё сделано: следующее с %d-го уровня"
-L.NAR_INLOG_FMT = "В журнале: %d · к сдаче: %d"
+L.NAR_INLOG_FMT = "В журнале: %d, к сдаче: %d"
 -- %s = имя того, кто выдаёт задания
 L.NAR_ERRANDS_FMT = "%s: поручения"
 -- почему подсказка идёт первой
