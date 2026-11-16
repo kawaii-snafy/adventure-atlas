@@ -385,9 +385,9 @@ describe("step window", function()
         H.settle(m)
         refresh()
         local t = texts(frame())
-        for _, want in ipairs({ "Повествование", "Сюжет: 0/11", "Взять «Oasis One» — Oasis Keeper, The Barrens · 20 ярд.",
-            "В журнале: 0 · к сдаче: 0", "Попутно", "Взять «Warrior Call» — Warrior Trainer, Orgrimmar · 1031 ярд.",
-            "Взять «Bag One» — Bag Maker, Durotar · 1569 ярд. · лучший момент" }) do
+        for _, want in ipairs({ "Повествование", "Сюжет: 0/11", "Взять «Oasis One» — Oasis Keeper, 20 ярд.",
+            "В журнале: 0, к сдаче: 0", "Попутно", "Взять «Warrior Call» — Warrior Trainer, Orgrimmar, 1031 ярд.",
+            "Взять «Bag One» — Bag Maker, Durotar, 1569 ярд. (лучший момент)" }) do
             assert.is_true(has(t, want), "missing text: " .. want .. " in " .. table.concat(t, " | "))
         end
         assert.is_false(frame().forwardButton:IsEnabled(), "no route steps")

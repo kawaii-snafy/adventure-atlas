@@ -227,3 +227,32 @@ describe("run-time strictness of a full scenario", function()
         assert.same({}, m.warnings)
     end)
 end)
+
+-- The client fonts draw ASCII, Cyrillic, « » and the em dash; other glyphs (the middle dot ·, arrows, №, …)
+-- showed up as empty boxes in game. Every text of the addon folders (locales, route notes, generated data)
+-- keeps to that set.
+describe("glyphs of the addon texts", function()
+    -- true when the UTF-8 character is one the client fonts draw
+    local function drawable(ch)
+        if #ch == 1 then return true end
+        if ch == "«" or ch == "»" or ch == "—" then return true end
+        local b1, b2 = ch:byte(1, 2)
+        return #ch == 2 and (b1 == 0xD0 or b1 == 0xD1) and b2 >= 0x80 and b2 <= 0xBF -- U+0400..U+047F
+    end
+
+    it("uses only characters the client fonts draw", function()
+        local p = assert(io.popen("find addons -name '*.lua' | sort"))
+        local bad = {}
+        for path in p:lines() do
+            local n = 0
+            for line in io.lines(path) do
+                n = n + 1
+                for ch in line:gmatch("[%z\1-\127\194-\244][\128-\191]*") do
+                    if not drawable(ch) then bad[#bad + 1] = path .. ":" .. n .. ": " .. ch end
+                end
+            end
+        end
+        p:close()
+        assert.same({}, bad)
+    end)
+end)

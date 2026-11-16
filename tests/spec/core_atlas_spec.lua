@@ -379,8 +379,8 @@ describe("atlas narrative view", function()
     it("shows where now, the five aspect bars and the goals grouped by zone, the player's zone first", function()
         local p = boot()
         local t = texts()
-        for _, s in ipairs({ "Where now", "In the log: 0 · ready: 0", "Accept \"Oasis One\" -- Oasis Keeper, The Barrens · 20 yd",
-            "Lead", "Class: Accept \"Warrior Call\" -- Warrior Trainer, Orgrimmar · 1031 yd",
+        for _, s in ipairs({ "Where now", "In the log: 0, ready: 0", "Accept \"Oasis One\" -- Oasis Keeper, 20 yd",
+            "Lead", "Class: Accept \"Warrior Call\" -- Warrior Trainer, Orgrimmar, 1031 yd",
             "Story", "Dungeons", "Class", "New in Forever", "Professions", "0/11", "0/2", "0/3",
             "Hide finished", "Only new in Forever", "did it", "skip" }) do
             assert.is_true(has(t, s), s)
@@ -390,8 +390,8 @@ describe("atlas narrative view", function()
         for _, row in ipairs(p.story.rows) do
             if row:IsShown() then rows[#rows + 1] = row.goal and row.goal.id or row.zone:GetText() end
         end
-        assert.same({ "The Barrens  5-14 · 0/6", "s1061", "e1011", "s1001", "Durotar  12-13 · 0/4", "s1071",
-            "Tirisfal Glades  12-12 · 0/1", "s1051" }, rows)
+        assert.same({ "The Barrens  5-14  (0/6)", "s1061", "e1011", "s1001", "Durotar  12-13  (0/4)", "s1071",
+            "Tirisfal Glades  12  (0/1)", "s1051" }, rows)
         local row = rowOf(p, "e1011")
         assert.same({ "o", "Errand Giver: errands", "12-13", "0/2" },
             { row.mark:GetText(), row.name:GetText(), row.level:GetText(), row.count:GetText() })
@@ -435,8 +435,8 @@ describe("atlas narrative view", function()
         ns.Narrative:Invalidate()
         H.settle(m)
         local t = texts()
-        assert.is_true(has(t, "Where now · more from level 3"))
-        assert.is_true(has(t, "Sealed Test Crate: turn it in -- Crate Clerk, The Barrens · 100 yd · not checked in game"))
+        assert.is_true(has(t, "Where now -- more from level 3"))
+        assert.is_true(has(t, "Sealed Test Crate: turn it in -- Crate Clerk, 100 yd (not checked in game)"))
     end)
 
     it("renews an open goal tooltip when an item name arrives", function()
@@ -565,8 +565,8 @@ describe("atlas narrative view", function()
     it("renders in ruRU", function()
         boot({ locale = "ruRU" })
         local t = texts()
-        for _, s in ipairs({ "Скоростной", "Повествование", "Куда сейчас", "В журнале: 0 · к сдаче: 0",
-            "Взять «Oasis One» — Oasis Keeper, The Barrens · 20 ярд.", "Вести", "Сюжет", "Подземелья", "Класс",
+        for _, s in ipairs({ "Скоростной", "Повествование", "Куда сейчас", "В журнале: 0, к сдаче: 0",
+            "Взять «Oasis One» — Oasis Keeper, 20 ярд.", "Вести", "Сюжет", "Подземелья", "Класс",
             "Новое в Forever", "Скрыть завершённые", "Только новое в Forever", "сам", "не надо",
             "Errand Giver: поручения" }) do
             assert.is_true(has(t, s), s)

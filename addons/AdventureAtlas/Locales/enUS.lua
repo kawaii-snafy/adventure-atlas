@@ -67,11 +67,11 @@ L.NAR_TURNIN_FMT = "Turn in \"%s\" -- %s"
 L.NAR_ENTER_FMT = "Dungeon \"%s\": entrance -- %s"
 -- %s = NPC / object name, then the zone
 L.NAR_PLACE_FMT = "%s, %s"
-L.NAR_YARDS_FMT = "· %d yd"
+L.NAR_YARDS_FMT = "%d yd"
 L.NAR_NO_PLACE = "place unknown"
 L.NAR_FAR_FMT = "%s -- another continent"
 L.NAR_WAIT_FMT = "All done nearby: more from level %d"
-L.NAR_INLOG_FMT = "In the log: %d · ready: %d"
+L.NAR_INLOG_FMT = "In the log: %d, ready: %d"
 -- %s = the name of the quest giver
 L.NAR_ERRANDS_FMT = "%s: errands"
 -- why a suggestion comes first

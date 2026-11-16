@@ -322,7 +322,7 @@ AdventureAtlas.AddLibrarySegment({
           note = { ru = "Фелнок Сталлист: письмо; возьмите «Рога стылодыхов».",
                    en = "Felnok Steelspring: the letter; take Chillwind Horns." } },
         { accept = 3783, npc = 10305, at = { 1452, 60.88, 37.62 },
-          note = { ru = "Юми Румпельшникер: «Йети где-то рядом…» (10 шкур).",
+          note = { ru = "Юми Румпельшникер: «Йети где-то рядом...» (10 шкур).",
                    en = "Umi Rumplesnicker: Are We There, Yeti? (10 furs)." } },
         { accept = 5054, npc = 10303, optional = true, at = { 1452, 61.93, 38.38 },
           note = { ru = "Необязательно: Шторм Призрачное Копыто — «Урсиус из щербозубов» (элитный медведь 56; берите, "
